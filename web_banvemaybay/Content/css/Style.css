@@ -7,6 +7,7 @@
 
 a {
     text-decoration: none;
+    color: #000;
 }
 
 li {
@@ -20,12 +21,13 @@ li {
     --dark: #0e1010;
     --trans: all 0.3s ease-in-out;
     --sea: #4d6edfa3;
-    --background-color: rgb(224 229 244);
+    --background-color: rgb(207 219 255 / 20%);
 }
 
-body {
+html {
     background-color: var(--background-color);
 }
+
 /*-------------------------header---------------------------------------*/
 #header {
     height: 46px;
@@ -61,13 +63,19 @@ body {
 
     #nav li {
         position: relative;
+        text-transform: uppercase;
     }
 
     #nav > li:hover > a,
     #nav .subnav li:hover {
         color: #000;
-        background-color: #dddddd9e;
-        font-weight: bold;
+        background-color: #85b8ff9e;
+        text-shadow: 0 0 2px rgb(0, 0, 0, 0.3);
+        ;
+    }
+
+    #nav > li:first-child:hover > a {
+        background-color: transparent;
     }
 
     #nav > li:hover .subnav {
@@ -81,7 +89,7 @@ body {
 
     #nav li a {
         text-decoration: none;
-        line-height: 46px;
+        line-height: 45px;
         padding: 0 24px;
         display: block;
     }
@@ -92,8 +100,8 @@ body {
         top: 100%;
         left: 0;
         list-style-type: none;
-        background-color: #dddddd9e;
-        min-width: 160px;
+        background-color: #85b8ff9e;
+        min-width: 135px;
         box-shadow: 0 0 10px rgb(0, 0, 0, 0.3);
     }
 
@@ -103,11 +111,6 @@ body {
             line-height: 38px;
         }
 
-.nav-arrow-down {
-    font-size: 14px;
-    font-weight: bold;
-}
-
 #header .mobile-menu-btn {
     position: absolute;
     top: 0;
@@ -115,26 +118,18 @@ body {
     display: none;
 }
 
-#header .search-btn,
 #header .mobile-menu-btn {
     float: right;
-    padding: 0 21px;
+    padding: 14px 19px
 }
-
-    #header .search-btn:hover {
-        background-color: #f44336;
-        cursor: pointer;
-    }
 
     #header .mobile-menu-btn:hover {
-        background-color: #3a3a3a
+        background-color: var(--sea);
     }
 
-#header .search-icon {
-    font-size: 20px;
-    color: #fff;
-    line-height: 46px;
-}
+    #header .mobile-menu-btn i {
+        font-size: 20px;
+    }
 
 #header.sticky {
     background: var(--sea);
@@ -176,7 +171,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     margin-top: 25px;
-    width: 70%;
+    width: 80%;
     border-radius: 4px;
     min-height: 140px;
 }
@@ -191,10 +186,15 @@ body {
 }
 
 .ticket-type {
-    font-size: 15px;
+    font-size: 17px;
     display: flex;
     align-items: center;
 }
+
+    .ticket-type input {
+        width: 15px;
+        height: 15px;
+    }
 
     .ticket-type label {
         padding: 0 8px 0 4px;
@@ -203,9 +203,9 @@ body {
 
 .tic-content {
     display: flex;
-    flex-wrap: wrap;
     padding: 0 10px;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    /* justify-content: space-around; */
 }
 
 .deprture,
@@ -216,6 +216,16 @@ body {
     border-radius: 4px;
     padding: 10px;
     cursor: pointer;
+    display: flex;
+    flex-wrap: nowrap;
+    text-align: center;
+    align-items: center;
+}
+
+.deprture, .destination, .in-date, .btn-find-tic {
+    flex: 1;
+    max-height: 40px;
+    margin: 10px;
 }
 
     .deprture i, input {
@@ -237,12 +247,15 @@ body {
     font-weight: bold;
     background-color: #fff;
     cursor: pointer;
+    min-width: 152px;
+    max-height: 40px;
 }
 
 .number-p {
     color: #000;
     background-color: #fff;
     border-radius: 4px;
+    margin: 10px;
 }
 
 .btn-number-p {
@@ -251,10 +264,14 @@ body {
     border: none;
     font-size: 16px;
     cursor: pointer;
+    display: flex;
+    flex-wrap: nowrap;
+    text-align: center;
+    align-items: center;
 }
 
     .btn-number-p i {
-        padding-left: 2px;
+        padding: 0 5px
     }
 
 .btn-find-tic {
@@ -273,12 +290,12 @@ body {
     .btn-number-p:hover,
     .btn-find-tic:hover {
         opacity: 1;
-        border: 1px solid var(--blue);
+        /* border: 1px solid  var(--blue); */
     }
 
 .p-table {
     position: absolute;
-    top: 211px;
+    top: 217px;
     padding: 12px;
     background-color: #fff;
     min-width: 200px;
@@ -286,6 +303,7 @@ body {
     box-shadow: 0 0 10px rgb(0 0 0 / 30%);
     ;
     display: none;
+    z-index: 999;
 }
 
 .p-item {
@@ -336,7 +354,7 @@ body {
 
 .location-container, .location-container-2 {
     background: #fff;
-    width: 900px;
+    width: 60%;
     top: 18px;
     max-width: calc(100% - 32px);
     min-height: 200px;
@@ -526,8 +544,9 @@ body {
     /* The company logo */
 
     .footer-distributed h3 {
-        color: #ffffff;
-        font: normal 36px 'Open Sans', cursive;
+        color: #000;
+        font-size: 20px;
+        text-transform: uppercase;
         margin: 0;
     }
 
@@ -832,7 +851,6 @@ body {
 
 .information-left {
     width: 60%;
-    background-color: var(--background-color);
     display: flex;
     /* margin-right: auto; */
     margin-left: auto;
@@ -1107,13 +1125,13 @@ body {
     background-color: var(--blue);
     cursor: pointer;
     padding: 5px 15px;
-    opacity: 0.8;
+    opacity: 0.9;
 }
 
     .btn-back:hover,
     .btn-reservations:hover {
         opacity: 1;
-        border: 1px solid #333;
+        border: 0.5px solid #333;
     }
 
 .information-right {
@@ -1203,8 +1221,7 @@ body {
 }
 
 .done-main {
-    width: 60%;
-    background-color: var(--background-color);
+    width: 70%;
     display: flex;
     margin: 5px auto 18px;
     flex-direction: row;
@@ -1286,6 +1303,10 @@ body {
     padding: 5px;
 }
 
+    .contact-details-item:last-child {
+        width: 100%;
+    }
+
 .ticket-details {
     margin-bottom: 10px;
     box-shadow: 0 0 3px rgb(0 0 0 / 30%);
@@ -1325,7 +1346,6 @@ body {
 .introduce {
     width: 80%;
     display: flex;
-    background-color: var(--background-color);
     margin: 90px auto 80px;
     line-height: 30px;
     flex-direction: column;
@@ -1358,7 +1378,6 @@ body {
     width: 80%;
     display: flex;
     align-items: center;
-    background-color: rgb(224 229 244);
     margin: 90px auto 80px;
     line-height: 30px;
     flex-direction: column;
@@ -1390,7 +1409,7 @@ body {
 
 .contact iframe {
     max-height: 350px;
-    width: 80%;
+    width: 100%;
     box-shadow: 0 0 3px rgb(0 0 0 / 30%);
     border: 2px ridge #3333 !important;
 }
