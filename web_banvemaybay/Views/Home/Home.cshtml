@@ -1,0 +1,341 @@
+﻿
+@{
+    ViewBag.Title = "Home";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<img src="~/Content/image/209501.jpg" alt="" id="backgroud">
+<!------------------------------- <main> ------------------------------->
+<div id="main">
+    <div class="main-heading">
+        <b>Vé máy bay giá rẻ</b><br>
+        <p>Bay đẳng cấp, giá cực thấp</p>
+    </div>
+    @using (Html.BeginForm("SearchFlight", "Flight", FormMethod.Post))
+    {<div class="tic">
+            <div class="tic-heading">
+                <p>Vé máy bay</p>
+                <div class="ticket-type">
+                    <input type="radio" name="ticket-type" id="one-way" checked><label for="one-way"> Một chiều</label>
+                    <input type="radio" name="ticket-type" id="round-trip"><label for="round-trip"> Khứ hồi</label>
+                    <input type="radio" name="searchBy" id="priceSort" value="priceSort" checked>
+                    <label for="priceSort"> Giảm dần</label>
+                    <input type="radio" name="searchBy" id="priceSort1" value="priceSort1">
+                    <label for="priceSort1"> Tăng dần</label>
+                </div>
+            </div>
+            <div class="tic-content">
+                <div class="deprture js-open-location">
+                    <i class="fa-sharp fa-solid fa-plane-departure"></i>
+                    @Html.TextBox("to", null, new { @class = "form-control" })
+                    @*<input class="in-location" type="text" name="to" id="to" value="Hà Nội (HAN)" >*@
+
+                </div>
+                <div class="destination js-open-location-2">
+                    <i class="fa-solid fa-plane-arrival"></i>
+                    @Html.TextBox("from", null, new { @class = "form-control" })
+                    @**@ @*<input class="in-location" type="text" name="from" id="from" value="Hà Nội (HAN)">*@
+                </div>
+                <input class="in-date" type="date" name="dateto" id="dateto">
+                <input class="in-date" type="date" name="datefrom" id="datefrom">
+                @if (ViewBag.thongbao != null)
+                {
+                    <p style="color:red" ,style="margin:5px">
+                        @ViewBag.thongbao
+                    </p>
+                }
+                @*                <input class="in-date" type="date" name="round-trip_day" id="round-trip_day" disabled style="opacity: 0.3; cursor: no-drop;">*@
+                <div class="number-p">
+                    <button class="btn-number-p">
+                        <i class="fa-solid fa-user"></i>
+                        <span>1</span>
+                    </button>
+                    <div class="p-table">
+                        <div class="p-item">
+                            <div class="p-item-left">
+                                <p>Người lớn</p>
+                                <span>(Trên 18)</span>
+                            </div>
+                            <div class="p-item-right">
+                                <button class="btn-p">+</button>
+                                <label style="padding: 0 3px;" for="btn-p">1</label>
+                                <button class="btn-p">-</button>
+                            </div>
+                        </div>
+                        <div class="p-item">
+                            <div class="p-item-left">
+                                <p>Trẻ em</p>
+                                <span>(2 - 12)</span>
+                            </div>
+                            <div class="p-item-right">
+                                <button class="btn-p">+</button>
+                                <label style="padding: 0 3px;" for="btn-p">0</label>
+                                <button class="btn-p">-</button>
+                            </div>
+                        </div>
+                        <div class="p-item">
+                            <div class="p-item-left">
+                                <p>Em bé</p>
+                                <span>(0 - 2)</span>
+                            </div>
+                            <div class="p-item-right">
+                                <button class="btn-p">+</button>
+                                <label style="padding: 0 3px;" for="btn-p">0</label>
+                                <button class="btn-p">-</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-find-tic">Tìm chuyến bay</button>
+            </div>
+        </div>}
+</div>
+<!------------------------------- <location> ------------------------------->
+<div class="location js-location">
+    <div class="location-container js-location-container">
+        <header class="location-header">
+            <div class=l-h>Lựa chọn thành phố hoặc sân bay xuất phát</div>
+            <div class="location-close js-location-close">
+                <i class="fa-sharp fa-solid fa-xmark"></i>
+            </div>
+        </header>
+        <div class="locition-body ">
+            <div class="locition-body-search">
+                <input type="text" name="search" id="search" placeholder="Tìm địa điểm bạn muốn ?">
+                <button class="btn-search"><i class="fa-sharp fa-solid fa-magnifying-glass fa-bounce"></i></button>
+            </div>
+            <div class="locition-body-content">
+                <div class="Bac-Nam">
+                    <ul>Miền bắc</ul>
+                    <li>Hà Nội</li>
+                    <li>Hải Phòng</li>
+                    <li>Điện Biên lihủ</li>
+                    <li>Vân đồn</li>
+                    <ul>Miền Nam</ul>
+                    <li>Hồ Chí Minh</li>
+                    <li>Phú Quốc</li>
+                    <li>Cà Mau</li>
+                    <li>Cần Thơ</li>
+                    <li>Côn Đảo</li>
+                    <li>Kiên Giang</li>
+                </div>
+                <div class="Trung">
+                    <ul>Miền Trung</ul>
+                    <li>Đà Nẵng</li>
+                    <li>Nha Trang</li>
+                    <li>Đà Lạt</li>
+                    <li>Huế</li>
+                    <li>Ban Mê Thuột</li>
+                    <li>PleiKu</li>
+                    <li>Phú Yên</li>
+                    <li>Thanh Hóa</li>
+                    <li>Qui Nhơn</li>
+                    <li>Chu Lai</li>
+                    <li>Quảng Bình</li>
+                    <li>Vinh</li>
+                </div>
+                <div class="ChauA">
+                    <ul>Châu Á</ul>
+                    <li>Băng Cốc</li>
+                    <li>Quảng Châu</li>
+                    <li>Hồng Kông</li>
+                    <li>Kuala Lumliur</li>
+                    <li>Seoul, Incheon</li>
+                    <li>Thượng Hải</li>
+                    <li>Singaliore</li>
+                    <li>Đài Bắc</li>
+                    <li>Tokyo</li>
+                    <li>Camliuchia</li>
+                </div>
+                <div class="Au-My">
+                    <ul>Châu Âu</ul>
+                    <li>Amsterdam</li>
+                    <li>Cô-lien-ha-gen</li>
+                    <li>Frankfurt</li>
+                    <li>London</li>
+                    <li>liaris</li>
+                    <li>liraha</li>
+                    <li>Stockholm</li>
+                    <li>Zurich</li>
+                    <ul>Châu úc & Mỹ</ul>
+                    <li>Dallas</li>
+                    <li>Houston</li>
+                    <li>Los Angeles</li>
+                    <li>Men-bơn</li>
+                    <li>New York</li>
+                    <li>San Francisco</li>
+                    <li>Sydney</li>
+                    <li>Toronto</li>
+                    <li>Vancouver</li>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!------------------------------- <location-ve> ------------------------------->
+<div class="location-2 js-location-2">
+    <div class="location-container-2 js-location-container-2">
+        <header class="location-header-2">
+            <div class=l-h>Lựa chọn thành phố hoặc sân bay muốn đến</div>
+            <div class="location-close-2 js-location-close-2">
+                <i class="fa-sharp fa-solid fa-xmark"></i>
+            </div>
+        </header>
+        <div class="locition-body-2 ">
+            <div class="locition-body-search-2">
+                <input type="text" name="search" id="search" placeholder="Tìm địa điểm bạn muốn ?">
+                <button class="btn-search"><i class="fa-sharp fa-solid fa-magnifying-glass fa-bounce"></i></button>
+            </div>
+            <div class="locition-body-content-2">
+                <div class="Bac-Nam">
+                    <ul>Miền bắc</ul>
+                    <li>Hà Nội</li>
+                    <li>Hải lihòng</li>
+                    <li>Điện Biên lihủ</li>
+                    <li>Vân đồn</li>
+                    <ul>Miền Nam</ul>
+                    <li>Hồ Chí Minh</li>
+                    <li>Phú Quốc</li>
+                    <li>Cà Mau</li>
+                    <li>Cần Thơ</li>
+                    <li>Côn Đảo</li>
+                    <li>Kiên Giang</li>
+                </div>
+                <div class="Trung">
+                    <ul>Miền Trung</ul>
+                    <li>Đà Nẵng</li>
+                    <li>Nha Trang</li>
+                    <li>Đà Lạt</li>
+                    <li>Huế</li>
+                    <li>Ban Mê Thuột</li>
+                    <li>PleiKu</li>
+                    <li>Phú Yên</li>
+                    <li>Thanh Hóa</li>
+                    <li>Qui Nhơn</li>
+                    <li>Chu Lai</li>
+                    <li>Quảng Bình</li>
+                    <li>Vinh</li>
+                </div>
+                <div class="ChauA">
+                    <ul>Châu Á</ul>
+                    <li>Băng Cốc</li>
+                    <li>Quảng Châu</li>
+                    <li>Hồng Kông</li>
+                    <li>Kuala Lumliur</li>
+                    <li>Seoul, Incheon</li>
+                    <li>Thượng Hải</li>
+                    <li>Singaliore</li>
+                    <li>Đài Bắc</li>
+                    <li>Tokyo</li>
+                    <li>Camliuchia</li>
+                </div>
+                <div class="Au-My">
+                    <ul>Châu Âu</ul>
+                    <li>Amsterdam</li>
+                    <li>Cô-lien-ha-gen</li>
+                    <li>Frankfurt</li>
+                    <li>London</li>
+                    <li>liaris</li>
+                    <li>liraha</li>
+                    <li>Stockholm</li>
+                    <li>Zurich</li>
+                    <ul>Châu úc & Mỹ</ul>
+                    <li>Dallas</li>
+                    <li>Houston</li>
+                    <li>Los Angeles</li>
+                    <li>Men-bơn</li>
+                    <li>New York</li>
+                    <li>San Francisco</li>
+                    <li>Sydney</li>
+                    <li>Toronto</li>
+                    <li>Vancouver</li>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const nembleP = document.querySelector('.btn-number-p')
+    const closeNembleP = document.querySelector('#backgroud')
+    const closeNembleP2 = document.querySelector('#main')
+    const pTable = document.querySelector('.p-table')
+    nembleP.addEventListener('click', function () {
+        document.querySelector(".p-table").style.display = "block"
+    })
+    closeNembleP.addEventListener('click', function () {
+        document.querySelector(".p-table").style.display = "none"
+    })
+    closeNembleP2.addEventListener('click', function () {
+        document.querySelector(".p-table").style.display = "none"
+    })
+    nembleP.addEventListener('click', function (event) {
+        event.stopPropagation()
+    })
+    pTable.addEventListener('click', function (event) {
+        event.stopPropagation()
+    })
+    const locationBtns = document.querySelectorAll('.js-open-location')
+    const locationOnly = document.querySelector('.js-location')
+    const locationContainer = document.querySelector('.js-location-container')
+    const locationClose = document.querySelector('.js-location-close')
+    function showLocations() {
+        locationOnly.classList.add('location-open')
+    }
+    function hideLocations() {
+        locationOnly.classList.remove('location-open')
+    }
+    for (const locationBtn of locationBtns) {
+        locationBtn.addEventListener('click', showLocations)
+    }
+    locationClose.addEventListener('click', hideLocations)
+    locationOnly.addEventListener('click', hideLocations)
+    locationContainer.addEventListener('click', function (event) {
+        event.stopPropagation()
+    })
+    const locationBtns2 = document.querySelectorAll('.js-open-location-2')
+    const locationOnly2 = document.querySelector('.js-location-2')
+    const locationContainer2 = document.querySelector('.js-location-container-2')
+    const locationClose2 = document.querySelector('.js-location-close-2')
+    function showLocations2() {
+        locationOnly2.classList.add('location-open')
+    }
+    function hideLocations2() {
+        locationOnly2.classList.remove('location-open')
+    }
+    for (const locationBtn2 of locationBtns2) {
+        locationBtn2.addEventListener('click', showLocations2)
+    }
+    locationClose2.addEventListener('click', hideLocations2)
+    locationOnly2.addEventListener('click', hideLocations2)
+    locationContainer2.addEventListener('click', function (event) {
+        event.stopPropagation()
+    })
+    document.getElementById('one-way').onclick = function (e) {
+        if (this.checked) {
+            document.querySelector("#round-trip_day").style = "opacity: 0.3; cursor: no-drop;"
+            document.querySelector("#round-trip_day").disabled = true;
+        }
+    }
+    document.getElementById('round-trip').onclick = function (e) {
+        if (this.checked) {
+            document.querySelector("#round-trip_day").style = "opacity: 1; cursor: pointer;"
+            document.querySelector("#round-trip_day").disabled = false;
+        }
+    }
+    const chonDiaDiems = document.querySelectorAll('.locition-body-content li')
+    for (const chonDiaDiem of chonDiaDiems) {
+        chonDiaDiem.addEventListener('click', function () {
+            document.querySelector("#to").value = chonDiaDiem.innerText;
+        })
+        chonDiaDiem.addEventListener('click', hideLocations)
+    }
+    const chonDiaDiems2 = document.querySelectorAll('.locition-body-content-2 li')
+    for (const chonDiaDiem2 of chonDiaDiems2) {
+        chonDiaDiem2.addEventListener('click', function () {
+            document.querySelector("#from").value = chonDiaDiem2.innerText;
+        })
+        chonDiaDiem2.addEventListener('click', hideLocations2)
+    }
+</script>
+
+
+

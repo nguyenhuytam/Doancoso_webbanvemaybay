@@ -1,0 +1,161 @@
+﻿@*@model web_banvemaybay.Models.TaiKhoan
+
+
+    @{
+        Layout = null;
+        ViewBag.Title = "DN";
+
+    }
+    <div class="wrapper">
+        <h2 class="text-right">welcome</h2>
+        <div class="form-wrapper login">
+            <form action="Login" method="post">
+                <h2>Đăng nhập</h2>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="tenDN"></ion-icon></span>
+                    <input name="tenDN" placeholder="Email" required>
+                </div>
+                <div class="input-box">
+                    <span class="icon"><ion-icon name="mkDN"></ion-icon></span>
+                    <input type="password" name="mkDN" placeholder="Mật khẩu" required>
+                    @if (ViewBag.thongbao != null)
+                    {
+                        <p style="color:red" ,style="margin:5px">
+                            @ViewBag.thongbao
+                        </p>
+                    }
+                </div>
+                <div class="forgot-pass">
+                    <a href="#">Quên mật khẩu?</a>
+                </div>
+                <button type="submit">Đăng nhập.</button>
+                <a href="/DN/LoginFaceBook">Đăng nhập bằng facebook <i class='bx bxl-facebook-circle'></i></a>
+                <div class="sign-link">
+                    <p>
+                        Đăng ký tài khoản tại đây? <a href="#" onclick="registerActive()"> Đăng ký</a>
+                    </p>
+
+                </div>
+            </form>
+        </div>
+
+        <div class="form-wrapper register">
+            <form action="Register" method="post">
+                @Html.AntiForgeryToken()
+                <h2>Đăng ký</h2>
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="Ten"></ion-icon>
+                    </span>
+                    @Html.TextBoxFor(model => model.HovaTen, new { placeholder = "Họ và tên", required = "required" })
+                    @Html.ValidationMessageFor(model => model.HovaTen)
+                </div>
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="userName1"></ion-icon>
+                    </span>
+                    @Html.TextBoxFor(model => model.TenDN, new { placeholder = "User", required = "required" })
+                    @Html.ValidationMessageFor(model => model.TenDN)
+                </div>
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="sdt"></ion-icon>
+                    </span>
+                    @Html.TextBoxFor(model => model.SDT, new { placeholder = "SDT", required = "required" })
+                    @Html.ValidationMessageFor(model => model.SDT)
+                </div>
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="gmail"></ion-icon>
+                    </span>
+                    @Html.TextBoxFor(model => model.Email, new { placeholder = "Email", required = "required", type = "email" })
+                    @Html.ValidationMessageFor(model => model.Email)
+                    @if (ViewBag.thongbao == null)
+                    {
+                        <p style="color:red">
+                            @ViewBag.thongbao
+                        </p>
+                    }
+                </div>
+                <div class="input-box">
+                    <span class="icon">
+                        <ion-icon name="pass"></ion-icon>
+                    </span>
+                    @Html.PasswordFor(model => model.Password, new { placeholder = "Mật khẩu", required = "required" })
+                    @Html.ValidationMessageFor(model => model.Password)
+                </div>
+                <button type="submit">Đăng ký</button>
+            </form>
+        </div>
+        <div class="sign-link">
+            <p>Bạn có sẵn sàng tạo tài khoản? <a href="#" onclick="loginActive()">Đăng nhập</a></p>
+        </div>
+    </div>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="~/Scripts/javaScripts/main.js"></script>
+    <link href="~/Content/css/styleDN.css" rel="stylesheet" />*@
+
+@model web_banvemaybay.Models.TaiKhoan
+@{
+    ViewBag.Title = "Log in";
+    Layout = "";
+}
+
+
+<link href="~/Content/css/StyleSheetLogin.css" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@1,300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+<main>
+    <div class="container" id="container">
+        <div class="form-container sign-up-container">
+            <form action="#">
+            </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <h1>Đăng nhập</h1>
+            <section>
+                @using (Html.BeginForm("Login", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "")
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="tenDN"></ion-icon></span>
+                        <input name="tenDN" placeholder="Email" required>
+                    </div>
+                    <div class="input-box">
+                        <span class="icon"><ion-icon name="mkDN"></ion-icon></span>
+                        <input type="password" name="mkDN" placeholder="Mật khẩu" required>
+                    </div>
+                    @Html.ActionLink("Quên mật khẩu?", "ForgotPassword")
+                    @*<a href="#">Quên mật khẩu?</a>*@
+                    <button type="submit" value="Log in">Đăng nhập</button>
+                }
+
+            </section>
+
+
+
+        </div>
+
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>Chào mừng trở lại!</h1>
+                    <p>Để giữ kết nối với chúng tôi, vui lòng đăng nhập bằng thông tin cá nhân của bạn</p>
+                    <button class="ghost" id="signIn">Đăng nhập</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>Chào bạn !</h1>
+                    <p>Nhập thông tin cá nhân của bạn và bắt đầu hành trình với chúng tôi</p>
+                    <button class="ghost" id="signUp">@Html.ActionLink("Đăng ký", "Register", "Login")</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+</div>
+
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+            enables a clean separation of concerns and gives you full control over markup
+            for enjoyable, agile development.
+        </p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    </div>
+    <!-----------------------------------------------------GỌI API trả dữ liêu ----------------------------------------------------->
+    <form action="/" method="post"></form>
+    <a href="#">content</a>
+    <a href="/Login/Login">content</a>
+    <div class="user">
+        @functions {
+
+            // Hàm kiểm tra quyền truy cập
+            public bool CheckPermission(string idCV)
+            {
+                if (idCV == "1")
+                {
+                    return true;
+                }
+                else if (idCV == "2" || idCV == null)
+                {
+                    return false;
+                }
+                return false;
+            }
+        }
+
+        @if (Session["IDtaikhoan"] != null)
+        {
+            <span>@Session["Hovaten"]</span>
+            if (CheckPermission(Session["IDchucvu"]?.ToString()))
+            {
+                <div class="userEdit">
+                    <li class="edit"><a href="/DN/Logout">Đăng xuất</a></li>
+                    <li class="edit"><a href="/Phims/Index">Thêm mới</a></li>
+                </div>
+            }
+            else
+            {
+                <div class="userEdit">
+                    <li class="edit"><a href="/DN/Logout">Đăng xuất</a></li>
+                    <li class="edit"><a href="@Url.Action("Edit", "DN", new { id = Session["idNguoidung"] })">Cá nhân</a></li>
+                </div>
+            }
+
+        }
+        else
+        {
+            <a href="@Url.Action("DN", "DN")" class="username"><img src="~/images/user.jpg" alt="" class="user-img"></a>
+        }
+
+    </div>
+</div>

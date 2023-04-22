@@ -1,0 +1,28 @@
+﻿@using web_banvemaybay.Models;
+@model IEnumerable<Chuyenbay>
+<!-- Hiển thị danh sách chuyến bay -->
+<table>
+    <tr>
+        <th>Địa điểm đi</th>
+        <th>Địa điểm đến</th>
+        <th>Ngày đi</th>
+        @if (Model.Any(chuyenbay => chuyenbay.Ngayve != null))
+        {
+            <th>Ngày về</th>
+        }
+        <th>Gía Tiền</th>
+    </tr>
+    @foreach (var chuyenbay in Model)
+    {
+        <tr>
+            <td>@chuyenbay.Diadiemdi</td>
+            <td>@chuyenbay.Diadiemden</td>
+            <td>@chuyenbay.Ngaydi.Value.ToString("dd-MM-yyyy HH:mm")</td>
+            @if (chuyenbay.Ngayve != null)
+            {
+                <td>@chuyenbay.Ngayve.Value.ToString("dd-MM-yyyy HH:mm")</td>
+            }
+            <td>@chuyenbay.Giatien.Value.ToString("#,###,###")</td>
+        </tr>
+    }
+</table>
