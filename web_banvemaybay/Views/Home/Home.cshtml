@@ -17,22 +17,22 @@
                 <div class="ticket-type">
                     <input type="radio" name="ticket-type" id="one-way" checked><label for="one-way"> Một chiều</label>
                     <input type="radio" name="ticket-type" id="round-trip"><label for="round-trip"> Khứ hồi</label>
-                    <input type="radio" name="searchBy" id="priceSort" value="priceSort" checked>
+                    @*<input type="radio" name="searchBy" id="priceSort" value="priceSort" checked>
                     <label for="priceSort"> Giảm dần</label>
                     <input type="radio" name="searchBy" id="priceSort1" value="priceSort1">
-                    <label for="priceSort1"> Tăng dần</label>
+                    <label for="priceSort1"> Tăng dần</label>*@
                 </div>
             </div>
             <div class="tic-content">
                 <div class="deprture js-open-location">
                     <i class="fa-sharp fa-solid fa-plane-departure"></i>
-                    @Html.TextBox("to", null, new { @class = "form-control" })
+                    @Html.TextBox("to", null, new { @class = "form-control in-location", @Value = "Hồ Chí Minh" })
                     @*<input class="in-location" type="text" name="to" id="to" value="Hà Nội (HAN)" >*@
 
                 </div>
                 <div class="destination js-open-location-2">
                     <i class="fa-solid fa-plane-arrival"></i>
-                    @Html.TextBox("from", null, new { @class = "form-control" })
+                    @Html.TextBox("from", null, new { @class = "form-control in-location", @Value = "Hà Nội" })
                     @**@ @*<input class="in-location" type="text" name="from" id="from" value="Hà Nội (HAN)">*@
                 </div>
                 <input class="in-date" type="date" name="dateto" id="dateto">
@@ -44,47 +44,47 @@
                     </p>
                 }
                 @*                <input class="in-date" type="date" name="round-trip_day" id="round-trip_day" disabled style="opacity: 0.3; cursor: no-drop;">*@
-                <div class="number-p">
-                    <button class="btn-number-p">
-                        <i class="fa-solid fa-user"></i>
-                        <span>1</span>
-                    </button>
-                    <div class="p-table">
-                        <div class="p-item">
-                            <div class="p-item-left">
-                                <p>Người lớn</p>
-                                <span>(Trên 18)</span>
-                            </div>
-                            <div class="p-item-right">
-                                <button class="btn-p">+</button>
-                                <label style="padding: 0 3px;" for="btn-p">1</label>
-                                <button class="btn-p">-</button>
-                            </div>
+            <div class="number-p">
+                <button class="btn-number-p">
+                    <i class="fa-solid fa-user"></i>
+                    <input type="text" name="p-tong" id="p-tong" value="1" >
+                </button>
+                <div class="p-table">
+                    <div class="p-item">
+                        <div class="p-item-left">
+                            <p>Người lớn</p>
+                            <span>(Trên 18)</span>
                         </div>
-                        <div class="p-item">
-                            <div class="p-item-left">
-                                <p>Trẻ em</p>
-                                <span>(2 - 12)</span>
-                            </div>
-                            <div class="p-item-right">
-                                <button class="btn-p">+</button>
-                                <label style="padding: 0 3px;" for="btn-p">0</label>
-                                <button class="btn-p">-</button>
-                            </div>
+                        <div class="p-item-right">
+                            <button class="btn-p" onclick="handleMinusnl()">-</button>
+                            <input type="text" name="p-nl" id="p-nl" value="1" >
+                            <button class="btn-p" onclick="handlePlusnl()">+</button>
                         </div>
-                        <div class="p-item">
-                            <div class="p-item-left">
-                                <p>Em bé</p>
-                                <span>(0 - 2)</span>
-                            </div>
-                            <div class="p-item-right">
-                                <button class="btn-p">+</button>
-                                <label style="padding: 0 3px;" for="btn-p">0</label>
-                                <button class="btn-p">-</button>
-                            </div>
+                    </div>
+                    <div class="p-item">
+                        <div class="p-item-left">
+                            <p>Trẻ em</p>
+                            <span>(2 - 12)</span>
+                        </div>
+                        <div class="p-item-right">
+                            <button class="btn-p" onclick="handleMinuste()">-</button>
+                            <input type="text" name="p-te" id="p-te" value="0" >
+                            <button class="btn-p" onclick="handlePluste()">+</button>
+                        </div>
+                    </div>
+                    <div class="p-item">
+                        <div class="p-item-left">
+                            <p>Em bé</p>
+                            <span>(0 - 2)</span>
+                        </div>
+                        <div class="p-item-right">
+                            <button class="btn-p" onclick="handleMinuseb()">-</button>
+                            <input type="text" name="p-eb" id="p-eb" value="0" >
+                            <button class="btn-p" onclick="handlePluseb()">+</button>
                         </div>
                     </div>
                 </div>
+            </div>
                 <button class="btn-find-tic">Tìm chuyến bay</button>
                 <script>
                     // Lấy danh sách các button có class là "btn-p"
@@ -329,14 +329,14 @@
     })
     document.getElementById('one-way').onclick = function (e) {
         if (this.checked) {
-            document.querySelector("#round-trip_day").style = "opacity: 0.3; cursor: no-drop;"
-            document.querySelector("#round-trip_day").disabled = true;
+            document.querySelector("#datefrom").style = "opacity: 0.3; cursor: no-drop;"
+            document.querySelector("#datefrom").disabled = true;
         }
     }
     document.getElementById('round-trip').onclick = function (e) {
         if (this.checked) {
-            document.querySelector("#round-trip_day").style = "opacity: 1; cursor: pointer;"
-            document.querySelector("#round-trip_day").disabled = false;
+            document.querySelector("#datefrom").style = "opacity: 1; cursor: pointer;"
+            document.querySelector("#datefrom").disabled = false;
         }
     }
     const chonDiaDiems = document.querySelectorAll('.locition-body-content li')
@@ -353,6 +353,102 @@
         })
         chonDiaDiem2.addEventListener('click', hideLocations2)
     }
+    //js tinh tong nguoi
+    let amountTong = document.getElementById('p-tong')
+    let amountT = amountTong.value
+    let renderT = (amountT) => {
+        amountTong.value = amountT
+    }
+    amountTong.addEventListener('input', () => {
+        amountT = amountTong.value;
+        amountT = parseInt(amountT);
+        amountT = (isNaN(amountT) || amountT < 1 || amountT > 9) ? 1 : amountT;
+        renderT(amountT)
+    });
+    //js tinh tong nguoi lon
+    let amountNguoiLon = document.getElementById('p-nl')
+    let amountNL = amountNguoiLon.value
+    let renderNL = (amountNL) => {
+        amountNguoiLon.value = amountNL
+    }
+    let handlePlusnl = () => {
+        if (amountNL < 9 && amountT < 9) {
+            amountNL++
+            amountT++
+        }
+        renderNL(amountNL);
+        renderT(amountT);
+    }
+    let handleMinusnl = () => {
+        if (amountNL > 1 && amountT > 1) {
+            amountNL--
+            amountT--
+        }
+        renderNL(amountNL);
+        renderT(amountT);
+    }
+    amountNguoiLon.addEventListener('input', () => {
+        amountNL = amountNguoiLon.value;
+        amountNL = parseInt(amountNL);
+        amountNL = (isNaN(amountNL) || amountNL < 1 || amountNL > 9) ? 1 : amountNL;
+        renderNL(amountNL)
+    });
+    //js tinh tong tre em
+    let amountTreEm = document.getElementById('p-te')
+    let amountTE = amountTreEm.value
+    let renderTE = (amountTE) => {
+        amountTreEm.value = amountTE
+    }
+    let handlePluste = () => {
+        if (amountTE < 9 && amountT < 9) {
+            amountTE++
+            amountT++
+        }
+        renderTE(amountTE);
+        renderT(amountT);
+    }
+    let handleMinuste = () => {
+        if (amountTE > 0 && amountT > 1) {
+            amountTE--
+            amountT--
+        }
+        renderTE(amountTE);
+        renderT(amountT);
+    }
+    amountTreEm.addEventListener('input', () => {
+        amountTE = amountTreEm.value;
+        amountTE = parseInt(amountTE);
+        amountTE = (isNaN(amountTE) || amountTE < 0 || amountTE > 9) ? 1 : amountTE;
+        renderTE(amountTE)
+    });
+    //js tinh tong em be
+    let amountEmBe = document.getElementById('p-eb')
+    let amountEB = amountEmBe.value
+    let renderEB = (amountEB) => {
+        amountEmBe.value = amountEB
+    }
+    let handlePluseb = () => {
+        if (amountEB < 9 && amountT < 9) {
+            amountEB++
+            amountT++
+        }
+        renderEB(amountEB);
+        renderT(amountT)
+    }
+    let handleMinuseb = () => {
+        if (amountEB > 0 && amountT > 1) {
+            amountEB--
+            amountT--
+        }
+        renderEB(amountEB);
+        renderT(amountT);
+    }
+    amountEmBe.addEventListener('input', () => {
+        amountEB = amountEmBe.value;
+        amountEB = parseInt(amountEB);
+        amountEB = (isNaN(amountEB) || amountEB < 0 || amountEB > 9) ? 1 : amountEB;
+        renderEB(amountEB)
+    });
 </script>
 
 

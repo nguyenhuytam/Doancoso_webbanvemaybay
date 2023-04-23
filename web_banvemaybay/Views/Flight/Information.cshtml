@@ -1,6 +1,7 @@
 ﻿@model web_banvemaybay.Models.Chuyenbay
 @{
-    Layout = null;
+    ViewBag.Title = "NhapThongTin";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <h1>Hảng hàng không </h1>
@@ -9,3 +10,196 @@
 <p>@Model.Diadiemden</p>
 <p>@Model.Ngayve</p>
 <p>@Model.Giatien</p>
+
+<div class="information">
+    <div class="information-left">
+        <div class="customer-info">
+            <div class="customer-info-heading">
+                <i class="fa-solid fa-users"></i>
+                Thông tin khách hàng
+            </div>
+            <div class="customer-info-body">
+                <ul class="customer-i">
+                    <li>
+                        <p>Giới tính <sup>*</sup></p>
+                        <select name="customer-input" id="customer-i" class="ci-gender">
+                            <option value="1">Nam</option>
+                            <option value="2">Nử</option>
+                        </select>
+                    </li>
+                    <li>
+                        <p>Họ tên <sup>*</sup></p>
+                        <input type="text" placeholder="Nhập họ tên" required class="form-control" uppercase ng-pattern="/^([bcdfghjklmnpqrstvxwz]*[aeouiy][^àáâãèéêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ\d\W]*)( +[bcdfghjklmnpqrstvxwz]*[aeouiy][^àáâãèéêìíòóôõùúăđĩũơưăạảấầẩẫậắằẳẵặẹẻẽềềểễệỉịọỏốồổỗộớờởỡợụủứừửữựỳỵỷỹ\d\W]*)+$/i">
+                    </li>
+                    <li>
+                        <p>Ngày sinh <sup>*</sup></p>
+                        <input type="date" name="customer-input" id="customer-i">
+                    </li>
+                    <li>
+                        <p>Hành lý ký gửi <sup></sup></p>
+                        <select name="customer-baggage" id="customer-i" class="ci-baggage">
+                            <option value="4"></option>
+                            <option value="1">20kg</option>
+                            <option value="2">30kg</option>
+                            <option value="3">49kg</option>
+                        </select>
+                    </li>
+                </ul>
+                <div class="note">
+                    <h3><i class="fa-solid fa-triangle-exclamation"></i>Lưu ý về độ tuổi người lớn, trẻ em, trẻ sơ sinh</h3>
+                    <p><i class="fa-regular fa-hand-point-right"></i>Người lớn từ 12 tuổi trở lên.</p>
+                    <p><i class="fa-regular fa-hand-point-right"></i>Nếu trẻ em và em bé của bạn không sinh vào khoảng thời gian trên, vui lòng chọn ngày bay khác.</p>
+                </div>
+            </div>
+        </div>
+        <div class="contact-info">
+            <div class="contact-info-heading">
+                <i class="fa-solid fa-inbox"></i>
+                Thông tin liên hệ
+            </div>
+            <div class="contact-info-body">
+                <ul class="contact-i">
+                    <li>
+                        <p>Quý danh <sup>*</sup></p>
+                        <select name="contact-input" id="contact-i" class="ci-gender">
+                            <option value="1">Quý Ông</option>
+                            <option value="2">Quý Bà</option>
+                        </select>
+                    </li>
+                    <li>
+                        <p>Họ tên <sup>*</sup></p>
+                        <input type="text" placeholder="Họ tên" required class="form-control">
+                    </li>
+                    <li>
+                        <p>Điện thoại<sup>*</sup></p>
+                        <input type="text" placeholder="Điện thoại" required class="form-control">
+                    </li>
+                    <li>
+                        <p>Email <sup>*</sup></p>
+                        <input type="email" placeholder="Email" required class="form-control">
+                    </li>
+                </ul>
+                <div class="invoice">
+                    <div class="invoice-on">
+                        <label for="invoice"><input type="checkbox" name="invoice" id="invoice">Tôi muốn xuất hóa đơn</label>
+                    </div>
+                    <div class="invoice-in">
+                        <ul class="invoice-i">
+                            <li>
+                                <p>Tên công ty <sup>*</sup></p>
+                                <input type="text" placeholder="Tên công ty" required class="form-control">
+                            </li>
+                            <li>
+                                <p>Địa chỉ <sup>*</sup></p>
+                                <input type="text" placeholder="Địa chỉ" required class="form-control">
+                            </li>
+                            <li>
+                                <p>Thành phố <sup>*</sup></p>
+                                <input type="text" placeholder="Thành phố" required class="form-control">
+                            </li>
+                            <li>
+                                <p>Mã số thuế VAT <sup>*</sup></p>
+                                <input type="text" placeholder="Mã số thuế VAT" required class="form-control">
+                            </li>
+                            <li>
+                                <p>Người nhận hóa đơn<sup>*</sup></p>
+                                <input type="text" placeholder="Người nhận hóa đơn" required class="form-control">
+                            </li>
+                            <li>
+                                <p>Email <sup>*</sup></p>
+                                <input type="email" placeholder="Email" required class="form-control">
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="payment">
+            <div class="payment-heading">
+                <i class="fa-solid fa-money-bill"></i>
+                Phương thức thanh toán
+            </div>
+            <div class="payment-body">
+                <ul class="payment-i">
+                    <li>
+                        <input type="radio" name="payment" id="payment2">
+                        <label for="payment2">Thanh toán tại nhà quý khách</label>
+                    </li>
+                    <li>
+                        <input type="radio" name="payment" id="payment1">
+                        <label for="payment1">Thanh toán tại văn phòng</label>
+                    </li>
+                    <div class="payment1">
+                        Địa chỉ: 10/80C XL Hà Nội, Phường Tân Phú, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam
+                    </div>
+
+                    <li>
+                        <input type="radio" name="payment" id="payment3">
+                        <label for="payment3">Chuyển khoản ngân hàng</label>
+                    </li>
+                    <div class="payment3">
+                        Chủ TK: TRẦN TRUNG BẢO KHA<br>
+                        STK: 027100109923
+                    </div>
+                </ul>
+                <div class="payment-button">
+                    <button class="btn-back">Quay lại</button>
+                    <button class="btn-reservations">Đặt chổ</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="information-right">
+        <div class="information-r-heading">
+            <i class="fa-solid fa-cart-shopping"></i>
+            Chuyến bay của bạn
+        </div>
+        <div class="information-r-body">
+            <ul class="information-goto">
+                <b>Chuyến bay một chiều</b>
+                <li><p>Đi từ <span class="go">Tp.Hồ Chí Minh</span></p><p>Đến <span class="to">Đà nẵng</span></p></li>
+                <li><span class="go">1/5/2023</span><span class="to"></span></li>
+                <li><span class="go">VJ620  05:35</span><span class="to"></span></li>
+            </ul>
+            <ul class="information-money">
+                <b>Giá vé tạm tính</b>
+                <li>Giá vé<span>190.000đ</span></li>
+                <li>Thuế<span>62.000đ</span></li>
+                <li>Phí<span>550.000đ</span></li>
+                <li>Phí tiện ích<span>33.000đ</span></li>
+                <li class="li-money-last">Tổng tiền<span>835.000đ</span></li>
+            </ul>
+        </div>
+
+    </div>
+</div>
+<script>
+    document.getElementById('invoice').onclick = function(e){
+        if (this.checked){
+            document.querySelector(".invoice-in").style.display = "block"
+        }
+        else{
+            document.querySelector(".invoice-in").style.display = "none"
+        }
+    }
+    document.getElementById('payment1').onclick = function(e){
+        if (this.checked){
+            document.querySelector(".payment1").style.display = "block"
+            document.querySelector(".payment3").style.display = "none"
+        }
+    }
+    document.getElementById('payment2').onclick = function(e){
+        if (this.checked){
+            document.querySelector(".payment1").style.display = "none"
+            document.querySelector(".payment3").style.display = "none"
+        }
+    }
+    document.getElementById('payment3').onclick = function(e){
+        if (this.checked){
+            document.querySelector(".payment1").style.display = "none"
+            document.querySelector(".payment3").style.display = "block"
+        }
+    }
+
+
+</script>
