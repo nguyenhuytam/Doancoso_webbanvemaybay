@@ -1,6 +1,9 @@
 ﻿@using web_banvemaybay.Models;
 @model IEnumerable<Chuyenbay>
 <!-- Hiển thị danh sách chuyến bay -->
+@{
+    Layout = null;
+}
 <table>
     <tr>
         <th>Địa điểm đi</th>
@@ -23,6 +26,9 @@
                 <td>@chuyenbay.Ngayve.Value.ToString("dd-MM-yyyy HH:mm")</td>
             }
             <td>@chuyenbay.Giatien.Value.ToString("#,###,###")</td>
+            <a href="@Url.Action("Information","Flight" ,new {id=chuyenbay.IDchuyenbay})">
+                Chọn
+            </a>
         </tr>
     }
 </table>

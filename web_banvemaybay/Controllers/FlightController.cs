@@ -14,6 +14,7 @@ namespace FlightSearch.Controllers
 {
     public class FlightController : Controller
     {
+          web_banvemaybayEntities db = new web_banvemaybayEntities();
         /*  public async Task<ActionResult> SearchFlight(string to, string from, DateTime dateto, DateTime? datefrom)
           {
 
@@ -56,7 +57,6 @@ namespace FlightSearch.Controllers
             public ActionResult SearchFlight(string to, string from, DateTime? dateto, DateTime? datefrom,string searchBy)
             {
                 var datetoValue = dateto.Value.Date;
-                web_banvemaybayEntities db = new web_banvemaybayEntities();
                 // Thực hiện tìm kiếm dựa trên các tham số đầu vào
                 var flights = db.Chuyenbay.Where(c => c.Diadiemdi.ToLower().Contains(to.ToLower()) && c.Diadiemden.ToLower().Contains(from.ToLower()));
 
@@ -67,22 +67,41 @@ namespace FlightSearch.Controllers
                     {
                         return RedirectToAction("Home", "Home", new { thongbao = "Vui lòng chọn Ngày đi lớn hơn ngày hiện tại hoặc bằng ngày hiện tại " });
                     }
-                    else if(datefromValue <= dateto)
+                    else if(datetoValue == DateTime.Now.Date)
                     {
-                        return RedirectToAction("Home", "Home", new { thongbao = "Vui lòng chọn Ngày về cách ngày đi ít nhất 1 ngày " });
+                        var now = DateTime.Now;
+
+                        // Tính toán giờ hiện tại cộng thêm 1 tiếng 30 p 
+                        var nowPlusOneHour = now.AddHours(2).AddMinutes(30);
+
+                        // Kiểm tra nếu khoảng thời gian giữa ngày đi và giờ đi của mỗi chuyến bay lớn hơn giờ hiện tại và không quá 1 tiếng, hiển thị kết quả
+                        flights = flights.Where(c => c.Ngaydi > now && c.Ngaydi > nowPlusOneHour && c.Ngayve >=datefromValue);
                     }
-                        // Hiển thị chuyến bay có cả ngày đi và ngày về
-                        flights = flights.Where(c => SqlFunctions.DateDiff("day", c.Ngayve, datefromValue) == 0 && SqlFunctions.DateDiff("day", c.Ngaydi, datetoValue) == 0);
+                    else if (datefromValue <= dateto)
+                        {
+                            return RedirectToAction("Home", "Home", new { thongbao = "Vui lòng chọn Ngày về cách ngày đi ít nhất 1 ngày " });
+                        }
+                     flights = flights.Where(c => c.Ngaydi !=null && SqlFunctions.DateDiff("day", c.Ngaydi, datetoValue) == 0 && c.Ngayve>=datefromValue);
                 }
-                else if (dateto != null && datefrom == null)
+                 else if (dateto != null && datefrom == null)
                 {
                     if (datetoValue < DateTime.Now.Date)
+                        {
+                            return RedirectToAction("Home", "Home", new { thongbao = "Vui lòng chọn Ngày đi lớn hơn ngày hiện tại hoặc bằng ngày hiện tại " });
+                        }
+                    if (datetoValue == DateTime.Now.Date)
                     {
-                        return RedirectToAction("Home", "Home", new { thongbao = "Vui lòng chọn Ngày đi lớn hơn ngày hiện tại hoặc bằng ngày hiện tại " });
-                    }
+                         var now = DateTime.Now;
+
+                            // Tính toán giờ hiện tại cộng thêm 1 tiếng 30 p
+                         var nowPlusOneHour = now.AddHours(2).AddMinutes(30);
+
+                        // Kiểm tra nếu khoảng thời gian giữa ngày đi và giờ đi của mỗi chuyến bay lớn hơn giờ hiện tại và không quá 1 tiếng, hiển thị kết quả
+                         flights = flights.Where(c => c.Ngaydi > now && c.Ngaydi > nowPlusOneHour && c.Ngayve == null);
+                     }
                     // Hiển thị chuyến bay có ngày đi và không có ngày về
-                    flights = flights.Where(c => c.Ngaydi != null && SqlFunctions.DateDiff("day", c.Ngaydi, datetoValue) == 0 && c.Ngayve == null);
-                }
+                    flights = flights.Where(c => c.Ngaydi != null && SqlFunctions.DateDiff("day", c.Ngaydi, datetoValue) == 0 && c.Ngayve ==null);
+                  }
             // Lấy giá trị của radio button đã chọn
             Func<Chuyenbay, double?> sortBy = c => c.Giatien;
             bool isDescending = true;
@@ -119,7 +138,11 @@ namespace FlightSearch.Controllers
                 return View(flights);
             }
 
-
+        public ActionResult Information(int id)
+        {
+            var tt = db.Chuyenbay.Where(c => c.IDchuyenbay == id).FirstOrDefault();
+            return View(tt);
+        }
 
 
 
