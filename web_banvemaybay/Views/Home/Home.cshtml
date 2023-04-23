@@ -41,7 +41,7 @@
         <div class="number-p">
             <button class="btn-number-p">
                 <i class="fa-solid fa-user"></i>
-                <span>1</span>
+                <input type="text" name="p-tong" id="p-tong" value="1" disabled>
             </button>
             <div class="p-table">
                 <div class="p-item">
@@ -50,9 +50,9 @@
                         <span>(Trên 18)</span>
                     </div>
                     <div class="p-item-right">
-                        <button class="btn-p">+</button>
-                        <label style="padding: 0 3px;" for="btn-p">1</label>
-                        <button class="btn-p">-</button>
+                        <button class="btn-p" onclick="handleMinusnl()">-</button>
+                        <input type="text" name="p-nl" id="p-nl" value="1" disabled>
+                        <button class="btn-p" onclick="handlePlusnl()">+</button>
                     </div>
                 </div>
                 <div class="p-item">
@@ -61,9 +61,9 @@
                         <span>(2 - 12)</span>
                     </div>
                     <div class="p-item-right">
-                        <button class="btn-p">+</button>
-                        <label style="padding: 0 3px;" for="btn-p">0</label>
-                        <button class="btn-p">-</button>
+                        <button class="btn-p" onclick="handleMinuste()">-</button>
+                        <input type="text" name="p-te" id="p-te" value="0" disabled>
+                        <button class="btn-p" onclick="handlePluste()">+</button>
                     </div>
                 </div>
                 <div class="p-item">
@@ -72,9 +72,9 @@
                         <span>(0 - 2)</span>
                     </div>
                     <div class="p-item-right">
-                        <button class="btn-p">+</button>
-                        <label style="padding: 0 3px;" for="btn-p">0</label>
-                        <button class="btn-p">-</button>
+                        <button class="btn-p" onclick="handleMinuseb()">-</button>
+                        <input type="text" name="p-eb" id="p-eb" value="0" disabled>
+                        <button class="btn-p" onclick="handlePluseb()">+</button>
                     </div>
                 </div>
             </div>
@@ -248,18 +248,13 @@
     </div>
 </div>
 <script>
-    
     const nembleP = document.querySelector('.btn-number-p')
-    const closeNembleP = document.querySelector('#backgroud')
-    const closeNembleP2 = document.querySelector('#main')
+    const closeNembleP = document.querySelector('body')
     const pTable = document.querySelector('.p-table')
     nembleP.addEventListener('click', function () {
         document.querySelector(".p-table").style.display = "block"
     })
     closeNembleP.addEventListener('click', function () {
-        document.querySelector(".p-table").style.display = "none"
-    })
-    closeNembleP2.addEventListener('click', function () {
         document.querySelector(".p-table").style.display = "none"
     })
     nembleP.addEventListener('click', function (event) {
@@ -330,6 +325,103 @@
         })
         chonDiaDiem2.addEventListener('click', hideLocations2)
     }
+    //js tinh tong nguoi
+    let amountTong = document.getElementById('p-tong')
+    let amountT = amountTong.value
+    let renderT = (amountT) => {
+        amountTong.value = amountT
+    }
+    amountTong.addEventListener('input', () => {
+        amountT = amountTong.value;
+        amountT = parseInt(amountT);
+        amountT = (isNaN(amountT) || amountT < 1 || amountT > 9) ? 1 : amountT;
+        renderT(amountT)
+    });
+    //js tinh tong nguoi lon
+    let amountNguoiLon = document.getElementById('p-nl')
+    let amountNL = amountNguoiLon.value
+    let renderNL = (amountNL) => {
+        amountNguoiLon.value = amountNL
+    }
+    let handlePlusnl = () => {
+        if (amountNL < 9 && amountT < 9) {
+            amountNL++
+            amountT++
+        }
+        renderNL(amountNL);
+        renderT(amountT);
+    }
+    let handleMinusnl = () => {
+        if (amountNL > 1 && amountT > 1) {
+            amountNL--
+            amountT--
+        }
+        renderNL(amountNL);
+        renderT(amountT);
+    }
+    amountNguoiLon.addEventListener('input', () => {
+        amountNL = amountNguoiLon.value;
+        amountNL = parseInt(amountNL);
+        amountNL = (isNaN(amountNL) || amountNL < 1 || amountNL > 9) ? 1 : amountNL;
+        renderNL(amountNL)
+    });
+    //js tinh tong tre em
+    let amountTreEm = document.getElementById('p-te')
+    let amountTE = amountTreEm.value
+    let renderTE = (amountTE) => {
+        amountTreEm.value = amountTE
+    }
+    let handlePluste = () => {
+        if (amountTE < 9 && amountT < 9) {
+            amountTE++
+            amountT++
+        }
+        renderTE(amountTE);
+        renderT(amountT);
+    }
+    let handleMinuste = () => {
+        if (amountTE > 0 && amountT > 1) {
+            amountTE--
+            amountT--
+        }
+        renderTE(amountTE);
+        renderT(amountT);
+    }
+    amountTreEm.addEventListener('input', () => {
+        amountTE = amountTreEm.value;
+        amountTE = parseInt(amountTE);
+        amountTE = (isNaN(amountTE) || amountTE < 0 || amountTE > 9) ? 1 : amountTE;
+        renderTE(amountTE)
+    });
+    //js tinh tong em be
+    let amountEmBe = document.getElementById('p-eb')
+    let amountEB = amountEmBe.value
+    let renderEB = (amountEB) => {
+        amountEmBe.value = amountEB
+    }
+    let handlePluseb = () => {
+        if (amountEB < 9 && amountT < 9) {
+            amountEB++
+            amountT++
+        }
+        renderEB(amountEB);
+        renderT(amountT)
+    }
+    let handleMinuseb = () => {
+        if (amountEB > 0 && amountT > 1) {
+            amountEB--
+            amountT--
+        }
+        renderEB(amountEB);
+        renderT(amountT);
+    }
+    amountEmBe.addEventListener('input', () => {
+        amountEB = amountEmBe.value;
+        amountEB = parseInt(amountEB);
+        amountEB = (isNaN(amountEB) || amountEB < 0 || amountEB > 9) ? 1 : amountEB;
+        renderEB(amountEB)
+    });
+
 </script>
 
 

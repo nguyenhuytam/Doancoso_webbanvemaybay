@@ -63,7 +63,6 @@ html {
 
     #nav li {
         position: relative;
-        text-transform: uppercase;
     }
 
     #nav > li:hover > a,
@@ -144,6 +143,22 @@ html {
 #backgroud {
     position: relative;
     width: 100%;
+}
+
+#p-tong {
+    width: 11px;
+    border: none;
+    font-size: 16px;
+    background-color: #f0f0f0;
+}
+
+#p-nl,
+#p-te,
+#p-eb {
+    width: 11px;
+    border: none;
+    font-size: 16px;
+    background-color: #ffffff;
 }
 /*------------------------------------------------------- main-------------------------------------------*/
 #main {
@@ -226,6 +241,7 @@ html {
     flex: 1;
     max-height: 40px;
     margin: 10px;
+    box-shadow: 0 0 3px rgb(0 0 0 / 30%);
 }
 
     .deprture i, input {
@@ -238,6 +254,7 @@ html {
     padding-left: 5px;
     font-weight: bold;
     background-color: #fff;
+    max-width: 140px;
 }
 
 .in-date {
@@ -687,7 +704,6 @@ html {
 
 .choose {
     width: 60%;
-    background-color: #dddddd9e;
     display: flex;
     /* margin-right: auto; */
     margin-left: auto;
@@ -841,6 +857,49 @@ html {
             width: 17px;
             height: 17px;
         }
+
+.choose-search {
+    box-shadow: 0 0 3px rgb(0 0 0 / 30%);
+    background-color: #fff;
+}
+
+.choose-s-heading {
+    display: flex;
+    flex-direction: row;
+    background-color: var(--sea);
+    padding: 12px;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 0 3px rgb(0 0 0 / 30%);
+}
+
+    .choose-s-heading i {
+        font-size: 20px;
+        padding-right: 5px;
+    }
+
+    .choose-s-heading input {
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
+    }
+
+.flex-al-ct {
+    display: flex;
+    align-items: center;
+}
+
+.p-table-s {
+    top: 562px !important;
+    right: 154px;
+    box-shadow: 0 0 3px rgb(0 0 0 / 20%) !important;
+}
+
+.btn-pa {
+    padding: 15px 15px !important;
+    justify-content: center;
+}
+
 /*-------------------------information---------------------------------------*/
 .information {
     margin-top: 90px;

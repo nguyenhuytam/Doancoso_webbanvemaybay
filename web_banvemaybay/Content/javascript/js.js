@@ -50,7 +50,7 @@ function topFunction() {
 //    }
 //}
 //const nembleP = document.querySelector('.btn-number-p')
-//const closeNembleP = document.querySelector('#backgroud')
+//const closeNembleP = document.querySelector('body')
 //const closeNembleP2 = document.querySelector('#main')
 //const pTable = document.querySelector('.p-table')
 //nembleP.addEventListener('click', function () {
@@ -130,3 +130,99 @@ function topFunction() {
 //    })
 //    chonDiaDiem2.addEventListener('click', hideLocations2)
 //} 
+////js tinh tong nguoi
+//let amountTong = document.getElementById('p-tong')
+//let amountT = amountTong.value
+//let renderT = (amountT) => {
+//    amountTong.value = amountT
+//}
+//amountTong.addEventListener('input', () => {
+//    amountT = amountTong.value;
+//    amountT = parseInt(amountT);
+//    amountT = (isNaN(amountT) || amountT < 1 || amountT > 9) ? 1 : amountT;
+//    renderT(amountT)
+//});
+////js tinh tong nguoi lon
+//let amountNguoiLon = document.getElementById('p-nl')
+//let amountNL = amountNguoiLon.value
+//let renderNL = (amountNL) => {
+//    amountNguoiLon.value = amountNL
+//}
+//let handlePlusnl = () => {
+//    if (amountNL < 9 && amountT < 9) {
+//        amountNL++
+//        amountT++
+//    }
+//    renderNL(amountNL);
+//    renderT(amountT);
+//}
+//let handleMinusnl = () => {
+//    if (amountNL > 1 && amountT > 1) {
+//        amountNL--
+//        amountT--
+//    }
+//    renderNL(amountNL);
+//    renderT(amountT);
+//}
+//amountNguoiLon.addEventListener('input', () => {
+//    amountNL = amountNguoiLon.value;
+//    amountNL = parseInt(amountNL);
+//    amountNL = (isNaN(amountNL) || amountNL < 1 || amountNL > 9) ? 1 : amountNL;
+//    renderNL(amountNL)
+//});
+////js tinh tong tre em
+//let amountTreEm = document.getElementById('p-te')
+//let amountTE = amountTreEm.value
+//let renderTE = (amountTE) => {
+//    amountTreEm.value = amountTE
+//}
+//let handlePluste = () => {
+//    if (amountTE < 9 && amountT < 9) {
+//        amountTE++
+//        amountT++
+//    }
+//    renderTE(amountTE);
+//    renderT(amountT);
+//}
+//let handleMinuste = () => {
+//    if (amountTE > 0 && amountT > 1) {
+//        amountTE--
+//        amountT--
+//    }
+//    renderTE(amountTE);
+//    renderT(amountT);
+//}
+//amountTreEm.addEventListener('input', () => {
+//    amountTE = amountTreEm.value;
+//    amountTE = parseInt(amountTE);
+//    amountTE = (isNaN(amountTE) || amountTE < 0 || amountTE > 9) ? 1 : amountTE;
+//    renderTE(amountTE)
+//});
+////js tinh tong em be
+//let amountEmBe = document.getElementById('p-eb')
+//let amountEB = amountEmBe.value
+//let renderEB = (amountEB) => {
+//    amountEmBe.value = amountEB
+//}
+//let handlePluseb = () => {
+//    if (amountEB < 9 && amountT < 9) {
+//        amountEB++
+//        amountT++
+//    }
+//    renderEB(amountEB);
+//    renderT(amountT)
+//}
+//let handleMinuseb = () => {
+//    if (amountEB > 0 && amountT > 1) {
+//        amountEB--
+//        amountT--
+//    }
+//    renderEB(amountEB);
+//    renderT(amountT);
+//}
+//amountEmBe.addEventListener('input', () => {
+//    amountEB = amountEmBe.value;
+//    amountEB = parseInt(amountEB);
+//    amountEB = (isNaN(amountEB) || amountEB < 0 || amountEB > 9) ? 1 : amountEB;
+//    renderEB(amountEB)
+//});
