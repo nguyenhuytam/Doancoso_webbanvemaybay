@@ -52,6 +52,7 @@
 
 	.btn-back, .btn-reservations {
 		padding: 7px 17px;
+
 	}
 
 	.choose {
@@ -205,6 +206,7 @@
 
 	.btn-back, .btn-reservations {
 		padding: 8px 18px;
+		margin: 0;
 	}
 
 	.information-right {

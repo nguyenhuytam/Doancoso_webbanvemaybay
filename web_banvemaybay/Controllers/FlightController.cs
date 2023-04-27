@@ -263,7 +263,7 @@ namespace FlightSearch.Controllers
             {
                 // Tính tổng tiền mới dựa trên giá trị của hl.Giatien
                 double tongtien = hanhli.Giatien + gia;
-
+                ViewBag.giahanhly = hanhli.Giatien;
                 // Lưu lại tổng tiền vào session
                 Session["giatien"+idChuyenBay] = tongtien;
 

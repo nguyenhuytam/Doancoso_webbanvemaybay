@@ -23,19 +23,19 @@
                     </div>
                     <div class="choose-time-go">
                         <span>@chuyenbay.Diadiemdi</span>
-                        <p>@chuyenbay.Ngaydi.Value.ToString("dd-MM-yyyy HH:mm")</p>
+                        <p>@chuyenbay.Ngaydi.Value.ToString("HH:mm")</p>
                     </div>
                     @if ( chuyenbay.Ngayve != null)
                     {
                         <div class="choose-time-next">
                             <span>@chuyenbay.Diadiemden</span>
-                            <p>@chuyenbay.Ngayve</p>
+                            <p>@chuyenbay.Ngayve.Value.ToString("HH:mm")</p>
                         </div>
                     }
                     <div class="choose-money">
-                        <b>@chuyenbay.Giatien</b><span> VNĐ</span>
+                        <b>@String.Format("{0:0,0}", @chuyenbay.Giatien)</b><span> VNĐ</span>
                     </div>
-                    <a href="@Url.Action("Information","Flight" ,new {id=chuyenbay.IDchuyenbay})">
+                    <a class="btn-choose" href="@Url.Action("Information","Flight" ,new {id=chuyenbay.IDchuyenbay})">
                         Chọn
                     </a>
                 </div>
@@ -51,10 +51,12 @@
         @using (Html.BeginForm("Pirec", "Flight", FormMethod.Post, new { id = "flightForm" }))
         {
             <div class="choose-mode-body">
-                <input type="radio" name="searchBy" id="priceSort" value="priceSort">
-                <label for="priceSort"> Giảm dần</label>
-                <input type="radio" name="searchBy" id="priceSort1" value="priceSort1">
-                <label for="priceSort1"> Tăng dần</label>
+                <div class="choose-mode-item">
+                    <label for="priceSort"><input type="radio" name="searchBy" id="priceSort" value="priceSort"> Giảm dần</label>
+                </div>
+                <div class="choose-mode-item">
+                   <label for="priceSort1"><input type="radio" name="searchBy" id="priceSort1" value="priceSort1"> Tăng dần</label>
+                </div>   
             </div>
         }
         <script>
@@ -101,7 +103,7 @@
                         <input class="in-location" type="text" name="from" id="from" value="@Session["from"]" />
                     </div>
                     <input class="in-date" type="date" name="dateto" id="dateto" value="@Session["dateto"]" />
-                    <input class="in-date" type="date" name="datefrom" id="datefrom" value="@Session["datefrom"]" />
+                    <input class="in-date" type="date" name="datefrom" id="datefrom" value="@Session["datefrom"]" disabled />
                     <div class="number-p">
                         <button class="btn-number-p">
                             <i class="fa-solid fa-user"></i>
@@ -143,7 +145,7 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn-find-tic">Tìm chuyến bay</button>
+                    <button class="btn-find-tic  btn-pa flex-al-ct">Tìm chuyến bay</button>
                     <script>
                         // Lấy danh sách các button có class là "btn-p"
                         var buttons = document.getElementsByClassName('btn-p');
@@ -167,7 +169,7 @@
         }
     </div>
 </div>
------------------------------ <location-di> -----------------------------
+@*----------------------------- <location-di> -----------------------------*@
 <div class="location js-location">
     <div class="location-container js-location-container">
         <header class="location-header">
@@ -249,7 +251,7 @@
         </div>
     </div>
 </div>
------------------------------ <location-ve> -----------------------------
+@*----------------------------- <location-ve> -----------------------------*@
 <div class="location-2 js-location-2">
     <div class="location-container-2 js-location-container-2">
         <header class="location-header-2">
@@ -385,14 +387,14 @@
     })
     document.getElementById('one-way').onclick = function (e) {
         if (this.checked) {
-            document.querySelector("#round-trip_day").style = "opacity: 0.3; cursor: no-drop;"
-            document.querySelector("#round-trip_day").disabled = true;
+            document.querySelector("#datefrom").style = "opacity: 0.3; cursor: no-drop;"
+            document.querySelector("#datefrom").disabled = true;
         }
     }
     document.getElementById('round-trip').onclick = function (e) {
         if (this.checked) {
-            document.querySelector("#round-trip_day").style = "opacity: 1; cursor: pointer;"
-            document.querySelector("#round-trip_day").disabled = false;
+            document.querySelector("#datefrom").style = "opacity: 1; cursor: pointer;"
+            document.querySelector("#datefrom").disabled = false;
         }
     }
     const chonDiaDiems = document.querySelectorAll('.locition-body-content li')

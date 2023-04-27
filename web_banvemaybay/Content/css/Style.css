@@ -152,9 +152,9 @@ html {
     background-color: #f0f0f0;
 }
 
-#p-nl,
-#p-te,
-#p-eb {
+#nl,
+#te,
+#eb {
     width: 11px;
     border: none;
     font-size: 16px;
@@ -237,6 +237,10 @@ html {
     align-items: center;
 }
 
+#datefrom {
+    opacity: 0.3; cursor: no-drop;
+}
+
 .deprture, .destination, .in-date, .btn-find-tic {
     flex: 1;
     max-height: 40px;
@@ -295,7 +299,8 @@ html {
     border-radius: 4px;
     border: none;
     font-size: 16px;
-    padding: 0 15px;
+    line-height:10px;
+    padding: 15px;
     background-color: var(--blue);
     opacity: 0.8;
     cursor: pointer;
@@ -788,7 +793,7 @@ html {
     }
 
 .btn-choose {
-    flex: 0.8;
+    flex: 0.5;
     border: none;
     border-radius: 4px;
     padding: 9px 0;
@@ -940,7 +945,6 @@ html {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: center;
     padding-bottom: 20px;
     padding-top: 13px;
     margin-top: 5px;
@@ -1136,7 +1140,7 @@ html {
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
     padding-top: 13px;
     margin-top: 5px;
 }
@@ -1161,6 +1165,7 @@ html {
         }
 
 .payment1,
+.payment2,
 .payment3 {
     width: 100%;
     background-color: #ddd;
@@ -1178,12 +1183,14 @@ html {
 
 .btn-back,
 .btn-reservations {
+    float: right;
     border-radius: 4px;
     border: none;
+    margin-right: 11px;
     font-size: 16px;
     background-color: var(--blue);
     cursor: pointer;
-    padding: 5px 15px;
+    padding: 8px;
     opacity: 0.9;
 }
 

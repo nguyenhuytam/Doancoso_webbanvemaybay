@@ -30,6 +30,15 @@
                             <p>Ngày sinh <sup>*</sup></p>
                             <input type="date" name="birthday" id="birthday">
                         </li>
+                        <li>
+                            <p>Hành lý ký gửi <sup></sup></p>
+                            <select name="hanhlyid" id="hanhlyid" class="ci-baggage">
+                                <option value="0">none</option>
+                                <option value="1">10kg</option>
+                                <option value="2">20kg</option>
+                                <option value="3">30kg</option>
+                            </select>
+                        </li>
                     </ul>
                     <div class="note">
                         <h3><i class="fa-solid fa-triangle-exclamation"></i>Lưu ý về độ tuổi người lớn, trẻ em, trẻ sơ sinh</h3>
@@ -108,12 +117,15 @@
                 <div class="payment-body">
                     <ul class="payment-i">
                         <li>
-                            <input type="radio" name="payment" id="payment2">
-                            <label for="payment2">Thanh toán tại nhà quý khách</label>
+                            <input type="radio" name="payment" id="payment2" checked>
+                            <label for="payment2">Thanh toán tại công ty</label>
                         </li>
+                        <div class="payment2" style="display:block">
+                            Địa chỉ: 10/80C XL Hà Nội, Phường Tân Phú, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam
+                        </div>
                         <li>
                             <input type="radio" name="payment" id="payment1">
-                            <label for="payment1">Thanh toán tại văn phòng</label>
+                            <label for="payment1">Thanh toán momo</label>
                         </li>
                         <div class="payment1">
                             Địa chỉ: 10/80C XL Hà Nội, Phường Tân Phú, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam
@@ -121,17 +133,18 @@
 
                         <li>
                             <input type="radio" name="payment" id="payment3">
-                            <label for="payment3">Chuyển khoản ngân hàng</label>
+                            <label for="payment3">Thanh toán vnpay</label>
                         </li>
                         <div class="payment3">
                             Chủ TK: TRẦN TRUNG BẢO KHA<br>
                             STK: 027100109923
                         </div>
                     </ul>
-                    <input type="submit" value="Tìm kiếm " class="btn btn-primary" />
+                    <input type="submit" value="Tìm kiếm " class="btn btn-reservations" />
                 </div>
             </div>
         </div>
+
         <div class="information-right">
             <div class="information-r-heading">
                 <i class="fa-solid fa-cart-shopping"></i>
@@ -139,23 +152,33 @@
             </div>
             <div class="information-r-body">
                 <ul class="information-goto">
-                    <b>Chuyến bay một chiều</b>
-                    <li><p>Đi từ <span class="go">@Model.Diadiemdi</span></p><p>Đến <span class="to">@Model.Diadiemden</span></p></li>
-                    <li><span class="go">@Model.Ngaydi</span><span class="to"></span></li>
                     @if (Model.Ngayve != null)
                     {
-                        <li><span class="go">@Model.Ngayve</span><span class="to"></span></li>
+                        <b>Chuyến bay khứ hồi</b>
                     }
+                    else
+                    {
+                        <b>Chuyến bay một chiều</b>
+                    }
+                    <li><p>Đi từ <span class="go">@Model.Diadiemdi</span></p><p>Đến <span class="to">@Model.Diadiemden</span></p></li>
+                    <li>
+                        <span class="go">@Model.Ngaydi</span>
+                        @if (Model.Ngayve != null)
+                        {
+                            <span class="to">@Model.Ngayve</span>
+                        }
+                    </li>
                 </ul>
                 <ul class="information-money">
-                    <b>Giá vé tạm tính</b>
-                    <li>Giá vé<span>190.000đ</span></li>
-                    <li>Thuế<span>62.000đ</span></li>
-                    <li>Phí<span>550.000đ</span></li>
-                    <li>Phí tiện ích<span>33.000đ</span></li>
-                    <li class="li-money-last">Tổng tiền<span>@Session["giatien"+Model.IDchuyenbay]</span></li>
                     <input type="hidden" name="idChuyenBay" value="@Model.IDchuyenbay" />
                     <input type="hidden" name="giatien" value="@Session["giatien"]" />
+                    <b>Giá vé tạm tính</b>
+                    <li>Giá vé<span>@String.Format("{0:0,0}", @Model.Giatien)đ</span></li>
+                    <li>Thuế<span>@String.Format("{0:0,0}", (@Model.Giatien / 100 * 10))đ</span></li>
+                    <li>Phí<span>@String.Format("{0:0,0}", 70000)đ</span></li
+                    <li>Giá hành lý<span>@String.Format("{0:0,0}", 1)đ</span></li>
+                    <li class="li-money-last">Tổng tiền<span>@String.Format("{0:0,0}", @Session["giatien" + Model.IDchuyenbay])đ</span></li>
+
                 </ul>
             </div>
 
@@ -163,6 +186,7 @@
     </div>
 </form>
 <li>
+    <p>Hành lý ký gửi <sup></sup></p>
     @using (Html.BeginForm("tongtien", "Flight", FormMethod.Post, new { id = "flightForm" }))
     {
         <select name="idhanhli" id="searchBySelect">
@@ -180,8 +204,11 @@
 </li>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        var selectElementHanhLyId = document.getElementById('hanhlyid');
         var selectElement = document.getElementById('searchBySelect');
-        selectElement.addEventListener('change', function () {
+        selectElementHanhLyId.addEventListener('change', function () {
+            selectElementHanhLyId.value = this.value;
+            selectElement.value = this.value;
             localStorage.setItem('selectedOption', this.value);
             document.getElementById('flightForm').submit();
         });
@@ -191,40 +218,33 @@
             selectElement.value = selectedOption;
         }
     });
-
-
-
-
-
-
-
-
-    document.getElementById('invoice').onclick = function (e) {
-        if (this.checked) {
-            document.querySelector(".invoice-in").style.display = "block"
-        }
-        else {
-            document.querySelector(".invoice-in").style.display = "none"
-        }
-    }
+    //document.getElementById('invoice').onclick = function (e) {
+    //    if (this.checked) {
+    //        document.querySelector(".invoice-in").style.display = "block"
+    //    }
+    //    else {
+    //        document.querySelector(".invoice-in").style.display = "none"
+    //    }
+    //}
     document.getElementById('payment1').onclick = function (e) {
         if (this.checked) {
             document.querySelector(".payment1").style.display = "block"
+            document.querySelector(".payment2").style.display = "none"
             document.querySelector(".payment3").style.display = "none"
         }
     }
     document.getElementById('payment2').onclick = function (e) {
         if (this.checked) {
             document.querySelector(".payment1").style.display = "none"
+            document.querySelector(".payment2").style.display = "block"
             document.querySelector(".payment3").style.display = "none"
         }
     }
     document.getElementById('payment3').onclick = function (e) {
         if (this.checked) {
             document.querySelector(".payment1").style.display = "none"
+            document.querySelector(".payment2").style.display = "none"
             document.querySelector(".payment3").style.display = "block"
         }
     }
-
-
 </script>
