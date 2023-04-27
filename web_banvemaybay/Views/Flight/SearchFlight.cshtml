@@ -5,35 +5,6 @@
     ViewBag.Title = "ChonVe";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<table>
-    <tr>
-        <th>Địa điểm đi</th>
-        <th>Địa điểm đến</th>
-        <th>Ngày đi</th>
-        @if (Model.Any(chuyenbay => chuyenbay.Ngayve != null))
-        {
-            <th>Ngày về</th>
-        }
-        <th>Gía Tiền</th>
-    </tr>
-    @foreach (var chuyenbay in Model)
-    {
-        <tr>
-            <td>@chuyenbay.Diadiemdi</td>
-            <td>@chuyenbay.Diadiemden</td>
-            <td>@chuyenbay.Ngaydi.Value.ToString("dd-MM-yyyy HH:mm")</td>
-            @if (chuyenbay.Ngayve != null)
-            {
-                <td>@chuyenbay.Ngayve.Value.ToString("dd-MM-yyyy HH:mm")</td>
-            }
-            <td>@chuyenbay.Giatien.Value.ToString("#,###,###")</td>
-            <a href="@Url.Action("Information","Flight" ,new {id=chuyenbay.IDchuyenbay})">
-                Chọn
-            </a>
-        </tr>
-    }
-</table>
-
 <div class="body-choose">
     <div class="choose">
         <div class="choose-heading">
@@ -44,108 +15,31 @@
             </div>
         </div>
         <div class="choose-container">
-            <div class="choose-item">
-                <div class="choose-img">
-                    <img src="~/Content/image/vietjet.png" alt="">
+            @foreach (var chuyenbay in Model)
+            {
+                <div class="choose-item">
+                    <div class="choose-img">
+                        <img src="~/Content/image/vietjet.png" alt="">
+                    </div>
+                    <div class="choose-time-go">
+                        <span>@chuyenbay.Diadiemdi</span>
+                        <p>@chuyenbay.Ngaydi.Value.ToString("dd-MM-yyyy HH:mm")</p>
+                    </div>
+                    @if ( chuyenbay.Ngayve != null)
+                    {
+                        <div class="choose-time-next">
+                            <span>@chuyenbay.Diadiemden</span>
+                            <p>@chuyenbay.Ngayve</p>
+                        </div>
+                    }
+                    <div class="choose-money">
+                        <b>@chuyenbay.Giatien</b><span> VNĐ</span>
+                    </div>
+                    <a href="@Url.Action("Information","Flight" ,new {id=chuyenbay.IDchuyenbay})">
+                        Chọn
+                    </a>
                 </div>
-                <div class="choose-time-go">
-                    <span>Hà nội</span>
-                    <p>19:35</p>
-                </div>
-                <div class="choose-time-next">
-                    <span>Hồ Chí Minh</span>
-                    <p>21:50</p>
-                </div>
-                <div class="choose-money">
-                    <b>1,009,000</b><span> VNĐ</span>
-                </div>
-                <button class="btn-choose">Chọn</button>
-            </div>
-            <div class="choose-item">
-                <div class="choose-img">
-                    <img src="~/Content/image/vietnamairlines.png" alt="">
-                </div>
-                <div class="choose-time-go">
-                    <span>Hà nội</span>
-                    <p>19:35</p>
-                </div>
-                <div class="choose-time-next">
-                    <span>Hồ Chí Minh</span>
-                    <p>21:50</p>
-                </div>
-                <div class="choose-money">
-                    <b>1,009,000</b><span> VNĐ</span>
-                </div>
-                <button class="btn-choose">Chọn</button>
-            </div>
-            <div class="choose-item">
-                <div class="choose-img">
-                    <img src="~/Content/image/bamboo.png" alt="">
-                </div>
-                <div class="choose-time-go">
-                    <span>Hà nội</span>
-                    <p>19:35</p>
-                </div>
-                <div class="choose-time-next">
-                    <span>Hồ Chí Minh</span>
-                    <p>21:50</p>
-                </div>
-                <div class="choose-money">
-                    <b>1,009,000</b><span> VNĐ</span>
-                </div>
-                <button class="btn-choose">Chọn</button>
-            </div>
-            <div class="choose-item">
-                <div class="choose-img">
-                    <img src="~/Content/image/vietjet.png" alt="">
-                </div>
-                <div class="choose-time-go">
-                    <span>Hà nội</span>
-                    <p>19:35</p>
-                </div>
-                <div class="choose-time-next">
-                    <span>Hồ Chí Minh</span>
-                    <p>21:50</p>
-                </div>
-                <div class="choose-money">
-                    <b>1,009,000</b><span> VNĐ</span>
-                </div>
-                <button class="btn-choose">Chọn</button>
-            </div>
-            <div class="choose-item">
-                <div class="choose-img">
-                    <img src="~/Content/image/vietnamairlines.png" alt="">
-                </div>
-                <div class="choose-time-go">
-                    <span>Hà nội</span>
-                    <p>19:35</p>
-                </div>
-                <div class="choose-time-next">
-                    <span>Hồ Chí Minh</span>
-                    <p>21:50</p>
-                </div>
-                <div class="choose-money">
-                    <b>1,009,000</b><span> VNĐ</span>
-                </div>
-                <button class="btn-choose">Chọn</button>
-            </div>
-            <div class="choose-item">
-                <div class="choose-img">
-                    <img src="~/Content/image/bamboo.png" alt="">
-                </div>
-                <div class="choose-time-go">
-                    <span>Hà nội</span>
-                    <p>19:35</p>
-                </div>
-                <div class="choose-time-next">
-                    <span>Hồ Chí Minh</span>
-                    <p>21:50</p>
-                </div>
-                <div class="choose-money">
-                    <b>1,009,000</b><span> VNĐ</span>
-                </div>
-                <button class="btn-choose">Chọn</button>
-            </div>
+            }
 
         </div>
     </div>
@@ -154,78 +48,123 @@
             <i class="fa-regular fa-eye"></i>
             Chế độ hiển thị theo
         </div>
-        <div class="choose-mode-body">
-            <div class="choose-mode-item">
-                <label for="choose-basic"><input type="radio" name="choose-radio" id="choose-basic" checked="checked"> Giá vé cơ bản cho người lớn</label>
+        @using (Html.BeginForm("Pirec", "Flight", FormMethod.Post, new { id = "flightForm" }))
+        {
+            <div class="choose-mode-body">
+                <input type="radio" name="searchBy" id="priceSort" value="priceSort">
+                <label for="priceSort"> Giảm dần</label>
+                <input type="radio" name="searchBy" id="priceSort1" value="priceSort1">
+                <label for="priceSort1"> Tăng dần</label>
             </div>
-            <div class="choose-mode-item">
-                <label for="choose-taxes"><input type="radio" name="choose-radio" id="choose-taxes"> Giá vé bao gồm thuế và phí</label>
-            </div>
-        </div>
-        <div class="choose-search">
-            <div class="choose-s-heading">
-                <p><i><i class="fa-solid fa-magnifying-glass fa-bounce"></i></i>Tìm kiếm vé</p>
-                <div class="choose-check">
-                    <div class="flex-al-ct"><input type="radio" name="ticket-type" id="one-way" checked><label for="one-way"> Một chiều</label></div>
-                    <div class="flex-al-ct"><input type="radio" name="ticket-type" id="round-trip"><label for="round-trip"> Khứ hồi</label></div>
+        }
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                var radioButtons = document.getElementsByName('searchBy');
+                for (var i = 0; i < radioButtons.length; i++) {
+                    radioButtons[i].addEventListener('change', function () {
+                        localStorage.setItem('selectedRadioButton', this.value);
+                    });
+                    if (localStorage.getItem('selectedRadioButton') === radioButtons[i].value) {
+                        radioButtons[i].checked = true;
+                    }
+                }
+            });
+        </script>
+        <script>
+            document.getElementById("priceSort").addEventListener("change", function () {
+                document.getElementById("flightForm").submit();
+            });
+
+            document.getElementById("priceSort1").addEventListener("change", function () {
+                document.getElementById("flightForm").submit();
+            });
+        </script>
+
+        @using (Html.BeginForm("SearchFlight", "Flight", FormMethod.Post, new { id = "myForm" }))
+        {
+            <div class="choose-search">
+                <div class="choose-s-heading">
+                    <p><i><i class="fa-solid fa-magnifying-glass fa-bounce"></i></i>Tìm kiếm vé</p>
+                    <div class="choose-check">
+                        <div class="flex-al-ct"><input type="radio" name="ticket-type" id="one-way" checked><label for="one-way"> Một chiều</label></div>
+                        <div class="flex-al-ct"><input type="radio" name="ticket-type" id="round-trip"><label for="round-trip"> Khứ hồi</label></div>
+                    </div>
                 </div>
 
-            </div>
-            <div class="tic-content" style="padding: 0;">
-                <div class="deprture js-open-location">
-                    <i class="fa-sharp fa-solid fa-plane-departure"></i>
-                    <input class="in-location" type="text" name="departure" id="departure" value="Hà Nội (HAN)" title="Chọn nơi đi">
-                </div>
-                <div class="destination js-open-location-2">
-                    <i class="fa-solid fa-plane-arrival"></i>
-                    <input class="in-location" type="text" name="destination" id="destination" value="Hồ Chí Minh (SGN)" title="Chọn nơi đến" >
-                </div>
-                <input class="in-date" type="date" name="departure_day" id="departure_day" title="Chọn ngày đi">
-                <input class="in-date" type="date" name="round-trip_day" id="round-trip_day" title="Chọn ngày về"  style="opacity: 0.3; cursor: no-drop;">
-                <div class="number-p">
-                    <button class="btn-number-p">
-                        <i class="fa-solid fa-user"></i>
-                        <input type="text" name="p-tong" id="p-tong" value="1" >
-                    </button>
-                    <div class="p-table p-table-s">
-                        <div class="p-item">
-                            <div class="p-item-left">
-                                <p>Người lớn</p>
-                                <span>(Trên 18)</span>
+                <div class="tic-content" style="padding: 0;">
+                    <div class="deprture js-open-location">
+                        <i class="fa-sharp fa-solid fa-plane-departure"></i>
+                        <input class="in-location" type="text" name="to" id="to" value="@Session["to"]" />
+                    </div>
+                    <div class="destination js-open-location-2">
+                        <i class="fa-solid fa-plane-arrival"></i>
+                        <input class="in-location" type="text" name="from" id="from" value="@Session["from"]" />
+                    </div>
+                    <input class="in-date" type="date" name="dateto" id="dateto" value="@Session["dateto"]" />
+                    <input class="in-date" type="date" name="datefrom" id="datefrom" value="@Session["datefrom"]" />
+                    <div class="number-p">
+                        <button class="btn-number-p">
+                            <i class="fa-solid fa-user"></i>
+                            <input type="text" name="p-tong" id="p-tong" value="1" />
+                        </button>
+                        <div class="p-table p-table-s">
+                            <div class="p-item">
+                                <div class="p-item-left">
+                                    <p>Người lớn</p>
+                                    <span>(Trên 18)</span>
+                                </div>
+                                <div class="p-item-right">
+                                    <button class="btn-p" onclick="handleMinusnl()">-</button>
+                                    <input type="text" name="nl" id="nl" value="1">
+                                    <button class="btn-p" onclick="handlePlusnl()">+</button>
+                                </div>
                             </div>
-                            <div class="p-item-right">
-                                <button class="btn-p" onclick="handleMinusnl()">-</button>
-                                <input type="text" name="p-nl" id="p-nl" value="1" >
-                                <button class="btn-p" onclick="handlePlusnl()">+</button>
+                            <div class="p-item">
+                                <div class="p-item-left">
+                                    <p>Trẻ em</p>
+                                    <span>(2 - 12)</span>
+                                </div>
+                                <div class="p-item-right">
+                                    <button class="btn-p" onclick="handleMinuste()">-</button>
+                                    <input type="text" name="te" id="te" value="0">
+                                    <button class="btn-p" onclick="handlePluste()">+</button>
+                                </div>
                             </div>
-                        </div>
-                        <div class="p-item">
-                            <div class="p-item-left">
-                                <p>Trẻ em</p>
-                                <span>(2 - 12)</span>
-                            </div>
-                            <div class="p-item-right">
-                                <button class="btn-p" onclick="handleMinuste()">-</button>
-                                <input type="text" name="p-te" id="p-te" value="0" >
-                                <button class="btn-p" onclick="handlePluste()">+</button>
-                            </div>
-                        </div>
-                        <div class="p-item">
-                            <div class="p-item-left">
-                                <p>Em bé</p>
-                                <span>(0 - 2)</span>
-                            </div>
-                            <div class="p-item-right">
-                                <button class="btn-p" onclick="handleMinuseb()">-</button>
-                                <input type="text" name="p-eb" id="p-eb" value="0" >
-                                <button class="btn-p" onclick="handlePluseb()">+</button>
+                            <div class="p-item">
+                                <div class="p-item-left">
+                                    <p>Em bé</p>
+                                    <span>(0 - 2)</span>
+                                </div>
+                                <div class="p-item-right">
+                                    <button class="btn-p" onclick="handleMinuseb()">-</button>
+                                    <input type="text" name="eb" id="eb" value="0">
+                                    <button class="btn-p" onclick="handlePluseb()">+</button>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <button class="btn-find-tic">Tìm chuyến bay</button>
+                    <script>
+                        // Lấy danh sách các button có class là "btn-p"
+                        var buttons = document.getElementsByClassName('btn-p');
+                        // Duyệt qua từng button và ngăn chặn sự kiện click của chúng
+                        for (var i = 0; i < buttons.length; i++) {
+                            buttons[i].addEventListener('click', function (e) {
+                                e.preventDefault();
+                            });
+                        }
+                        var buttons = document.getElementsByClassName('btn-number-p');
+                        // Duyệt qua từng button và ngăn chặn sự kiện click của chúng
+                        for (var i = 0; i < buttons.length; i++) {
+                            buttons[i].addEventListener('click', function (e) {
+                                e.preventDefault();
+                            });
+                        }
+                    </script>
+
                 </div>
-                <button class="btn-find-tic btn-pa flex-al-ct"><a href="C">Tìm chuyến bay</a></button>
             </div>
-        </div>
+        }
     </div>
 </div>
 ----------------------------- <location-di> -----------------------------
@@ -483,7 +422,7 @@
         renderT(amountT)
     });
     //js tinh tong nguoi lon
-    let amountNguoiLon = document.getElementById('p-nl')
+    let amountNguoiLon = document.getElementById('nl')
     let amountNL = amountNguoiLon.value
     let renderNL = (amountNL) => {
         amountNguoiLon.value = amountNL
@@ -511,7 +450,7 @@
         renderNL(amountNL)
     });
     //js tinh tong tre em
-    let amountTreEm = document.getElementById('p-te')
+    let amountTreEm = document.getElementById('te')
     let amountTE = amountTreEm.value
     let renderTE = (amountTE) => {
         amountTreEm.value = amountTE
@@ -539,7 +478,7 @@
         renderTE(amountTE)
     });
     //js tinh tong em be
-    let amountEmBe = document.getElementById('p-eb')
+    let amountEmBe = document.getElementById('eb')
     let amountEB = amountEmBe.value
     let renderEB = (amountEB) => {
         amountEmBe.value = amountEB

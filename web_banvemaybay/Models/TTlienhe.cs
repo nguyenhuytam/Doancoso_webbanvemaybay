@@ -12,23 +12,19 @@ namespace web_banvemaybay.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Chuyenbay
+    public partial class TTlienhe
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Chuyenbay()
+        public TTlienhe()
         {
             this.Ve = new HashSet<Ve>();
         }
     
-        public int IDchuyenbay { get; set; }
-        public string Diadiemdi { get; set; }
-        public string Diadiemden { get; set; }
-        public Nullable<System.DateTime> Ngaydi { get; set; }
-        public Nullable<System.DateTime> Ngayve { get; set; }
-        public double Giatien { get; set; }
-        public Nullable<int> IDhang { get; set; }
+        public int IDlienhe { get; set; }
+        public string FullName { get; set; }
+        public string Email { get; set; }
+        public Nullable<int> Phone { get; set; }
     
-        public virtual HangHK HangHK { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ve> Ve { get; set; }
     }

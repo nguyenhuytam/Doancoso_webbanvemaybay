@@ -5,24 +5,25 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="719edde81a52431b99b7406dc25f59dc" Name="Diagram1" ZoomLevel="96">
-        <EntityTypeShape EntityType="web_banvemaybayModel.Chucvu" Width="1.5" PointX="0.75" PointY="1.75" />
-        <EntityTypeShape EntityType="web_banvemaybayModel.Dattruoc" Width="1.5" PointX="5.25" PointY="1.5" />
-        <EntityTypeShape EntityType="web_banvemaybayModel.HangHK" Width="1.5" PointX="3" PointY="6.875" />
+        <EntityTypeShape EntityType="web_banvemaybayModel.Chucvu" Width="1.5" PointX="0.75" PointY="2.125" />
+        <EntityTypeShape EntityType="web_banvemaybayModel.Chuyenbay" Width="1.5" PointX="5.25" PointY="6.5" />
+        <EntityTypeShape EntityType="web_banvemaybayModel.Dattruoc" Width="1.5" PointX="5.25" PointY="1.875" />
+        <EntityTypeShape EntityType="web_banvemaybayModel.HangHK" Width="1.5" PointX="3" PointY="7" />
         <EntityTypeShape EntityType="web_banvemaybayModel.Hanhkhach" Width="1.5" PointX="5.25" PointY="12.5" />
-        <EntityTypeShape EntityType="web_banvemaybayModel.Hanhli" Width="1.5" PointX="5.25" PointY="9.875" />
-        <EntityTypeShape EntityType="web_banvemaybayModel.Help" Width="1.5" PointX="7.75" PointY="5.75" />
-        <EntityTypeShape EntityType="web_banvemaybayModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="8.75" />
-        <EntityTypeShape EntityType="web_banvemaybayModel.TaiKhoan" Width="1.5" PointX="3" PointY="1.25" />
+        <EntityTypeShape EntityType="web_banvemaybayModel.Hanhli" Width="1.5" PointX="5.25" PointY="10" />
+        <EntityTypeShape EntityType="web_banvemaybayModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="5.75" />
+        <EntityTypeShape EntityType="web_banvemaybayModel.TaiKhoan" Width="1.5" PointX="3" PointY="1.75" />
+        <EntityTypeShape EntityType="web_banvemaybayModel.TTlienhe" Width="1.5" PointX="5.25" PointY="15.875" />
         <EntityTypeShape EntityType="web_banvemaybayModel.Ve" Width="1.5" PointX="7.5" PointY="1" />
         <AssociationConnector Association="web_banvemaybayModel.FK_TaiKhoan_Chucvu" />
+        <AssociationConnector Association="web_banvemaybayModel.FK_Chuyenbay_HangHK" />
+        <AssociationConnector Association="web_banvemaybayModel.FK_Ticket_Filght" />
         <AssociationConnector Association="web_banvemaybayModel.FK_Booking_User" />
         <AssociationConnector Association="web_banvemaybayModel.FK_Ticket_Booking" />
         <AssociationConnector Association="web_banvemaybayModel.FK_Ticket_Passenger" />
-        <AssociationConnector Association="web_banvemaybayModel.FK_Ticket_Luggage1" />
-        <EntityTypeShape EntityType="web_banvemaybayModel.Chuyenbay" Width="1.5" PointX="5.25" PointY="5.25" />
-        <AssociationConnector Association="web_banvemaybayModel.FK_Chuyenbay_HangHK" />
-        <AssociationConnector Association="web_banvemaybayModel.FK_Ticket_Filght" />
-        </Diagram>
+        <AssociationConnector Association="web_banvemaybayModel.FK_Ve_Hanhli" />
+        <AssociationConnector Association="web_banvemaybayModel.FK_Ve_TTlienhe" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

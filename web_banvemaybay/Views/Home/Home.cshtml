@@ -17,10 +17,7 @@
                 <div class="ticket-type">
                     <input type="radio" name="ticket-type" id="one-way" checked><label for="one-way"> Một chiều</label>
                     <input type="radio" name="ticket-type" id="round-trip"><label for="round-trip"> Khứ hồi</label>
-                    @*<input type="radio" name="searchBy" id="priceSort" value="priceSort" checked>
-                    <label for="priceSort"> Giảm dần</label>
-                    <input type="radio" name="searchBy" id="priceSort1" value="priceSort1">
-                    <label for="priceSort1"> Tăng dần</label>*@
+
                 </div>
             </div>
             <div class="tic-content">
@@ -57,7 +54,7 @@
                         </div>
                         <div class="p-item-right">
                             <button class="btn-p" onclick="handleMinusnl()">-</button>
-                            <input type="text" name="p-nl" id="p-nl" value="1" >
+                            <input type="text" name="nl" id="nl" value="1" >
                             <button class="btn-p" onclick="handlePlusnl()">+</button>
                         </div>
                     </div>
@@ -68,7 +65,7 @@
                         </div>
                         <div class="p-item-right">
                             <button class="btn-p" onclick="handleMinuste()">-</button>
-                            <input type="text" name="p-te" id="p-te" value="0" >
+                            <input type="text" name="te" id="te" value="0" >
                             <button class="btn-p" onclick="handlePluste()">+</button>
                         </div>
                     </div>
@@ -79,7 +76,7 @@
                         </div>
                         <div class="p-item-right">
                             <button class="btn-p" onclick="handleMinuseb()">-</button>
-                            <input type="text" name="p-eb" id="p-eb" value="0" >
+                            <input type="text" name="eb" id="eb" value="0" >
                             <button class="btn-p" onclick="handlePluseb()">+</button>
                         </div>
                     </div>
@@ -366,7 +363,7 @@
         renderT(amountT)
     });
     //js tinh tong nguoi lon
-    let amountNguoiLon = document.getElementById('p-nl')
+    let amountNguoiLon = document.getElementById('nl')
     let amountNL = amountNguoiLon.value
     let renderNL = (amountNL) => {
         amountNguoiLon.value = amountNL
@@ -394,7 +391,7 @@
         renderNL(amountNL)
     });
     //js tinh tong tre em
-    let amountTreEm = document.getElementById('p-te')
+    let amountTreEm = document.getElementById('te')
     let amountTE = amountTreEm.value
     let renderTE = (amountTE) => {
         amountTreEm.value = amountTE
@@ -422,7 +419,7 @@
         renderTE(amountTE)
     });
     //js tinh tong em be
-    let amountEmBe = document.getElementById('p-eb')
+    let amountEmBe = document.getElementById('eb')
     let amountEB = amountEmBe.value
     let renderEB = (amountEB) => {
         amountEmBe.value = amountEB
