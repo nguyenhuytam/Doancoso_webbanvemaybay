@@ -153,7 +153,7 @@
                     <li>Thuế<span>62.000đ</span></li>
                     <li>Phí<span>550.000đ</span></li>
                     <li>Phí tiện ích<span>33.000đ</span></li>
-                    <li class="li-money-last">Tổng tiền<span>@Session["giatien"]</span></li>
+                    <li class="li-money-last">Tổng tiền<span>@Session["giatien"+Model.IDchuyenbay]</span></li>
                     <input type="hidden" name="idChuyenBay" value="@Model.IDchuyenbay" />
                     <input type="hidden" name="giatien" value="@Session["giatien"]" />
                 </ul>
@@ -172,8 +172,9 @@
             <option value="3">30kg</option>
 
         </select>
-        <input type="hidden" name="giatien" value="@Session["giatien"]" />
+        <input type="hidden" name="giatien" value="@Session["giatien"+Model.IDchuyenbay]" />
         <input type="hidden" name="idChuyenBay" value="@Model.IDchuyenbay" />
+        @* <input type="hidden" name="idhanhlicu" value="@Session["idhanhli"+Model.IDchuyenbay]" />*@
     }
 
 </li>

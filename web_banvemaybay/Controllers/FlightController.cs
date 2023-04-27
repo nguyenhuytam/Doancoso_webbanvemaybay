@@ -149,8 +149,7 @@ namespace FlightSearch.Controllers
                             flight.Giatien = ((0.25 * giaVe) * valueEB) + ((0.75 * giaVe) * valueTE);
                             
                         }
-                        var giatien = flight.Giatien;
-                        Session["giatien"] = giatien;
+                             Session["giatien" + flight.IDchuyenbay] = flight.Giatien;
                      }
                     Session["to"] = to;
                     Session["from"] = from;
@@ -206,11 +205,11 @@ namespace FlightSearch.Controllers
             return View("SearchFlight", ((IEnumerable<Chuyenbay>)Session["flights"]).ToList());
         }
         [HttpPost]
-        public ActionResult tt(FormCollection form, TTlienhe lienhe , Hanhkhach hk, string name,DateTime? birthday ,int? sdtlh ,string emaillh, string gioitinh,string namelh , string gioitinhlh,int idhanhli,int idchuyenbay,double giatien)
+        public ActionResult tt(FormCollection form, TTlienhe lienhe, Hanhkhach hk, string name, DateTime? birthday, int? sdtlh, string emaillh, string gioitinh, string namelh, string gioitinhlh, int idhanhli, int idchuyenbay, double giatien)
         {
-            if (name != null && birthday!=null && sdtlh != null && emaillh !=null && gioitinh!=null && gioitinhlh!=null && namelh !=null)
-            { 
-                if (emaillh != null && namelh != null && sdtlh !=null)
+            if (name != null && birthday != null && sdtlh != null && emaillh != null && gioitinh != null && gioitinhlh != null && namelh != null)
+            {
+                if (emaillh != null && namelh != null && sdtlh != null)
                 {
                     var ktlh = new TTlienhe();
                     ktlh.FullName = namelh;
@@ -227,14 +226,14 @@ namespace FlightSearch.Controllers
                 db.SaveChanges();
                 if (idchuyenbay != null)
                 {
-                        var ve = new Ve();
-                        ve.IDchuyenbay = idchuyenbay;
-                        ve.IDhanhkhach = kt.IDhanhkhach;
-                        ve.IDhanhli = idhanhli;
-                        ve.Ngaydatve = DateTime.Now;
-                        ve.Gia = giatien;
-                        db.Ve.Add(ve);
-                        db.SaveChanges();
+                    var ve = new Ve();
+                    ve.IDchuyenbay = idchuyenbay;
+                    ve.IDhanhkhach = kt.IDhanhkhach;
+                    ve.IDhanhli = idhanhli;
+                    ve.Ngaydatve = DateTime.Now;
+                    ve.Gia = giatien;
+                    db.Ve.Add(ve);
+                    db.SaveChanges();
                 }
                 TempData["Name"] = name;
                 TempData["Birthday"] = birthday;
@@ -254,21 +253,22 @@ namespace FlightSearch.Controllers
             }
         }
         [HttpPost]
-        public ActionResult tongtien( int idhanhli, int idChuyenBay)
+        public ActionResult tongtien(int idhanhli, int idChuyenBay/*,int? idhanhlicu*/)
         {
-            double gia = double.Parse(Session["giatien"].ToString());
+
+            double gia = double.Parse(Session["giatien"+idChuyenBay].ToString());
             // Lấy thông tin từ cơ sở dữ liệu
             var hanhli = db.Hanhli.Where(hl => hl.IDhanhli == idhanhli).FirstOrDefault();
-            if (hanhli != null )
+            if (hanhli != null)
             {
                 // Tính tổng tiền mới dựa trên giá trị của hl.Giatien
                 double tongtien = hanhli.Giatien + gia;
 
                 // Lưu lại tổng tiền vào session
-                 Session["giatien"] = tongtien;
+                Session["giatien"+idChuyenBay] = tongtien;
 
                 // Chuyển hướng đến action "Information" trong controller "Flight"
-                return RedirectToAction("Information", "Flight", new {id=idChuyenBay });
+                return RedirectToAction("Information", "Flight", new { id = idChuyenBay });
             }
             else
             {
