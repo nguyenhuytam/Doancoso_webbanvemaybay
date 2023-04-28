@@ -99,6 +99,10 @@ button {
     button.ghost {
         background-color: transparent;
         border-color: #FFFFFF;
+        padding: 11px 30px;
+    }
+    button.ghost a{
+        font-size:12px;
     }
 
 form {
