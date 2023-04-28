@@ -1,0 +1,35 @@
+﻿@model web_banvemaybay.Models.HangHK
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>HangHK</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TenHang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TenHang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hinhanh)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hinhanh)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDhang }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -6,9 +6,9 @@ using System.Web.Mvc;
 
 namespace web_banvemaybay.Areas.Admin.Controllers
 {
-    public class LoginAdminController : Controller
+    public class HomeController : Controller
     {
-        // GET: Admin/LoginAdmin
+        // GET: Admin/Home
         public ActionResult Index()
         {
             return View();

@@ -1,0 +1,75 @@
+﻿@model web_banvemaybay.Models.Chuyenbay
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Chuyenbay</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Diadiemdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Diadiemdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Diadiemden)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Diadiemden)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ngaydi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ngaydi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ngayve)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ngayve)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Giatien)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Giatien)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Thoigiandi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Thoigiandi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HangHK.TenHang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HangHK.TenHang)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.IDchuyenbay }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
