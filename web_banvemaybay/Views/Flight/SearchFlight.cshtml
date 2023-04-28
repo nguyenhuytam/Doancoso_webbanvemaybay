@@ -10,8 +10,8 @@
         <div class="choose-heading">
             <i class="only-icon fa-solid fa-plane-up"></i>
             <div class="choose-heading-content">
-                <p>Hà Nội, Việt Nam <i class="fa-solid fa-arrow-right"></i> Hồ Chí Minh, Việt Nam</p>
-                <span>Thứ 7, 1-5-2023</span>
+                <p>@Session["to"] <i class="fa-solid fa-arrow-right"></i> @Session["from"]</p>
+                <span>@Session["dateto"]</span>
             </div>
         </div>
         <div class="choose-container">
@@ -25,13 +25,13 @@
                         <span>@chuyenbay.Diadiemdi</span>
                         <p>@chuyenbay.Ngaydi.Value.ToString("HH:mm")</p>
                     </div>
-                    @if ( chuyenbay.Ngayve != null)
-                    {
+                    @*@if ( chuyenbay.Ngayve != null)
+                    {*@
                         <div class="choose-time-next">
                             <span>@chuyenbay.Diadiemden</span>
-                            <p>@chuyenbay.Ngayve.Value.ToString("HH:mm")</p>
+                            <p>@chuyenbay.Ngaydi.Value.AddHours(1).AddMinutes(30).ToString("HH:mm")</p>
                         </div>
-                    }
+                    @*}*@
                     <div class="choose-money">
                         <b>@String.Format("{0:0,0}", @chuyenbay.Giatien)</b><span> VNĐ</span>
                     </div>
@@ -52,7 +52,7 @@
         {
             <div class="choose-mode-body">
                 <div class="choose-mode-item">
-                    <label for="priceSort"><input type="radio" name="searchBy" id="priceSort" value="priceSort"> Giảm dần</label>
+                    <label for="priceSort"><input type="radio" name="searchBy" id="priceSort" value="priceSort" checked> Giảm dần</label>
                 </div>
                 <div class="choose-mode-item">
                    <label for="priceSort1"><input type="radio" name="searchBy" id="priceSort1" value="priceSort1"> Tăng dần</label>
