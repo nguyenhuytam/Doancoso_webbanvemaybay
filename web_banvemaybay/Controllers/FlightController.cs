@@ -284,6 +284,7 @@ namespace FlightSearch.Controllers
                 // Lưu lại tổng tiền vào session
                 Session["giahanhly"] = hanhli.Giatien;
                 Session["giatien" + idChuyenBay] = tongtien;
+                Session["giathanhtoan"] = Math.Round(tongtien);
                 Session["idcu"] = idhanhlicu;
 
                 // Chuyển hướng đến action "Information" trong controller "Flight"
@@ -307,7 +308,7 @@ namespace FlightSearch.Controllers
             string returnUrl = "https://localhost:44394";
             string notifyurl = "https://4c8d-2001-ee0-5045-50-58c1-b2ec-3123-740d.ap.ngrok.io/Home/SavePayment"; //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
 
-            string amount = "1000";
+            string amount = Session["giathanhtoan"].ToString();
             string orderid = DateTime.Now.Ticks.ToString(); //mã đơn hàng
             string requestId = DateTime.Now.Ticks.ToString();
             string extraData = "";

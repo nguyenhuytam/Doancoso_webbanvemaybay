@@ -1280,6 +1280,10 @@ html {
     .information-money li span {
         font-size: 13px;
     }
+    .ttmomo,
+    .ttvnpay {
+        display:none;
+    }
 /*-------------------------done---------------------------------------*/
 .done {
     margin-top: 90px;
