@@ -185,8 +185,11 @@
     <Compile Include="Models\Ve.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
-    <Compile Include="Others\MoMoSecurity.cs" />
-    <Compile Include="Others\PaymentRequest.cs" />
+    <Compile Include="Others\Momo\MoMoSecurity.cs" />
+    <Compile Include="Others\Vnpay\PayCompare.cs" />
+    <Compile Include="Others\Vnpay\PayLib.cs" />
+    <Compile Include="Others\Momo\PaymentRequest.cs" />
+    <Compile Include="Others\Vnpay\Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
-namespace web_banvemaybay.Others
+namespace web_banvemaybay.Others.MoMo
 {
     class MoMoSecurity
     {
