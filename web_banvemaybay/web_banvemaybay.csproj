@@ -259,14 +259,11 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\_LayoutFlight.cshtml" />
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Login\Register.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />
-    <Content Include="Views\Home\ChonVe.cshtml" />
-    <Content Include="Views\Home\NhapThongTin.cshtml" />
     <Content Include="Views\Home\DatThanhCong.cshtml" />
     <Content Include="Views\Home\GioiThieu.cshtml" />
     <Content Include="Views\Home\LienHe.cshtml" />

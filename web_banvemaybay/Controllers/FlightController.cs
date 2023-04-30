@@ -242,7 +242,8 @@ namespace FlightSearch.Controllers
                     db.SaveChanges();
                 }
                 Session["giatien"] = giatien;
-                return View(db.Ve);
+                //return View(db.Ve);
+                return RedirectToAction("DatThanhCong", "Home");
             }
             else
             {
