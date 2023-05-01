@@ -5,14 +5,14 @@
     Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Chi tiết</h2>
 
 <div>
-    <h4>Ve</h4>
+    <h4>Vé</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal p15">
         <dt>
-            @Html.DisplayNameFor(model => model.Giatien)
+            Giá tiền
         </dt>
 
         <dd>
@@ -20,7 +20,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Tinhtrang)
+            Tình trạng
         </dt>
 
         <dd>
@@ -28,7 +28,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Ngaydatve)
+            Ngày đặt vé
         </dt>
 
         <dd>
@@ -36,7 +36,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Gia)
+            Giá
         </dt>
 
         <dd>
@@ -44,7 +44,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Chuyenbay.Diadiemdi)
+            Địa điểm đi
         </dt>
 
         <dd>
@@ -52,7 +52,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Dattruoc.Tinhtrang)
+            Đặt trước
         </dt>
 
         <dd>
@@ -60,7 +60,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Hanhkhach.Tenhanhkhach)
+            Tên hành khách
         </dt>
 
         <dd>
@@ -68,7 +68,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Hanhli.Kg)
+            Hành lí
         </dt>
 
         <dd>
@@ -76,7 +76,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TTlienhe.FullName)
+            Thông tin liên hệ
         </dt>
 
         <dd>
@@ -85,7 +85,7 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IDve }) |
-    @Html.ActionLink("Back to List", "Index")
+<p class="p15">
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.IDve }) |
+    @Html.ActionLink("Quay lại", "Index")
 </p>

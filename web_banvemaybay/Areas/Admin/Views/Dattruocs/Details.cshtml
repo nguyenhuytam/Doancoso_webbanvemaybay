@@ -5,14 +5,14 @@
     Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Chi tiết</h2>
 
 <div>
-    <h4>Dattruoc</h4>
+    <h4>Đặt trước</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal p15">
         <dt>
-            @Html.DisplayNameFor(model => model.NgayDat)
+            Ngày đặt
         </dt>
 
         <dd>
@@ -20,7 +20,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Tinhtrang)
+            Tình trạng
         </dt>
 
         <dd>
@@ -28,16 +28,16 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TaiKhoan.Password)
+            ID tài khoản
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.TaiKhoan.Password)
+            @Html.DisplayFor(model => model.TaiKhoan.IDtaikhoan)
         </dd>
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IDdattruoc }) |
-    @Html.ActionLink("Back to List", "Index")
+<p class="p15">
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.IDdattruoc }) |
+    @Html.ActionLink("Quay lại", "Index")
 </p>

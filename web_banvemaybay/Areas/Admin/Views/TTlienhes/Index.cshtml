@@ -5,42 +5,60 @@
     Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
 }
 
-<h2>Index</h2>
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Thêm/ sửa xóa</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Thông tin liên hệ</li>
+        </ol>
+        <p>
+            @Html.ActionLink("Thêm mới", "Create")
+        </p>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.FullName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Phone)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.FullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Phone)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IDlienhe }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IDlienhe }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IDlienhe })
-        </td>
-    </tr>
-}
-
-</table>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Bảng số liệu thông tin liên hệ
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>
+                                Họ và tên
+                            </th>
+                            <th>
+                                Email
+                            </th>
+                            <th>
+                                Số điện thoại
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FullName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Email)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Phone)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.IDlienhe }) |
+                                    @Html.ActionLink("Chi tiết", "Details", new { id = item.IDlienhe }) |
+                                    @Html.ActionLink("Xóa", "Delete", new { id = item.IDlienhe })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>

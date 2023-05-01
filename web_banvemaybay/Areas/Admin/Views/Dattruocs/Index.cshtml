@@ -5,42 +5,62 @@
     Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
 }
 
-<h2>Index</h2>
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Thêm/ sửa xóa</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Đặt trước</li>
+        </ol>
+        <p>
+            @Html.ActionLink("Thêm mới", "Create")
+        </p>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.NgayDat)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Tinhtrang)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.TaiKhoan.Password)
-        </th>
-        <th></th>
-    </tr>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Bảng số liệu đặt trước
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>
+                                Ngày đặt
+                            </th>
+                            <th>
+                                Tình trạng
+                            </th>
+                            <th>
+                               Id tài khoản
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NgayDat)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Tinhtrang)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TaiKhoan.IDtaikhoan)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.IDdattruoc }) |
+                                    @Html.ActionLink("Chi tiết", "Details", new { id = item.IDdattruoc }) |
+                                    @Html.ActionLink("Xóa", "Delete", new { id = item.IDdattruoc })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NgayDat)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tinhtrang)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.TaiKhoan.Password)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IDdattruoc }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IDdattruoc }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IDdattruoc })
-        </td>
-    </tr>
-}
 
-</table>

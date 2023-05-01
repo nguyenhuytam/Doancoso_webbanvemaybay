@@ -5,36 +5,55 @@
     Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
 }
 
-<h2>Index</h2>
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Thêm/ sửa xóa</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Hành lí</li>
+        </ol>
+        <p>
+            @Html.ActionLink("Thêm mới", "Create")
+        </p>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Kg)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Giatien)
-        </th>
-        <th></th>
-    </tr>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Bảng số liệu hành lí
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>
+                                Kg
+                            </th>
+                            <th>
+                                Giá tiền
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Kg)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Giatien)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.IDhanhli }) |
+                                    @Html.ActionLink("Chi tiết", "Details", new { id = item.IDhanhli }) |
+                                    @Html.ActionLink("Xóa", "Delete", new { id = item.IDhanhli })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Kg)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Giatien)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IDhanhli }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IDhanhli }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IDhanhli })
-        </td>
-    </tr>
-}
-
-</table>

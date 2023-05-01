@@ -5,14 +5,14 @@
     Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Chi tiết</h2>
 
 <div>
-    <h4>TaiKhoan</h4>
+    <h4>Tài Khoản</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal p15">
         <dt>
-            @Html.DisplayNameFor(model => model.Password)
+            Mật khẩu
         </dt>
 
         <dd>
@@ -20,7 +20,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.HovaTen)
+            Họ và tên
         </dt>
 
         <dd>
@@ -28,7 +28,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Email)
+            Email
         </dt>
 
         <dd>
@@ -36,7 +36,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.SDT)
+            Số điện thoại
         </dt>
 
         <dd>
@@ -44,7 +44,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Chucvu.TenCV)
+            Chức vụ
         </dt>
 
         <dd>
@@ -53,7 +53,7 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IDtaikhoan }) |
-    @Html.ActionLink("Back to List", "Index")
+<p class="p15">
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.IDtaikhoan }) |
+    @Html.ActionLink("Quay lại", "Index")
 </p>

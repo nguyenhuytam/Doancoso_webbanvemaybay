@@ -5,20 +5,20 @@
     Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>Sửa</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Hanhli</h4>
+        <h4>Hành lý</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.IDhanhli)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Kg, htmlAttributes: new { @class = "control-label col-md-2" })
+            Kg
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Kg, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Kg, "", new { @class = "text-danger" })
@@ -26,7 +26,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Giatien, htmlAttributes: new { @class = "control-label col-md-2" })
+            Giá tiền
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Giatien, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.Giatien, "", new { @class = "text-danger" })
@@ -34,13 +34,13 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="col-md-offset-2 col-md-10 p15">
+                <input type="submit" value="Lưu" class="btn btn-dark" />
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+<div class="p15">
+    @Html.ActionLink("Quay lại", "Index")
 </div>

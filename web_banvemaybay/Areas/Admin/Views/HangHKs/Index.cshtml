@@ -4,37 +4,55 @@
     ViewBag.Title = "Index";
     Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
 }
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Thêm/ sửa xóa</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Hãng hàng không</li>
+        </ol>
+        <p>
+            @Html.ActionLink("Thêm mới", "Create")
+        </p>
 
-<h2>Index</h2>
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Bảng số liệu hãng hàng không
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>
+                                Tên hãng
+                            </th>
+                            <th>
+                                Hình ảnh
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TenHang)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Hinhanh)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.IDhang }) |
+                                    @Html.ActionLink("Chi tiết", "Details", new { id = item.IDhang }) |
+                                    @Html.ActionLink("Xóa", "Delete", new { id = item.IDhang })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.TenHang)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Hinhanh)
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.TenHang)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Hinhanh)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.IDhang }) |
-            @Html.ActionLink("Details", "Details", new { id=item.IDhang }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.IDhang })
-        </td>
-    </tr>
-}
-
-</table>

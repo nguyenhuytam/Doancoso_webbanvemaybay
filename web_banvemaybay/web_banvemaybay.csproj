@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -46,10 +47,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
       <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
@@ -132,7 +133,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\ChuyenbaysController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DattruocsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HangHKsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\HanhlisController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginAdminController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TaiKhoansController.cs" />
+    <Compile Include="Areas\Admin\Controllers\TTlienhesController.cs" />
+    <Compile Include="Areas\Admin\Controllers\VesController.cs" />
     <Compile Include="Controllers\FlightController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -193,6 +201,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\Admin\ContentAdmin\assets\demo\chart-area-demo.js" />
+    <Content Include="Areas\Admin\ContentAdmin\assets\demo\chart-bar-demo.js" />
+    <Content Include="Areas\Admin\ContentAdmin\assets\demo\chart-pie-demo.js" />
+    <Content Include="Areas\Admin\ContentAdmin\assets\demo\datatables-demo.js" />
+    <Content Include="Areas\Admin\ContentAdmin\assets\img\error-404-monochrome.svg" />
+    <Content Include="Areas\Admin\ContentAdmin\css\styles.css" />
+    <Content Include="Areas\Admin\ContentAdmin\js\datatables-simple-demo.js" />
+    <Content Include="Areas\Admin\ContentAdmin\js\scripts.js" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -236,6 +252,42 @@
     </Content>
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\LoginAdmin\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Shared\Layout_Admin.cshtml" />
+    <Content Include="Areas\Admin\Views\Chuyenbays\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Chuyenbays\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Chuyenbays\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Chuyenbays\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Chuyenbays\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Dattruocs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Dattruocs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Dattruocs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Dattruocs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Dattruocs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\HangHKs\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\HangHKs\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\HangHKs\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\HangHKs\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\HangHKs\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Hanhlis\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Hanhlis\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Hanhlis\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Hanhlis\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Hanhlis\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\TaiKhoans\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\TaiKhoans\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\TaiKhoans\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\TaiKhoans\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\TaiKhoans\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\TTlienhes\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\TTlienhes\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\TTlienhes\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\TTlienhes\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\TTlienhes\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\Ves\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Ves\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Ves\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Ves\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Ves\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\javaScripts\main.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
@@ -274,7 +326,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -325,7 +376,10 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
   </Target>
+  <Import Project="..\packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

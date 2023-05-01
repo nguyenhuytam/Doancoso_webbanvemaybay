@@ -5,14 +5,14 @@
     Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
 }
 
-<h2>Details</h2>
+<h2>Chi tiết</h2>
 
 <div>
-    <h4>Chuyenbay</h4>
+    <h4>Chuyến bay</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal p15">
         <dt>
-            @Html.DisplayNameFor(model => model.Diadiemdi)
+            Điểm đi
         </dt>
 
         <dd>
@@ -20,7 +20,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Diadiemden)
+            Điểm đến
         </dt>
 
         <dd>
@@ -28,7 +28,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Ngaydi)
+            Ngày đi
         </dt>
 
         <dd>
@@ -36,7 +36,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Ngayve)
+            Ngày về
         </dt>
 
         <dd>
@@ -44,7 +44,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Giatien)
+            Giá tiền
         </dt>
 
         <dd>
@@ -52,7 +52,7 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.HangHK.TenHang)
+            Hãng hàng không
         </dt>
 
         <dd>
@@ -61,7 +61,7 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.IDchuyenbay }) |
-    @Html.ActionLink("Back to List", "Index")
+<p class="p15">
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.IDchuyenbay }) |
+    @Html.ActionLink("Quay lại", "Index")
 </p>
