@@ -271,6 +271,8 @@ namespace FlightSearch.Controllers
                     Session["giahanhly"] = hanhli.Giatien;
                     Session["giatien" + idChuyenBay] = tongtien;
                     Session["idcu"] = idhanhlicu;
+                    Session["giathanhtoan"] = Math.Round(tongtien);
+                    Session["giathanhtoanvnpay"] = Math.Round(tongtien * 100);
 
                     // Chuyển hướng đến action "Information" trong controller "Flight"
                     return RedirectToAction("Information", "Flight", new { id = idChuyenBay });

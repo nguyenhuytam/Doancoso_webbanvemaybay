@@ -5,87 +5,44 @@
     Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
 }
 
-<h2>Chi tiết</h2>
 
-<div>
+
+<div class="p15">
+    <h2>Chi tiết</h2><br />
     <h4>Vé</h4>
     <hr />
     <dl class="dl-horizontal p15">
         <dt>
-            Giá tiền
+            Id vé : @Html.DisplayFor(model => model.IDve)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Giatien)
-        </dd>
-
         <dt>
-            Tình trạng
+            Tên hành khách : @Html.DisplayFor(model => model.Hanhkhach.Tenhanhkhach)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Tinhtrang)
-        </dd>
-
         <dt>
-            Ngày đặt vé
+            Ngày đặt vé : @Html.DisplayFor(model => model.Ngaydatve)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ngaydatve)
-        </dd>
-
         <dt>
-            Giá
+            Địa điểm đi : @Html.DisplayFor(model => model.Chuyenbay.Diadiemdi)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Gia)
-        </dd>
-
         <dt>
-            Địa điểm đi
+            Địa điểm đến : @Html.DisplayFor(model => model.Chuyenbay.Diadiemden)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Chuyenbay.Diadiemdi)
-        </dd>
-
         <dt>
-            Đặt trước
+            Hành lí : @Html.DisplayFor(model => model.Hanhli.Kg)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Dattruoc.Tinhtrang)
-        </dd>
-
         <dt>
-            Tên hành khách
+            Giá tiền : @String.Format("{0:0,0}", @Html.DisplayFor(model => model.Gia).ToString())đ
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hanhkhach.Tenhanhkhach)
-        </dd>
-
         <dt>
-            Hành lí
+            Thông tin liên hệ : @Html.DisplayFor(model => model.TTlienhe.Phone)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hanhli.Kg)
-        </dd>
-
         <dt>
-            Thông tin liên hệ
+            Tình trạng : @Html.DisplayFor(model => model.Tinhtrang)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TTlienhe.FullName)
-        </dd>
-
     </dl>
+    <p class="p15">
+        @*@Html.ActionLink("Sửa", "Edit", new { id = Model.IDve }) |*@
+        @Html.ActionLink("Quay lại", "Index")
+    </p>
 </div>
-<p class="p15">
-    @Html.ActionLink("Sửa", "Edit", new { id = Model.IDve }) |
-    @Html.ActionLink("Quay lại", "Index")
-</p>
+

@@ -5,39 +5,30 @@
     Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
 }
 
-<h2>Chi tiết</h2>
 
-<div>
+<div class="p15">
+
+    <h2>Chi tiết</h2><br />
     <h4>Thông tin liên hệ</h4>
     <hr />
     <dl class="dl-horizontal p15">
         <dt>
-            Họ và tên
+            Họ và tên : @Html.DisplayFor(model => model.FullName)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FullName)
-        </dd>
 
         <dt>
-            Email
+            Email : @Html.DisplayFor(model => model.Email)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Email)
-        </dd>
 
         <dt>
-            Số điện thoại
+            Số điện thoại : @Html.DisplayFor(model => model.Phone)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
 
     </dl>
+    <p class="p15">
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.IDlienhe }) |
+        @Html.ActionLink("Quay lại", "Index")
+    </p>
+
 </div>
-<p class="p15">
-    @Html.ActionLink("Sửa", "Edit", new { id = Model.IDlienhe }) |
-    @Html.ActionLink("Quay lại", "Index")
-</p>

@@ -5,39 +5,27 @@
     Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
 }
 
-<h2>Xóa</h2>
-
-<div>
+<div class="p15">
+    <h2>Xóa</h2><br />
     <h4>Đặt trước</h4>
     <hr />
     <dl class="dl-horizontal p15">
         <dt>
-            Ngày đặt
+            Ngày đặt : @Html.DisplayFor(model => model.NgayDat)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.NgayDat)
-        </dd>
 
         <dt>
-            Tình trạng
+            Tình trạng : @Html.DisplayFor(model => model.Tinhtrang)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Tinhtrang)
-        </dd>
 
         <dt>
-            Tài khoản
+            Tài khoản : @Html.DisplayFor(model => model.TaiKhoan.IDtaikhoan)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TaiKhoan.IDtaikhoan)
-        </dd>
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color p15">

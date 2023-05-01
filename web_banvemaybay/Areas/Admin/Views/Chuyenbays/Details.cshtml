@@ -4,64 +4,38 @@
     ViewBag.Title = "Details";
     Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
 }
-
-<h2>Chi tiết</h2>
-
-<div>
-    <h4>Chuyến bay</h4>
+<div class="p15">
+    <h2>Chi tiết</h2><br />
+    <h4 c>Chuyến bay</h4>
     <hr />
-    <dl class="dl-horizontal p15">
+    <dl class="dl-horizontal">
         <dt>
-            Điểm đi
+            Điểm đi : @Html.DisplayFor(model => model.Diadiemdi)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Diadiemdi)
-        </dd>
-
         <dt>
-            Điểm đến
+            Điểm đến : @Html.DisplayFor(model => model.Diadiemden)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Diadiemden)
-        </dd>
-
         <dt>
-            Ngày đi
+            Ngày đi : @Html.DisplayFor(model => model.Ngaydi)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ngaydi)
-        </dd>
-
         <dt>
-            Ngày về
+            Ngày về : @Html.DisplayFor(model => model.Ngayve)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Ngayve)
-        </dd>
-
         <dt>
-            Giá tiền
+            Giá tiền : @Html.DisplayFor(model => model.Giatien)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Giatien)
-        </dd>
-
         <dt>
-            Hãng hàng không
+            Hãng hàng không : @Html.DisplayFor(model => model.HangHK.TenHang)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.HangHK.TenHang)
-        </dd>
-
     </dl>
+    <p>
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.IDchuyenbay }) |
+        @Html.ActionLink("Quay lại", "Index")
+    </p>
 </div>
-<p class="p15">
-    @Html.ActionLink("Sửa", "Edit", new { id = Model.IDchuyenbay }) |
-    @Html.ActionLink("Quay lại", "Index")
-</p>
+

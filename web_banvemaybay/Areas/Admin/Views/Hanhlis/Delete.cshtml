@@ -5,36 +5,28 @@
     Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
 }
 
-<h2>Xóa</h2>
 
-<div>
+
+<div class="p15">
+    <h2>Xóa</h2><br />
     <h4>Hành lí</h4>
     <hr />
-    <dl class="dl-horizontal p15">
-        <dt>
-            Kg
-        </dt>
+        <dl class="dl-horizontal p15">
+            <dt>
+                Kg : @Html.DisplayFor(model => model.Kg)
+            </dt>
+            <dt>
+                Giá tiền : @Html.DisplayFor(model => model.Giatien)
+            </dt>
+        </dl>
 
-        <dd>
-            @Html.DisplayFor(model => model.Kg)
-        </dd>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
 
-        <dt>
-            Giá tiền
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Giatien)
-        </dd>
-
-    </dl>
-
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color p15">
-            <input type="submit" value="Xóa" class="btn btn-danger" /> |
-            @Html.ActionLink("Quay lại", "Index")
-        </div>
-    }
+            <div class="form-actions no-color p15">
+                <input type="submit" value="Xóa" class="btn btn-danger" /> |
+                @Html.ActionLink("Quay lại", "Index")
+            </div>
+        }
 </div>

@@ -5,31 +5,23 @@
     Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
 }
 
-<h2>Chi tiết</h2>
-
-<div>
+<div class="p15">
+    <h2>Chi tiết</h2><br />
     <h4>Hãng hàng không</h4>
     <hr />
     <dl class="dl-horizontal p15">
         <dt>
-            Tên hãng
+            Tên hãng : @Html.DisplayFor(model => model.TenHang)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TenHang)
-        </dd>
 
         <dt>
-            Hình ảnh
+            Hình ảnh : @Html.DisplayFor(model => model.Hinhanh)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Hinhanh)
-        </dd>
-
     </dl>
+    <p>
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.IDhang }) |
+        @Html.ActionLink("Quay lại", "Index")
+    </p>
 </div>
-<p class="p15">
-    @Html.ActionLink("Sửa", "Edit", new { id = Model.IDhang }) |
-    @Html.ActionLink("Quay lại", "Index")
-</p>
+

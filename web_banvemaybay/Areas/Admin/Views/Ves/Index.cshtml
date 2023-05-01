@@ -11,9 +11,9 @@
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active">Vé</li>
         </ol>
-        <p>
+        @*<p>
             @Html.ActionLink("Thêm mới", "Create")
-        </p>
+        </p>*@
 
         <div class="card mb-4">
             <div class="card-header">
@@ -25,31 +25,23 @@
                     <thead>
                         <tr>
                             <th>
-                                Giá tiền
-                            </th>
-                            <th>
-                                Tình trạng
+                                Tên hành khách
                             </th>
                             <th>
                                 Ngày đặt vé
                             </th>
                             <th>
-                                Giá
-                            </th>
-                            <th>
                                 Địa điểm đi
-                            </th>
-                            <th>
-                                Đặt trước
-                            </th>
-                            <th>
-                                Tên hành khách
                             </th>
                             <th>
                                 Hành lí
                             </th>
                             <th>
-                                Thông tin liên hệ
+                                Giá tiền
+                            </th>
+                            <th>
+                                Tình trạng
+                            </th>
                             </th>
                             <th></th>
                         </tr>
@@ -59,36 +51,27 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Giatien)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Tinhtrang)
+                                    @Html.DisplayFor(modelItem => item.Hanhkhach.Tenhanhkhach)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Ngaydatve)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Gia)
-                                </td>
-                                <td>
                                     @Html.DisplayFor(modelItem => item.Chuyenbay.Diadiemdi)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Dattruoc.Tinhtrang)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Hanhkhach.Tenhanhkhach)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Hanhli.Kg)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.TTlienhe.FullName)
+                                    @Html.DisplayFor(modelItem => item.Gia)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Sửa", "Edit", new { id = item.IDve }) |
-                                    @Html.ActionLink("Chi tiết", "Details", new { id = item.IDve }) |
-                                    @Html.ActionLink("Xóa", "Delete", new { id = item.IDve })
+                                    @Html.DisplayFor(modelItem => item.Tinhtrang)
+                                </td>
+                                <td>
+                                    @*@Html.ActionLink("Sửa", "Edit", new { id = item.IDve }) |*@
+                                    @Html.ActionLink("Chi tiết", "Details", new { id = item.IDve })
+                                    @*@Html.ActionLink("Xóa", "Delete", new { id = item.IDve })*@
                                 </td>
                             </tr>
                         }

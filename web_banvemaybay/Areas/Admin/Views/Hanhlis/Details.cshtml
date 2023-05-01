@@ -5,31 +5,23 @@
     Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
 }
 
-<h2>Chi tiết</h2>
 
-<div>
+
+<div class="p15">
+    <h2>Chi tiết</h2><br />
     <h4>Hành lí</h4>
     <hr />
     <dl class="dl-horizontal p15">
         <dt>
-            Kg
+            Kg : @Html.DisplayFor(model => model.Kg)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Kg)
-        </dd>
-
         <dt>
-            Giá tiền
+            Giá tiền : @Html.DisplayFor(model => model.Giatien)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Giatien)
-        </dd>
-
     </dl>
+    <p class="p15">
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.IDhanhli }) |
+        @Html.ActionLink("Quay lại", "Index")
+    </p>
 </div>
-<p class="p15">
-    @Html.ActionLink("Sửa", "Edit", new { id = Model.IDhanhli }) |
-    @Html.ActionLink("Quay lại", "Index")
-</p>
+
