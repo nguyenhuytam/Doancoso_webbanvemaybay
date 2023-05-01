@@ -1,0 +1,40 @@
+﻿@model IEnumerable<web_banvemaybay.Models.Hanhli>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Kg)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Giatien)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Kg)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Giatien)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.IDhanhli }) |
+            @Html.ActionLink("Details", "Details", new { id=item.IDhanhli }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.IDhanhli })
+        </td>
+    </tr>
+}
+
+</table>
