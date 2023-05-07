@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -46,16 +47,33 @@ namespace web_banvemaybay.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDhang,TenHang,Hinhanh")] HangHK hangHK)
+        public ActionResult Create(HangHK Create, HttpPostedFileBase fileAnh)
         {
             if (ModelState.IsValid)
             {
-                db.HangHK.Add(hangHK);
+                web_banvemaybayEntities db = new web_banvemaybayEntities();
+                var existingUser = db.HangHK.FirstOrDefault(c => c.IDhang == Create.IDhang);
+                if (existingUser != null)
+                {
+                    ModelState.AddModelError("", "Lỗi vui lòng kiểm tra id  ");
+                    return View(Create);
+                }
+                if (fileAnh.ContentLength > 0)
+                {
+                    string file = Server.MapPath("/Areas/Admin/ContentAdmin/image/");
+                    string path = file + fileAnh.FileName;
+                    fileAnh.SaveAs(path);
+                    Create.Hinhanh = "/Areas/Admin/ContentAdmin/image/" + fileAnh.FileName;
+                }
+                db.HangHK.Add(Create);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            return View(hangHK);
+            else
+            {
+                ModelState.AddModelError("", "Tên hãng không được để trống");
+                return View(Create);
+            }
         }
 
         // GET: Admin/HangHKs/Edit/5
@@ -78,15 +96,33 @@ namespace web_banvemaybay.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDhang,TenHang,Hinhanh")] HangHK hangHK)
+        public ActionResult Edit(HangHK hang, HttpPostedFileBase fileAnh, HttpPostedFileBase filevideo)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(hangHK).State = EntityState.Modified;
+                web_banvemaybayEntities db = new web_banvemaybayEntities();
+                var existingUser = db.HangHK.FirstOrDefault(c => c.IDhang == hang.IDhang);
+                if (existingUser == null)
+                {
+                    // Mã hóa mật khẩu trước khi lưu vào CSDL\
+                    // user.pass = MD5Hash(user.pass);
+                    ModelState.AddModelError("", "Lỗi vui lòng kiểm tra id  ");
+                    return View(hang);
+                }
+                existingUser.TenHang = hang.TenHang;
+                if (fileAnh.ContentLength > 0)
+                {
+                    string fileName = Path.GetFileName(fileAnh.FileName);
+                    string fileExtension = Path.GetExtension(fileName).ToLower();
+                    string filePath = Path.Combine(Server.MapPath("~/Areas/Admin/ContentAdmin/image/"), fileName);
+                    fileAnh.SaveAs(filePath);
+                    existingUser.Hinhanh = "/Areas/Admin/ContentAdmin/image/" + fileName;
+                }
+                db.Entry(existingUser).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(hangHK);
+            return View(hang);
         }
 
         // GET: Admin/HangHKs/Delete/5

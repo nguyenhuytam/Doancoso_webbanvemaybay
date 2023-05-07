@@ -1,4 +1,4 @@
-﻿
+﻿@model web_banvemaybay.Models.Ve
 @{
     ViewBag.Title = "DatThanhCong";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -8,52 +8,76 @@
         <div class="done-heading">
             <i class="fa-solid fa-circle-check fa-bounce"></i> Bạn đã đặt vé thành công
         </div>
-        <div class="flight-details">
-            <div class="flight-details-heading">
-                Chi tiết chuyến bay
-            </div>
-            <div class="flight-details-body">
-                <div class="flight-details-img">
-                    <img src="~/Content/image/vietjet.png" alt="">
-                </div>
-                <div class="flight-details-go">
-                    <b>Hà Nội - HAN</b>
-                    <p>Sân bay Nội Bài</p>
-                    <p>Cất cánh: <b>23:00</b></p>
-                    <p>Ngày: <b>15-04-2023</b></p>
-                </div>
-                <div class="flight-details-to">
-                    <b>Hồ Chí Minh - SGN</b>
-                    <p>Sân bay Tân Sơn Nhất</p>
-                    <p>Hạ cánh: <b>01:10</b></p>
-                    <p>Ngày: <b>16-04-2023</b></p>
-                </div>
-                <div class="flight-details-info">
-                    <p>Chuyến bay: <b>VJ165</b></p>
-                    <p>Thời gian  <b>02h 10p</b></p>
-                    <p>Hạng chỗ: <b>E1_ECO</b></p>
-                    <p>Máy bay: <b>A321-100/200</b></p>
-                    <p>Hành lý xách tay: <b>7kg</b></p>
-                </div>
-            </div>
+        @if (Session["idchuyenbay"] != null)
+        {
+            int id = int.Parse(Session["idchuyenbay"].ToString());
+            web_banvemaybay.Models.web_banvemaybayEntities db = new web_banvemaybay.Models.web_banvemaybayEntities();
+            var kt = db.Chuyenbay.Where(c => c.IDchuyenbay == id).FirstOrDefault();
+            if (kt != null)
+            {
+                <div class="flight-details">
+                    <div class="flight-details-heading">
+                        Chi tiết chuyến bay
+                    </div>
+                    <div class="flight-details-body">
+                        <div class="flight-details-img">
+                            <img src="~/Content/image/vietjet.png" alt="">
+                        </div>
+                        <div class="flight-details-go">
+                            <b>@kt.Diadiemdi</b>
+                            <p>Ngày: <b>@kt.Ngaydi</b></p>
+                        </div>
+                        @if (@kt.Ngayve != null)
+                        {
+                            <div class="flight-details-to">
+                                <b>@kt.Diadiemden</b>                      
+                                <p>Ngày: <b>@kt.Ngayve</b></p>
+                            </div>
+                        }
+                        <div class="flight-details-info">
+                            <p>Chuyến bay: <b>VJ165</b></p>
+                            <p>Thời gian  <b>02h 10p</b></p>
+                            <p>Hạng chỗ: <b>E1_ECO</b></p>
+                            <p>Máy bay: <b>A321-100/200</b></p>
+                            <p>Hành lý xách tay:                                
+                            @if (@Session["idhanhli"] != null)
+                            {
+                                int hanhli = int.Parse(Session["idhanhli"].ToString());
+                                var khhl = db.Hanhli.Where(c => c.IDhanhli == id).FirstOrDefault();
+                                if (khhl != null)
+                                {
+                                        <b>@khhl.Kg</b>
 
-        </div>
+                                    }
+
+                                }
+                                else
+                                {
+                                        <b>0kg</b>
+                                }
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+            }
+        }
         <div class="contact-details">
             <div class="contact-details-heading">
                 Thông tin liên hệ
             </div>
             <div class="contact-details-body">
                 <div class="contact-details-item">
-                    <b>Họ tên: </b> <span>Nguyễn Văn A</span>
+                    <b>Họ tên: </b> <span>@Session["namelh"];</span>
                 </div>
                 <div class="contact-details-item">
-                    <b>Email: </b> <span>nguyenvana@gmail.com</span>
+                    <b>Email: </b> <span>@Session["emaillh"];</span>
                 </div>
                 <div class="contact-details-item">
-                    <b>Điện thoại: </b> <span>096 096 096</span>
+                    <b>Điện thoại: </b> <span>@Session["sdtlh"]</span>
                 </div>
                 <div class="contact-details-item">
-                    <b>Phương thức thanh toán: </b> <span>Chuyển khoản ngân hàng</span>
+                    <b>Phương thức thanh toán: </b> <span>@Session["payment"]</span>
                 </div>
                 <div class="contact-details-item">
                     <b>Yêu cầu đặc biệt: </b> <span>Không có yêu cầu gì</span>
@@ -67,19 +91,34 @@
             </div>
             <div class="ticket-details-body">
                 <div class="ticket-details-item">
-                    <b>Mã đơn hàng: </b> <span>AHJLFGHLAHFL</span>
+                    <b>Mã vé: </b> <span>@Session["idVeMoi"]</span>
                 </div>
                 <div class="ticket-details-item">
                     <b>Trạng thái: </b> <span>Chưa xác nhận</span>
                 </div>
+                @if (Session["idchuyenbay"] != null)
+                {
+                    int id = int.Parse(Session["idchuyenbay"].ToString());
+                    web_banvemaybay.Models.web_banvemaybayEntities db = new web_banvemaybay.Models.web_banvemaybayEntities();
+                    var ngay = db.Chuyenbay.Where(c => c.IDchuyenbay == id).FirstOrDefault();
+                    if (ngay.Ngayve != null)
+                    {
+                        <div class="ticket-details-item">
+                            <b>Chuyến bay: </b> <span>Khứ hồi </span>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="ticket-details-item">
+                            <b>Chuyến bay: </b> <span>Một chiều</span>
+                        </div>
+                    }
+                }
                 <div class="ticket-details-item">
-                    <b>Chuyến bay: </b> <span>Một chiều</span>
-                </div>
-                <div class="ticket-details-item">
-                    <b>Số hành khách: </b> <span>1 người lớn</span>
+                    <b>Số hành khách: </b> <span>@Session["soluong"]</span>
                 </div>
                 <div class="ticket-details-money">
-                    <b>Tổng cộng: </b> <span>1.024,000 đ</span>
+                    <b>Tổng cộng: </b> <span>@Session["giatien"]</span>
                 </div>
             </div>
 

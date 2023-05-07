@@ -138,6 +138,7 @@
     <Compile Include="Areas\Admin\Controllers\TaiKhoansController.cs" />
     <Compile Include="Areas\Admin\Controllers\TTlienhesController.cs" />
     <Compile Include="Areas\Admin\Controllers\VesController.cs" />
+    <Compile Include="Controllers\CheckController.cs" />
     <Compile Include="Controllers\FlightController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -226,15 +227,15 @@
     <Content Include="Content\css\Style.css" />
     <Content Include="Content\css\styleDN.css" />
     <Content Include="Content\css\StyleSheetLogin.css" />
-    <Content Include="Content\image\209501.jpg" />
-    <Content Include="Content\image\347821.jpg" />
-    <Content Include="Content\image\682174.jpg" />
-    <Content Include="Content\image\bamboo.png" />
-    <Content Include="Content\image\favicon.ico" />
-    <Content Include="Content\image\iconweb.jpg" />
-    <Content Include="Content\image\iconweb2.jpg" />
-    <Content Include="Content\image\vietjet.png" />
-    <Content Include="Content\image\vietnamairlines.png" />
+    <Content Include="Areas\Admin\ContentAdmin\image\209501.jpg" />
+    <Content Include="Areas\Admin\ContentAdmin\image\347821.jpg" />
+    <Content Include="Areas\Admin\ContentAdmin\image\682174.jpg" />
+    <Content Include="Areas\Admin\ContentAdmin\image\bamboo.png" />
+    <Content Include="Areas\Admin\ContentAdmin\image\favicon.ico" />
+    <Content Include="Areas\Admin\ContentAdmin\image\iconweb.jpg" />
+    <Content Include="Areas\Admin\ContentAdmin\image\iconweb2.jpg" />
+    <Content Include="Areas\Admin\ContentAdmin\image\vietjet.png" />
+    <Content Include="Areas\Admin\ContentAdmin\image\vietnamairlines.png" />
     <Content Include="Content\javascript\js.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -328,12 +329,14 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Login\Register.cshtml" />
     <Content Include="Views\Home\Home.cshtml" />
-    <Content Include="Views\Home\DatThanhCong.cshtml" />
     <Content Include="Views\Home\GioiThieu.cshtml" />
     <Content Include="Views\Home\LienHe.cshtml" />
     <Content Include="Views\Flight\SearchFlight.cshtml" />
     <Content Include="Views\Login\Edit.cshtml" />
     <Content Include="Views\Flight\Information.cshtml" />
+    <Content Include="Views\Home\DatThanhCong.cshtml" />
+    <Content Include="Views\Check\Checkve.cshtml" />
+    <Content Include="Views\Check\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
