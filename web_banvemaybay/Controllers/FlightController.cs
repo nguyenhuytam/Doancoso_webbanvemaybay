@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.SqlServer;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using System.Web.Mvc;
+using Common;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using web_banvemaybay.Models;
@@ -226,6 +232,10 @@ namespace FlightSearch.Controllers
                 kt.Gioitinh = gioitinh;
                 db.Hanhkhach.Add(kt);
                 db.SaveChanges();
+                string Bag = "Không hành lý!";
+                string DateHour = "";
+                string Departure = "";
+                string Destination = "";
                 if (idchuyenbay != null)
                 {
                     var ve = new Ve();
@@ -236,13 +246,30 @@ namespace FlightSearch.Controllers
                         ve.IDhanhli = 1;
                     }
                     ve.IDhanhli = idcu;
+                    var hanhli = db.Hanhli.Where(hl => hl.IDhanhli == idcu).FirstOrDefault();
+                    Bag = hanhli.Kg;
                     ve.Ngaydatve = DateTime.Now;
                     ve.Gia = giatien;
+                    var chuyenbay = db.Chuyenbay.Where(hl => hl.IDchuyenbay == idchuyenbay).FirstOrDefault();
+                    DateHour = chuyenbay.Ngaydi.ToString();
+                    Departure = chuyenbay.Diadiemdi.ToString();
+                    Destination = chuyenbay.Diadiemden.ToString();
                     db.Ve.Add(ve);
                     db.SaveChanges();
                 }
                 Session["giatien"] = giatien;
                 //return View(db.Ve);
+                string content = System.IO.File.ReadAllText(Server.MapPath("~/Content/template/EmailVe.html"));
+
+                content = content.Replace("{{CustomerName}}", namelh);
+                content = content.Replace("{{DateHour}}", DateHour);
+                content = content.Replace("{{Departure}}", Departure);
+                content = content.Replace("{{Destination}}", Destination);
+                content = content.Replace("{{Bag}}", Bag);
+                var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+
+                new MailHelper().SendMail(emaillh, "Bạn đã đặt vé thành công tại AirplaneTicket", content);
+                new MailHelper().SendMail(toEmail, "Đơn hàng mới từ AirplaneTicket", content);
                 return RedirectToAction("DatThanhCong", "Home");
             }
             else
