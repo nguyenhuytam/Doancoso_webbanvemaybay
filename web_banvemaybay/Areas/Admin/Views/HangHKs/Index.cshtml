@@ -40,7 +40,8 @@
                                     @Html.DisplayFor(modelItem => item.TenHang)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Hinhanh)
+                                    
+                                    <img src="@item.Hinhanh" style="width:20%;height:20%;" />
                                 </td>
                                 <td>
                                     @Html.ActionLink("Sửa", "Edit", new { id = item.IDhang }) |

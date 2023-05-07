@@ -181,7 +181,7 @@
     </div>
 </form>
 <li style="display:none">
-    @using (Html.BeginForm("tongtien", "Flight", FormMethod.Post, new { id = "flightForm" }))
+    @using (Html.BeginForm("Information", "Flight", FormMethod.Post, new { id = "flightForm" }))
     {
         web_banvemaybay.Models.web_banvemaybayEntities db = new web_banvemaybay.Models.web_banvemaybayEntities();
         var hanhli = db.Hanhli.ToList();
