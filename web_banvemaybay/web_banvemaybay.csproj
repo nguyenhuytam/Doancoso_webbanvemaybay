@@ -237,6 +237,7 @@
     <Content Include="Areas\Admin\ContentAdmin\image\vietjet.png" />
     <Content Include="Areas\Admin\ContentAdmin\image\vietnamairlines.png" />
     <Content Include="Content\javascript\js.js" />
+    <Content Include="Content\template\EmailVe.html" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -371,6 +372,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{4c28b629-00a1-4951-9f79-349068d0e048}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

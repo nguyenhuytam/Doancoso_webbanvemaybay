@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using System.Data.Entity.SqlServer;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Reflection;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Threading.Tasks;
+using System.Web.Helpers;
 using System.Web.Mvc;
+using Common;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using web_banvemaybay.Models;
@@ -88,7 +94,7 @@ namespace FlightSearch.Controllers
                 {
                     return RedirectToAction("Home", "Home", new { thongbao = "Vui lòng chọn Ngày về cách ngày đi ít nhất 1 ngày " });
                 }
-                flights = flights.Where(c => c.Ngaydi != null && SqlFunctions.DateDiff("day", c.Ngaydi, datetoValue) == 0 && SqlFunctions.DateDiff("day", c.Ngayve, datefromValue) == 0);
+                flights = flights.Where(c => c.Ngaydi != null && SqlFunctions.DateDiff("day", c.Ngaydi, datetoValue) == 0 && c.Ngayve >= datefromValue);
             }
             else if (dateto != null && datefrom == null)
             {
@@ -154,7 +160,6 @@ namespace FlightSearch.Controllers
                 Session["giatien" + flight.IDchuyenbay] = flight.Giatien;
             }
             Session["to"] = to;
-            Session["soluong"] = valueEB + valueNL + valueTE;
             Session["from"] = from;
             Session["dateto"] = form["dateto"];
             Session["datefrom"] = form["datefrom"];
@@ -208,7 +213,7 @@ namespace FlightSearch.Controllers
             return View("SearchFlight", ((IEnumerable<Chuyenbay>)Session["flights"]).ToList());
         }
         [HttpPost]
-        public ActionResult tt(FormCollection form, TTlienhe lienhe, Hanhkhach hk, string name, DateTime? birthday, int? sdtlh, string emaillh, string gioitinh, string namelh, string gioitinhlh, int? idcu, int idchuyenbay, double giatien,string payment)
+        public ActionResult tt(FormCollection form, TTlienhe lienhe, Hanhkhach hk, string name, DateTime? birthday, int? sdtlh, string emaillh, string gioitinh, string namelh, string gioitinhlh, int? idcu, int idchuyenbay, double giatien)
         {
             if (name != null && birthday != null && sdtlh != null && emaillh != null && gioitinh != null && gioitinhlh != null && namelh != null)
             {
@@ -227,36 +232,45 @@ namespace FlightSearch.Controllers
                 kt.Gioitinh = gioitinh;
                 db.Hanhkhach.Add(kt);
                 db.SaveChanges();
+                string Bag = "Không hành lý!";
+                string DateHour = "";
+                string Departure = "";
+                string Destination = "";
                 if (idchuyenbay != null)
                 {
                     var ve = new Ve();
                     ve.IDchuyenbay = idchuyenbay;
                     ve.IDhanhkhach = kt.IDhanhkhach;
-                    var lh = new TTlienhe();
-                    ve.IDlienhe = lh.IDlienhe;
                     if (idcu == null)
                     {
                         ve.IDhanhli = 1;
                     }
                     ve.IDhanhli = idcu;
+                    var hanhli = db.Hanhli.Where(hl => hl.IDhanhli == idcu).FirstOrDefault();
+                    Bag = hanhli.Kg;
                     ve.Ngaydatve = DateTime.Now;
                     ve.Gia = giatien;
+                    var chuyenbay = db.Chuyenbay.Where(hl => hl.IDchuyenbay == idchuyenbay).FirstOrDefault();
+                    DateHour = chuyenbay.Ngaydi.ToString();
+                    Departure = chuyenbay.Diadiemdi.ToString();
+                    Destination = chuyenbay.Diadiemden.ToString();
                     db.Ve.Add(ve);
                     db.SaveChanges();
-                    int idVeMoi = ve.IDve;
-                    Session["idVeMoi"] = idVeMoi;
-                    Session["giatien"] = giatien;
-                    Session["idchuyenbay"] = idchuyenbay;
-                    Session["idhanhli"] = idcu;
-                    Session["emaillh"] = emaillh;
-                    Session["namelh"] = namelh;
-                    Session["sdtlh"] = sdtlh;
-                    Session["payment"] = payment;
-
-                    //return View(db.Ve);
-                    return RedirectToAction("DatThanhCong", "Home",new {id=idVeMoi});
                 }
-                return RedirectToAction("Information", "Flight", new { thongbao = "không lấy được dữ liệu chuyến bay  " });
+                Session["giatien"] = giatien;
+                //return View(db.Ve);
+                string content = System.IO.File.ReadAllText(Server.MapPath("~/Content/template/EmailVe.html"));
+
+                content = content.Replace("{{CustomerName}}", namelh);
+                content = content.Replace("{{DateHour}}", DateHour);
+                content = content.Replace("{{Departure}}", Departure);
+                content = content.Replace("{{Destination}}", Destination);
+                content = content.Replace("{{Bag}}", Bag);
+                var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+
+                new MailHelper().SendMail(emaillh, "Bạn đã đặt vé thành công tại AirplaneTicket", content);
+                new MailHelper().SendMail(toEmail, "Đơn hàng mới từ AirplaneTicket", content);
+                return RedirectToAction("DatThanhCong", "Home");
             }
             else
             {
@@ -296,13 +310,13 @@ namespace FlightSearch.Controllers
             {
                 // Tính tổng tiền mới dựa trên giá trị của hl.Giatien
 
-                    tongtien = hanhli.Giatien + gia + (gia / 100 * 10) + 70000;
+                tongtien = hanhli.Giatien + gia + (gia / 100 * 10) + 70000;
 
                 // Lưu lại tổng tiền vào session
                 Session["giahanhly"] = hanhli.Giatien;
                 Session["giatien" + idChuyenBay] = tongtien;
                 Session["giathanhtoan"] = Math.Round(tongtien);
-                Session["giathanhtoanvnpay"] = Math.Round(tongtien*100);
+                Session["giathanhtoanvnpay"] = Math.Round(tongtien * 100);
                 Session["idcu"] = idhanhlicu;
 
                 // Chuyển hướng đến action "Information" trong controller "Flight"
@@ -455,7 +469,6 @@ namespace FlightSearch.Controllers
 
             return View();
         }
-
         /*      // Action xử lý yêu cầu tìm kiếm chuyến bay
               [HttpPost]
               public async Task<ActionResult> TimKiem(string origin, string destination, DateTime departureDate)
