@@ -412,25 +412,26 @@ html {
     display: flex;
     align-items: center;
     padding: 10px 20px;
+    width:90%;
     justify-content: center;
 }
 
     .locition-body-search input, .locition-body-search-2 input {
         background-color: #fff;
-        border: 2px solid #000000;
+        border: 1px solid #000000;
         border-radius: 10px 0 0 10px;
-        padding: 5px 10px;
-        font-size: 17px;
+        padding: 7px 10px;
+        font-size: 18px;
         flex: 1;
     }
 
     .locition-body-search button, .locition-body-search-2 button {
         background-color: var(--blue);
-        border: 2px solid #000000;
+        border: 1px solid #000000;
         border-left: none;
-        font-size: 17px;
+        font-size: 18px;
         border-radius: 0 10px 10px 0;
-        padding: 5px;
+        padding: 7px;
         cursor: pointer;
     }
 
@@ -547,7 +548,7 @@ html {
     text-align: left;
     font: bold 16px sans-serif;
     padding: 25px 50px;
-    margin-top: -4px;
+    margin-top: -5px;
 }
 
     .footer-distributed .footer-left,
@@ -1491,3 +1492,70 @@ html {
     box-shadow: 0 0 3px rgb(0 0 0 / 30%);
     border: 2px ridge #3333 !important;
 }
+/*-------------------------Tra vé---------------------------------------*/
+.TraVe-heading {
+    font-size: 30px;
+    padding: 10px 17px 0px;
+    text-shadow: 0 0 10px rgb(0 0 0 / 30%);
+}
+
+.TraVe-content {
+    display: flex;
+    padding: 0 10px;
+    justify-content: space-around;
+}
+
+.TraVe {
+    background-color: #3a3a3a96;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+    width: 70%;
+    border-radius: 5px;
+    min-height: 140px;
+}
+
+.check {
+    margin-top: 100px;
+    width: 100%;
+    margin-bottom: 40px;
+    display: flex;
+}
+.check-main {
+    width: 80%;
+    display: flex;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin: 30px auto 217px;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.checkve-heading {
+    font-size: 20px;
+    width: 100%;
+    padding: 13px 8px;
+    background-color: var(--sea);
+    text-align:center;
+}
+
+.checkve-body {
+    padding: 25px 10px 35px;
+    display: flex;
+    line-height: 25px;
+    justify-content: space-around;
+}
+
+.checkve-img, .checkve-go, .checkve-to, .checkve-info, .checkve-chuyenbay {
+    width: 16%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 18px;
+}
+.checkve-info {
+    width: 24% !important;
+}
+    .checkve-img img {
+        width: 70%
+    }

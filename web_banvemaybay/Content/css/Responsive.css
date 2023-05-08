@@ -1,534 +1,544 @@
 ﻿
 /* Cho máy tính */
 @media (min-width: 64em) {
-	.customer-i,
-	.contact-i {
-		flex-wrap: nowrap;
-	}
+    .customer-i,
+    .contact-i {
+        flex-wrap: nowrap;
+    }
 
-		.customer-i li:first-child,
-		.contact-i li:first-child {
-			width: 15%;
-		}
+        .customer-i li:first-child,
+        .contact-i li:first-child {
+            width: 15%;
+        }
 }
 /* Cho máy tính bản */
 @media (min-width: 46.25em) and (max-width: 63.9375em) {
 
-	.tic {
-		width: 85%;
-	}
+    .tic {
+        width: 85%;
+    }
 
-	.p-table {
-		top: 276px;
-	}
+    .p-table {
+        top: 276px;
+    }
 
-	.introduce h2 {
-		font-size: 21px;
-		margin-top: 10px;
-	}
+    .introduce h2 {
+        font-size: 21px;
+        margin-top: 10px;
+    }
 
-	.information-left {
-		width: 67%;
-	}
+    .information-left {
+        width: 67%;
+    }
 
-	.information-right {
-		width: 27%;
-	}
+    .information-right {
+        width: 27%;
+    }
 
-	.customer-i,
-	.contact-i {
-		flex-wrap: nowrap;
-	}
+    .customer-i,
+    .contact-i {
+        flex-wrap: nowrap;
+    }
 
-		.customer-i li:first-child,
-		.contact-i li:first-child {
-			width: 15%;
-		}
+        .customer-i li:first-child,
+        .contact-i li:first-child {
+            width: 15%;
+        }
 
-	.invoice-i li {
-		margin: 0 5px;
-		width: calc(100% / 3 - 14px);
-	}
+    .invoice-i li {
+        margin: 0 5px;
+        width: calc(100% / 3 - 14px);
+    }
 
-	.btn-back, .btn-reservations {
-		padding: 7px 17px;
+    .btn-back, .btn-reservations {
+        padding: 7px 17px;
+    }
 
-	}
+    .choose {
+        width: 70%;
+    }
 
-	.choose {
-		width: 70%;
-	}
+    .choose-mode {
+        width: 23%;
+    }
 
-	.choose-mode {
-		width: 23%;
-	}
+    .choose-heading-content p {
+        font-size: 15px;
+    }
 
-	.choose-heading-content p {
-		font-size: 15px;
-	}
+    .choose-heading-content span {
+        font-size: 13px;
+    }
 
-	.choose-heading-content span {
-		font-size: 13px;
-	}
+    .choose-mode-heading {
+        padding: 18px 10px;
+        ;
+        font-size: 14px;
+    }
 
-	.choose-mode-heading {
-		padding: 18px 10px;
-		;
-		font-size: 14px;
-	}
+    .choose-mode-item label {
+        padding: 10px;
+        font-size: 14px;
+    }
 
-	.choose-mode-item label {
-		padding: 10px;
-		font-size: 14px;
-	}
+    .choose-heading .only-icon {
+        font-size: 18px;
+        width: 40px;
+        height: 40px;
+    }
 
-	.choose-heading .only-icon {
-		font-size: 18px;
-		width: 40px;
-		height: 40px;
-	}
+    .choose-time-go span, .choose-time-next span {
+        font-size: 13px;
+    }
 
-	.choose-time-go span, .choose-time-next span {
-		font-size: 13px;
-	}
+    .choose-time-go p, .choose-time-next p {
+        font-size: 22px;
+    }
 
-	.choose-time-go p, .choose-time-next p {
-		font-size: 22px;
-	}
+    .choose-money b {
+        font-size: 15px;
+    }
 
-	.choose-money b {
-		font-size: 15px;
-	}
+    .btn-choose {
+        padding: 9px;
+    }
 
-	.btn-choose {
-		padding: 9px;
-	}
+    .location-header, .location-header-2 {
+        font-size: 17px;
+    }
 
-	.location-header, .location-header-2 {
-		font-size: 17px;
-	}
+    .locition-body-search input, .locition-body-search-2 input {
+        font-size: 14px;
+    }
 
-	.locition-body-search input, .locition-body-search-2 input {
-		font-size: 14px;
-	}
+    .locition-body-content ul, .locition-body-content-2 ul {
+        font-size: 17px;
+    }
 
-	.locition-body-content ul, .locition-body-content-2 ul {
-		font-size: 17px;
-	}
+    .locition-body-content li, .locition-body-content-2 li {
+        font-size: 13px;
+    }
 
-	.locition-body-content li, .locition-body-content-2 li {
-		font-size: 13px;
-	}
+    .location-container, .location-container-2 {
+        top: -120px;
+        width: 90%;
+    }
 
-	.location-container, .location-container-2 {
-		top: -120px;
-		width: 90%;
-	}
+    .choose-s-heading p,
+    .choose-s-heading label {
+        font-size: 14px;
+    }
 
-	.choose-s-heading p,
-	.choose-s-heading label {
-		font-size: 14px;
-	}
+    .choose-check {
+        display: flex;
+        width: 100%;
+        margin-top: 5px;
+        justify-content: space-between;
+    }
 
-	.choose-check {
-		display: flex;
-		width: 100%;
-		margin-top: 5px;
-		justify-content: space-between;
-	}
+    .choose-s-heading i {
+        font-size: 17px;
+        padding-right: 3px;
+    }
 
-	.choose-s-heading i {
-		font-size: 17px;
-		padding-right: 3px;
-	}
+    .choose-s-heading {
+        flex-wrap: wrap;
+    }
 
-	.choose-s-heading {
-		flex-wrap: wrap;
-	}
+    .in-location {
+        max-width: 127px;
+        font-size: 13px;
+    }
 
-	.in-location {
-		max-width: 127px;
-		font-size: 13px;
-	}
+    .p-table-s {
+        top: 638px !important;
+        right: 150px;
+    }
 
-	.p-table-s {
-		top: 638px !important;
-		right: 150px;
-	}
-
-	.btn-pa {
-		font-size: 13px;
-		padding: 0 !important;
-	}
+    .btn-pa {
+        font-size: 13px;
+        padding: 0 !important;
+    }
 }
 /* Cho điện thoại */
 @media (max-width: 46.1875em) {
-	.introduce {
-		line-height: 22px;
-	}
+    .introduce {
+        line-height: 22px;
+    }
 
-		.introduce h1 {
-			font-size: 25px;
-			padding: 10px 0;
-		}
+        .introduce h1 {
+            font-size: 25px;
+            padding: 10px 0;
+        }
 
-		.introduce h2 {
-			font-size: 18px;
-		}
+        .introduce h2 {
+            font-size: 18px;
+        }
 
-	.information {
-		flex-direction: column;
-		margin-top: 48px;
-	}
+    .information {
+        flex-direction: column;
+        margin-top: 48px;
+    }
 
-	.information-left {
-		margin-right: auto;
-		width: 95%;
-	}
+    .information-left {
+        margin-right: auto;
+        width: 95%;
+    }
 
-	.customer-i li,
-	.contact-i li,
-	.invoice-i li {
-		width: 90% !important;
-	}
+    .customer-i li,
+    .contact-i li,
+    .invoice-i li {
+        width: 90% !important;
+    }
 
-	.payment-i li {
-		margin: 5px 0;
-	}
+    .payment-i li {
+        margin: 5px 0;
+    }
 
-	.payment1, .payment3 {
-		margin: -5px 0 10px;
-	}
+    .payment1, .payment3 {
+        margin: -5px 0 10px;
+    }
 
-	.payment-button {
-		padding: 0;
-	}
+    .payment-button {
+        padding: 0;
+    }
 
-	.btn-back, .btn-reservations {
-		padding: 8px 18px;
-		margin: 0;
-	}
+    .btn-back, .btn-reservations {
+        padding: 8px 18px;
+        margin: 0;
+    }
 
-	.information-right {
-		width: 95%;
-	}
+    .information-right {
+        width: 95%;
+    }
 
-	.done {
-		margin-top: 55px;
-	}
+    .done {
+        margin-top: 55px;
+    }
 
-	.flight-details-heading,
-	.contact-details-heading,
-	.ticket-details-heading {
-		text-align: center;
-	}
+    .flight-details-heading,
+    .contact-details-heading,
+    .ticket-details-heading {
+        text-align: center;
+    }
 
-	.flight-details-body {
-		flex-wrap: wrap;
-	}
+    .flight-details-body {
+        flex-wrap: wrap;
+    }
 
-	.flight-details-img,
-	.flight-details-info,
-	.flight-details-go,
-	.flight-details-to {
-		width: 50%;
-		padding-bottom: 10px;
-		align-items: normal;
-	}
+    .flight-details-img,
+    .flight-details-info,
+    .flight-details-go,
+    .flight-details-to {
+        width: 50%;
+        padding-bottom: 10px;
+        align-items: normal;
+    }
 
-		.flight-details-img img {
-			width: 75%;
-		}
+        .flight-details-img img {
+            width: 75%;
+        }
 
-	.contact-details,
-	.ticket-details,
-	.flight-details {
-		width: 100%;
-		margin-right: 0;
-		margin-bottom: 25px;
-	}
+    .contact-details,
+    .ticket-details,
+    .flight-details {
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 25px;
+    }
 
-	.contact-details-item,
-	.ticket-details-item {
-		width: 100%;
-	}
+    .contact-details-item,
+    .ticket-details-item {
+        width: 100%;
+    }
 
-	.body-choose {
-		margin-top: 80px;
-		flex-wrap: wrap;
-		flex-direction: column-reverse;
-	}
+    .body-choose {
+        margin-top: 80px;
+        flex-wrap: wrap;
+        flex-direction: column-reverse;
+    }
 
-	.choose {
-		width: 95%;
-		margin-right: auto;
-	}
+    .choose {
+        width: 95%;
+        margin-right: auto;
+    }
 
-	.choose-mode {
-		width: 95%;
-		margin-left: auto;
-		margin-bottom: 10px;
-	}
+    .choose-mode {
+        width: 95%;
+        margin-left: auto;
+        margin-bottom: 10px;
+    }
 
-	.choose-mode-item {
-		margin: 10px 0;
-	}
+    .choose-mode-item {
+        margin: 10px 0;
+    }
 
-	.choose-heading-content p {
-		font-size: 14px;
-	}
+    .choose-heading-content p {
+        font-size: 14px;
+    }
 
-	.choose-heading-content span {
-		font-size: 12px;
-	}
+    .choose-heading-content span {
+        font-size: 12px;
+    }
 
-	.choose-mode-heading {
-		padding: 18px 10px;
-		;
-		font-size: 13px;
-	}
+    .choose-mode-heading {
+        padding: 18px 10px;
+        ;
+        font-size: 13px;
+    }
 
-	.choose-mode-item label {
-		padding: 13px 10px;
-		font-size: 13px;
-	}
+    .choose-mode-item label {
+        padding: 13px 10px;
+        font-size: 13px;
+    }
 
-	.choose-time-go p, .choose-time-next p {
-		font-size: 17px;
-	}
+    .choose-time-go p, .choose-time-next p {
+        font-size: 17px;
+    }
 
-	.choose-heading .only-icon {
-		font-size: 18px;
-		width: 40px;
-		height: 40px;
-	}
+    .choose-heading .only-icon {
+        font-size: 18px;
+        width: 40px;
+        height: 40px;
+    }
 
-	.choose-item {
-		padding: 0 8px 0 0;
-	}
+    .choose-item {
+        padding: 0 8px 0 0;
+    }
 
-	.choose-time-go span, .choose-time-next span {
-		font-size: 12px;
-	}
+    .choose-time-go span, .choose-time-next span {
+        font-size: 12px;
+    }
 
-	.choose-money b {
-		font-size: 12px;
-	}
+    .choose-money b {
+        font-size: 12px;
+    }
 
-	.btn-choose {
-		padding: 10px;
-		margin-left: 5px;
-	}
+    .btn-choose {
+        padding: 10px;
+        margin-left: 5px;
+    }
 
-	#main {
-		top: 75px;
-	}
+    #main {
+        top: 75px;
+    }
 
-	.main-heading b {
-		font-size: 27px;
-	}
+    .main-heading b {
+        font-size: 27px;
+    }
 
-	.main-heading p {
-		font-size: 14px;
-	}
+    .main-heading p {
+        font-size: 14px;
+    }
 
-	.tic-heading,
-	.ticket-type label {
-		font-size: 14px;
-	}
+    .tic-heading,
+    .ticket-type label {
+        font-size: 14px;
+    }
 
-	.btn-find-tic {
-		padding: 15px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
+    .btn-find-tic {
+        padding: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
 
-	#backgroud {
-		height: 505px;
-	}
+    #backgroud {
+        height: 505px;
+    }
 
-	.p-table {
-		z-index: 999;
-		top: 368px
-	}
+    .p-table {
+        z-index: 999;
+        top: 368px
+    }
 
-	.tic {
-		width: 95%;
-	}
+    .tic {
+        width: 95%;
+    }
 
-	.tic-content {
-		padding: 10px;
-	}
+    .tic-content {
+        padding: 10px;
+    }
 
-	.location-header, .location-header-2 {
-		font-size: 15px;
-		justify-content: space-between;
-	}
+    .location-header, .location-header-2 {
+        font-size: 15px;
+        justify-content: space-between;
+    }
 
-	.l-h {
-		padding-left: 10px;
-	}
+    .l-h {
+        padding-left: 10px;
+    }
 
-	.location-close, .location-close-2 {
-		padding: 14px 15px;
-	}
+    .location-close, .location-close-2 {
+        padding: 14px 15px;
+    }
 
-	.locition-body-search input,
-	.locition-body-search-2 input,
-	.locition-body-search button,
-	.locition-body-search-2 button {
-		font-size: 15px;
-	}
+    .locition-body-search input,
+    .locition-body-search-2 input,
+    .locition-body-search button,
+    .locition-body-search-2 button {
+        font-size: 15px;
+    }
 
-	.Bac-Nam, .Trung, .ChauA, .Au-My {
-		width: 100%;
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-	}
+    .Bac-Nam, .Trung, .ChauA, .Au-My {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
 
-	.locition-body-content ul, .locition-body-content-2 ul {
-		display: flex;
-		width: 100%;
-		flex-direction: column;
-		flex-wrap: wrap;
-		font-size: 15px;
-	}
+    .locition-body-content ul, .locition-body-content-2 ul {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        flex-wrap: wrap;
+        font-size: 15px;
+    }
 
-	.locition-body-content li, .locition-body-content-2 li {
-		width: 50%;
-		font-size: 14px;
-		padding: 5px;
-	}
+    .locition-body-content li, .locition-body-content-2 li {
+        width: 50%;
+        font-size: 14px;
+        padding: 5px;
+    }
 
-	.location-container, .location-container-2 {
-		top: 80px;
-		position: absolute;
-		width: 90%;
-	}
+    .location-container, .location-container-2 {
+        top: 80px;
+        position: absolute;
+        width: 90%;
+    }
 
-	.location, .location-2 {
-		position: absolute;
-	}
+    .location, .location-2 {
+        position: absolute;
+    }
 
-	.locition-body-content, .locition-body-content-2 {
-		padding: 0 20px 15px;
-	}
+    .locition-body-content, .locition-body-content-2 {
+        padding: 0 20px 15px;
+    }
 
-	.locition-body-search, .locition-body-search-2 {
-		padding: 10px;
-	}
+    .locition-body-search, .locition-body-search-2 {
+        padding: 10px;
+    }
 
-	.p-table-s {
-		top: 541px !important;
-		right: 169px;
-	}
+    .p-table-s {
+        top: 541px !important;
+        right: 169px;
+    }
 }
 /* Cho ipab và điện thoại */
 @media (max-width: 63.9375em) {
-	#nav > li {
-		text-align: center;
-	}
+    #nav > li {
+        text-align: center;
+    }
 
-	.footer-distributed {
-		font: bold 14px sans-serif;
-	}
+    .footer-distributed {
+        font: bold 14px sans-serif;
+    }
 
-		.footer-distributed .footer-left,
-		.footer-distributed .footer-center,
-		.footer-distributed .footer-right {
-			display: block;
-			width: 100%;
-			margin-bottom: 40px;
-			text-align: center;
-		}
+        .footer-distributed .footer-left,
+        .footer-distributed .footer-center,
+        .footer-distributed .footer-right {
+            display: block;
+            width: 100%;
+            margin-bottom: 40px;
+            text-align: center;
+        }
 
-			.footer-distributed .footer-center i {
-				margin-left: 0;
-			}
+            .footer-distributed .footer-center i {
+                margin-left: 0;
+            }
 
-	#header {
-		overflow: hidden;
-		background-color: #758dde;
-	}
+    #header {
+        overflow: hidden;
+        background-color: #758dde;
+    }
 
-		#header .search-btn {
-			display: none;
-		}
+        #header .search-btn {
+            display: none;
+        }
 
-		#header .mobile-menu-btn {
-			display: block;
-		}
+        #header .mobile-menu-btn {
+            display: block;
+        }
 
-	#nav {
-		display: block;
-	}
+    #nav {
+        display: block;
+    }
 
-		#nav > li {
-			display: block;
-			border-top: 1px solid #dddddd30;
-		}
+        #nav > li {
+            display: block;
+            border-top: 1px solid #dddddd30;
+        }
 
-			#nav > li a {
-				padding: 1px 24px;
-			}
+            #nav > li a {
+                padding: 1px 24px;
+            }
 
-			#nav > li:first-child {
-				display: inline-block;
-				padding-right: 0;
-				border: none;
-			}
+            #nav > li:first-child {
+                display: inline-block;
+                padding-right: 0;
+                border: none;
+            }
 
-		#nav .subnav {
-			position: initial;
-		}
+        #nav .subnav {
+            position: initial;
+        }
 
-			#nav .subnav a {
-				padding: 5 41px;
-			}
-
-
-
-	.done-main {
-		width: 90%;
-	}
-
-
-	.customer-info-heading,
-	.information-r-heading,
-	.contact-info-heading,
-	.payment-heading {
-		font-size: 17px;
-	}
-
-	.customer-i p,
-	.contact-i p,
-	.invoice-i p {
-		font-size: 15px;
-	}
-
-	.customer-i li,
-	.contact-i li {
-		margin: 0 5px;
-	}
-
-	.payment-i li label {
-		font-size: 15px;
-	}
-
-	.payment1, .payment3 {
-		font-size: 14px;
-	}
+            #nav .subnav a {
+                padding: 5 41px;
+            }
 
 
 
-	.information-goto, .information-money {
-		font-size: 14px;
-	}
+    .done-main {
+        width: 90%;
+    }
 
-		.information-goto b,
-		.information-money b {
-			font-size: 15px;
-		}
+
+    .customer-info-heading,
+    .information-r-heading,
+    .contact-info-heading,
+    .payment-heading {
+        font-size: 17px;
+    }
+
+    .customer-i p,
+    .contact-i p,
+    .invoice-i p {
+        font-size: 15px;
+    }
+
+    .customer-i li,
+    .contact-i li {
+        margin: 0 5px;
+    }
+
+    .payment-i li label {
+        font-size: 15px;
+    }
+
+    .payment1, .payment3 {
+        font-size: 14px;
+    }
+
+
+
+    .information-goto, .information-money {
+        font-size: 14px;
+    }
+
+        .information-goto b,
+        .information-money b {
+            font-size: 15px;
+        }
+    .checkve-body {
+        flex-wrap: wrap;
+    }
+
+        .checkve-img, .checkve-go, .checkve-to, .checkve-chuyenbay, .checkve-info {
+            width: 100% !important;
+            font-size: 20px;
+            padding: 10px;
+            line-height: 30px;
+            text-align:center;
+        }
 }
