@@ -230,12 +230,9 @@
     <Content Include="Areas\Admin\ContentAdmin\image\209501.jpg" />
     <Content Include="Areas\Admin\ContentAdmin\image\347821.jpg" />
     <Content Include="Areas\Admin\ContentAdmin\image\682174.jpg" />
-    <Content Include="Areas\Admin\ContentAdmin\image\bamboo.png" />
     <Content Include="Areas\Admin\ContentAdmin\image\favicon.ico" />
     <Content Include="Areas\Admin\ContentAdmin\image\iconweb.jpg" />
     <Content Include="Areas\Admin\ContentAdmin\image\iconweb2.jpg" />
-    <Content Include="Areas\Admin\ContentAdmin\image\vietjet.png" />
-    <Content Include="Areas\Admin\ContentAdmin\image\vietnamairlines.png" />
     <Content Include="Content\javascript\js.js" />
     <Content Include="Content\template\EmailVe.html" />
     <Content Include="favicon.ico" />

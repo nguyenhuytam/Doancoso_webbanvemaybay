@@ -233,6 +233,7 @@
 	.flight-details-to {
 		width: 50%;
 		padding-bottom: 10px;
+		align-items: normal;
 	}
 
 		.flight-details-img img {

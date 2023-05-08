@@ -1341,10 +1341,15 @@ html {
 .flight-details-to,
 .flight-details-info {
     width: 25%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-size: 18px;
 }
 
     .flight-details-img img {
-        width: 60%;
+        width: 70%
     }
 
 .contact-details {
@@ -1373,10 +1378,11 @@ html {
 .contact-details-item {
     width: 50%;
     padding: 5px;
+    font-size: 18px;
 }
 
-    .contact-details-item:last-child {
-        width: 100%;
+    .contact-details-item-100 {
+        width: 100% !important;
     }
 
 .ticket-details {

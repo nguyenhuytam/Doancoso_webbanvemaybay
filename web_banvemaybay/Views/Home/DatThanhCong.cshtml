@@ -21,42 +21,88 @@
                     </div>
                     <div class="flight-details-body">
                         <div class="flight-details-img">
-                            <img src="~/Content/image/vietjet.png" alt="">
+                            <img src="@kt.HangHK.Hinhanh" alt="">
                         </div>
                         <div class="flight-details-go">
-                            <b>@kt.Diadiemdi</b>
-                            <p>Ngày: <b>@kt.Ngaydi</b></p>
+                            <b>Đi từ: @kt.Diadiemdi</b>
+                            <p>Cất cánh: <b>@kt.Ngaydi.Value.ToString("HH:mm")</b></p>
+                            <p>Ngày: <b>@kt.Ngaydi.Value.ToString("dd/MM/yyyy")</b></p>
                         </div>
-                        @if (@kt.Ngayve != null)
-                        {
-                            <div class="flight-details-to">
-                                <b>@kt.Diadiemden</b>                      
-                                <p>Ngày: <b>@kt.Ngayve</b></p>
-                            </div>
-                        }
-                        <div class="flight-details-info">
-                            <p>Chuyến bay: <b>VJ165</b></p>
-                            <p>Thời gian  <b>02h 10p</b></p>
-                            <p>Hạng chỗ: <b>E1_ECO</b></p>
-                            <p>Máy bay: <b>A321-100/200</b></p>
-                            <p>Hành lý xách tay:                                
-                            @if (@Session["idhanhli"] != null)
-                            {
-                                int hanhli = int.Parse(Session["idhanhli"].ToString());
-                                var khhl = db.Hanhli.Where(c => c.IDhanhli == id).FirstOrDefault();
-                                if (khhl != null)
-                                {
-                                        <b>@khhl.Kg</b>
-
+                        <div class="flight-details-to">
+                            <b>Đi đến: @kt.Diadiemden</b>
+                            <p>
+                                Hạ cánh: <b>
+                                    @if (@kt.Ngayve != null)
+                                    {
+                                        @kt.Ngayve.Value.ToString("HH:mm")
                                     }
-
-                                }
-                                else
-                                {
-                                        <b>0kg</b>
-                                }
+                                    else
+                                    {
+                                        @kt.Ngaydi.Value.AddHours(1).AddMinutes(30).ToString("HH:mm")
+                                    }
+                                </b>
+                            </p>
+                            <p>
+                                Ngày: <b>
+                                    @if (@kt.Ngayve != null)
+                                    {
+                                        @kt.Ngayve.Value.ToString("dd/MM/yyyy")
+                                    }
+                                    else
+                                    {
+                                        @kt.Ngaydi.Value.AddHours(1).AddMinutes(30).ToString("dd/MM/yyyy")
+                                    }
+                                </b>
                             </p>
                         </div>
+                        <div class="flight-details-info">
+                            <p>Chuyến bay: <b>@kt.IDchuyenbay</b></p>
+                            <p>Thời gian: <b>02h 30p</b></p>
+                            <p>Hành lý ký gửi: <b>@Session["KgHanhly"]</b> </p>
+                        </div>
+                        @*<div class="flight-details-go">
+                                <b>Đi từ : @kt.Diadiemdi</b>
+                                <p><b>@kt.Ngaydi</b></p>
+                            </div>
+                            <div class="flight-details-to">
+                                <b> Đi đến : @kt.Diadiemden</b>
+                                <p>
+                                    <b>
+                                        @if (@kt.Ngayve != null)
+                                        {
+                                            @kt.Ngayve
+                                        }
+                                        else
+                                        {
+                                            @kt.Ngaydi.Value.AddHours(1).AddMinutes(30)
+                                        }
+                                    </b>
+                                </p>
+                            </div>
+                            <div class="flight-details-info">
+                                <p>Chuyến bay: <b>VJ165</b></p>
+                                <p>Thời gian  <b>02h 10p</b></p>
+                                <p>Hạng chỗ: <b>E1_ECO</b></p>
+                                <p>Máy bay: <b>A321-100/200</b></p>
+                                <p>
+                                    Hành lý xách tay:
+                                    @if (@Session["idhanhli"] != null)
+                                    {
+                                        int hanhli = int.Parse(Session["idhanhli"].ToString());
+                                        var khhl = db.Hanhli.Where(c => c.IDhanhli == id).FirstOrDefault();
+                                        if (khhl != null)
+                                        {
+                                            <b>@khhl.Kg</b>
+
+                                        }
+
+                                    }
+                                    else
+                                    {
+                                        <b>0kg</b>
+                                    }
+                                </p>
+                            </div>*@
                     </div>
 
                 </div>
@@ -68,20 +114,19 @@
             </div>
             <div class="contact-details-body">
                 <div class="contact-details-item">
-                    <b>Họ tên: </b> <span>@Session["namelh"];</span>
-                </div>
-                <div class="contact-details-item">
-                    <b>Email: </b> <span>@Session["emaillh"];</span>
+                    <b>Họ tên: </b> <span>@Session["namelh"]</span>
                 </div>
                 <div class="contact-details-item">
                     <b>Điện thoại: </b> <span>@Session["sdtlh"]</span>
                 </div>
-                <div class="contact-details-item">
-                    <b>Phương thức thanh toán: </b> <span>@Session["payment"]</span>
+                <div class="contact-details-item contact-details-item-100">
+                    <b>Email: </b> <span>@Session["emaillh"]</span>
                 </div>
-                <div class="contact-details-item">
-                    <b>Yêu cầu đặc biệt: </b> <span>Không có yêu cầu gì</span>
+
+                <div class="contact-details-item contact-details-item-100">
+                    <b>Phương thức thanh toán: </b><span>@Session["payment"]</span>
                 </div>
+
             </div>
 
         </div>
@@ -94,7 +139,15 @@
                     <b>Mã vé: </b> <span>@Session["idVeMoi"]</span>
                 </div>
                 <div class="ticket-details-item">
-                    <b>Trạng thái: </b> <span>Chưa xác nhận</span>
+                    <b>Trạng thái: </b>
+                    @if (Session["TinhTrang"] != null)
+                    {
+                        <span>Đã thanh toán</span>
+                    }
+                    else
+                    {
+                        <span>Chưa thanh toán</span>
+                    }
                 </div>
                 @if (Session["idchuyenbay"] != null)
                 {
@@ -118,7 +171,7 @@
                     <b>Số hành khách: </b> <span>@Session["soluong"]</span>
                 </div>
                 <div class="ticket-details-money">
-                    <b>Tổng cộng: </b> <span>@Session["giatien"]</span>
+                    <b>Tổng cộng: </b> <span>@String.Format("{0:0,0}", @Session["giatien"])đ</span>
                 </div>
             </div>
 

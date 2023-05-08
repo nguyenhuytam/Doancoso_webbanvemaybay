@@ -200,12 +200,16 @@ namespace FlightSearch.Controllers
                 Session["giatien" + tt.IDchuyenbay] = tong;
                 double tongtien = tong+ idhl.Giatien ;
                 Session["giatien" + tt.IDchuyenbay] = tongtien;
+                Session["giathanhtoan"] = Math.Round(tongtien);
+                Session["giathanhtoanvnpay"] = Math.Round(tongtien * 100);
             }
             else
             {
                 double gia = double.Parse(Session["giatien" + tt.IDchuyenbay].ToString());
                 double tong = gia + tt.Giatien / 100 * 10 + 70000;
                 Session["giatien" + tt.IDchuyenbay] = tong;
+                Session["giathanhtoan"] = Math.Round(tong);
+                Session["giathanhtoanvnpay"] = Math.Round(tong * 100);
 
             }
             Session["idcu"] = idhanhlicu;
@@ -304,9 +308,11 @@ namespace FlightSearch.Controllers
                     Session["namelh"] = namelh;
                     Session["sdtlh"] = sdtlh;
                     Session["payment"] = payment;
+                    Session["KgHanhly"] = Bag;
+                    Session["TinhTrang"] = ve.Tinhtrang;
                     string content = System.IO.File.ReadAllText(Server.MapPath("~/Content/template/EmailVe.html"));
-
                     content = content.Replace("{{CustomerName}}", namelh);
+                    content = content.Replace("{{MaVe}}", ve.IDve.ToString());
                     content = content.Replace("{{DateHour}}", DateHour);
                     content = content.Replace("{{Departure}}", Departure);
                     content = content.Replace("{{Destination}}", Destination);
@@ -318,7 +324,6 @@ namespace FlightSearch.Controllers
                     //return View(db.Ve);
                     return RedirectToAction("DatThanhCong", "Home", new { id = idVeMoi });
                 }
-                Session["giatien"] = giatien;
             }
             return RedirectToAction("Information", "Flight", new { thongbao = "không lấy được dữ liệu chuyến bay  " });
         }
