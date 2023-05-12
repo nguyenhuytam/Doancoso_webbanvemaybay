@@ -36,9 +36,22 @@
                 <input class="in-date" type="date" name="datefrom" id="datefrom" disabled>
                 @if (ViewBag.thongbao != null)
                 {
-                    <p style="color:red" ,style="margin:5px">
-                        @ViewBag.thongbao
-                    </p>
+                    <div id="thongbao">
+                        <div class="thongbao">
+                            <div class="thongbao-icon">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                            </div>
+                            <div class="thongbao-body">
+                                <p>Thông báo</p>
+                                <p class="ndtb">@ViewBag.thongbao</p>
+                                
+                            </div>
+                            <div class="thongbao-close">
+                                <i class="fa-solid fa-xmark"></i>
+                            </div>
+                        </div>
+                    </div>
+                    
                 }
                 @*                <input class="in-date" type="date" name="round-trip_day" id="round-trip_day" disabled style="opacity: 0.3; cursor: no-drop;">*@
             <div class="number-p">
@@ -269,6 +282,8 @@
     </div>
 </div>
 <script>
+    const thongBao = document.querySelector('#thongbao')
+    const tbClose = document.querySelector('.thongbao-close')
     const nembleP = document.querySelector('.btn-number-p')
     const closeNembleP = document.querySelector('#backgroud')
     const closeNembleP2 = document.querySelector('#main')
@@ -278,9 +293,17 @@
     })
     closeNembleP.addEventListener('click', function () {
         document.querySelector(".p-table").style.display = "none"
+        document.querySelector("#thongbao").style.display = "none"
     })
     closeNembleP2.addEventListener('click', function () {
         document.querySelector(".p-table").style.display = "none"
+        document.querySelector("#thongbao").style.display = "none"
+    })
+    tbClose.addEventListener('click', function () {
+        document.querySelector("#thongbao").style.display = "none"
+    })
+    thongBao.addEventListener('click', function (event) {
+        event.stopPropagation()
     })
     nembleP.addEventListener('click', function (event) {
         event.stopPropagation()
