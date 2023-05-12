@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "xacnhan";
+    Layout = null;
+}
+
+<h2>xacnhan</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <p>@ViewBag.Message</p>
+}
+<form method="post" action="@Url.Action("Checkve")">
+    <div class="form-group">
+        <label>OTP:</label>
+        <input type="text" name="OTP" required />
+    </div>
+    <button type="submit">Xác Nhận OTP</button>
+</form>

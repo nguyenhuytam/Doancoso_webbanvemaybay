@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "SendOTP";
+    Layout = null;
+}
+<h2>Send OTP</h2>
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <p>@ViewBag.Message</p>
+}
+
+<form method="post" action="@Url.Action("SendOTP")">
+    <div class="form-group">
+        <label>Email:</label>
+        <input type="email" name="email" required />
+    </div>
+    <button type="submit">Send OTP</button>
+</form>

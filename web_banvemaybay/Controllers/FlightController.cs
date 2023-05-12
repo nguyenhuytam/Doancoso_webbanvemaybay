@@ -202,6 +202,7 @@ namespace FlightSearch.Controllers
                 Session["giatien" + tt.IDchuyenbay] = tongtien;
                 Session["giathanhtoan"] = Math.Round(tongtien);
                 Session["giathanhtoanvnpay"] = Math.Round(tongtien * 100);
+                Session["giahanhly"] = idhl.Giatien;
             }
             else
             {
@@ -210,6 +211,7 @@ namespace FlightSearch.Controllers
                 Session["giatien" + tt.IDchuyenbay] = tong;
                 Session["giathanhtoan"] = Math.Round(tong);
                 Session["giathanhtoanvnpay"] = Math.Round(tong * 100);
+
 
             }
             Session["idcu"] = idhanhlicu;
@@ -328,7 +330,7 @@ namespace FlightSearch.Controllers
             return RedirectToAction("Information", "Flight", new { thongbao = "không lấy được dữ liệu chuyến bay  " });
         }
         [HttpPost]
-        public ActionResult tongtien(int idhanhli, int idChuyenBay, int? idcu, string name, DateTime? birthday, int? sdtlh, string emaillh, string gioitinh, string namelh, string gioitinhlh)
+     /*   public ActionResult tongtien(int idhanhli, int idChuyenBay, int? idcu, string name, DateTime? birthday, int? sdtlh, string emaillh, string gioitinh, string namelh, string gioitinhlh)
         {
             string giaTriNamelh = Request.Form["namelh"];
 
@@ -378,7 +380,7 @@ namespace FlightSearch.Controllers
                 // Nếu cần, bạn có thể thêm mã lỗi hoặc thông báo lỗi tùy vào yêu cầu của dự án
                 return View("Error");
             }
-        }
+        }*/
         public ActionResult PaymentMomo()
         {
             //request params need to request to MoMo system

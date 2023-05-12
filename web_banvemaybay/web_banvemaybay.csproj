@@ -335,6 +335,8 @@
     <Content Include="Views\Home\DatThanhCong.cshtml" />
     <Content Include="Views\Check\Checkve.cshtml" />
     <Content Include="Views\Check\Index.cshtml" />
+    <Content Include="Views\Check\SendOTP.cshtml" />
+    <Content Include="Views\Check\xacnhan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

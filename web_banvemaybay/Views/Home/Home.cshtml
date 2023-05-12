@@ -36,52 +36,82 @@
                 <input class="in-date" type="date" name="datefrom" id="datefrom" disabled>
                 @if (ViewBag.thongbao != null)
                 {
-                    <p style="color:red" ,style="margin:5px">
-                        @ViewBag.thongbao
-                    </p>
+                    <div id="thongbao">
+                        <div class="thongbao">
+                            <div class="thongbao-icon">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                            </div>
+                            <div class="thongbao-body">
+                                <p>Thông báo</p>
+                                <p class="ndtb">@ViewBag.thongbao</p>
+
+                            </div>
+                            <div class="thongbao-close">
+                                <i class="fa-solid fa-xmark"></i>
+                            </div>
+                        </div>
+                    </div>
+
                 }
-                @*                <input class="in-date" type="date" name="round-trip_day" id="round-trip_day" disabled style="opacity: 0.3; cursor: no-drop;">*@
-            <div class="number-p">
-                <button class="btn-number-p">
-                    <i class="fa-solid fa-user"></i>
-                    <input type="text" name="p-tong" id="p-tong" value="1" >
-                </button>
-                <div class="p-table">
-                    <div class="p-item">
-                        <div class="p-item-left">
-                            <p>Người lớn</p>
-                            <span>(Trên 18)</span>
-                        </div>
-                        <div class="p-item-right">
-                            <button class="btn-p" onclick="handleMinusnl()">-</button>
-                            <input type="text" name="nl" id="nl" value="1" >
-                            <button class="btn-p" onclick="handlePlusnl()">+</button>
-                        </div>
-                    </div>
-                    <div class="p-item">
-                        <div class="p-item-left">
-                            <p>Trẻ em</p>
-                            <span>(2 - 12)</span>
-                        </div>
-                        <div class="p-item-right">
-                            <button class="btn-p" onclick="handleMinuste()">-</button>
-                            <input type="text" name="te" id="te" value="0" >
-                            <button class="btn-p" onclick="handlePluste()">+</button>
+                else
+                {
+                    <div id="thongbao" style="display:none !important">
+                        <div class="thongbao">
+                            <div class="thongbao-icon">
+                                <i class="fa-solid fa-triangle-exclamation"></i>
+                            </div>
+                            <div class="thongbao-body">
+                                <p>Thông báo</p>
+                                <p class="ndtb"></p>
+
+                            </div>
+                            <div class="thongbao-close">
+                                <i class="fa-solid fa-xmark"></i>
+                            </div>
                         </div>
                     </div>
-                    <div class="p-item">
-                        <div class="p-item-left">
-                            <p>Em bé</p>
-                            <span>(0 - 2)</span>
+                }
+                <div class="number-p">
+                    <button class="btn-number-p">
+                        <i class="fa-solid fa-user"></i>
+                        <input type="text" name="p-tong" id="p-tong" value="1">
+                    </button>
+                    <div class="p-table">
+                        <div class="p-item">
+                            <div class="p-item-left">
+                                <p>Người lớn</p>
+                                <span>(Trên 18)</span>
+                            </div>
+                            <div class="p-item-right">
+                                <button class="btn-p" onclick="handleMinusnl()">-</button>
+                                <input type="text" name="nl" id="nl" value="1">
+                                <button class="btn-p" onclick="handlePlusnl()">+</button>
+                            </div>
                         </div>
-                        <div class="p-item-right">
-                            <button class="btn-p" onclick="handleMinuseb()">-</button>
-                            <input type="text" name="eb" id="eb" value="0" >
-                            <button class="btn-p" onclick="handlePluseb()">+</button>
+                        <div class="p-item">
+                            <div class="p-item-left">
+                                <p>Trẻ em</p>
+                                <span>(2 - 12)</span>
+                            </div>
+                            <div class="p-item-right">
+                                <button class="btn-p" onclick="handleMinuste()">-</button>
+                                <input type="text" name="te" id="te" value="0">
+                                <button class="btn-p" onclick="handlePluste()">+</button>
+                            </div>
+                        </div>
+                        <div class="p-item">
+                            <div class="p-item-left">
+                                <p>Em bé</p>
+                                <span>(0 - 2)</span>
+                            </div>
+                            <div class="p-item-right">
+                                <button class="btn-p" onclick="handleMinuseb()">-</button>
+                                <input type="text" name="eb" id="eb" value="0">
+                                <button class="btn-p" onclick="handlePluseb()">+</button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
                 <button class="btn-find-tic">Tìm chuyến bay</button>
                 <script>
                     // Lấy danh sách các button có class là "btn-p"
@@ -269,6 +299,8 @@
     </div>
 </div>
 <script>
+    const thongBao = document.querySelector('#thongbao')
+    const tbClose = document.querySelector('.thongbao-close')
     const nembleP = document.querySelector('.btn-number-p')
     const closeNembleP = document.querySelector('#backgroud')
     const closeNembleP2 = document.querySelector('#main')
@@ -278,9 +310,17 @@
     })
     closeNembleP.addEventListener('click', function () {
         document.querySelector(".p-table").style.display = "none"
+        document.querySelector("#thongbao").style.display = "none"
     })
     closeNembleP2.addEventListener('click', function () {
         document.querySelector(".p-table").style.display = "none"
+        document.querySelector("#thongbao").style.display = "none"
+    })
+    tbClose.addEventListener('click', function () {
+        document.querySelector("#thongbao").style.display = "none"
+    })
+    thongBao.addEventListener('click', function (event) {
+        event.stopPropagation()
     })
     nembleP.addEventListener('click', function (event) {
         event.stopPropagation()
