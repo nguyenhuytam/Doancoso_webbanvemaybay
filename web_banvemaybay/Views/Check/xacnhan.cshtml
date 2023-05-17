@@ -1,19 +1,26 @@
 ﻿
 @{
     ViewBag.Title = "xacnhan";
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>xacnhan</h2>
-
 @if (!string.IsNullOrEmpty(ViewBag.Message))
 {
     <p>@ViewBag.Message</p>
 }
-<form method="post" action="@Url.Action("Checkve")">
-    <div class="form-group">
-        <label>OTP:</label>
-        <input type="text" name="OTP" required />
+<img src="~/Areas/Admin/ContentAdmin/image/209501.jpg" alt="" id="backgroud">
+<form action="@Url.Action("Checkve")" method="post">
+    <div id="main">
+        <div class="TraVe">
+            <div class="TraVe-heading">
+                <p>Tra thông tin vé</p>
+            </div>
+            <div class="TraVe-content">
+                <div class="locition-body-search">
+                    <label for="search">Mã vé:</label><input type="text" name="search" id="search" value="@Session["mavemuontra"]" required  disabled class="trave">
+                    <label for="otp" class="label-otp">OTP: </label><input type="text" name="otp" required class="otp-2">
+                    <button type="submit" class="btn-search">Tra vé<i class="fa-sharp fa-solid fa-magnifying-glass fa-bounce"></i></button>
+                </div>
+            </div>
+        </div>
     </div>
-    <button type="submit">Xác Nhận OTP</button>
 </form>

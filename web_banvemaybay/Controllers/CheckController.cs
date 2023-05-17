@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -48,14 +49,15 @@ namespace web_banvemaybay.Controllers
             [HttpPost]
         public ActionResult SendOTP(FormCollection form)
         {
+            string mavemuontra = form["search"];
             string email = form["email"];
             otp = random.Next(100000, 10000000);
 
-            var fromAddress = new MailAddress("tamhuynguyen31052002@gmail.com");
-            var toAddress = new MailAddress(email);
-            const string frompass = "oriuziapnaaeixfz";
+            var fromAddress = ConfigurationManager.AppSettings["FromEmailAddress"].ToString();
+            var toAddress = new MailAddress(email).ToString();
+            string frompass = ConfigurationManager.AppSettings["FromEmailPassword"].ToString();
             const string subject = "OTP code";
-            string body = otp.ToString();
+            string body = "Mã OTP: " + otp.ToString();
 
             var smtp = new SmtpClient
             {
@@ -64,7 +66,7 @@ namespace web_banvemaybay.Controllers
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
-                Credentials = new NetworkCredential(fromAddress.Address, frompass),
+                Credentials = new NetworkCredential(fromAddress, frompass),
                 Timeout = 200000
             };
             using (var message = new MailMessage(fromAddress, toAddress)
@@ -77,6 +79,7 @@ namespace web_banvemaybay.Controllers
             }
             Session["otp"] = otp.ToString();
             Session["email"] = email;
+            Session["mavemuontra"] = mavemuontra;
             ViewBag.Message = "OTP đã được gửi";
             return RedirectToAction("xacnhan", "Check");
         }

@@ -159,6 +159,21 @@
         font-size: 13px;
         padding: 0 !important;
     }
+    .locition-body-search .otp {
+        margin: 0px;
+        width: 73%;
+    }
+    .locition-body-search button {
+        margin: 0px;
+    }
+    .locition-body-search .trave {
+        margin: 0px;
+        width: 100%;
+    }
+    .locition-body-search .otp-2 {
+        margin: 0px;
+        width: 80%;
+    }
 }
 /* Cho điện thoại */
 @media (max-width: 46.1875em) {
@@ -423,6 +438,34 @@
         top: 541px !important;
         right: 169px;
     }
+    .locition-body-search .otp,
+    .locition-body-search .otp-2 {
+        background-color: #fff;
+        border: 1px solid #000000;
+        border-radius: 10px;
+        padding: 7px 10px;
+        font-size: 18px;
+        width: 100%;
+        margin: 0 0 10px;
+    }
+    .locition-body-search button {
+        margin: 0;
+        border-radius: 10px;
+        width: 100%;
+        margin-bottom: 18px;
+        padding: 10px;
+    }
+    .locition-body-search .trave {
+        margin: 0 0 10px;
+        width: 100%;
+    }
+    .TraVe {
+        width: 90%;
+        margin-top: 35px;
+    }
+    .TraVe-heading {
+        font-size: 26px;
+    }
 }
 /* Cho ipab và điện thoại */
 @media (max-width: 63.9375em) {
@@ -530,15 +573,31 @@
         .information-money b {
             font-size: 15px;
         }
+
     .checkve-body {
         flex-wrap: wrap;
     }
 
-        .checkve-img, .checkve-go, .checkve-to, .checkve-chuyenbay, .checkve-info {
-            width: 100% !important;
-            font-size: 20px;
-            padding: 10px;
-            line-height: 30px;
-            text-align:center;
+    .checkve-img, .checkve-go, .checkve-to, .checkve-chuyenbay, .checkve-info {
+        width: 100% !important;
+        font-size: 20px;
+        padding: 10px;
+        line-height: 30px;
+        text-align: center;
+    }
+
+        .checkve-img img {
+            width: 100%;
         }
+
+
+    .locition-body-search label,
+    .locition-body-search .label-otp {
+        font-size: 20px;
+        width: 100%;
+        margin-bottom: 5px;
+        text-align: left;
+    }
+    
+    
 }

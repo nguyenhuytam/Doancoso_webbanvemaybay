@@ -11,67 +11,65 @@
                 Chi tiết vé máy bay của bạn
             </div>
             @{
-                foreach (var item in Model.OrderBy(c => c.IDve))
+                foreach (var item in Model.OrderByDescending(c => c.IDve))
                 {
-                        <div class="checkve-body">
-                            <div class="checkve-img">
-                                <img src="@item.Chuyenbay.HangHK.Hinhanh" alt="">
-                            </div>
-                            <div class="checkve-chuyenbay">
-                                <p>Mã chuyến bay: <b>@item.Chuyenbay.IDchuyenbay</b></p>
-                                @if (@item.Chuyenbay.Ngayve != null)
-                                {
-                                    <p>Chuyến bay: <b>Khứ hồi </b></p>
-                                }
-                                else
-                                {
-                                    <p>Chuyến bay: <b>Một chiều </b></p>
-                                }
-                                <p>Thời gian: <b>02h 30p</b></p>
-                            </div>
-                            <div class="checkve-go">
-                                <p>Đi từ: <b>@item.Chuyenbay.Diadiemden</b></p>
-                                <p>Cất cánh: <b>@item.Chuyenbay.Ngaydi.Value.ToString("HH:mm")</b></p>
-                                <p>Ngày: <b>@item.Chuyenbay.Ngaydi.Value.ToString("dd/MM/yyyy")</b></p>
-                            </div>
-                            <div class="checkve-to">
-                                <p>Đi từ: <b>@item.Chuyenbay.Diadiemdi</b></p>
-                                <p>
-                                    Hạ cánh: <b>
-                                        @if (@item.Chuyenbay.Ngayve != null)
-                                        {
-                                            @item.Chuyenbay.Ngayve.Value.ToString("HH:mm")
-                                        }
-                                        else
-                                        {
-                                            @item.Chuyenbay.Ngaydi.Value.AddHours(1).AddMinutes(30).ToString("HH:mm")
-                                        }
-                                    </b>
-                                </p>
-                                <p>
-                                    Ngày: <b>
-                                        @if (@item.Chuyenbay.Ngayve != null)
-                                        {
-                                            @item.Chuyenbay.Ngayve.Value.ToString("dd/MM/yyyy")
-                                        }
-                                        else
-                                        {
-                                            @item.Chuyenbay.Ngaydi.Value.AddHours(1).AddMinutes(30).ToString("dd/MM/yyyy")
-                                        }
-                                    </b>
-                                </p>
-                            </div>
-                            <div class="checkve-info">
-                                <p>Mã vé: <b>@item.IDve</b></p>
-                                <p>Hành khách: <b>@item.Hanhkhach.Tenhanhkhach</b></p>
-                                <p>Hành lý xách tay: <b>@item.Hanhli.Kg</b></p>
-                                <p>Tổng tiền: <b>@String.Format("{0:0,0}", @item.Gia)đ</b></p>
-                            </div>
-
+                    <div class="checkve-body">
+                        <div class="checkve-img">
+                            <img src="@item.Chuyenbay.HangHK.Hinhanh" alt="">
                         </div>
+                        <div class="checkve-chuyenbay">
+                            <p>Mã chuyến bay: <b>@item.Chuyenbay.IDchuyenbay</b></p>
+                            @if (@item.Chuyenbay.Ngayve != null)
+                            {
+                                <p>Chuyến bay: <b>Khứ hồi </b></p>
                             }
+                            else
+                            {
+                                <p>Chuyến bay: <b>Một chiều </b></p>
                             }
+                            <p>Thời gian: <b>02h 30p</b></p>
                         </div>
+                        <div class="checkve-go">
+                            <p>Đi từ: <b>@item.Chuyenbay.Diadiemden</b></p>
+                            <p>Cất cánh: <b>@item.Chuyenbay.Ngaydi.Value.ToString("HH:mm")</b></p>
+                            <p>Ngày: <b>@item.Chuyenbay.Ngaydi.Value.ToString("dd/MM/yyyy")</b></p>
+                        </div>
+                        <div class="checkve-to">
+                            <p>Đi từ: <b>@item.Chuyenbay.Diadiemdi</b></p>
+                            <p>
+                                Hạ cánh: <b>
+                                    @if (@item.Chuyenbay.Ngayve != null)
+                                    {
+                                        @item.Chuyenbay.Ngayve.Value.ToString("HH:mm")
+                                    }
+                                    else
+                                    {
+                                        @item.Chuyenbay.Ngaydi.Value.AddHours(1).AddMinutes(30).ToString("HH:mm")
+                                    }
+                                </b>
+                            </p>
+                            <p>
+                                Ngày: <b>
+                                    @if (@item.Chuyenbay.Ngayve != null)
+                                    {
+                                        @item.Chuyenbay.Ngayve.Value.ToString("dd/MM/yyyy")
+                                    }
+                                    else
+                                    {
+                                        @item.Chuyenbay.Ngaydi.Value.AddHours(1).AddMinutes(30).ToString("dd/MM/yyyy")
+                                    }
+                                </b>
+                            </p>
+                        </div>
+                        <div class="checkve-info">
+                            <p>Mã vé: <b>@item.IDve</b></p>
+                            <p>Hành khách: <b>@item.Hanhkhach.Tenhanhkhach</b></p>
+                            <p>Hành lý xách tay: <b>@item.Hanhli.Kg</b></p>
+                            <p>Tổng tiền: <b>@String.Format("{0:0,0}", @item.Gia)đ</b></p>
+                        </div>
+                    </div>
+                }
+            }
+        </div>
     </div>
-
 </div>

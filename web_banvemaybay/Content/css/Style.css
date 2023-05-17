@@ -238,7 +238,8 @@ html {
 }
 
 #datefrom {
-    opacity: 0.3; cursor: no-drop;
+    opacity: 0.3;
+    cursor: no-drop;
 }
 
 .deprture, .destination, .in-date, .btn-find-tic {
@@ -299,7 +300,7 @@ html {
     border-radius: 4px;
     border: none;
     font-size: 16px;
-    line-height:10px;
+    line-height: 10px;
     padding: 15px;
     background-color: var(--blue);
     opacity: 0.8;
@@ -411,18 +412,53 @@ html {
 .locition-body-search, .locition-body-search-2 {
     display: flex;
     align-items: center;
-    padding: 10px 20px;
-    width:90%;
-    justify-content: center;
+    padding: 10px 0px;
+    width: 90%;
+    flex-wrap: wrap;
 }
 
-    .locition-body-search input, .locition-body-search-2 input {
+    .locition-body-search .trave {
+        background-color: #fff;
+        border: 1px solid #000000;
+        border-radius: 10px;
+        padding: 7px 10px;
+        font-size: 18px;
+        margin-left: 5px;
+        width: 94%;
+    }
+
+    .locition-body-search label {
+        font-size: 18px;
+    }
+
+    .locition-body-search .lable-otp-2 {
+        margin-top: 5px;
+    }
+
+    .locition-body-search .label-otp {
+        margin: 5px 11px 0 0px;
+    }
+
+    .locition-body-search .otp {
         background-color: #fff;
         border: 1px solid #000000;
         border-radius: 10px 0 0 10px;
         padding: 7px 10px;
+        margin-top: 5px;
+        margin-left: 6px;
         font-size: 18px;
-        flex: 1;
+        width: 82%;
+    }
+
+    .locition-body-search .otp-2 {
+        background-color: #fff;
+        border: 1px solid #000000;
+        border-radius: 10px 0 0 10px;
+        padding: 7px 10px;
+        margin-top: 5px;
+        margin-left: 6px;
+        font-size: 18px;
+        width: 84%;
     }
 
     .locition-body-search button, .locition-body-search-2 button {
@@ -431,13 +467,30 @@ html {
         border-left: none;
         font-size: 18px;
         border-radius: 0 10px 10px 0;
-        padding: 7px;
+        padding: 7px 10px;
         cursor: pointer;
+        margin-top: 5px;
     }
 
-        .locition-body-search button:hover, .locition-body-search-2 button:hover {
-            background-color: var(--sea);
-        }
+.btn-search {
+    background-color: var(--blue);
+    border: 1px solid #000000;
+    border-left: none;
+    font-size: 18px;
+    border-radius: 0 10px 10px 0;
+    padding: 7px 15px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.locition-body-search button i {
+    margin: 0 5px 0px 8px;
+    font-size: 15px;
+}
+
+.locition-body-search button:hover, .locition-body-search-2 button:hover {
+    background-color: #5093ef;
+}
 
 .locition-body-content, .locition-body-content-2 {
     display: flex;
@@ -1281,10 +1334,11 @@ html {
     .information-money li span {
         font-size: 13px;
     }
-    .ttmomo,
-    .ttvnpay {
-        display:none;
-    }
+
+.ttmomo,
+.ttvnpay {
+    display: none;
+}
 /*-------------------------done---------------------------------------*/
 .done {
     margin-top: 90px;
@@ -1382,9 +1436,9 @@ html {
     font-size: 18px;
 }
 
-    .contact-details-item-100 {
-        width: 100% !important;
-    }
+.contact-details-item-100 {
+    width: 100% !important;
+}
 
 .ticket-details {
     margin-bottom: 10px;
@@ -1501,7 +1555,7 @@ html {
 
 .TraVe-content {
     display: flex;
-    padding: 0 10px;
+    padding: 0 10px 25px;
     justify-content: space-around;
 }
 
@@ -1516,11 +1570,12 @@ html {
 }
 
 .check {
-    margin-top: 100px;
+    margin-top: 50px;
     width: 100%;
     margin-bottom: 40px;
     display: flex;
 }
+
 .check-main {
     width: 80%;
     display: flex;
@@ -1536,13 +1591,15 @@ html {
     width: 100%;
     padding: 13px 8px;
     background-color: var(--sea);
-    text-align:center;
+    text-align: center;
 }
 
 .checkve-body {
     padding: 25px 10px 35px;
     display: flex;
     line-height: 25px;
+    border: 1px solid #333;
+    border-top: none;
     justify-content: space-around;
 }
 
@@ -1553,12 +1610,15 @@ html {
     flex-direction: column;
     font-size: 18px;
 }
+
 .checkve-info {
     width: 24% !important;
 }
-    .checkve-img img {
-        width: 70%
-    }
+
+.checkve-img img {
+    width: 70%
+}
+
 #thongbao {
     position: fixed;
     top: 60px;
