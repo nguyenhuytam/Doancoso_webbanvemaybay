@@ -24,14 +24,19 @@ namespace web_banvemaybay.Controllers
         public ActionResult Checkve(string OTP)
         {
             string email = Session["email"].ToString();
+            int mave =int.Parse(@Session["mavemuontra"].ToString());
             web_banvemaybayEntities db = new web_banvemaybayEntities();
             if (Session["otp"].ToString() == OTP)
             {
-                var checkve = db.Ve.Where(c => c.TTlienhe.Email == email);
-                if (checkve != null)
-                {
-                    return View(checkve.OrderBy(c => c.TTlienhe.Email));
-                }
+                    var checkve = db.Ve.Where(c => c.TTlienhe.Email == email);
+                    if (checkve != null)
+                    {
+                        var checkma = db.Ve.Where(c => c.IDve == mave);
+                        if (checkma != null)
+                        {
+                        return View(checkma.OrderBy(c => c.IDve));
+                    }
+                    }
             }
             else
             {
