@@ -24,13 +24,19 @@ namespace web_banvemaybay.Controllers
         public ActionResult Checkve(string OTP)
         {
             string email = Session["email"].ToString();
+            int mave =int.Parse(@Session["mavemuontra"].ToString());
             web_banvemaybayEntities db = new web_banvemaybayEntities();
             if (Session["otp"].ToString() == OTP)
             {
-                var checkve = db.Ve.Where(c => c.TTlienhe.Email == email);
-                if (checkve != null)
+                var checkma = db.Ve.Where(c => c.IDve.Equals(mave) && c.TTlienhe.Email.Equals(email)).ToList();
+                if (checkma.Count > 0)
                 {
-                    return View(checkve.OrderBy(c => c.TTlienhe.Email));
+                        return View(checkma.OrderBy(c => c.IDve));  
+                }
+                else
+                {
+                    ViewBag.Message = "Bạn nhập sai mã vui lòng kiểm tra lại ";
+                    return RedirectToAction("xacnhan", "Check", new { thongbao = "Vui lòng kiểm kĩ Email hoặc Mã vé : " });      
                 }
             }
             else
