@@ -19,6 +19,11 @@ namespace web_banvemaybay.Controllers
 
             return View();
         }
+        public ActionResult Clear()
+        {
+            Session.Clear();
+            return RedirectToAction("Home", "Home");
+        }
 
         public ActionResult Contact()
         {
