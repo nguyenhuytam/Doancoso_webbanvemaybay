@@ -1,12 +1,10 @@
 ﻿
 /* Cho máy tính */
 @media (min-width: 64em) {
-    .customer-i,
     .contact-i {
         flex-wrap: nowrap;
     }
 
-        .customer-i li:first-child,
         .contact-i li:first-child {
             width: 15%;
         }
@@ -14,6 +12,15 @@
 /* Cho máy tính bản */
 @media (min-width: 46.25em) and (max-width: 63.9375em) {
 
+    .customer-i .li-50 {
+        width: 48%;
+    }
+    .customer-i li {
+        width: 31.4%;
+    }
+    .contact-i li, .contact-i li:first-child {
+        width: 48%;
+    }
     .tic {
         width: 85%;
     }
@@ -34,16 +41,6 @@
     .information-right {
         width: 27%;
     }
-
-    .customer-i,
-    .contact-i {
-        flex-wrap: nowrap;
-    }
-
-        .customer-i li:first-child,
-        .contact-i li:first-child {
-            width: 15%;
-        }
 
     .invoice-i li {
         margin: 0 5px;

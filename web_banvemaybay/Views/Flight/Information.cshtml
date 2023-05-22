@@ -2,11 +2,40 @@
 @{
     ViewBag.Title = "NhapThongTin";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}
+}   
 @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
 {
-    <div class="error-message">
-        @ViewBag.ErrorMessage
+    <div id="thongbao">
+        <div class="thongbao">
+            <div class="thongbao-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="thongbao-body">
+                <p>Thông báo</p>
+                <p class="ndtb"> @ViewBag.ErrorMessage</p>
+            </div>
+            <div class="thongbao-close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div id="thongbao" style="display:none !important">
+        <div class="thongbao">
+            <div class="thongbao-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="thongbao-body">
+                <p>Thông báo</p>
+                <p class="ndtb"></p>
+
+            </div>
+            <div class="thongbao-close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
     </div>
 }
 <form action="@Url.Action("tt","Flight", new { id = "myForm" })" method="post">
@@ -21,6 +50,24 @@
                 </div>
                 <div class="customer-info-body">
                     <ul class="customer-i">
+                        <li class="li-50">
+                            <p>Chọn hạng vé<sup>*</sup></p>
+                            <select name="hangveid" id="hangveid" class="ci-baggage">
+                                <option value="0"> -- Chọn hạng vé -- </option>
+                                <option value="1">Hạng thương gia</option>
+                                <option value="2">Hạng phổ thông</option>
+                            </select>
+                        </li>
+                        <li class="li-50">
+                            <p>Hành lý ký gửi <sup>*</sup></p>
+                            <select name="hanhlyid" id="hanhlyid" class="ci-baggage">
+                                <option value="0"> -- Chọn hạng mức hành lý -- </option>
+                                <option value="1">none</option>
+                                <option value="2">10kg</option>
+                                <option value="3">20kg</option>
+                                <option value="4">30kg</option>
+                            </select>
+                        </li>
                         <li>
                             <p>Giới tính <sup>*</sup></p>
                             <select name="gioitinh" id="gioitinh" class="ci-gender">
@@ -35,16 +82,6 @@
                         <li>
                             <p>Ngày sinh <sup>*</sup></p>
                             <input type="date" name="birthday" id="birthday">
-                        </li>
-                        <li>
-                            <p>Hành lý ký gửi <sup></sup></p>
-                            <select name="hanhlyid" id="hanhlyid" class="ci-baggage">
-                                <option value="0"></option>
-                                <option value="1">none</option>
-                                <option value="2">10kg</option>
-                                <option value="3">20kg</option>
-                                <option value="4">30kg</option>
-                            </select>
                         </li>
                         <li>
                             <div>
@@ -183,7 +220,7 @@
                     <li>Thuế<span>@String.Format("{0:0,0}", (@Model.Giatien / 100 * 10))đ</span></li>
                     <li>Phí<span>@String.Format("{0:0,0}", 70000)đ</span></li>
                     <li>Giá hành lý<span>@String.Format("{0:0,0}", @Session["giahanhly"])đ</span></li>
-                    <li>Hạng Ghế Thương gia<span>@String.Format("{0:0,0}", @Session["giaHangghe"])đ</span></li>
+                    <li>Giá hạng vé<span>@String.Format("{0:0,0}", @Session["giaHangghe"])đ</span></li>
                     <li class="li-money-last">Tổng tiền<span>@String.Format("{0:0,0}", @Session["giatien" + Model.IDchuyenbay])đ</span></li>
                     <input type="hidden" name="idChuyenBay" value="@Model.IDchuyenbay" />
                     <input type="hidden" name="giatien" value="@Session["giatien"+Model.IDchuyenbay]" />
@@ -212,26 +249,27 @@
         <input type="hidden" name="giatienidcu" value="@Session["giatien" + Model.IDchuyenbay + Session["idhanhli"]]" />
         @* <input type="hidden" name="idhanhlicu" value="@Session["idhanhli"+Model.IDchuyenbay]" />*@
     }
+    @using (Html.BeginForm("Sohangve", "Flight", FormMethod.Post, new { id = "Hangve" }))
+    {
+        var hangve = db.Hangve.ToList();
+        <div id="form2">
+            <!-- Nội dung form tại đây -->
+            <select name="idHangve" id="idHangve">
+                @foreach (var item in hangve)
+                {
+                    <option value="@item.IDhangve">@item.TenHangve</option>
+                }
+            </select>
+        </div>
+        <input type="hidden" name="giatien" value="@Session["giatien"+Model.IDchuyenbay]" />
+        <input type="hidden" name="idChuyenBay" value="@Model.IDchuyenbay" />
+        <input type="hidden" name="idHangvecu" value="@Session["idHangvecu"]" />
+        <input type="hidden" name="idHangve" value="@Session["idHangve"]" />
+        <input type="hidden" name="giatien" value="@Session["giatien"+Model.IDchuyenbay]" />
+        @* <input type="hidden" name="idhanhlicu" value="@Session["idhanhli"+Model.IDchuyenbay]" />*@
+    }
 </li>
-@using (Html.BeginForm("Sohangve", "Flight", FormMethod.Post, new { id = "Hangve" }))
-{
-    var hangve = db.Hangve.ToList();
-    <div id="form2">
-        <!-- Nội dung form tại đây -->
-        <select name="idHangve" id="idHangve">
-            @foreach (var item in hangve)
-            {
-                <option value="@item.IDhangve">@item.TenHangve</option>
-            }
-        </select>
-    </div>
-    <input type="hidden" name="giatien" value="@Session["giatien"+Model.IDchuyenbay]" />
-    <input type="hidden" name="idChuyenBay" value="@Model.IDchuyenbay" />
-    <input type="hidden" name="idHangvecu" value="@Session["idHangvecu"]" />
-    <input type="hidden" name="idHangve" value="@Session["idHangve"]" />
-    <input type="hidden" name="giatien" value="@Session["giatien"+Model.IDchuyenbay]" />
-    @* <input type="hidden" name="idhanhlicu" value="@Session["idhanhli"+Model.IDchuyenbay]" />*@
-}
+
 <script>
     // Kiểm tra xem có giá trị mặc định trong localStorage không
     if (!localStorage.getItem('selectedIdHangve')) {
@@ -243,6 +281,18 @@
     document.getElementById('idHangve').value = localStorage.getItem('selectedIdHangve');
 </script>
 <script>
+    const thongBao = document.querySelector('#thongbao')
+    const tbClose = document.querySelector('.thongbao-close')
+    const closeNemble = document.querySelector('.information')
+    closeNemble.addEventListener('click', function () {
+        document.querySelector("#thongbao").style.display = "none"
+    })
+    tbClose.addEventListener('click', function () {
+        document.querySelector("#thongbao").style.display = "none"
+    })
+    thongBao.addEventListener('click', function (event) {
+        event.stopPropagation()
+    })
     document.addEventListener('DOMContentLoaded', function () {
         var selectElementHanhLyId = document.getElementById('hanhlyid');
         var selectElement = document.getElementById('searchBySelect');
@@ -252,23 +302,22 @@
             localStorage.setItem('selectedOption', this.value);
             document.getElementById('flightForm').submit();
         });
-
         var selectedOption = localStorage.getItem('selectedOption');
         if (selectedOption) {
             selectElement.value = selectedOption;
         }
     });
     document.addEventListener('DOMContentLoaded', function () {
-        var selectElementHanhLyId = document.getElementById('idHangve');
-        var selectElement = document.getElementById('idHangve');
-        selectElementHanhLyId.addEventListener('change', function () {
-            selectElementHanhLyId.value = this.value;
-            selectElement.value = this.value;
-            localStorage.setItem('selectedOption', this.value);
+        var selectElementHangveId = document.getElementById('hangveid');
+        var selectElement2 = document.getElementById('idHangve');
+        selectElementHangveId.addEventListener('change', function () {
+            selectElementHangveId.value = this.value;
+            selectElement2.value = this.value;
+            localStorage.setItem('selectedOption2', this.value);
             document.getElementById('Hangve').submit();
         });
 
-        var selectedOption = localStorage.getItem('selectedOption');
+        var selectedOption = localStorage.getItem('selectedOption2');
         if (selectedOption) {
             selectElement.value = selectedOption;
         }
