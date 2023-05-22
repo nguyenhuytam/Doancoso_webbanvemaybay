@@ -29,6 +29,7 @@ namespace web_banvemaybay.Models
         public virtual DbSet<Chuyenbay> Chuyenbay { get; set; }
         public virtual DbSet<Dattruoc> Dattruoc { get; set; }
         public virtual DbSet<HangHK> HangHK { get; set; }
+        public virtual DbSet<Hangve> Hangve { get; set; }
         public virtual DbSet<Hanhkhach> Hanhkhach { get; set; }
         public virtual DbSet<Hanhli> Hanhli { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }

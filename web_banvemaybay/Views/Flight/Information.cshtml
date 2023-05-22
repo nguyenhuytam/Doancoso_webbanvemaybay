@@ -3,6 +3,12 @@
     ViewBag.Title = "NhapThongTin";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+{
+    <div class="error-message">
+        @ViewBag.ErrorMessage
+    </div>
+}
 <form action="@Url.Action("tt","Flight", new { id = "myForm" })" method="post">
     <!-- Nội dung form tại đây -->
 
@@ -39,6 +45,13 @@
                                 <option value="3">20kg</option>
                                 <option value="4">30kg</option>
                             </select>
+                        </li>
+                        <li>
+                            <div>
+                                @{
+                                    web_banvemaybay.Models.web_banvemaybayEntities db = new web_banvemaybay.Models.web_banvemaybayEntities();
+                                }
+                            </div>
                         </li>
                     </ul>
                     <div class="note">
@@ -170,10 +183,12 @@
                     <li>Thuế<span>@String.Format("{0:0,0}", (@Model.Giatien / 100 * 10))đ</span></li>
                     <li>Phí<span>@String.Format("{0:0,0}", 70000)đ</span></li>
                     <li>Giá hành lý<span>@String.Format("{0:0,0}", @Session["giahanhly"])đ</span></li>
+                    <li>Hạng Ghế Thương gia<span>@String.Format("{0:0,0}", @Session["giaHangghe"])đ</span></li>
                     <li class="li-money-last">Tổng tiền<span>@String.Format("{0:0,0}", @Session["giatien" + Model.IDchuyenbay])đ</span></li>
                     <input type="hidden" name="idChuyenBay" value="@Model.IDchuyenbay" />
                     <input type="hidden" name="giatien" value="@Session["giatien"+Model.IDchuyenbay]" />
                     <input type="hidden" name="idcu" value="@Session["idcu"]" />
+                    <input type="hidden" name="idHangve" value="@Session["idHangve"]" />
                 </ul>
             </div>
 
@@ -183,7 +198,6 @@
 <li style="display:none">
     @using (Html.BeginForm("Information", "Flight", FormMethod.Post, new { id = "flightForm" }))
     {
-        web_banvemaybay.Models.web_banvemaybayEntities db = new web_banvemaybay.Models.web_banvemaybayEntities();
         var hanhli = db.Hanhli.ToList();
 
         <select name="idhanhli" id="searchBySelect">
@@ -199,6 +213,35 @@
         @* <input type="hidden" name="idhanhlicu" value="@Session["idhanhli"+Model.IDchuyenbay]" />*@
     }
 </li>
+@using (Html.BeginForm("Sohangve", "Flight", FormMethod.Post, new { id = "Hangve" }))
+{
+    var hangve = db.Hangve.ToList();
+    <div id="form2">
+        <!-- Nội dung form tại đây -->
+        <select name="idHangve" id="idHangve">
+            @foreach (var item in hangve)
+            {
+                <option value="@item.IDhangve">@item.TenHangve</option>
+            }
+        </select>
+    </div>
+    <input type="hidden" name="giatien" value="@Session["giatien"+Model.IDchuyenbay]" />
+    <input type="hidden" name="idChuyenBay" value="@Model.IDchuyenbay" />
+    <input type="hidden" name="idHangvecu" value="@Session["idHangvecu"]" />
+    <input type="hidden" name="idHangve" value="@Session["idHangve"]" />
+    <input type="hidden" name="giatien" value="@Session["giatien"+Model.IDchuyenbay]" />
+    @* <input type="hidden" name="idhanhlicu" value="@Session["idhanhli"+Model.IDchuyenbay]" />*@
+}
+<script>
+    // Kiểm tra xem có giá trị mặc định trong localStorage không
+    if (!localStorage.getItem('selectedIdHangve')) {
+        // Thiết lập giá trị mặc định là id 2
+        localStorage.setItem('selectedIdHangve', 2);
+    }
+
+    // Thiết lập giá trị đã chọn cho select box từ localStorage
+    document.getElementById('idHangve').value = localStorage.getItem('selectedIdHangve');
+</script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         var selectElementHanhLyId = document.getElementById('hanhlyid');
@@ -208,6 +251,21 @@
             selectElement.value = this.value;
             localStorage.setItem('selectedOption', this.value);
             document.getElementById('flightForm').submit();
+        });
+
+        var selectedOption = localStorage.getItem('selectedOption');
+        if (selectedOption) {
+            selectElement.value = selectedOption;
+        }
+    });
+    document.addEventListener('DOMContentLoaded', function () {
+        var selectElementHanhLyId = document.getElementById('idHangve');
+        var selectElement = document.getElementById('idHangve');
+        selectElementHanhLyId.addEventListener('change', function () {
+            selectElementHanhLyId.value = this.value;
+            selectElement.value = this.value;
+            localStorage.setItem('selectedOption', this.value);
+            document.getElementById('Hangve').submit();
         });
 
         var selectedOption = localStorage.getItem('selectedOption');

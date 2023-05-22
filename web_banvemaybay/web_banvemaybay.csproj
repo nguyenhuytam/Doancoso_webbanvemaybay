@@ -157,6 +157,9 @@
     <Compile Include="Models\HangHK.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Hangve.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Hanhkhach.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

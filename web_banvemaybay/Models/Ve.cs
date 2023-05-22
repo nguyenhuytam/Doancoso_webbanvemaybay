@@ -24,9 +24,11 @@ namespace web_banvemaybay.Models
         public Nullable<int> IDhanhli { get; set; }
         public Nullable<System.DateTime> Ngaydatve { get; set; }
         public Nullable<double> Gia { get; set; }
+        public Nullable<int> IDhangve { get; set; }
     
         public virtual Chuyenbay Chuyenbay { get; set; }
         public virtual Dattruoc Dattruoc { get; set; }
+        public virtual Hangve Hangve { get; set; }
         public virtual Hanhkhach Hanhkhach { get; set; }
         public virtual Hanhli Hanhli { get; set; }
         public virtual TTlienhe TTlienhe { get; set; }
