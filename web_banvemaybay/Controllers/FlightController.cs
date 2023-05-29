@@ -396,6 +396,11 @@ namespace FlightSearch.Controllers
         [HttpPost]
         public ActionResult tt(FormCollection form, TTlienhe lienhe, Hanhkhach hk , string name, DateTime? birthday, int? idHangve, int? sdtlh, string emaillh, string gioitinh, string namelh, string gioitinhlh, int? idcu, int idchuyenbay, double giatien, string payment)
         {
+            var now = DateTime.Now;
+            if (birthday > now.AddYears(-18))
+            {
+                return RedirectToAction("Information", "Flight", new { thongbao = "Tuổi của bạn phải ít nhất 18 tuổi !" });
+            }
             if (name != null && birthday != null && sdtlh != null && emaillh != null && gioitinh != null && gioitinhlh != null && namelh != null)
             {
                      var ktlh = new TTlienhe();

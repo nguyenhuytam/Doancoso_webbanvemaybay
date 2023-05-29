@@ -3,7 +3,7 @@
     ViewBag.Title = "NhapThongTin";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }   
-@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage))
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage) || ViewBag.thongbao != null)
 {
     <div id="thongbao">
         <div class="thongbao">
@@ -12,7 +12,7 @@
             </div>
             <div class="thongbao-body">
                 <p>Thông báo</p>
-                <p class="ndtb"> @ViewBag.ErrorMessage</p>
+                <p class="ndtb"> @ViewBag.ErrorMessage @ViewBag.thongbao</p>
             </div>
             <div class="thongbao-close">
                 <i class="fa-solid fa-xmark"></i>
@@ -52,7 +52,7 @@ else
                     <ul class="customer-i">
                         <li class="li-50">
                             <p>Chọn hạng vé<sup>*</sup></p>
-                            <select name="hangveid" id="hangveid" class="ci-baggage">
+                            <select name="hangveid" id="hangveid" class="ci-baggage" required >
                                 <option value="0"> -- Chọn hạng vé -- </option>
                                 <option value="1">Hạng thương gia</option>
                                 <option value="2">Hạng phổ thông</option>
@@ -81,7 +81,7 @@ else
                         </li>
                         <li>
                             <p>Ngày sinh <sup>*</sup></p>
-                            <input type="date" name="birthday" id="birthday">
+                            <input type="date" name="birthday" id="birthday" required>
                         </li>
                         <li>
                             <div>
