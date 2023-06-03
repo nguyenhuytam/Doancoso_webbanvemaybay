@@ -67,20 +67,37 @@ namespace FlightSearch.Controllers
         [HttpPost]
         public ActionResult Sohangve(int idHangve,int idChuyenBay,int? idHangvecu)
         {
+            int nguoidat = int.Parse(Session["soluong"].ToString());
             int? idGhecu = idHangve;
             var idHv = db.Hangve.Where(c => c.IDhangve == idHangve).FirstOrDefault();
             var tt = db.Chuyenbay.Where(c => c.IDchuyenbay == idChuyenBay).FirstOrDefault();
             var sl =  new Chuyenbay();
             double giatienidcu = double.Parse(Session["giatien" + tt.IDchuyenbay].ToString());
             Session["idHangve"] = idHangve;
-            if (tt!=null && tt.PhoThong > 0 && tt.ThuongGia>0)
+            if ( tt.PhoThong < nguoidat && idHangve == 2)
+            {
+                double tongtien = (giatienidcu) - (tt.Giatien / 100 * 10 + 70000);
+                TempData["ErrorMessage"] = "Hết chỗ trống vui lòng chọn lại  !";
+                Session["giatien" + tt.IDchuyenbay] = tongtien;
+                // Chuyển hướng đến action "Information" trong controller "Flight"
+                return RedirectToAction("Information", "Flight", new { id = idChuyenBay });
+            }
+            if (tt.ThuongGia<nguoidat && idHangve ==1)
+            {
+                double tongtien = giatienidcu - (tt.Giatien / 100 * 10 + 70000);
+                TempData["ErrorMessage"] = "Hết chỗ trống vui lòng chọn lại  !";
+                Session["giatien" + tt.IDchuyenbay] = tongtien;
+                // Chuyển hướng đến action "Information" trong controller "Flight"
+                return RedirectToAction("Information", "Flight", new { id = idChuyenBay });
+            }
+            if (tt!=null)
             {
                 if (idHangvecu != null) // Kiểm tra idhanhlicu có tồn tại
                 {
                     var hanhcu = db.Hangve.Where(hl => hl.IDhangve == idHangvecu).FirstOrDefault();
                     if (hanhcu != null)
                     {
-                        double tongtien = ((giatienidcu - hanhcu.Gia) + idHv.Gia) - (tt.Giatien / 100 * 10 + 70000);
+                        double tongtien = ((giatienidcu - hanhcu.Gia * nguoidat) + idHv.Gia *nguoidat) - (tt.Giatien / 100 * 10 + 70000);
                         // Lưu lại tổng tiền vào session
                         Session["giaHangghe"] = idHv.Gia;
                         Session["giatien" + tt.IDchuyenbay] = tongtien;
@@ -96,7 +113,7 @@ namespace FlightSearch.Controllers
                     double gia = double.Parse(Session["giatien" + tt.IDchuyenbay].ToString());
                     double tong = gia;
                     Session["giatien" + tt.IDchuyenbay] = tong;
-                    double tongtien = (tong + idHv.Gia) - (tt.Giatien / 100 * 10 + 70000);
+                    double tongtien = (tong + idHv.Gia * nguoidat) - (tt.Giatien / 100 * 10 + 70000);
                     Session["giatien" + tt.IDchuyenbay] = tongtien;
                     Session["giathanhtoan"] = Math.Round(tongtien);
                     Session["giathanhtoanvnpay"] = Math.Round(tongtien * 100);
@@ -107,101 +124,15 @@ namespace FlightSearch.Controllers
                 // Chuyển hướng đến action "Information" trong controller "Flight"
                 return RedirectToAction("Information", "Flight", new { id = idChuyenBay });
             }
-            if (tt != null && tt.ThuongGia > 0 && tt.PhoThong == 0)
-            {
-                if (idHangve == 2) // Kiểm tra idhanhlicu có tồn tại
-                {
-                    double tongtien = (giatienidcu) - (tt.Giatien / 100 * 10 + 70000);
-                    Session["giatien" + tt.IDchuyenbay] = tongtien;
-                    TempData["ErrorMessage"] = "Hết chỗ trống vui lòng chọn lại  !";
-                    Session["idHangvecu"] = idGhecu;
-                    // Chuyển hướng đến action "Information" trong controller "Flight"
-                    return RedirectToAction("Information", "Flight", new { id = idChuyenBay });
-                }
-                else
-                {
-                    if (idHangvecu !=null) // Kiểm tra idhanhlicu có tồn tại
-                    {
-                        var hanhcu = db.Hangve.Where(hl => hl.IDhangve == idHangvecu).FirstOrDefault();
-                        if (hanhcu != null)
-                        {
-                            double tongtien = ((giatienidcu- hanhcu.Gia)+idHv.Gia)-(tt.Giatien / 100 * 10 + 70000);
-                            // Lưu lại tổng tiền vào session
-                            Session["giaHangghe"] = idHv.Gia;
-                            Session["giatien" + tt.IDchuyenbay] = tongtien;
-                            Session["idHangvecu"] = idGhecu;
-                            Session["giathanhtoan"] = Math.Round(tongtien);
-                            Session["giathanhtoanvnpay"] = Math.Round(tongtien * 100);
-                            return RedirectToAction("Information", "Flight", new { id = idChuyenBay });
-                        }
-                    }
-                    if (idHangve != null)
-                    {
-                        double gia = double.Parse(Session["giatien" + tt.IDchuyenbay].ToString());
-                        double tong = gia;
-                        Session["giatien" + tt.IDchuyenbay] = tong;
-                        double tongtien = (tong + idHv.Gia) - (tt.Giatien / 100 * 10 + 70000);
-                        Session["giatien" + tt.IDchuyenbay] = tongtien;
-                        Session["giathanhtoan"] = Math.Round(tongtien);
-                        Session["giathanhtoanvnpay"] = Math.Round(tongtien * 100);
-                        Session["giaHangghe"] = idHv.Gia;
-
-                    }
-                    Session["idHangvecu"] = idGhecu;
-                    // Chuyển hướng đến action "Information" trong controller "Flight"
-                    return RedirectToAction("Information", "Flight", new { id = idChuyenBay });
-                }
-            }
-            if (tt != null && tt.ThuongGia == 0 && tt.PhoThong>0)
-            {
-                if (idHangve == 1) // Kiểm tra idhanhlicu có tồn tại
-                {
-                    double tongtien = giatienidcu - (tt.Giatien / 100 * 10 + 70000);
-                    Session["giatien" + tt.IDchuyenbay] = tongtien;
-                    TempData["ErrorMessage"] = "Hết chỗ trống vui lòng chọn lại  !";
-                    Session["idHangvecu"] = idGhecu;
-                    // Chuyển hướng đến action "Information" trong controller "Flight"
-                    return RedirectToAction("Information", "Flight", new { id = idChuyenBay });
-                }
-                else
-                {
-                    if (idHangvecu != null) // Kiểm tra idhanhlicu có tồn tại
-                    {
-                        var hanhcu = db.Hangve.Where(hl => hl.IDhangve == idHangvecu).FirstOrDefault();
-                        if (hanhcu != null)
-                        {
-                            double tongtien =(giatienidcu + idHv.Gia) - (tt.Giatien / 100 * 10 + 70000);
-                            // Lưu lại tổng tiền vào session
-                            Session["giaHangghe"] = idHv.Gia;
-                            Session["giatien" + tt.IDchuyenbay] = tongtien;
-                            Session["idHangvecu"] = idGhecu;
-                            Session["giathanhtoan"] = Math.Round(tongtien);
-                            Session["giathanhtoanvnpay"] = Math.Round(tongtien * 100);
-                            return RedirectToAction("Information", "Flight", new { id = idChuyenBay });
-                        }
-                    }
-                    if (idHangve != null)
-                    {
-                        double gia = double.Parse(Session["giatien" + tt.IDchuyenbay].ToString());
-                        double tong = gia;
-                        Session["giatien" + tt.IDchuyenbay] = tong;
-                        double tongtien = (tong + idHv.Gia) - (tt.Giatien / 100 * 10 + 70000);
-                        Session["giatien" + tt.IDchuyenbay] = tongtien;
-                        Session["giathanhtoan"] = Math.Round(tongtien);
-                        Session["giathanhtoanvnpay"] = Math.Round(tongtien * 100);
-                        Session["giaHangghe"] = idHv.Gia;
-
-                    }
-                    Session["idHangvecu"] = idGhecu;
-                    // Chuyển hướng đến action "Information" trong controller "Flight"
-                    return RedirectToAction("Information", "Flight", new { id = idChuyenBay });
-                }
-            }
             return RedirectToAction("Information", "Flight", new { id = idChuyenBay });
         }
         [HttpPost]
         public ActionResult SearchFlight(string to, string from, DateTime? dateto, DateTime? datefrom, string searchBy, FormCollection form, float nl, float te, float eb)
         {
+            if (to == from)
+            {
+                return RedirectToAction("Home", "Home", new { thongbao = " Vui lòng không chọn ngày đi và ngày về trùng nhau " });
+            }
             if (dateto == null)
             {
                 return RedirectToAction("Home", "Home", new { thongbao = " Chọn Ngày đi! " });
@@ -224,13 +155,13 @@ namespace FlightSearch.Controllers
                     var nowPlusOneHour = now.AddHours(1).AddMinutes(30);
 
                     // Kiểm tra nếu khoảng thời gian giữa ngày đi và giờ đi của mỗi chuyến bay lớn hơn giờ hiện tại và không quá 1 tiếng, hiển thị kết quả
-                    flights = flights.Where(c => c.Ngaydi > now && c.Ngaydi > nowPlusOneHour && c.Ngayve >= datefromValue && c.PhoThong > 0 || c.ThuongGia > 0);
+                    flights = flights.Where(c => c.Ngaydi > now && c.Ngaydi > nowPlusOneHour && c.Ngayve == datefromValue && (c.PhoThong > 0 || c.ThuongGia > 0) && (c.PhoThong >= (nl + te + eb) || c.ThuongGia >= (nl + te + eb)));
                 }
                 else if (datefromValue <= dateto)
                 {
                     return RedirectToAction("Home", "Home", new { thongbao = "Vui lòng chọn Ngày về cách ngày đi ít nhất 1 ngày " });
                 }
-                flights = flights.Where(c => c.Ngaydi != null && SqlFunctions.DateDiff("day", c.Ngaydi, datetoValue) == 0 && SqlFunctions.DateDiff("day", c.Ngayve, datefromValue) == 0 && c.PhoThong > 0 || c.ThuongGia > 0);
+                flights = flights.Where(c => c.Ngaydi != null && SqlFunctions.DateDiff("day", c.Ngaydi, datetoValue) == 0 && SqlFunctions.DateDiff("day", c.Ngayve, datefromValue) == 0 && ( c.PhoThong > 0 || c.ThuongGia > 0) && (c.PhoThong >=( nl + te + eb) || c.ThuongGia >= (nl + te + eb)));
             }
             else if (dateto != null && datefrom == null)
             {
@@ -247,10 +178,10 @@ namespace FlightSearch.Controllers
                     var nowPlusOneHour = now.AddHours(1).AddMinutes(30);
 
                     // Kiểm tra nếu khoảng thời gian giữa ngày đi và giờ đi của mỗi chuyến bay lớn hơn giờ hiện tại và không quá 1 tiếng, hiển thị kết quả
-                    flights = flights.Where(c => c.Ngaydi > now && c.Ngaydi > nowPlusOneHour && c.Ngayve == null && c.PhoThong > 0 || c.ThuongGia > 0);
+                    flights = flights.Where(c => c.Ngaydi > now && c.Ngaydi > nowPlusOneHour && c.Ngayve == null &&( c.PhoThong > 0 || c.ThuongGia > 0) && (c.PhoThong >= (nl + te + eb) || c.ThuongGia >= (nl + te + eb)));
                 }
                 // Hiển thị chuyến bay có ngày đi và không có ngày về
-                flights = flights.Where(c => c.Ngaydi != null && SqlFunctions.DateDiff("day", c.Ngaydi, datetoValue) == 0 && c.Ngayve == null && c.PhoThong > 0 || c.ThuongGia > 0);
+                flights = flights.Where(c => c.Ngaydi != null && SqlFunctions.DateDiff("day", c.Ngaydi, datetoValue) == 0 && c.Ngayve == null && (c.PhoThong > 0 || c.ThuongGia > 0) && (c.PhoThong >=(nl + te + eb) || c.ThuongGia >= (nl + te + eb)));
             }
             var valueNL = Int32.Parse(form["nl"]);
             var valueTE = Int32.Parse(form["te"]);

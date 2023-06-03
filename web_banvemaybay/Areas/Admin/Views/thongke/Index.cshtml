@@ -1,0 +1,17 @@
+﻿@model List<web_banvemaybay.Models.Doanhthu>
+
+<h2>Tổng doanh thu theo tháng</h2>
+
+<table>
+    <tr>
+        <th>Tháng</th>
+        <th>Doanh thu</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.thang</td>
+            <td>@item.doanhthu</td>
+        </tr>
+    }
+</table>
