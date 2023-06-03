@@ -31,7 +31,7 @@
             Hành lí : @Html.DisplayFor(model => model.Hanhli.Kg)
         </dt>
         <dt>
-            Giá tiền : @String.Format("{0:0,0}", @Html.DisplayFor(model => model.Gia).ToString())đ
+            Giá tiền : @String.Format("{0:0,0}", int.Parse(@Html.DisplayFor(model => model.Gia).ToString()))đ
         </dt>
         <dt>
             Thông tin liên hệ : @Html.DisplayFor(model => model.TTlienhe.Phone)

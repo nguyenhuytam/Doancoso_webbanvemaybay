@@ -63,7 +63,7 @@
                                     @Html.DisplayFor(modelItem => item.Hanhli.Kg)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Gia)
+                                    @String.Format("{0:0,0}", int.Parse(@Html.DisplayFor(modelItem => item.Gia).ToString()))đ
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Tinhtrang)

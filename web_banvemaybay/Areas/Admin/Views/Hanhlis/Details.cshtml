@@ -16,7 +16,7 @@
             Kg : @Html.DisplayFor(model => model.Kg)
         </dt>
         <dt>
-            Giá tiền : @Html.DisplayFor(model => model.Giatien)
+            Giá tiền : @String.Format("{0:0,0}", int.Parse(@Html.DisplayFor(model => model.Giatien).ToString()))đ
         </dt>
     </dl>
     <p class="p15">

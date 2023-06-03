@@ -41,7 +41,7 @@
                                     @Html.DisplayFor(modelItem => item.Kg)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Giatien)
+                                    @String.Format("{0:0,0}", int.Parse(@Html.DisplayFor(modelItem => item.Giatien).ToString()))đ
                                 </td>
                                 <td>
                                     @Html.ActionLink("Sửa", "Edit", new { id = item.IDhanhli }) |

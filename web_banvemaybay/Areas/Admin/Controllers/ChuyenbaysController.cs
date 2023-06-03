@@ -19,7 +19,21 @@ namespace web_banvemaybay.Areas.Admin.Controllers
         {
             return View(db.Chuyenbay.ToList());
         }
-
+        public ActionResult DoanhThu(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Chuyenbay chuyenbay = db.Chuyenbay.Find(id);
+            double doanhthu = (double.Parse((162 - chuyenbay.PhoThong).ToString()) * chuyenbay.Giatien) + (double.Parse((16 - chuyenbay.ThuongGia).ToString()) * (chuyenbay.Giatien + 100000));
+            Session["DoanhThuChuyen"] = doanhthu.ToString();
+            if (chuyenbay == null)
+            {
+                return HttpNotFound();
+            }
+            return View(chuyenbay);
+        }
         // GET: Admin/Chuyenbays/Details/5
         public ActionResult Details(int? id)
         {
