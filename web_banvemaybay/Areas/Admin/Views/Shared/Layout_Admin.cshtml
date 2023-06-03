@@ -5,17 +5,18 @@
 
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Trang Quản lý</title>
-        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
-        <link href="/Areas/Admin/ContentAdmin/css/styles.css" rel="stylesheet" />
-        <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    </head>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Trang Quản lý</title>
+    <link href="~/Areas/Admin/ContentAdmin/css/Chartstyle.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="/Areas/Admin/ContentAdmin/css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
@@ -44,10 +45,14 @@
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            <div class="sb-sidenav-menu-heading">Thông tin chuyến bay</div>
+                            <div class="sb-sidenav-menu-heading">Thông kê</div>
                             <a class="nav-link" href="/Admin/Chuyenbays/Index">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Lịch trình bay
+                                Thống kê chuyến bay
+                            </a>
+                            <a class="nav-link" href="/Admin/thongke/DoanhThuNamNay">
+                                <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                                Thống kê doanh thu
                             </a>
                             <div class="sb-sidenav-menu-heading">Chỉnh sửa thông tin</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -65,7 +70,7 @@
                                     <a class="nav-link" href="/Admin/Ves/Index">Vé</a>
                                 </nav>
                             </div>
-            
+
                         </div>
                     </div>
                     
@@ -80,7 +85,6 @@
         <script src="/Areas/Admin/ContentAdmin/js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="/Areas/Admin/ContentAdmin/assets/demo/chart-area-demo.js"></script>
-        <script src="/Areas/Admin/ContentAdmin/assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js" crossorigin="anonymous"></script>
         <script src="/Areas/Admin/ContentAdmin/js/datatables-simple-demo.js"></script>
     </body>

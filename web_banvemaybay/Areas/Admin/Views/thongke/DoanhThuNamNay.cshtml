@@ -1,5 +1,4 @@
-﻿@model List<web_banvemaybay.Models.Doanhthu>
-@{
+﻿@{
     Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
 }
 <main>
@@ -16,7 +15,7 @@
                                 <input class="in-date" type="number" name="monthYear" id="monthYear">
                                 <input type="submit" value="Thống kê theo năm" class="btn btn-dark" />
                             </div>
-
+                            
                         }
                     </div>
                     <div class="card-body">
@@ -26,8 +25,7 @@
                                 <li>
                                     <span class="top">@String.Format("{0:0,0}", @item.doanhthu)đ</span>
                                     <span style="height: calc( @item.doanhthu% /1000000) " title="Tháng @item.thang"></span>
-                                </li>
-
+                                </li>                                   
                             }
                         </ul>
                     </div>

@@ -1,0 +1,46 @@
+﻿@import "compass/css3";
+.chart {
+    display: table;
+    table-layout: fixed;
+    width: 100%;
+    height: 500px;
+    background-position: left top;
+}
+.chart li {
+    position: relative;
+    display: table-cell;
+    vertical-align: bottom;
+    height: 200px;
+    
+}
+
+    .chart li span {
+        margin: 0 0.4em;
+        display: block;
+        background: #0026ffad;
+        animation: draw 1s ease-in-out;
+    }
+        .chart li span:before {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 100%;
+            padding: 5px 1em 0;
+            display: block;
+            text-align: center;
+            content: attr(title);
+            word-wrap: break-word;
+        }
+
+@keyframes draw {
+    0% {
+        height: 0;
+    }
+}
+#monthYear {
+    margin-right: 5px;
+    height: 37px;
+    border: 1px solid;
+    cursor: pointer;
+    border-radius: 0.375rem;
+}
