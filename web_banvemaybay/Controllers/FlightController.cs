@@ -327,6 +327,11 @@ namespace FlightSearch.Controllers
         [HttpPost]
         public ActionResult tt(FormCollection form, TTlienhe lienhe, Hanhkhach hk , string name, DateTime? birthday, int? idHangve, int? sdtlh, string emaillh, string gioitinh, string namelh, string gioitinhlh, int? idcu, int idchuyenbay, double giatien, string payment)
         {
+            var now = DateTime.Now;
+            if (birthday > now.AddYears(-18))
+            {
+                return RedirectToAction("Information", "Flight", new { thongbao = "Tuổi của bạn phải ít nhất 18 tuổi !" });
+            }
             if (name != null && birthday != null && sdtlh != null && emaillh != null && gioitinh != null && gioitinhlh != null && namelh != null)
             {
                      var ktlh = new TTlienhe();
@@ -406,6 +411,11 @@ namespace FlightSearch.Controllers
                     Session["KgHanhly"] = Bag;
                     Session["Hangge"] = Baghangghe;
                     Session["TinhTrang"] = ve.Tinhtrang;
+                    if (payment == "payment1")
+                    {
+                        Ve veMomo = db.Ve.Find(idVeMoi);
+                        return RedirectToAction("PaymentMomo", "Flight", veMomo);
+                    }
                     string content = System.IO.File.ReadAllText(Server.MapPath("~/Content/template/EmailVe.html"));
                     content = content.Replace("{{CustomerName}}", namelh);
                     content = content.Replace("{{MaVe}}", ve.IDve.ToString());
@@ -475,7 +485,7 @@ namespace FlightSearch.Controllers
                 return View("Error");
             }
         }*/
-        public ActionResult PaymentMomo()
+        public ActionResult PaymentMomo(Ve veMomo)
         {
             //request params need to request to MoMo system
             string endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
@@ -483,12 +493,12 @@ namespace FlightSearch.Controllers
             string accessKey = "iPXneGmrJH0G8FOP";
             string serectkey = "sFcbSGRSJjwGxwhhcEktCHWYUuTuPNDB";
             string orderInfo = "Thanh toán momo";
-            string returnUrl = "https://localhost:44394";
+            string returnUrl = RedirectToAction("DatThanhCong", "Home", new { id = Session["idVeMoi"] }).ToString();
             string notifyurl = "https://4c8d-2001-ee0-5045-50-58c1-b2ec-3123-740d.ap.ngrok.io/Home/SavePayment"; //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
 
             string amount = Session["giathanhtoan"].ToString();
-            string orderid = DateTime.Now.Ticks.ToString(); //mã đơn hàng
-            string requestId = DateTime.Now.Ticks.ToString();
+            string orderid = "0000000000000"+ veMomo.IDve.ToString(); //mã đơn hàng
+            string requestId = Session["idVeMoi"].ToString();
             string extraData = "";
 
             //Before sign HMAC SHA256 signature
@@ -538,8 +548,25 @@ namespace FlightSearch.Controllers
         {
             //lấy kết quả Momo trả về và hiển thị thông báo cho người dùng (có thể lấy dữ liệu ở đây cập nhật xuống db)
             string rMessage = result.message;
-            string rOrderId = result.orderId;
+            int rOrderId = int.Parse(result.orderId);
             string rErrorCode = result.errorCode; // = 0: thanh toán thành công
+            int code = Convert.ToInt32(rErrorCode);
+
+            if (code == 0)
+            {
+                Ve ve = db.Ve.Where(p => p.IDve == rOrderId).FirstOrDefault();
+                if (ve != null)
+                {
+                    ve.Tinhtrang = "Da thanh toan";
+                }
+                db.SaveChanges();
+                return RedirectToAction("DatThanhCong", "Home", new { id = ve.IDve });
+            }
+
+            else
+            {
+                ViewBag.Message = "Có lỗi xảy ra trong quá trình xử lý";
+            }
             return View();
         }
         public ActionResult PaymentVnpay()
