@@ -33,6 +33,18 @@
         </dt>
 
         <dt>
+            Số ghế trống (PT)/Số ghế phổ thông: @Html.DisplayFor(model => model.PhoThong)/162
+        </dt>
+
+        <dt>
+            Số ghế trống (TG)/Số ghế thương gia: @Html.DisplayFor(model => model.ThuongGia)/16
+        </dt>
+
+        <dt>
+            Tổng số vé đã bán : @Session["SoVeDaBan"]
+        </dt>
+
+        <dt>
             Doanh thu : @String.Format("{0:0,0}", int.Parse(@Session["DoanhThuChuyen"].ToString()))đ
         </dt>
 

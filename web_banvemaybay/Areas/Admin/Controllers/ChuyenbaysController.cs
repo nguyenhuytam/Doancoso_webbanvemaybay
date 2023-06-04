@@ -26,6 +26,8 @@ namespace web_banvemaybay.Areas.Admin.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Chuyenbay chuyenbay = db.Chuyenbay.Find(id);
+            int sovedaban = int.Parse((162 - chuyenbay.PhoThong).ToString()) + int.Parse((16 - chuyenbay.ThuongGia).ToString());
+            Session["SoVeDaBan"] = sovedaban;
             double doanhthu = (double.Parse((162 - chuyenbay.PhoThong).ToString()) * chuyenbay.Giatien) + (double.Parse((16 - chuyenbay.ThuongGia).ToString()) * (chuyenbay.Giatien + 100000));
             Session["DoanhThuChuyen"] = doanhthu.ToString();
             if (chuyenbay == null)
