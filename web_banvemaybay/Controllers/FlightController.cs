@@ -330,7 +330,8 @@ namespace FlightSearch.Controllers
             var now = DateTime.Now;
             if (birthday > now.AddYears(-18))
             {
-                return RedirectToAction("Information", "Flight", new { thongbao = "Tuổi của bạn phải ít nhất 18 tuổi !" });
+                TempData["ErrorMessage"] = "Chưa đủ 18 tuổi vui lòng chọn  lại  !";
+                return RedirectToAction("Information", "Flight", new {id = idchuyenbay});
             }
             if (name != null && birthday != null && sdtlh != null && emaillh != null && gioitinh != null && gioitinhlh != null && namelh != null)
             {
