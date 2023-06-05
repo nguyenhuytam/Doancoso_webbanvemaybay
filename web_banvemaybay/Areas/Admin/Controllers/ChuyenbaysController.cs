@@ -21,20 +21,39 @@ namespace web_banvemaybay.Areas.Admin.Controllers
         }
         public ActionResult DoanhThu(int? id)
         {
+            Chuyenbay chuyenbay = db.Chuyenbay.Find(id);
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Chuyenbay chuyenbay = db.Chuyenbay.Find(id);
-            int sovedaban = int.Parse((162 - chuyenbay.PhoThong).ToString()) + int.Parse((16 - chuyenbay.ThuongGia).ToString());
-            Session["SoVeDaBan"] = sovedaban;
-            double doanhthu = (double.Parse((162 - chuyenbay.PhoThong).ToString()) * chuyenbay.Giatien) + (double.Parse((16 - chuyenbay.ThuongGia).ToString()) * (chuyenbay.Giatien + 100000));
-            Session["DoanhThuChuyen"] = doanhthu.ToString();
-            if (chuyenbay == null)
+            var kt = db.Ve.Where(c => c.IDchuyenbay == id).ToList();
+            double tong = 0;
+            int soHangVePhoThong = db.Ve.Count(c => c.IDchuyenbay == id && c.IDhangve == 2);
+            int soHangVeThuongGia = db.Ve.Count(c => c.IDchuyenbay == id && c.IDhangve == 1);
+            var check = db.Chuyenbay.Where(c => c.IDchuyenbay == id).FirstOrDefault();
+            if (kt != null)
             {
-                return HttpNotFound();
+                foreach (var item in kt)
+                {
+                    tong += item.Gia;
+                }
             }
+            Session["PTDaBan"] = soHangVePhoThong;
+            Session["TGDaBan"] = soHangVeThuongGia;
+            Session["SoVeDaBan"] = soHangVePhoThong + soHangVeThuongGia;
+            Session["Tongdoanhthu"] = tong;
             return View(chuyenbay);
+            
+            //Chuyenbay chuyenbay = db.Chuyenbay.Find(id);
+            //int sovedaban = int.Parse((162 - chuyenbay.PhoThong).ToString()) + int.Parse((16 - chuyenbay.ThuongGia).ToString());
+            //Session["SoVeDaBan"] = sovedaban;
+            //double doanhthu = (double.Parse((162 - chuyenbay.PhoThong).ToString()) * chuyenbay.Giatien) + (double.Parse((16 - chuyenbay.ThuongGia).ToString()) * (chuyenbay.Giatien + 100000));
+            //Session["DoanhThuChuyen"] = doanhthu.ToString();
+            //if (chuyenbay == null)
+            //{
+            //    return HttpNotFound();
+            //}
+            //return View(chuyenbay);
         }
         // GET: Admin/Chuyenbays/Details/5
         public ActionResult Details(int? id)

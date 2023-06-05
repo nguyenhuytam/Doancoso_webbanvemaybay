@@ -7,18 +7,7 @@
 
 <main>
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Thông tin chuyến bay</h1>
-        @using (Html.BeginForm("chitiet", "chitietchuyenbay", FormMethod.Post))
-        {
-            <input type="text" name="idchuyenbay" id="idchuyenbay" />
-            <input type="submit" value="them moi " />
-        }
-        <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active">Lịch trình bay</li>
-        </ol>
-        <p>
-            @Html.ActionLink("Thêm mới", "Create")
-        </p>
+        <h1 class="mt-4">Thống kê chuyến bay</h1>
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
@@ -32,10 +21,10 @@
                                 Mã chuyến
                             </th>
                             <th>
-                                Số ghế trống (PT)/Số ghế phổ thông
+                                Số ghế phổ thông còn trống
                             </th>
                             <th>
-                                Số ghế trống (TG)/Số ghế thương gia
+                                Số ghế thương gia còn trống
                             </th>
                             <th>
 
@@ -50,10 +39,10 @@
                                     @Html.DisplayFor(modelItem => item.IDchuyenbay)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.PhoThong)/162
+                                    @Html.DisplayFor(modelItem => item.PhoThong)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.ThuongGia)/16
+                                    @Html.DisplayFor(modelItem => item.ThuongGia)
                                 </td>
                                 <td>
                                     @Html.ActionLink("Chi tiết", "DoanhThu", new { id = item.IDchuyenbay })
