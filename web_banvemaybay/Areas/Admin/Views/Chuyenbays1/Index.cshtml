@@ -1,0 +1,94 @@
+﻿@model IEnumerable<web_banvemaybay.Models.Chuyenbay>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
+}
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Thêm/ sửa xóa</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Chuyến bay</li>
+        </ol>
+        <p>
+            @Html.ActionLink("Thêm mới", "Create")
+        </p>
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Bảng chuyến bay
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Diadiemdi)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Diadiemden)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Ngaydi)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Ngayve)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Giatien)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.PhoThong)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.ThuongGia)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.HangHK.TenHang)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Diadiemdi)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Diadiemden)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Ngaydi)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Ngayve)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Giatien)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.PhoThong)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.ThuongGia)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.HangHK.TenHang)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.IDchuyenbay }) |
+                                    @Html.ActionLink("Chi tiết", "Details", new { id = item.IDchuyenbay }) |
+                                    @Html.ActionLink("Xóa", "Delete", new { id = item.IDchuyenbay })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
+

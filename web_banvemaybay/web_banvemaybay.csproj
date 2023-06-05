@@ -130,6 +130,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
+    <Compile Include="Areas\Admin\Controllers\Chuyenbays1Controller.cs" />
     <Compile Include="Areas\Admin\Controllers\ChuyenbaysController.cs" />
     <Compile Include="Areas\Admin\Controllers\DattruocsController.cs" />
     <Compile Include="Areas\Admin\Controllers\HangHKsController.cs" />
@@ -311,6 +312,11 @@
     <Content Include="Areas\Admin\Views\thongke\Index.cshtml" />
     <Content Include="Areas\Admin\Views\thongke\DoanhThuNamNay.cshtml" />
     <Content Include="Areas\Admin\Views\Chuyenbays\DoanhThu.cshtml" />
+    <Content Include="Areas\Admin\Views\Chuyenbays1\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\Chuyenbays1\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\Chuyenbays1\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\Chuyenbays1\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\Chuyenbays1\Index.cshtml" />
     <None Include="Scripts\jquery-3.6.4.intellisense.js" />
     <Content Include="Scripts\jquery-3.6.4.js" />
     <Content Include="Scripts\jquery-3.6.4.min.js" />
