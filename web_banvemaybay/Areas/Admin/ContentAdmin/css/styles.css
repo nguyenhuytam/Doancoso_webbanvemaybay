@@ -11196,6 +11196,7 @@ body {
 }
 
 .datatable-table th a {
+    text-align: center;
   text-decoration: none;
   color: inherit;
 }

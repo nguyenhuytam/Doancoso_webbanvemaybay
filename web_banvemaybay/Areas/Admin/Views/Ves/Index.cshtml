@@ -42,7 +42,6 @@
                             <th>
                                 Tình trạng
                             </th>
-                            </th>
                             <th></th>
                         </tr>
                     </thead>
@@ -63,7 +62,8 @@
                                     @Html.DisplayFor(modelItem => item.Hanhli.Kg)
                                 </td>
                                 <td>
-                                    @String.Format("{0:0,0}", int.Parse(@Html.DisplayFor(modelItem => item.Gia).ToString()))đ
+                                    @String.Format("{0:0,0}", @Html.DisplayFor(modelItem => item.Gia).ToString())đ
+
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Tinhtrang)
