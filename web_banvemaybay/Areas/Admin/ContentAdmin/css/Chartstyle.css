@@ -9,11 +9,14 @@
 .chart li {
     position: relative;
     display: table-cell;
+    font-size:12px;
     vertical-align: bottom;
     height: 200px;
     
 }
-
+.top {
+    font-size: 12px; text-align: center;
+}
     .chart li span {
         margin: 0 0.4em;
         display: block;
