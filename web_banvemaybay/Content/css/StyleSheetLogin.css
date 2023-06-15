@@ -350,3 +350,64 @@ footer {
     border-radius: 10px;
     border: 1px solid;
 }
+#thongbao {
+    position: fixed;
+    top: 60px;
+    right: 15px;
+    z-index: 999999;
+}
+
+.thongbao {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 4px;
+    padding: 15px 10px;
+    min-width: 400px;
+    max-width: 450px;
+    border-left: 4px solid;
+    box-shadow: 0 5px 8px rgba(0, 0, 0, 0.08);
+    transition: all linear 0.3s;
+}
+
+.thongbao-icon {
+    color: #ff623d;
+    font-size: 31px;
+}
+    .thongbao-icon i {
+        box-sizing: unset;
+    }
+
+
+.thongbao-close {
+    font-size: 26px;
+    cursor: pointer;
+    color: #333;
+}
+
+.thongbao-body {
+    font-size: 16px;
+    width: 320px;
+    padding: 0 10px;
+    font-weight: bold;
+    color: #333;
+    text-align: left;
+}
+    .thongbao-body p {
+        font-size: 16px;
+        font-weight: unset;
+        line-height: unset;
+        letter-spacing: unset;
+        margin: auto;
+    }
+
+    .thongbao-body .ndtb {
+        font-size: 14px;
+        padding: 3px 0;
+        font-weight: 600;
+        color: #888;
+        text-align: left;
+    }
+.fbli a {
+    color: #1197f5;
+}

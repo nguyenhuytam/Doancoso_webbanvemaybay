@@ -2,7 +2,42 @@
 @{
     ViewBag.Title = "Register"; Layout = "";
 }
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage) || ViewBag.thongbao != null)
+{
+    <div id="thongbao">
+        <div class="thongbao">
+            <div class="thongbao-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="thongbao-body">
+                <p>Thông báo</p>
+                <p class="ndtb"> @ViewBag.ErrorMessage @ViewBag.thongbao</p>
+            </div>
+            <div class="thongbao-close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div id="thongbao" style="display:none !important">
+        <div class="thongbao">
+            <div class="thongbao-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="thongbao-body">
+                <p>Thông báo</p>
+                <p class="ndtb"></p>
 
+            </div>
+            <div class="thongbao-close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+    </div>
+}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <link href="~/Content/css/StyleSheetLogin.css" rel="stylesheet" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -29,15 +64,15 @@
                         <span class="icon">
                             <ion-icon name="Password"></ion-icon>
                         </span>
-                        @Html.TextBoxFor(model => model.Password, new { placeholder = "Mật khẩu", required = "required" })
+                        @Html.PasswordFor(model => model.Password, new { placeholder = "Nhập mật khẩu", required = "required" })
                         @Html.ValidationMessageFor(model => model.Password)
                     </div>
                     <div class="input-box">
                         <span class="icon">
                             <ion-icon name="Password"></ion-icon>
                         </span>
-                        @Html.TextBoxFor(model => model.Password, new { placeholder = "Nhập Mật khẩu", required = "required" })
-                        @Html.ValidationMessageFor(model => model.Password)
+                        @Html.PasswordFor(model => model.ConfirmPassword, new { placeholder = "Nhập lại Mật khẩu", required = "required" })
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword)
                     </div>
                     <div class="input-box">
                         <span class="icon">
@@ -48,6 +83,10 @@
                     </div>
                     <button type="submit" value="Register">Đăng ký</button>
                 }
+                <div class="fbli">
+                    <span>hoặc đăng nhập bằng </span>
+                    @Html.ActionLink("Facebook", "LoginFacebook", "Login").
+                </div>
             </main>
 
 
@@ -97,7 +136,21 @@
         </div>
     </div>
 </main>
+<script>
+    const thongBao = document.querySelector('#thongbao')
+    const tbClose = document.querySelector('.thongbao-close')
 
+    const body = document.querySelector('body');
+    body.addEventListener('click', function () {
+        document.querySelector("#thongbao").style.display = "none"
+    })
+    tbClose.addEventListener('click', function () {
+        document.querySelector("#thongbao").style.display = "none"
+    })
+    thongBao.addEventListener('click', function (event) {
+        event.stopPropagation()
+    })
+</script>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

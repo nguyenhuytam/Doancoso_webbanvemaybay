@@ -102,12 +102,47 @@
     Layout = "";
 }
 
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 <link href="~/Content/css/StyleSheetLogin.css" rel="stylesheet" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@1,300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+@if (!string.IsNullOrEmpty(ViewBag.ErrorMessage) || ViewBag.thongbao != null)
+{
+    <div id="thongbao">
+        <div class="thongbao">
+            <div class="thongbao-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="thongbao-body">
+                <p>Thông báo</p>
+                <p class="ndtb"> @ViewBag.ErrorMessage @ViewBag.thongbao</p>
+            </div>
+            <div class="thongbao-close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div id="thongbao" style="display:none !important">
+        <div class="thongbao">
+            <div class="thongbao-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="thongbao-body">
+                <p>Thông báo</p>
+                <p class="ndtb"></p>
+
+            </div>
+            <div class="thongbao-close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+    </div>
+}
 <main>
     <div class="container" id="container">
         <div class="form-container sign-up-container">
@@ -133,7 +168,10 @@
                     @*<a href="#">Quên mật khẩu?</a>*@
                     <button type="submit" value="Log in">Đăng nhập</button>
                 }
-
+            <div class="fbli">
+                <span>hoặc đăng nhập bằng </span>
+                @Html.ActionLink("Facebook", "LoginFacebook", "Login").
+            </div>
             </section>
 
 
@@ -156,6 +194,20 @@
         </div>
     </div>
 </main>
+<script>
+    const thongBao = document.querySelector('#thongbao')
+    const tbClose = document.querySelector('.thongbao-close')
+    const body = document.querySelector('body');
+    body.addEventListener('click', function () {
+        document.querySelector("#thongbao").style.display = "none"
+    })
+    tbClose.addEventListener('click', function () {
+        document.querySelector("#thongbao").style.display = "none"
+    })
+    thongBao.addEventListener('click', function (event) {
+        event.stopPropagation()
+    })
+</script>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
