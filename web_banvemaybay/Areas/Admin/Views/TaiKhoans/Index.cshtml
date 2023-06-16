@@ -58,7 +58,11 @@
                                 <td>
                                     @Html.ActionLink("Sửa", "Edit", new { id = item.IDtaikhoan }) |
                                     @Html.ActionLink("Chi tiết", "Details", new { id = item.IDtaikhoan }) |
-                                    @Html.ActionLink("Xóa", "Delete", new { id = item.IDtaikhoan })
+                                    @if (item.IDchucvu != 1)
+                                    {
+                                        @Html.ActionLink("Xóa", "Delete", new { id = item.IDtaikhoan })
+                                    }
+
                                 </td>
                             </tr>
                         }
