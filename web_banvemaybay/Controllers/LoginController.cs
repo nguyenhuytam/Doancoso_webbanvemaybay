@@ -182,17 +182,17 @@ namespace web_banvemaybay.Controllers
                         Session["IDtaikhoan"] = user.IDtaikhoan;
                         Session["Password"] = user.Password;
                         Session["IDchucvu"] = user.IDchucvu;
-                        return RedirectToAction("Index", "Home", new { ten = Session["IDtaikhoan"] = Session["HovaTen"] });
+                        return RedirectToAction("Home", "Home", new { ten = Session["HovaTen"] });
 
                     }
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Home", new { ten = Session["IDtaikhoan"] = Session["HovaTen"] });
+                    return RedirectToAction("Home", "Home", new { ten = Session["HovaTen"] });
                 }
             }
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Home", "Home");
         }
         public ActionResult Logout()
         {
