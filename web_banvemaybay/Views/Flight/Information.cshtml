@@ -178,10 +178,10 @@ else
                             <input type="radio" name="payment" id="payment1" value="payment1" @*value="Thanh toán momo"*@>
                             <label for="payment1">Thanh toán momo</label>
                         </li>
-                        <li>
+                        @*<li>
                             <input type="radio" name="payment" id="payment3" value="Thanh toán vnpay">
                             <label for="payment3">Thanh toán vnpay</label>
-                        </li>
+                        </li>*@
                     </ul>
                     <input type="submit" value="Thanh toán" class="btn btn-reservations ttmacdinh" />
                     <a class="btn btn-reservations ttmomo" href="@Url.Action("PaymentMomo","Flight")">Thanh toán</a>
@@ -346,12 +346,12 @@ else
             document.querySelector(".ttvnpay").style.display = "none"
         }
     }
-    document.getElementById('payment3').onclick = function (e) {
-        if (this.checked) {
-            document.querySelector(".payment2").style.display = "none"
-            document.querySelector(".ttmacdinh").style.display = "none"
-            document.querySelector(".ttmomo").style.display = "none"
-            document.querySelector(".ttvnpay").style.display = "block"
-        }
-    }
+    //document.getElementById('payment3').onclick = function (e) {
+    //    if (this.checked) {
+    //        document.querySelector(".payment2").style.display = "none"
+    //        document.querySelector(".ttmacdinh").style.display = "none"
+    //        document.querySelector(".ttmomo").style.display = "none"
+    //        document.querySelector(".ttvnpay").style.display = "block"
+    //    }
+    //}
 </script>

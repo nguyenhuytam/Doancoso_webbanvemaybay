@@ -25,6 +25,9 @@
                     <thead>
                         <tr>
                             <th>
+                                Mã vé
+                            </th>
+                            <th>
                                 Tên hành khách
                             </th>
                             <th>
@@ -49,6 +52,9 @@
                         @foreach (var item in Model)
                         {
                             <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IDve)
+                                </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Hanhkhach.Tenhanhkhach)
                                 </td>

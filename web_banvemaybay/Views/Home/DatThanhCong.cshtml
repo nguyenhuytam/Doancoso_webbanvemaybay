@@ -6,7 +6,15 @@
 <div class="done">
     <div class="done-main">
         <div class="done-heading">
-            <i class="fa-solid fa-circle-check fa-bounce"></i> Bạn đã đặt vé thành công
+            @if (Session["TinhTrang"].ToString() == "Đã thanh toán")
+            {
+                <i class="fa-solid fa-circle-check fa-bounce"></i><p> Bạn đã đặt vé thành công</p>
+            }
+            @if (Session["TinhTrang"].ToString() == "Chờ thanh toán" || Session["TinhTrang"].ToString() == null)
+            {
+                <i class="fa-solid fa-circle-pause fa-fade" style="color: #FFCC00"></i><p style="color: #FFCC00">Chờ thanh toán</p>
+            }
+
         </div>
         @if (Session["idchuyenbay"] != null)
         {
@@ -141,7 +149,7 @@
                 </div>
                 <div class="ticket-details-item">
                     <b>Trạng thái: </b>
-                    @if (Session["TinhTrang"] != null)
+                    @if (Session["TinhTrang"].ToString() == "Đã thanh toán")
                     {
                         <span>Đã thanh toán</span>
                     }

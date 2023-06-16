@@ -24,17 +24,17 @@
             <div class="tic-content">
                 <div class="deprture js-open-location">
                     <i class="fa-sharp fa-solid fa-plane-departure"></i>
-                    @Html.TextBox("to", null, new { @class = "form-control in-location", @Value = "Hồ Chí Minh" })
+                    @Html.TextBox("to", null, new { @class = "form-control in-location", @Value = "Điểm đi", @Title = "Điểm đi" })
                     @*<input class="in-location" type="text" name="to" id="to" value="Hà Nội (HAN)" >*@
 
                 </div>
                 <div class="destination js-open-location-2">
                     <i class="fa-solid fa-plane-arrival"></i>
-                    @Html.TextBox("from", null, new { @class = "form-control in-location", @Value = "Hà Nội" })
+                    @Html.TextBox("from", null, new { @class = "form-control in-location", @Value = "Điểm đến", @Title = "Điểm đến" })
                     @**@ @*<input class="in-location" type="text" name="from" id="from" value="Hà Nội (HAN)">*@
                 </div>
-                <input class="in-date" type="date" name="dateto" id="dateto">
-                <input class="in-date" type="date" name="datefrom" id="datefrom" disabled>
+                <input class="in-date" type="date" name="dateto" id="dateto" title="Ngày đi">
+                <input class="in-date" type="date" name="datefrom" id="datefrom" title="Ngày về" disabled>
                 @if (ViewBag.thongbao != null)
                 {
                     <div id="thongbao">
@@ -71,7 +71,7 @@
                     </div>
                 }
                 <div class="number-p">
-                    <button class="btn-number-p">
+                    <button class="btn-number-p" title="Số lượng người">
                         <i class="fa-solid fa-user"></i>
                         <input type="text" name="p-tong" id="p-tong" value="1">
                     </button>

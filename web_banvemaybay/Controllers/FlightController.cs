@@ -5,6 +5,7 @@ using System.Data;
 using System.Data.Entity;
 using System.Data.Entity.Core.Common.CommandTrees.ExpressionBuilder;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Migrations;
 using System.Data.Entity.SqlServer;
 using System.Linq;
 using System.Net;
@@ -360,6 +361,17 @@ namespace FlightSearch.Controllers
                     ve.IDlienhe = ktlh.IDlienhe;
                     ve.IDhangve = idHangve;
                     var slhang = db.Chuyenbay.FirstOrDefault(cb => cb.IDchuyenbay == idchuyenbay);
+                    if (ve.IDhangve == null)
+                    {
+                        if (slhang.PhoThong > 0)
+                        {
+                            ve.IDhangve = 2;
+                        }
+                        else
+                        {
+                            ve.IDhangve = 1;
+                        }
+                    }
                     if (slhang!=null)
                     {
                         if (idHangve==null)
@@ -396,11 +408,17 @@ namespace FlightSearch.Controllers
                     ve.Gia = giatien;
                     var chuyenbay = db.Chuyenbay.Where(hl => hl.IDchuyenbay == idchuyenbay).FirstOrDefault();
                     DateHour = chuyenbay.Ngaydi.ToString();
+                    string DateHour1= (DateTime.Parse(DateHour).AddDays(-1)).ToString();
                     Departure = chuyenbay.Diadiemdi.ToString();
                     Destination = chuyenbay.Diadiemden.ToString();
+                    ve.Tinhtrang = "Chờ thanh toán";
                     db.Ve.Add(ve);
                     db.SaveChanges();
                     int idVeMoi = ve.IDve;
+                    Session["DateHour"] = DateHour;
+                    Session["DateHour1"] = DateHour1;
+                    Session["Departure"] = Departure;
+                    Session["Destination"] = Destination;
                     Session["idVeMoi"] = idVeMoi;
                     Session["giatien"] = giatien;
                     Session["idchuyenbay"] = idchuyenbay;
@@ -417,18 +435,17 @@ namespace FlightSearch.Controllers
                         Ve veMomo = db.Ve.Find(idVeMoi);
                         return RedirectToAction("PaymentMomo", "Flight", veMomo);
                     }
-                    string content = System.IO.File.ReadAllText(Server.MapPath("~/Content/template/EmailVe.html"));
+                    string content = System.IO.File.ReadAllText(Server.MapPath("~/Content/template/ChoThanhToan.html"));
                     content = content.Replace("{{CustomerName}}", namelh);
-                    content = content.Replace("{{MaVe}}", ve.IDve.ToString());
-                    content = content.Replace("{{DateHour}}", DateHour);
-                    content = content.Replace("{{Departure}}", Departure);
-                    content = content.Replace("{{Destination}}", Destination);
-                    content = content.Replace("{{Bag}}", Bag);
+                    content = content.Replace("{{MaVe}}", Session["idVeMoi"].ToString());
+                    content = content.Replace("{{DateHour}}", DateHour1);
+                    content = content.Replace("{{Departure}}", Session["Departure"].ToString());
+                    content = content.Replace("{{Destination}}", Session["Destination"].ToString());
+                    content = content.Replace("{{Bag}}", Session["KgHanhly"].ToString());
                     var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
 
-                    new MailHelper().SendMail(emaillh, "Bạn đã đặt vé thành công tại AirplaneTicket", content);
+                    new MailHelper().SendMail(Session["emaillh"].ToString(), "Bạn đã đặt vé tại AirplaneTicket", content);
                     new MailHelper().SendMail(toEmail, "Đơn hàng mới từ AirplaneTicket", content);
-                    //return View(db.Ve);
                     return RedirectToAction("DatThanhCong", "Home", new { id = idVeMoi });
                 }
             }
@@ -486,19 +503,20 @@ namespace FlightSearch.Controllers
                 return View("Error");
             }
         }*/
-        public ActionResult PaymentMomo(Ve veMomo)
+        public ActionResult PaymentMomo(Ve ve)
         {
+            string link = "https://localhost:44378/Home/DatThanhCong/" + Session["idVeMoi"];
             //request params need to request to MoMo system
             string endpoint = "https://test-payment.momo.vn/gw_payment/transactionProcessor";
             string partnerCode = "MOMOOJOI20210710";
             string accessKey = "iPXneGmrJH0G8FOP";
             string serectkey = "sFcbSGRSJjwGxwhhcEktCHWYUuTuPNDB";
             string orderInfo = "Thanh toán momo";
-            string returnUrl = RedirectToAction("DatThanhCong", "Home", new { id = Session["idVeMoi"] }).ToString();
+            string returnUrl = "https://localhost:44378/Flight/ConfirmPaymentClient";
             string notifyurl = "https://4c8d-2001-ee0-5045-50-58c1-b2ec-3123-740d.ap.ngrok.io/Home/SavePayment"; //lưu ý: notifyurl không được sử dụng localhost, có thể sử dụng ngrok để public localhost trong quá trình test
 
             string amount = Session["giathanhtoan"].ToString();
-            string orderid = "0000000000000"+ veMomo.IDve.ToString(); //mã đơn hàng
+            string orderid = "0000000000000"+ Session["idVeMoi"]; //mã đơn hàng
             string requestId = Session["idVeMoi"].ToString();
             string extraData = "";
 
@@ -549,18 +567,29 @@ namespace FlightSearch.Controllers
         {
             //lấy kết quả Momo trả về và hiển thị thông báo cho người dùng (có thể lấy dữ liệu ở đây cập nhật xuống db)
             string rMessage = result.message;
-            int rOrderId = int.Parse(result.orderId);
+            string idmoi = result.requestId;
+            int rOrderId = int.Parse(Session["idVeMoi"].ToString());
             string rErrorCode = result.errorCode; // = 0: thanh toán thành công
-            int code = Convert.ToInt32(rErrorCode);
 
-            if (code == 0)
+            if (rErrorCode == "0")
             {
-                Ve ve = db.Ve.Where(p => p.IDve == rOrderId).FirstOrDefault();
-                if (ve != null)
-                {
-                    ve.Tinhtrang = "Da thanh toan";
-                }
+                var ve = db.Ve.FirstOrDefault(p => p.IDve == rOrderId);
+                ve.Tinhtrang = "Đã thanh toán";
+                Session["TinhTrang"] = ve.Tinhtrang;
+                Session["payment"] = "Thanh toán momo";
+                db.Ve.AddOrUpdate(ve);
                 db.SaveChanges();
+                string content = System.IO.File.ReadAllText(Server.MapPath("~/Content/template/EmailVe.html"));
+                content = content.Replace("{{CustomerName}}", Session["namelh"].ToString());
+                content = content.Replace("{{MaVe}}", Session["idVeMoi"].ToString());
+                content = content.Replace("{{DateHour}}", Session["DateHour"].ToString());
+                content = content.Replace("{{Departure}}", Session["Departure"].ToString());
+                content = content.Replace("{{Destination}}", Session["Destination"].ToString());
+                content = content.Replace("{{Bag}}", Session["KgHanhly"].ToString());
+                var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+
+                new MailHelper().SendMail(Session["emaillh"].ToString(), "Bạn đã đặt vé thành công tại AirplaneTicket", content);
+                new MailHelper().SendMail(toEmail, "Đơn hàng mới từ AirplaneTicket", content);
                 return RedirectToAction("DatThanhCong", "Home", new { id = ve.IDve });
             }
 
