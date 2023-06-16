@@ -4,6 +4,41 @@
     ViewBag.Title = "Checkve";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <div id="thongbao">
+        <div class="thongbao">
+            <div class="thongbao-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="thongbao-body">
+                <p>Thông báo</p>
+                <p class="ndtb">@ViewBag.Message</p>
+            </div>
+            <div class="thongbao-close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div id="thongbao" style="display:none !important">
+        <div class="thongbao">
+            <div class="thongbao-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="thongbao-body">
+                <p>Thông báo</p>
+                <p class="ndtb"></p>
+
+            </div>
+            <div class="thongbao-close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+    </div>
+}
 <div class="check">
     <div class="check-main">
         <div class="flight-details">

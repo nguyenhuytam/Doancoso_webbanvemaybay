@@ -89,8 +89,9 @@ namespace web_banvemaybay.Controllers
             ViewBag.Message = "OTP đã được gửi";
             return RedirectToAction("xacnhan", "Check");
         }
-        public ActionResult xacnhan()
+        public ActionResult xacnhan(string thongbao)
         {
+            ViewBag.thongbao = thongbao;
             return View();
         }
 

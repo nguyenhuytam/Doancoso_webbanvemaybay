@@ -3,9 +3,40 @@
     ViewBag.Title = "xacnhan";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@if (!string.IsNullOrEmpty(ViewBag.Message))
+@if (!string.IsNullOrEmpty(ViewBag.Message) || ViewBag.thongbao != null)
 {
-    <p>@ViewBag.Message</p>
+    <div id="thongbao">
+        <div class="thongbao">
+            <div class="thongbao-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="thongbao-body">
+                <p>Thông báo</p>
+                <p class="ndtb">@ViewBag.Message @ViewBag.thongbao</p>
+            </div>
+            <div class="thongbao-close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div id="thongbao" style="display:none !important">
+        <div class="thongbao">
+            <div class="thongbao-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="thongbao-body">
+                <p>Thông báo</p>
+                <p class="ndtb"></p>
+
+            </div>
+            <div class="thongbao-close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+    </div>
 }
 <img src="~/Areas/Admin/ContentAdmin/image/209501.jpg" alt="" id="backgroud">
 <form action="@Url.Action("Checkve")" method="post">
@@ -16,7 +47,7 @@
             </div>
             <div class="TraVe-content">
                 <div class="locition-body-search">
-                    <label for="search">Mã vé:</label><input type="text" name="search" id="search" value="@Session["mavemuontra"]" required  disabled class="trave">
+                    <label for="search">Mã vé:</label><input type="text" name="search" id="search" value="@Session["mavemuontra"]" required disabled class="trave">
                     <label for="otp" class="label-otp">OTP: </label><input type="text" name="otp" required class="otp-2">
                     <button type="submit" class="btn-search">Tra vé<i class="fa-sharp fa-solid fa-magnifying-glass fa-bounce"></i></button>
                 </div>
