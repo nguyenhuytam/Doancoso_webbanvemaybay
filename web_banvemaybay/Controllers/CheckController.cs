@@ -24,27 +24,35 @@ namespace web_banvemaybay.Controllers
         public ActionResult Checkve(string OTP)
         {
             string email = Session["email"].ToString();
-            int mave =int.Parse(@Session["mavemuontra"].ToString());
+            int mave = int.Parse(@Session["mavemuontra"].ToString());
             web_banvemaybayEntities db = new web_banvemaybayEntities();
             if (Session["otp"].ToString() == OTP)
             {
                 var checkma = db.Ve.Where(c => c.IDve.Equals(mave) && c.TTlienhe.Email.Equals(email)).ToList();
                 if (checkma.Count > 0)
                 {
-                        return View(checkma.OrderBy(c => c.IDve));  
+                    return View(checkma.OrderBy(c => c.IDve));
                 }
                 else
                 {
                     ViewBag.Message = "Bạn nhập sai mã vui lòng kiểm tra lại ";
-                    return RedirectToAction("xacnhan", "Check", new { thongbao = "Vui lòng kiểm kĩ Email hoặc Mã vé : " });      
+                    return RedirectToAction("xacnhan", "Check", new { thongbao = "Vui lòng kiểm kĩ Email hoặc Mã vé : " });
                 }
             }
             else
             {
                 ViewBag.Message = "Bạn nhập sai mã vui lòng kiểm tra lại ";
-                return RedirectToAction("xacnhan", "Check", new {thongbao="Bạn nhập sai mã otp vui lòng kiểm tra lại "});
+                return RedirectToAction("xacnhan", "Check", new { thongbao = "Bạn nhập sai mã otp vui lòng kiểm tra lại " });
             }
             return View();
+        }
+        public ActionResult LichSuVe()
+        {
+            string email = Session["EmailTaiKhoan"].ToString();
+           
+            web_banvemaybayEntities db = new web_banvemaybayEntities();
+            var checkma = db.Ve.Where(c => c.TTlienhe.Email.Equals(email)).ToList();
+            return View(checkma.OrderBy(c => c.IDve));
         }
         Random random = new Random();
         int otp;
@@ -52,7 +60,7 @@ namespace web_banvemaybay.Controllers
         {
             return View();
         }
-            [HttpPost]
+        [HttpPost]
         public ActionResult SendOTP(FormCollection form)
         {
             string mavemuontra = form["search"];

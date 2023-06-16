@@ -355,6 +355,7 @@
     <Content Include="Views\Check\Index.cshtml" />
     <Content Include="Views\Check\SendOTP.cshtml" />
     <Content Include="Views\Check\xacnhan.cshtml" />
+    <Content Include="Views\Check\LichSuVe.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

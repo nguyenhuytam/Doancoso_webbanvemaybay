@@ -58,6 +58,7 @@ namespace web_banvemaybay.Controllers
         [HttpPost]
         public ActionResult Login(string tenDN, string mkDN)
         {
+            Session["EmailTaiKhoan"] = tenDN;
             web_banvemaybayEntities db = new web_banvemaybayEntities();
             mkDN = MD5Hash(mkDN);
             var kt = db.TaiKhoan.Where(c => c.Email.Equals(tenDN) && c.Password.Equals(mkDN)).ToList();
