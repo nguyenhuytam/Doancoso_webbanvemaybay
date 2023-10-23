@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "NhapThongTin";
     Layout = "~/Views/Shared/_Layout.cshtml";
-}   
+}
 @if (!string.IsNullOrEmpty(ViewBag.ErrorMessage) || ViewBag.thongbao != null)
 {
     <div id="thongbao">
@@ -52,7 +52,7 @@ else
                     <ul class="customer-i">
                         <li class="li-50">
                             <p>Chọn hạng vé<sup>*</sup></p>
-                            <select name="hangveid" id="hangveid" class="ci-baggage" required >
+                            <select name="hangveid" id="hangveid" class="ci-baggage" required>
                                 <option value="0"> -- Chọn hạng vé -- </option>
                                 <option value="1">Hạng thương gia</option>
                                 <option value="2">Hạng phổ thông</option>
@@ -179,9 +179,9 @@ else
                             <label for="payment1">Thanh toán momo</label>
                         </li>
                         @*<li>
-                            <input type="radio" name="payment" id="payment3" value="Thanh toán vnpay">
-                            <label for="payment3">Thanh toán vnpay</label>
-                        </li>*@
+                                <input type="radio" name="payment" id="payment3" value="Thanh toán vnpay">
+                                <label for="payment3">Thanh toán vnpay</label>
+                            </li>*@
                     </ul>
                     <input type="submit" value="Thanh toán" class="btn btn-reservations ttmacdinh" />
                     <a class="btn btn-reservations ttmomo" href="@Url.Action("PaymentMomo","Flight")">Thanh toán</a>
@@ -269,6 +269,32 @@ else
         @* <input type="hidden" name="idhanhlicu" value="@Session["idhanhli"+Model.IDchuyenbay]" />*@
     }
 </li>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var selectElementHanhLyId = document.getElementById('hanhlyid');
+        selectElementHanhLyId.addEventListener('change', function () {
+            localStorage.setItem('selectedIdHangve', this.value);
+            document.getElementById('flightForm').submit();
+        });
+        var selectedOption = localStorage.getItem('selectedIdHangve');
+        if (selectedOption) {
+            selectElementHanhLyId.value = selectedOption;
+        }
+    });
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var selectElementHangVe = document.getElementById('hangveid');
+        selectElementHangVe.addEventListener('change', function () {
+            localStorage.setItem('selectedHangVe', this.value);
+            document.getElementById('flightForm').submit();
+        });
+        var selectedHangVe = localStorage.getItem('selectedHangVe');
+        if (selectedHangVe) {
+            selectElementHangVe.value = selectedHangVe;
+        }
+    });
+</script>
 
 <script>
     // Kiểm tra xem có giá trị mặc định trong localStorage không

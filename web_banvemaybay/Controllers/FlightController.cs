@@ -27,38 +27,38 @@ namespace FlightSearch.Controllers
     public class FlightController : Controller
     {
         web_banvemaybayEntities db = new web_banvemaybayEntities();
-        /*  public async Task<ActionResult> SearchFlight(string to, string from, DateTime dateto, DateTime? datefrom)
-          {
+/*        public async Task<ActionResult> SearchFlight1(string to, string from, DateTime dateto, DateTime? datefrom)
+        {
 
-              HttpClient client = new HttpClient();
-              string apiKey = "b7878674755fde7fab824400c50ce94d"; // API key của AviationStack
-              string apiUrl = $"http://api.aviationstack.com/v1/flights?access_key={apiKey}&dep_iata={from}&arr_iata={to}&date={dateto.ToString("yyyy-MM-dd")}";
+            HttpClient client = new HttpClient();
+            string apiKey = "b7878674755fde7fab824400c50ce94d"; // API key của AviationStack
+            string apiUrl = $"http://api.aviationstack.com/v1/flights?access_key={apiKey}&dep_iata={from}&arr_iata={to}&date={dateto.ToString("yyyy-MM-dd")}";
 
-              HttpResponseMessage response = await client.GetAsync(apiUrl);
-              if (response.IsSuccessStatusCode)
-              {
-                  string jsonString = await response.Content.ReadAsStringAsync();
-                  dynamic result = JsonConvert.DeserializeObject(jsonString);
+            HttpResponseMessage response = await client.GetAsync(apiUrl);
+            if (response.IsSuccessStatusCode)
+            {
+                string jsonString = await response.Content.ReadAsStringAsync();
+                dynamic result = JsonConvert.DeserializeObject(jsonString);
 
-                  // Kiểm tra xem API có trả về kết quả hay không
-                  if (result.success && result.data != null)
-                  {
-                      // Lấy dữ liệu từ API và hiển thị lên View
-                      var flights = result.data;
-                      return View(flights);
-                  }
-                  else
-                  {
-                      // Xử lý khi không tìm thấy chuyến bay nào
-                      return RedirectToAction("Home", "Home", new { thongbao = "Không tìm thấy chuyến bay phù hợp" });
-                  }
-              }
-              else
-              {
-                  // Xử lý khi gọi API không thành công
-                  return RedirectToAction("Home", "Home", new { thongbao = "Đã xảy ra lỗi trong quá trình tìm kiếm chuyến bay" });
-              }
-          }*/
+                // Kiểm tra xem API có trả về kết quả hay không
+                if (result.success && result.data != null)
+                {
+                    // Lấy dữ liệu từ API và hiển thị lên View
+                    var flights = result.data;
+                    return View(flights);
+                }
+                else
+                {
+                    // Xử lý khi không tìm thấy chuyến bay nào
+                    return RedirectToAction("Home", "Home", new { thongbao = "Không tìm thấy chuyến bay phù hợp" });
+                }
+            }
+            else
+            {
+                // Xử lý khi gọi API không thành công
+                return RedirectToAction("Home", "Home", new { thongbao = "Đã xảy ra lỗi trong quá trình tìm kiếm chuyến bay" });
+            }
+        }*/
 
         public ActionResult Index()
         {
