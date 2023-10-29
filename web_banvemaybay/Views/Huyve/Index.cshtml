@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Hủy Vé </h2>
+
+@if (ViewBag.TienHoang != null)
+{
+    <p>Tien Hoang: @ViewBag.TienHoang</p>
+}
+
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <p>@ViewBag.Message</p>
+}

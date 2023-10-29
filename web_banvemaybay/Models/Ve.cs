@@ -18,13 +18,13 @@ namespace web_banvemaybay.Models
         public Nullable<int> IDdattruoc { get; set; }
         public Nullable<int> IDchuyenbay { get; set; }
         public Nullable<int> IDhanhkhach { get; set; }
-        public Nullable<decimal> Giatien { get; set; }
         public string Tinhtrang { get; set; }
         public Nullable<int> IDlienhe { get; set; }
         public Nullable<int> IDhanhli { get; set; }
         public DateTime Ngaydatve { get; set; }
         public double Gia { get; set; }
         public Nullable<int> IDhangve { get; set; }
+        public Nullable<double> Tienphat { get; set; }
     
         public virtual Chuyenbay Chuyenbay { get; set; }
         public virtual Dattruoc Dattruoc { get; set; }

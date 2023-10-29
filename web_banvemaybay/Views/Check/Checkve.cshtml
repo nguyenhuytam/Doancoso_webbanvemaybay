@@ -104,8 +104,28 @@ else
                             <p>Tổng tiền: <b>@String.Format("{0:0,0}", @item.Gia)đ</b></p>
                         </div>
                     </div>
+                    <a class="btn-choose" href="#" onclick="confirmAction()">
+                        huy
+                    </a>
+                    <input type="hidden" name="idcu" value="@Session["idcu"]" />
                 }
             }
         </div>
     </div>
 </div>
+
+<script>
+function confirmAction() {
+    // Sử dụng hàm `confirm` để hiển thị hộp thoại thông báo
+    var confirmation = confirm("Bạn có chắc chắn muốn thực hiện hành động này?");
+
+    // Kiểm tra kết quả của hộp thoại thông báo
+    if (confirmation) {
+        // Nếu người dùng chọn "Yes," thực hiện chuyển hướng
+        window.location.href = "@Url.Action("Index","Huyve")";
+    } else {
+        // Nếu người dùng chọn "No," sử dụng URL trang hiện tại để ở lại trang cũ
+        window.location.href = currentURL;
+    }
+}
+</script>

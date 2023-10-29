@@ -13,9 +13,11 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Reflection;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
+using System.Security.Cryptography.Pkcs;
 using System.Threading.Tasks;
 using System.Web.Helpers;
 using System.Web.Mvc;
+using Antlr.Runtime.Tree;
 using Common;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
@@ -68,17 +70,35 @@ namespace FlightSearch.Controllers
         [HttpPost]
         public ActionResult Sohangve(int idHangve,int idChuyenBay,int? idHangvecu)
         {
+            int kthl = Session["idcu"] != null ? int.Parse(Session["idcu"].ToString()) : 0;
+
+            int idhanhli = Session["idhanhlimoi"] != null ? int.Parse(Session["idhanhlimoi"].ToString()) : 0;
+            Session["idkthlcu"] = kthl;
+            Session["idmoinhat"] = idhanhli;
             int nguoidat = int.Parse(Session["soluong"].ToString());
             int? idGhecu = idHangve;
             var idHv = db.Hangve.Where(c => c.IDhangve == idHangve).FirstOrDefault();
+            var idgiave = db.Hangve.Where(c => c.IDhangve == 1).FirstOrDefault();
             var tt = db.Chuyenbay.Where(c => c.IDchuyenbay == idChuyenBay).FirstOrDefault();
             var sl =  new Chuyenbay();
             double giatienidcu = double.Parse(Session["giatien" + tt.IDchuyenbay].ToString());
             Session["idHangve"] = idHangve;
-            if ( tt.PhoThong < nguoidat && idHangve == 2)
+
+            if (tt.PhoThong < nguoidat && idHangve == 2)
             {
-                double tongtien = (giatienidcu) - (tt.Giatien / 100 * 10 + 70000);
+                double tongtien = (giatienidcu) - (tt.Giatien / 100 * 10 + 70000)- (idgiave.Gia*nguoidat);
                 TempData["ErrorMessage"] = "Hết chỗ trống vui lòng chọn lại  !";
+                Session["giatien" + tt.IDchuyenbay] = tongtien;
+                Session["idHangvecu"] = idGhecu;
+                Session["idHangve"] = idHangve;
+                // Chuyển hướng đến action "Information" trong controller "Flight"
+                return RedirectToAction("Information", "Flight", new { id = idChuyenBay });
+            }
+            if (tt.PhoThong < nguoidat && idHangve == 1)
+            {
+                double tongtien = (giatienidcu) - (tt.Giatien / 100 * 10 + 70000) -(idgiave.Gia * nguoidat);
+                Session["idHangve"] = idHangve;
+                Session["idHangvecu"] = idGhecu;
                 Session["giatien" + tt.IDchuyenbay] = tongtien;
                 // Chuyển hướng đến action "Information" trong controller "Flight"
                 return RedirectToAction("Information", "Flight", new { id = idChuyenBay });
@@ -98,7 +118,15 @@ namespace FlightSearch.Controllers
                     var hanhcu = db.Hangve.Where(hl => hl.IDhangve == idHangvecu).FirstOrDefault();
                     if (hanhcu != null)
                     {
-                        double tongtien = ((giatienidcu - hanhcu.Gia * nguoidat) + idHv.Gia *nguoidat) - (tt.Giatien / 100 * 10 + 70000);
+                        double tongtien = 0;
+                        if (idHangvecu == 1)
+                        {
+                            tongtien = ((giatienidcu - hanhcu.Gia * nguoidat));
+                        }
+                        else
+                        {
+                            tongtien = ((giatienidcu + idHv.Gia * nguoidat));
+                        }
                         // Lưu lại tổng tiền vào session
                         Session["giaHangghe"] = idHv.Gia;
                         Session["giatien" + tt.IDchuyenbay] = tongtien;
@@ -108,6 +136,20 @@ namespace FlightSearch.Controllers
                         Session["giathanhtoanvnpay"] = Math.Round(tongtien * 100);
                         return RedirectToAction("Information", "Flight", new { id = idChuyenBay });
                     }
+                }
+                if (idHangve != null && idhanhli != 0)
+                {
+                    double gia = double.Parse(Session["giatien" + tt.IDchuyenbay].ToString());
+                    double tong = gia;
+                    Session["giatien" + tt.IDchuyenbay] = tong;
+                    double tongtien = (tong + idHv.Gia * nguoidat);
+                    Session["giatien" + tt.IDchuyenbay] = tongtien;
+                    Session["giathanhtoan"] = Math.Round(tongtien);
+                    Session["giathanhtoanvnpay"] = Math.Round(tongtien * 100);
+                    Session["giaHangghe"] = idHv.Gia;
+                    Session["idHangvecu"] = idGhecu;
+                    // Chuyển hướng đến action "Information" trong controller "Flight"
+                    return RedirectToAction("Information", "Flight", new { id = idChuyenBay });
                 }
                 if (idHangve != null)
                 {
@@ -238,52 +280,232 @@ namespace FlightSearch.Controllers
             return View(flights);
         }
 
-        public ActionResult Information(int id, int? idhanhli, int? idcu)
+        public ActionResult Information(int id, int? idhanhli, int? idcu, int? hangveid)
         {
+            int ktidhlcu = Session["idkthlcu"] != null ? int.Parse(Session["idkthlcu"].ToString()) : 0;
+            int kthl = Session["idmoinhat"] != null ? int.Parse(Session["idmoinhat"].ToString()) : 0;
+            int kthv = Session["idHangve"] != null ? int.Parse(Session["idHangve"].ToString()) : 0;
+            int checkkthv = Session["kthv"] != null ? int.Parse(Session["kthv"].ToString()) : 0;
+            int checklai = Session["idHangvecu"] != null ? int.Parse(Session["idHangvecu"].ToString()) : 0;
+            Session["idcheckhangvecu"] = checklai;
+
+            if (kthl != 0 && checklai != 0 && idhanhli.HasValue)
+            {
+                kthl = idhanhli.Value;
+            }
+
+            if (kthl!= 0)
+            {
+                idhanhli = kthl;
+            }
+            if (kthv != null)
+            {
+                hangveid = kthv;
+            }
             string errorMessage = TempData["ErrorMessage"] as string;
             ViewBag.ErrorMessage = errorMessage;
             int? idhanhlicu = idhanhli;
             var tt = db.Chuyenbay.Where(c => c.IDchuyenbay == id).FirstOrDefault();
             var idhl = db.Hanhli.Where(c => c.IDhanhli == idhanhli).FirstOrDefault();
-            double giatienidcu = double.Parse(Session["giatien" + tt.IDchuyenbay].ToString());
+            double gia = double.Parse(Session["giatien" + tt.IDchuyenbay].ToString());
+            int nguoidat = int.Parse(Session["soluong"].ToString());      
+            var giahangve = db.Hangve.FirstOrDefault();
+            // Kiểm tra tình trạng số hạng vé thương gia và thiết lập giá trị mặc định cho idHangve
+
+            if (tt.PhoThong < nguoidat && idhanhli == null && idcu == null)
+            {
+                hangveid = 1; // Thiết lập mặc định là Thương gia
+                gia  += giahangve.Gia *nguoidat;
+                Session["giaHangghe"] = giahangve.Gia * nguoidat; 
+            }
+             if (tt.PhoThong < nguoidat && idhanhli != null && idcu == null)
+            {
+                hangveid = 1; 
+            }
+            if (tt.PhoThong >= nguoidat && hangveid == 0)
+            {
+                hangveid = 2;
+            }
+            if (tt.PhoThong >= nguoidat && tt.ThuongGia >= nguoidat && hangveid == 1)
+            {
+                hangveid = 1;
+            }
+            if (tt.PhoThong >= nguoidat && tt.ThuongGia >= nguoidat && hangveid == 2)
+            {
+                hangveid = 2;
+            }
+            if (tt.PhoThong >= nguoidat && hangveid == 1 && tt.ThuongGia< nguoidat)
+            {
+                hangveid = 2;
+            }
+            if (tt.PhoThong < nguoidat && idhanhli != null && idcu != null)
+            {
+                hangveid = 1; // Thiết lập mặc định là Thương gia
+            }
+            // Truyền biến idHangve vào ViewBag
+            ViewBag.IdHangve = hangveid;
             if (idcu != null) // Kiểm tra idhanhlicu có tồn tại
             {
                 var hanhcu = db.Hanhli.Where(hl => hl.IDhanhli == idcu).FirstOrDefault();
                 if (hanhcu != null)
                 {
-                   double tongtien = (giatienidcu - hanhcu.Giatien) + idhl.Giatien;
+                    double giatienidcu = double.Parse(Session["giatien" + tt.IDchuyenbay].ToString());
+                    double tongtien = (giatienidcu - hanhcu.Giatien) + idhl.Giatien;
                     // Lưu lại tổng tiền vào session
                     Session["giahanhly"] = idhl.Giatien;
                     Session["giatien" + tt.IDchuyenbay] = tongtien;
                     Session["idcu"] = idhanhlicu;
                     Session["giathanhtoan"] = Math.Round(tongtien);
                     Session["giathanhtoanvnpay"] = Math.Round(tongtien * 100);
-
+                    Session["idhanhlimoi"] = idhanhli;
+                    ViewBag.idhanhli = idhanhli;
                     // Chuyển hướng đến action "Information" trong controller "Flight"
                     return View(tt);
                 }
             }
-            if (idhanhli != null)
+            if (idhanhli != null && tt.PhoThong >= nguoidat && tt.ThuongGia>= nguoidat && ktidhlcu != 0)
             {
-                double gia = double.Parse(Session["giatien" + tt.IDchuyenbay].ToString());
                 double tong = gia;
-                Session["giatien" + tt.IDchuyenbay] = tong;
-                double tongtien = tong+ idhl.Giatien ;
-                Session["giatien" + tt.IDchuyenbay] = tongtien;
-                Session["giathanhtoan"] = Math.Round(tongtien);
-                Session["giathanhtoanvnpay"] = Math.Round(tongtien * 100);
-                Session["giahanhly"] = idhl.Giatien;
-            }
-            else
-            {
-                double gia = double.Parse(Session["giatien" + tt.IDchuyenbay].ToString());
-                double tong = gia + tt.Giatien / 100 * 10 + 70000;
                 Session["giatien" + tt.IDchuyenbay] = tong;
                 Session["giathanhtoan"] = Math.Round(tong);
                 Session["giathanhtoanvnpay"] = Math.Round(tong * 100);
-
+                Session["giahanhly"] = idhl.Giatien;
+                ViewBag.idhanhli = idhanhli;
+                Session["idhanhlimoi"] = idhanhli;
+                Session["idcu"] = idhanhlicu;
+                return View(tt);
+            }
+            if (idhanhli == null && tt.PhoThong >= nguoidat && tt.ThuongGia >= nguoidat && ktidhlcu != 0)
+            {
+                double tong = gia;
+                Session["giatien" + tt.IDchuyenbay] = tong;
+                Session["giathanhtoan"] = Math.Round(tong);
+                Session["giathanhtoanvnpay"] = Math.Round(tong * 100);
+                Session["giahanhly"] = idhl.Giatien;
+                ViewBag.idhanhli = idhanhli;
+                Session["idhanhlimoi"] = idhanhli;
+                Session["idcu"] = idhanhlicu;
+                return View(tt);
+            }
+            if (idhanhli != null && tt.PhoThong >= nguoidat && tt.ThuongGia >= nguoidat && ktidhlcu == 0)
+            {
+                double tong = gia;
+                Session["giatien" + tt.IDchuyenbay] = tong + idhl.Giatien;
+                Session["giathanhtoan"] = Math.Round(tong);
+                Session["giathanhtoanvnpay"] = Math.Round(tong * 100);
+                Session["giahanhly"] = idhl.Giatien;
+                ViewBag.idhanhli = idhanhli;
+                Session["idhanhlimoi"] = idhanhli;
+                Session["idcu"] = idhanhlicu;
+                return View(tt);
+            }
+            if (idhanhli == null && tt.PhoThong < nguoidat && ktidhlcu != 0)
+            {
+                double tong = gia;
+                Session["giatien" + tt.IDchuyenbay] = tong + idhl.Giatien;
+                Session["giathanhtoan"] = Math.Round(tong);
+                Session["giathanhtoanvnpay"] = Math.Round(tong * 100);
+                Session["giahanhly"] = idhl.Giatien;
+                ViewBag.idhanhli = idhanhli;
+                Session["idhanhlimoi"] = idhanhli;
+                Session["idcu"] = idhanhlicu;
+                return View(tt);
+            }
+            if (idhanhli == null && tt.PhoThong < nguoidat && ktidhlcu ==0 && checklai != 0)
+            {
+                double tong = gia;
+                Session["giatien" + tt.IDchuyenbay] = tong + (tt.Giatien / 100 * 10 + 70000);
+                Session["giathanhtoan"] = Math.Round(tong);
+                Session["giathanhtoanvnpay"] = Math.Round(tong * 100);
+                Session["giahanhly"] = 0;
+                ViewBag.idhanhli = 0;
+                Session["idhanhlimoi"] = idhanhli;
+                Session["idcu"] = idhanhlicu;
+                return View(tt);
+            }
+            if (idhanhli != null && tt.PhoThong < nguoidat && ktidhlcu != 0)
+            {
+                double tong = gia;
+                Session["giatien" + tt.IDchuyenbay] = tong + (tt.Giatien / 100 * 10 + 70000) + giahangve.Gia * nguoidat;
+                Session["giathanhtoan"] = Math.Round(tong);
+                Session["giathanhtoanvnpay"] = Math.Round(tong * 100);
+                Session["giahanhly"] = idhl.Giatien;
+                ViewBag.idhanhli = idhanhli;
+                Session["idhanhlimoi"] = idhanhli;
+                Session["idcu"] = idhanhlicu;
+                return View(tt);
+            }
+            if (idhanhli != null && tt.PhoThong < nguoidat && ktidhlcu == 0)
+            {
+                double tong = gia;
+                Session["giatien" + tt.IDchuyenbay] = tong + idhl.Giatien;
+                Session["giathanhtoan"] = Math.Round(tong);
+                Session["giathanhtoanvnpay"] = Math.Round(tong * 100);
+                Session["giahanhly"] = idhl.Giatien;
+                ViewBag.idhanhli = idhanhli;
+                Session["idhanhlimoi"] = idhanhli;
+                Session["idcu"] = idhanhlicu;
+                return View(tt);
+            }
+            if (idhanhli == null && tt.ThuongGia < nguoidat && ktidhlcu != 0)
+            {
+                double tong = gia;
+                Session["giatien" + tt.IDchuyenbay] = tong + idhl.Giatien;
+                Session["giathanhtoan"] = Math.Round(tong);
+                Session["giathanhtoanvnpay"] = Math.Round(tong * 100);
+                Session["giahanhly"] = idhl.Giatien;
+                ViewBag.idhanhli = idhanhli;
+                Session["idhanhlimoi"] = idhanhli;
+                Session["idcu"] = idhanhlicu;
+                return View(tt);
+            }
+            if (idhanhli == null && tt.ThuongGia < nguoidat && ktidhlcu == 0 && checklai != 0)
+            {
+                double tong = gia;
+                Session["giatien" + tt.IDchuyenbay] = tong + (tt.Giatien / 100 * 10 + 70000);
+                Session["giathanhtoan"] = Math.Round(tong);
+                Session["giathanhtoanvnpay"] = Math.Round(tong * 100);
+                Session["giahanhly"] = 0;
+                ViewBag.idhanhli = 0;
+                Session["idhanhlimoi"] = idhanhli;
+                Session["idcu"] = idhanhlicu;
+                return View(tt);
+            }
+            if (idhanhli != null && tt.ThuongGia < nguoidat && ktidhlcu != 0)
+            {
+                double tong = gia;
+                Session["giatien" + tt.IDchuyenbay] = tong + (tt.Giatien / 100 * 10 + 70000);
+                Session["giathanhtoan"] = Math.Round(tong);
+                Session["giathanhtoanvnpay"] = Math.Round(tong * 100);
+                Session["giahanhly"] = idhl.Giatien;
+                ViewBag.idhanhli = idhanhli;
+                Session["idhanhlimoi"] = idhanhli;
+                Session["idcu"] = idhanhlicu;
+                return View(tt);
+            }
+            if (idhanhli != null && tt.ThuongGia < nguoidat && ktidhlcu == 0)
+            {
+                double tong = gia;
+                Session["giatien" + tt.IDchuyenbay] = tong + idhl.Giatien;
+                Session["giathanhtoan"] = Math.Round(tong);
+                Session["giathanhtoanvnpay"] = Math.Round(tong * 100);
+                Session["giahanhly"] = idhl.Giatien;
+                ViewBag.idhanhli = idhanhli;
+                Session["idhanhlimoi"] = idhanhli;
+                Session["idcu"] = idhanhlicu;
+                return View(tt);
+            }
+            else
+            {          
+                double tong = gia;
+                Session["giatien" + tt.IDchuyenbay] = tong + (tt.Giatien / 100 * 10 + 70000);
+                Session["giathanhtoan"] = Math.Round(tong);
+                Session["giathanhtoanvnpay"] = Math.Round(tong * 100);
+                ViewBag.idhanhli = 0;
 
             }
+            Session["kthv"] = kthv;
+            Session["idhanhlimoi"] = idhanhli;
             Session["idcu"] = idhanhlicu;
             return View(tt);
         }
@@ -326,7 +548,7 @@ namespace FlightSearch.Controllers
             return View("SearchFlight", ((IEnumerable<Chuyenbay>)Session["flights"]).ToList());
         }
         [HttpPost]
-        public ActionResult tt(FormCollection form, TTlienhe lienhe, Hanhkhach hk , string name, DateTime? birthday, int? idHangve, int? sdtlh, string emaillh, string gioitinh, string namelh, string gioitinhlh, int? idcu, int idchuyenbay, double giatien, string payment)
+        public ActionResult tt(FormCollection form, TTlienhe lienhe, Hanhkhach hk , string name, DateTime? birthday, int? hangveid, int? sdtlh, string emaillh, string gioitinh, string namelh, string gioitinhlh, int? idcu, int idchuyenbay, double giatien, string payment)
         {
             var now = DateTime.Now;
             if (birthday > now.AddYears(-18))
@@ -359,7 +581,7 @@ namespace FlightSearch.Controllers
                     ve.IDchuyenbay = idchuyenbay;
                     ve.IDhanhkhach = kt.IDhanhkhach;
                     ve.IDlienhe = ktlh.IDlienhe;
-                    ve.IDhangve = idHangve;
+                    ve.IDhangve = hangveid;
                     var slhang = db.Chuyenbay.FirstOrDefault(cb => cb.IDchuyenbay == idchuyenbay);
                     if (ve.IDhangve == null)
                     {
@@ -374,17 +596,17 @@ namespace FlightSearch.Controllers
                     }
                     if (slhang!=null)
                     {
-                        if (idHangve==null)
+                        if (hangveid == null)
                         {
                             slhang.PhoThong -= 1;
                             ve.IDhanhli = 2;
                         }
-                        if (idHangve==1)
+                        if (hangveid == 1)
                         {
                             slhang.ThuongGia -= 1;
                             ve.IDhanhli = 1;
                         }
-                        if (idHangve == 2)
+                        if (hangveid == 2)
                         {
                             slhang.PhoThong -= 1;
                             ve.IDhanhli = 2;

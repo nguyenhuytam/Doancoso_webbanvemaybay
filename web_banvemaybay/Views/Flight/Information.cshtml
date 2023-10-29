@@ -38,7 +38,7 @@ else
         </div>
     </div>
 }
-<form action="@Url.Action("tt","Flight", new { id = "myForm" })" method="post">
+<form action="@Url.Action("tt", "Flight", new { id = "myForm" })" method="post">
     <!-- Nội dung form tại đây -->
 
     <div class="information">
@@ -53,19 +53,32 @@ else
                         <li class="li-50">
                             <p>Chọn hạng vé<sup>*</sup></p>
                             <select name="hangveid" id="hangveid" class="ci-baggage" required>
-                                <option value="0"> -- Chọn hạng vé -- </option>
-                                <option value="1">Hạng thương gia</option>
-                                <option value="2">Hạng phổ thông</option>
+                                @{
+                                    int selectedValue = ViewBag.IdHangve;
+
+                                    if (selectedValue == 2) // Nếu số hạng vé thương gia hết, thiết lập mặc định là hạng phổ thông
+                                    {
+                                        <option value="2" selected>Hạng phổ thông</option>
+                                        <option value="1">Hạng thương gia</option>
+                                    }
+                                    else // Nếu không, thiết lập mặc định là hạng thương gia
+                                    {
+                                        <option value="1" selected>Hạng thương gia</option>
+                                        <option value="2">Hạng phổ thông</option>
+                                    }
+                                }
                             </select>
                         </li>
                         <li class="li-50">
                             <p>Hành lý ký gửi <sup>*</sup></p>
                             <select name="hanhlyid" id="hanhlyid" class="ci-baggage">
-                                <option value="0"> -- Chọn hạng mức hành lý -- </option>
-                                <option value="1">none</option>
-                                <option value="2">10kg</option>
-                                <option value="3">20kg</option>
-                                <option value="4">30kg</option>
+                                @{ 
+                                    int hanhliid = ViewBag.idhanhli;
+                                    <option value="1" @(hanhliid == 1 ? "selected" : "")>none</option>
+                                    <option value="2" @(hanhliid == 2 ? "selected" : "")>10kg</option>
+                                    <option value="3" @(hanhliid == 3 ? "selected" : "")>20kg</option>
+                                    <option value="4" @(hanhliid == 4 ? "selected" : "")>30kg</option>
+                                 }
                             </select>
                         </li>
                         <li>
@@ -269,43 +282,82 @@ else
         @* <input type="hidden" name="idhanhlicu" value="@Session["idhanhli"+Model.IDchuyenbay]" />*@
     }
 </li>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var selectElementHanhLyId = document.getElementById('hanhlyid');
-        selectElementHanhLyId.addEventListener('change', function () {
-            localStorage.setItem('selectedIdHangve', this.value);
-            document.getElementById('flightForm').submit();
-        });
-        var selectedOption = localStorage.getItem('selectedIdHangve');
-        if (selectedOption) {
-            selectElementHanhLyId.value = selectedOption;
-        }
-    });
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var selectElementHangVe = document.getElementById('hangveid');
-        selectElementHangVe.addEventListener('change', function () {
-            localStorage.setItem('selectedHangVe', this.value);
-            document.getElementById('flightForm').submit();
-        });
-        var selectedHangVe = localStorage.getItem('selectedHangVe');
-        if (selectedHangVe) {
-            selectElementHangVe.value = selectedHangVe;
-        }
-    });
-</script>
 
 <script>
-    // Kiểm tra xem có giá trị mặc định trong localStorage không
-    if (!localStorage.getItem('selectedIdHangve')) {
-        // Thiết lập giá trị mặc định là id 2
-        localStorage.setItem('selectedIdHangve', 2);
+    document.addEventListener('DOMContentLoaded', function () {
+        // Lấy giá trị đã lưu trong localStorage (nếu có) và gán cho các trường dữ liệu
+        var inputElements = document.querySelectorAll('input[name="name"], input[name="namelh"], input[name="sdtlh"], input[name="emaillh"]');
+        var selectElements = document.querySelectorAll('select[name="gioitinh"], select[name="gioitinhlh"]');
+
+        for (var i = 0; i < inputElements.length; i++) {
+            var element = inputElements[i];
+            var savedValue = sessionStorage.getItem(element.name);
+            if (savedValue) {
+                element.value = savedValue;
+            }
+            element.addEventListener('input', function () {
+                sessionStorage.setItem(this.name, this.value);
+            });
+        }
+
+        for (var i = 0; i < selectElements.length; i++) {
+            var element = selectElements[i];
+            var savedValue = localStorage.getItem(element.name);
+            if (savedValue) {
+                element.value = savedValue;
+            }
+            element.addEventListener('change', function () {
+                sessionStorage.setItem(this.name, this.value);
+            });
+        }
+
+        // Đối với trường dữ liệu input type="date"
+        var inputElementBirthday = document.querySelector('input[name="birthday"]');
+        var savedBirthday = sessionStorage.getItem('savedBirthday');
+        if (savedBirthday) {
+            inputElementBirthday.value = savedBirthday;
+        }
+        inputElementBirthday.addEventListener('change', function () {
+            sessionStorage.setItem('savedBirthday', this.value);
+        });
+
+    });
+
+</script>
+@*<script>
+    // Lắng nghe sự kiện khi giá trị của select thay đổi
+    document.getElementById('hanhlyid').addEventListener('change', function () {
+        // Lấy giá trị được chọn từ select
+        var selectedValue = this.value;
+        sessionStorage.setItem('selectedHanhLy', selectedValue);
+    });
+
+    // Kiểm tra xem có giá trị đã lưu trong sessionStorage hay không
+    var storedValue = sessionStorage.getItem('selectedHanhLy');
+
+    if (storedValue) {
+        // Nếu có giá trị trong sessionStorage, thiết lập giá trị được lưu lên select
+        document.getElementById('hanhlyid').value = storedValue;
     }
-
-    // Thiết lập giá trị đã chọn cho select box từ localStorage
-    document.getElementById('idHangve').value = localStorage.getItem('selectedIdHangve');
 </script>
+<script>
+    // Lắng nghe sự kiện khi giá trị của select thay đổi
+    document.getElementById('hangveid').addEventListener('change', function () {
+        // Lấy giá trị được chọn từ select
+        var selectedValue = this.value;
+        // Lưu giá trị vào sessionStorage
+        sessionStorage.setItem('selectedHangVe', selectedValue);
+    });
+
+    // Kiểm tra xem có giá trị đã lưu trong sessionStorage hay không
+    var storedValue = sessionStorage.getItem('selectedHangVe');
+
+    if (storedValue) {
+        // Nếu có giá trị trong sessionStorage, thiết lập giá trị được lưu lên select
+        document.getElementById('hangveid').value = storedValue;
+    }
+</script>*@
+
 <script>
     const thongBao = document.querySelector('#thongbao')
     const tbClose = document.querySelector('.thongbao-close')

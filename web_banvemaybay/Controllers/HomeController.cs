@@ -21,8 +21,28 @@ namespace web_banvemaybay.Controllers
         }
         public ActionResult Clear()
         {
-            Session.Clear();
-            return RedirectToAction("Home", "Home");
+
+            // Kiểm tra xem người dùng đã đăng nhập thành công chưa
+            if (Session["EmailTaiKhoan"] != null)
+            {
+                // Người dùng đã đăng nhập thành công, xóa tất cả dữ liệu khác trừ thông tin đăng nhập
+                Session.Remove("giatien");
+                Session.Remove("idcu");
+                Session.Remove("idHangve");
+                Session.Remove("idcu");
+                // Xóa các phần tử khác
+
+                // Chuyển hướng đến trang chủ
+                return RedirectToAction("Home", "Home");
+            }
+            else
+            {
+                // Người dùng chưa đăng nhập hoặc đã đăng xuất, xóa tất cả dữ liệu
+                Session.Clear();
+
+                // Chuyển hướng đến trang chủ
+                return RedirectToAction("Home", "Home");
+            }
         }
 
         public ActionResult Contact()

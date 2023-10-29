@@ -11,8 +11,7 @@ namespace web_banvemaybay.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class HangHK
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -22,7 +21,6 @@ namespace web_banvemaybay.Models
         }
     
         public int IDhang { get; set; }
-        [DisplayName("Tên hãng")]
         public string TenHang { get; set; }
         public string Hinhanh { get; set; }
     

@@ -109,13 +109,13 @@
           <Property Name="IDdattruoc" Type="int" />
           <Property Name="IDchuyenbay" Type="int" />
           <Property Name="IDhanhkhach" Type="int" />
-          <Property Name="Giatien" Type="decimal" Precision="10" Scale="2" />
           <Property Name="Tinhtrang" Type="nvarchar" MaxLength="50" />
           <Property Name="IDlienhe" Type="int" />
           <Property Name="IDhanhli" Type="int" />
           <Property Name="Ngaydatve" Type="datetime" />
           <Property Name="Gia" Type="float" />
           <Property Name="IDhangve" Type="int" />
+          <Property Name="Tienphat" Type="float" />
         </EntityType>
         <Association Name="FK_Booking_User">
           <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
@@ -289,7 +289,6 @@
           <EntitySet Name="sysdiagrams" EntityType="web_banvemaybayModel.sysdiagrams" />
           <EntitySet Name="TaiKhoan" EntityType="web_banvemaybayModel.TaiKhoan" />
           <EntitySet Name="TTlienhe" EntityType="web_banvemaybayModel.TTlienhe" />
-          <EntitySet Name="Ve" EntityType="web_banvemaybayModel.Ve" />
           <AssociationSet Name="FK_TaiKhoan_Chucvu" Association="web_banvemaybayModel.FK_TaiKhoan_Chucvu">
             <End Role="Chucvu" EntitySet="Chucvu" />
             <End Role="TaiKhoan" EntitySet="TaiKhoan" />
@@ -298,13 +297,14 @@
             <End Role="HangHK" EntitySet="HangHK" />
             <End Role="Chuyenbay" EntitySet="Chuyenbay" />
           </AssociationSet>
-          <AssociationSet Name="FK_Ticket_Filght" Association="web_banvemaybayModel.FK_Ticket_Filght">
-            <End Role="Chuyenbay" EntitySet="Chuyenbay" />
-            <End Role="Ve" EntitySet="Ve" />
-          </AssociationSet>
           <AssociationSet Name="FK_Booking_User" Association="web_banvemaybayModel.FK_Booking_User">
             <End Role="TaiKhoan" EntitySet="TaiKhoan" />
             <End Role="Dattruoc" EntitySet="Dattruoc" />
+          </AssociationSet>
+          <EntitySet Name="Ve" EntityType="web_banvemaybayModel.Ve" />
+          <AssociationSet Name="FK_Ticket_Filght" Association="web_banvemaybayModel.FK_Ticket_Filght">
+            <End Role="Chuyenbay" EntitySet="Chuyenbay" />
+            <End Role="Ve" EntitySet="Ve" />
           </AssociationSet>
           <AssociationSet Name="FK_Ticket_Booking" Association="web_banvemaybayModel.FK_Ticket_Booking">
             <End Role="Dattruoc" EntitySet="Dattruoc" />
@@ -326,7 +326,7 @@
             <End Role="TTlienhe" EntitySet="TTlienhe" />
             <End Role="Ve" EntitySet="Ve" />
           </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Chucvu">
           <Key>
             <PropertyRef Name="IDchucvu" />
@@ -435,28 +435,6 @@
           <Property Name="Phone" Type="Int32" />
           <NavigationProperty Name="Ve" Relationship="web_banvemaybayModel.FK_Ve_TTlienhe" FromRole="TTlienhe" ToRole="Ve" />
         </EntityType>
-        <EntityType Name="Ve">
-          <Key>
-            <PropertyRef Name="IDve" />
-          </Key>
-          <Property Name="IDve" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="IDdattruoc" Type="Int32" />
-          <Property Name="IDchuyenbay" Type="Int32" />
-          <Property Name="IDhanhkhach" Type="Int32" />
-          <Property Name="Giatien" Type="Decimal" Precision="10" Scale="2" />
-          <Property Name="Tinhtrang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="IDlienhe" Type="Int32" />
-          <Property Name="IDhanhli" Type="Int32" />
-          <Property Name="Ngaydatve" Type="DateTime" Precision="3" />
-          <Property Name="Gia" Type="Double" />
-          <Property Name="IDhangve" Type="Int32" />
-          <NavigationProperty Name="Chuyenbay" Relationship="web_banvemaybayModel.FK_Ticket_Filght" FromRole="Ve" ToRole="Chuyenbay" />
-          <NavigationProperty Name="Dattruoc" Relationship="web_banvemaybayModel.FK_Ticket_Booking" FromRole="Ve" ToRole="Dattruoc" />
-          <NavigationProperty Name="Hangve" Relationship="web_banvemaybayModel.FK_Ve_Hangve" FromRole="Ve" ToRole="Hangve" />
-          <NavigationProperty Name="Hanhkhach" Relationship="web_banvemaybayModel.FK_Ticket_Passenger" FromRole="Ve" ToRole="Hanhkhach" />
-          <NavigationProperty Name="Hanhli" Relationship="web_banvemaybayModel.FK_Ve_Hanhli" FromRole="Ve" ToRole="Hanhli" />
-          <NavigationProperty Name="TTlienhe" Relationship="web_banvemaybayModel.FK_Ve_TTlienhe" FromRole="Ve" ToRole="TTlienhe" />
-        </EntityType>
         <Association Name="FK_TaiKhoan_Chucvu">
           <End Type="web_banvemaybayModel.Chucvu" Role="Chucvu" Multiplicity="0..1" />
           <End Type="web_banvemaybayModel.TaiKhoan" Role="TaiKhoan" Multiplicity="*" />
@@ -481,18 +459,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_Ticket_Filght">
-          <End Type="web_banvemaybayModel.Chuyenbay" Role="Chuyenbay" Multiplicity="0..1" />
-          <End Type="web_banvemaybayModel.Ve" Role="Ve" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Chuyenbay">
-              <PropertyRef Name="IDchuyenbay" />
-            </Principal>
-            <Dependent Role="Ve">
-              <PropertyRef Name="IDchuyenbay" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Booking_User">
           <End Type="web_banvemaybayModel.TaiKhoan" Role="TaiKhoan" Multiplicity="0..1" />
           <End Type="web_banvemaybayModel.Dattruoc" Role="Dattruoc" Multiplicity="*" />
@@ -502,6 +468,40 @@
             </Principal>
             <Dependent Role="Dattruoc">
               <PropertyRef Name="IDtaikhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Ve">
+          <Key>
+            <PropertyRef Name="IDve" />
+          </Key>
+          <Property Name="IDve" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IDdattruoc" Type="Int32" />
+          <Property Name="IDchuyenbay" Type="Int32" />
+          <Property Name="IDhanhkhach" Type="Int32" />
+          <Property Name="Tinhtrang" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IDlienhe" Type="Int32" />
+          <Property Name="IDhanhli" Type="Int32" />
+          <Property Name="Ngaydatve" Type="DateTime" Precision="3" />
+          <Property Name="Gia" Type="Double" />
+          <Property Name="IDhangve" Type="Int32" />
+          <Property Name="Tienphat" Type="Double" />
+          <NavigationProperty Name="Chuyenbay" Relationship="web_banvemaybayModel.FK_Ticket_Filght" FromRole="Ve" ToRole="Chuyenbay" />
+          <NavigationProperty Name="Dattruoc" Relationship="web_banvemaybayModel.FK_Ticket_Booking" FromRole="Ve" ToRole="Dattruoc" />
+          <NavigationProperty Name="Hangve" Relationship="web_banvemaybayModel.FK_Ve_Hangve" FromRole="Ve" ToRole="Hangve" />
+          <NavigationProperty Name="Hanhkhach" Relationship="web_banvemaybayModel.FK_Ticket_Passenger" FromRole="Ve" ToRole="Hanhkhach" />
+          <NavigationProperty Name="Hanhli" Relationship="web_banvemaybayModel.FK_Ve_Hanhli" FromRole="Ve" ToRole="Hanhli" />
+          <NavigationProperty Name="TTlienhe" Relationship="web_banvemaybayModel.FK_Ve_TTlienhe" FromRole="Ve" ToRole="TTlienhe" />
+        </EntityType>
+        <Association Name="FK_Ticket_Filght">
+          <End Type="web_banvemaybayModel.Chuyenbay" Role="Chuyenbay" Multiplicity="0..1" />
+          <End Type="web_banvemaybayModel.Ve" Role="Ve" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Chuyenbay">
+              <PropertyRef Name="IDchuyenbay" />
+            </Principal>
+            <Dependent Role="Ve">
+              <PropertyRef Name="IDchuyenbay" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -680,13 +680,13 @@
           <EntitySetMapping Name="Ve">
             <EntityTypeMapping TypeName="web_banvemaybayModel.Ve">
               <MappingFragment StoreEntitySet="Ve">
+                <ScalarProperty Name="Tienphat" ColumnName="Tienphat" />
                 <ScalarProperty Name="IDhangve" ColumnName="IDhangve" />
                 <ScalarProperty Name="Gia" ColumnName="Gia" />
                 <ScalarProperty Name="Ngaydatve" ColumnName="Ngaydatve" />
                 <ScalarProperty Name="IDhanhli" ColumnName="IDhanhli" />
                 <ScalarProperty Name="IDlienhe" ColumnName="IDlienhe" />
                 <ScalarProperty Name="Tinhtrang" ColumnName="Tinhtrang" />
-                <ScalarProperty Name="Giatien" ColumnName="Giatien" />
                 <ScalarProperty Name="IDhanhkhach" ColumnName="IDhanhkhach" />
                 <ScalarProperty Name="IDchuyenbay" ColumnName="IDchuyenbay" />
                 <ScalarProperty Name="IDdattruoc" ColumnName="IDdattruoc" />
