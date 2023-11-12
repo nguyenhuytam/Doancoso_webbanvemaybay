@@ -1,0 +1,86 @@
+﻿@model List<web_banvemaybay.Models.Binhluan>
+<link href="~/Content/css/Binhluan.css" rel="stylesheet" />
+<title>Beautiful Comments</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-dTq9t5pUc4L/Il2iXXx2AhNN07P5QPl3NmEs3TJ5ymCprYi/QT4P8ceGcv5Cd0zVK3C8E1GXvqzjo5A3uW9dkwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+@if (!string.IsNullOrEmpty(ViewBag.thongbao))
+{
+    <p>@ViewBag.thongbao</p>
+}
+<form action="@Url.Action("binhluan","Binhluan")" method="post">
+    <div class="comment-container">
+        @foreach (var item in Model)
+        {
+            <div class="comment">
+
+                <div class="comment-author">@item.TaiKhoan.HovaTen</div>
+                <div class="comment-date">@item.ngaybl</div>
+                <div class="comment-text">@item.binhluan1</div>
+                <div class="comment-rating">
+                    @for (int i = 0; i < item.sosao; i++)
+                    {
+                        <i class="fas fa-star" style="color:gold"></i>
+                    }
+                </div>
+            </div>
+        }
+        <!-- More comments go here -->
+
+        <div class="comment-form">
+            @if (Session["IDtaikhoan"] != null)
+            {
+                <span>@Session["Hovaten"]</span>
+                <textarea placeholder="Add a comment..." name="binhluanmoi"></textarea>
+                <button>Bình luận</button>
+                <div class="rating" name="sosao">
+                    <i class="fas fa-star" data-rating="1"></i>
+                    <i class="fas fa-star" data-rating="2"></i>
+                    <i class="fas fa-star" data-rating="3"></i>
+                    <i class="fas fa-star" data-rating="4"></i>
+                    <i class="fas fa-star" data-rating="5"></i>
+                </div>
+                <input type="hidden" id="selectedRating" name="selectedRating" value="0" />
+            }
+            else
+            {
+                <a href="@Url.Action("Login", "Login")">Đăng nhập để Bình luận</a>
+            }
+        </div>
+    </div>
+</form>
+
+<script>
+    const stars = document.querySelectorAll('.rating i');
+    const selectedRatingInput = document.getElementById('selectedRating');
+
+    stars.forEach(star => {
+        star.addEventListener('mouseover', () => {
+            const rating = parseInt(star.getAttribute('data-rating'));
+            resetStars();
+            highlightStars(rating);
+        });
+
+        star.addEventListener('click', () => {
+            const rating = parseInt(star.getAttribute('data-rating'));
+            resetStars();
+            highlightStars(rating);
+
+            // Lưu giá trị số sao vào input ẩn
+            selectedRatingInput.value = rating;
+            console.log('Selected Rating:', rating);
+        });
+    });
+
+    function resetStars() {
+        stars.forEach(star => {
+            star.classList.remove('rated');
+        });
+    }
+
+    function highlightStars(count) {
+        for (let i = 0; i < count; i++) {
+            stars[i].classList.add('rated');
+        }
+    }
+</script>
+

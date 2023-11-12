@@ -104,9 +104,18 @@ else
                             <p>Tổng tiền: <b>@String.Format("{0:0,0}", @item.Gia)đ</b></p>
                         </div>
                     </div>
-                    <a class="btn-choose" href="#" onclick="confirmAction()">
-                        huy
-                    </a>
+                
+                    
+                        web_banvemaybayEntities db = new web_banvemaybayEntities();
+                        int mave = int.Parse(@Session["mavemuontra"].ToString());
+                        var kt = db.Ve.Where(c => c.IDve == mave).FirstOrDefault();
+                        if (kt.Tinhtrang == "Chờ thanh toán" && kt.Tinhtrang == "Đã thanh toán")
+                        {
+                            <a class="btn-choose" href="#" onclick="confirmAction()">
+                                huy
+                            </a>
+                        }
+          
                     <input type="hidden" name="idcu" value="@Session["idcu"]" />
                 }
             }

@@ -72,13 +72,13 @@ else
                         <li class="li-50">
                             <p>Hành lý ký gửi <sup>*</sup></p>
                             <select name="hanhlyid" id="hanhlyid" class="ci-baggage">
-                                @{ 
+                                @{
                                     int hanhliid = ViewBag.idhanhli;
                                     <option value="1" @(hanhliid == 1 ? "selected" : "")>none</option>
                                     <option value="2" @(hanhliid == 2 ? "selected" : "")>10kg</option>
                                     <option value="3" @(hanhliid == 3 ? "selected" : "")>20kg</option>
                                     <option value="4" @(hanhliid == 4 ? "selected" : "")>30kg</option>
-                                 }
+                                }
                             </select>
                         </li>
                         <li>
@@ -92,6 +92,10 @@ else
                             <p>Họ tên <sup>*</sup></p>
                             <input type="text" name="name" placeholder="Nhập họ tên" required class="form-control">
                         </li>
+                      @*  <li>
+                            <p>CCCD <sup>*</sup></p>
+                            <input type="text" name="cccd" placeholder="CCCD" required class="form-control">
+                        </li>*@
                         <li>
                             <p>Ngày sinh <sup>*</sup></p>
                             <input type="date" name="birthday" id="birthday" required>

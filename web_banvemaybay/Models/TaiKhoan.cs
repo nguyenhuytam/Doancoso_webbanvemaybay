@@ -18,6 +18,7 @@ namespace web_banvemaybay.Models
         public TaiKhoan()
         {
             this.Dattruoc = new HashSet<Dattruoc>();
+            this.Binhluan = new HashSet<Binhluan>();
         }
     
         public int IDtaikhoan { get; set; }
@@ -31,5 +32,7 @@ namespace web_banvemaybay.Models
         public virtual Chucvu Chucvu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dattruoc> Dattruoc { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Binhluan> Binhluan { get; set; }
     }
 }

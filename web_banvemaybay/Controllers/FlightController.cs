@@ -548,15 +548,16 @@ namespace FlightSearch.Controllers
             return View("SearchFlight", ((IEnumerable<Chuyenbay>)Session["flights"]).ToList());
         }
         [HttpPost]
-        public ActionResult tt(FormCollection form, TTlienhe lienhe, Hanhkhach hk , string name, DateTime? birthday, int? hangveid, int? sdtlh, string emaillh, string gioitinh, string namelh, string gioitinhlh, int? idcu, int idchuyenbay, double giatien, string payment)
+        public ActionResult tt(FormCollection form, TTlienhe lienhe, Hanhkhach hk , string name, DateTime? birthday, int? hangveid, int? sdtlh, string emaillh, string gioitinh, string namelh, string gioitinhlh, int? idcu, int idchuyenbay, double giatien, string payment/*, int? cccd*/)
         {
+            int nguoidat = int.Parse(Session["soluong"].ToString());
             var now = DateTime.Now;
             if (birthday > now.AddYears(-18))
             {
                 TempData["ErrorMessage"] = "Chưa đủ 18 tuổi vui lòng chọn  lại  !";
                 return RedirectToAction("Information", "Flight", new {id = idchuyenbay});
             }
-            if (name != null && birthday != null && sdtlh != null && emaillh != null && gioitinh != null && gioitinhlh != null && namelh != null)
+            if (name != null && birthday != null && sdtlh != null && emaillh != null && gioitinh != null && gioitinhlh != null && namelh != null  /*cccd!=null*/)
             {
                      var ktlh = new TTlienhe();
                     ktlh.FullName = namelh;
@@ -569,6 +570,7 @@ namespace FlightSearch.Controllers
                 kt.Tenhanhkhach = name;
                 kt.NgaySinh = birthday;
                 kt.Gioitinh = gioitinh;
+               /* kt.CCCD = cccd;*/
                 db.Hanhkhach.Add(kt);
                 db.SaveChanges();
                 string Bag = "Không hành lý!";
@@ -598,22 +600,23 @@ namespace FlightSearch.Controllers
                     {
                         if (hangveid == null)
                         {
-                            slhang.PhoThong -= 1;
-                            ve.IDhanhli = 2;
+                            slhang.PhoThong -= 1 *nguoidat ;
+                            ve.IDhangve = 2;
                         }
                         if (hangveid == 1)
                         {
-                            slhang.ThuongGia -= 1;
-                            ve.IDhanhli = 1;
+                            slhang.ThuongGia -= 1 * nguoidat;
+                            ve.IDhangve = 1;
                         }
                         if (hangveid == 2)
                         {
-                            slhang.PhoThong -= 1;
-                            ve.IDhanhli = 2;
+                            slhang.PhoThong -= 1 * nguoidat;
+                            ve.IDhangve = 2;
                         }
 
                         db.SaveChanges();
                     }
+                    ve.Sove = nguoidat;
                     var hangghe = db.Hangve.Where(hl => hl.IDhangve ==ve.IDhangve ).FirstOrDefault();
                     var Baghangghe = hangghe.TenHangve;
                     if (idcu == null)

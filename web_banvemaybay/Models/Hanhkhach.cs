@@ -24,7 +24,7 @@ namespace web_banvemaybay.Models
         public string Tenhanhkhach { get; set; }
         public string Gioitinh { get; set; }
         public Nullable<System.DateTime> NgaySinh { get; set; }
-        public string Passport { get; set; }
+        public Nullable<int> CCCD { get; set; }
         public Nullable<int> SDT { get; set; }
         public string Email { get; set; }
     

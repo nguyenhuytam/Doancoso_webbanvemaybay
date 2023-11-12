@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using web_banvemaybay.Models;
 
 namespace web_banvemaybay.Controllers
 {
     public class HomeController : Controller
     {
+        web_banvemaybayEntities db = new web_banvemaybayEntities();
         public ActionResult Index()
         {
             return View();
@@ -53,8 +55,10 @@ namespace web_banvemaybay.Controllers
         }
         public ActionResult Home(string thongbao)
         {
+            List<Chuyenbay> chuyenbays = db.Chuyenbay.ToList();
+
             ViewBag.thongbao = thongbao;
-            return View();
+            return View(chuyenbays);
         }
         public ActionResult ChonVe()
         {

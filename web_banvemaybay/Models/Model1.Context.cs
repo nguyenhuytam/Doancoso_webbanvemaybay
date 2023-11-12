@@ -30,11 +30,12 @@ namespace web_banvemaybay.Models
         public virtual DbSet<Dattruoc> Dattruoc { get; set; }
         public virtual DbSet<HangHK> HangHK { get; set; }
         public virtual DbSet<Hangve> Hangve { get; set; }
-        public virtual DbSet<Hanhkhach> Hanhkhach { get; set; }
         public virtual DbSet<Hanhli> Hanhli { get; set; }
         public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TaiKhoan> TaiKhoan { get; set; }
         public virtual DbSet<TTlienhe> TTlienhe { get; set; }
         public virtual DbSet<Ve> Ve { get; set; }
+        public virtual DbSet<Binhluan> Binhluan { get; set; }
+        public virtual DbSet<Hanhkhach> Hanhkhach { get; set; }
     }
 }

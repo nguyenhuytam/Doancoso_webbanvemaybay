@@ -140,6 +140,7 @@
     <Compile Include="Areas\Admin\Controllers\thongkeController.cs" />
     <Compile Include="Areas\Admin\Controllers\TTlienhesController.cs" />
     <Compile Include="Areas\Admin\Controllers\VesController.cs" />
+    <Compile Include="Controllers\BinhluanController.cs" />
     <Compile Include="Controllers\CheckController.cs" />
     <Compile Include="Controllers\FlightController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -147,6 +148,9 @@
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Binhluan.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Chucvu.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -231,6 +235,7 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\css\Binhluan.css" />
     <Content Include="Content\css\Responsive.css" />
     <Content Include="Content\css\Style.css" />
     <Content Include="Content\css\styleDN.css" />
@@ -358,6 +363,7 @@
     <Content Include="Views\Check\xacnhan.cshtml" />
     <Content Include="Views\Check\LichSuVe.cshtml" />
     <Content Include="Views\Huyve\Index.cshtml" />
+    <Content Include="Views\Binhluan\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
