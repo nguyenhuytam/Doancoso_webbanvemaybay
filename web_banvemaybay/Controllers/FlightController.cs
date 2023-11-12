@@ -540,7 +540,6 @@ namespace FlightSearch.Controllers
                 else
                 {
                     // Sắp xếp tăng dần theo thuộc tính Giatien
-                    flights = flights.OrderBy(c => c.Giatien);
                     var flights = ((IEnumerable<Chuyenbay>)Session["flights"]).OrderBy(c => c.Giatien).ToList();
                     return View("SearchFlight", flights);
                 }
