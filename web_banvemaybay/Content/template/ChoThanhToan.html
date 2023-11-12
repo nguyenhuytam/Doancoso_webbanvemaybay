@@ -1,19 +1,198 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title> Thông tin đặt vé</title>
-    <meta charset="utf-8" />
+    <title>Ticket</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .ticket-container {
+            width: 600px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .flight-details {
+            margin-top: 20px;
+        }
+
+            .flight-details .row {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 10px;
+            }
+    </style>
 </head>
 <body>
-    <h1 style="font-size:13px">
-        Kính gửi Quý khách {{CustomerName}}<br />
-        Xin cảm ơn Quý khách đã lựa chọn và bay cùng AirplaneTicket!<br />
-        Quý khách vui lòng thanh toán trước ngày {{DateHour}}.<br />
-    </h1>
-    <!--<p>Ngày khởi hành: {{DateHour}}</p>
-    <p>Đi từ: {{Departure}}</p>
-    <p>Đi đến: {{Destination}}</p>
-    <p>Hành lý ký gửi: {{Bag}}</p>-->
+    <div class="ticket-container">
+        <div class="ticket-image" style="display: flex; justify-content: flex-end; align-items: flex-start;">
+            <img src="../../Areas/Admin/ContentAdmin/image/Logo.jpg" alt="Ticket Image" style="width: 150px; height: auto;" />
+        </div>
+        <h2>
+            Vé điện tử của quý khách trong thư này!
+        </h2>
+        <h3 style=" font-size: 16px; margin: 0px; padding: 0px; color: #434343;">Kính gửi quý khách {{CustomerName}}</h3>
+        <br />
+        <p style=" line-height: 25px; font-size: 16px; padding: 0px; margin: 0px;">Yêu cầu đặt vé của quý khách đã được xác nhận thành công. Quý khách vui lòng xem vé điện tử trong tập tin đính kèm.</p>
+        <h4 style="color: #0077be;">THÔNG TIN CHUYẾN BAY</h4>
+        <!--Vé máy bay-->
+        <div class="flight-details" style="border: 1px solid #e0e0e0; padding: 10px; margin-bottom: 10px; border-radius: 5px; background-color: #f9f9f9;">
+            <table border="0" cellpadding="0" cellspacing="0" style="border-bottom:1px solid #dadada;margin-bottom:8px;width:100%">
+                <tbody>
+                    <tr>
+                        <td align="left" valign="top" width="100%" style="padding-top:8px;padding-bottom:8px">
+                            <table border="0" cellpadding="0" cellspacing="0" align="left" style="display:block;width:200px">
+                                <tbody>
+                                    <tr>
+                                        <td valign="middle" style="width:100%;padding-bottom:8px"> <span style="font-size:12px;color:#8f8f8f;text-transform:uppercase;letter-spacing:0.8px;font-weight:bold">Chuyến bay đi</span> </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <table border="0" cellpadding="0" cellspacing="0" align="left" style="display:block;width:290px">
+                                <tbody>
+                                    <tr>
+                                        <td valign="middle" style="width:100%;padding-bottom:8px"> <span style="font-size:12px;color:#434343;text-transform:uppercase;letter-spacing:0.8px;font-weight:bold">{{Departure}} - {{Destination}}</span> </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
+            <div class="row">
+                <table align="left" border="0" cellpadding="0" cellspacing="0" style="margin-top:5px;display:block">
+                    <tbody>
+                        <tr>
+                            <td valign="middle" style="width:100%">
+                                <table align="left" border="0" cellpadding="0" cellspacing="0" width="200px">
+                                    <tbody>
+                                        <tr>
+                                            <td><span style="font-size:13px;line-height:25px;color:#444444">Mã đặt vé:</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td> <span style="font-size:24px;line-height:18px;color:#444444;font-weight:bold;color:#259fd9;padding-top:8px">{{MaVe}}</span> </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table align="left" border="0" cellpadding="0" cellspacing="0" width="320px" style="margin-top:10px">
+                    <tbody>
+                        <tr>
+                            <td> <span style="font-size:18px;line-height:22px;color:#444444;font-weight:bold">{{DateHour}}</span> </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="row">
+                <span>
+                    <img src="https://ci5.googleusercontent.com/proxy/7mnUVAcCOCbqF299JMMUkC_9k3714w-3JqUpfnzO61Dosb3HIQRbh5ppONDBnjrI_d--QE1_8DWX3z6fa8MV0RWAcMdF9hVpXG7Hk44xnBSqS99DTLvlSlXsJ_b9EIpPH8_TWqUZPNrqczbq8yh3CvZE8Rz-PnP9dwMS4gB1LbHrrmes=s0-d-e1-ft#https://d1gnmtcb0vp69g.cloudfront.net/imageResource/2021/01/28/1611827393518-206370ff769dff23e3454c0a753ce7ee.png" alt="Flight Logo" style="width:24px;height:24px;margin-right:16px;vertical-align:middle" class="CToWUd" data-bit="iit">
+                </span>
+                <div>
+                    <span style="margin:0px;padding:0px;font-size:15px;color:#444444;font-weight:bold"> {{TenHang}} </span> <br>
+                    <span style="margin:0px;padding:0px;color:#737374;font-size:15px;">
+                        {{idchuyenbay}}
+                    </span>
+                </div>
+                <div>
+                    <table align="left" border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tbody>
+                            <tr>
+                                <td align="left" style="width:55px;padding-bottom:0px" valign="top">
+                                </td>
+                                <td align="left" valign="top" style="width:30px" colspan="2">
+                                    <img src="https://ci3.googleusercontent.com/proxy/eGXwp8Ejw1CTPor4kr1Epx_8ulwCotVP1aRYi-ch0Fufwubx03ZcZkVso7hSVBGv1RDssV3mcEJzHEiYdbqYsi8BWiqA3Qx7NDQ_LjhryVxdbgmWlE77bLZ1yOIrKp_0FittKPbLnFZ9Fl1yf9pCNi7VCnKduUUpil-2mxXux2NVm_Iu=s0-d-e1-ft#https://d1gnmtcb0vp69g.cloudfront.net/imageResource/2021/01/28/1611827927248-80ada129819bd3a0e7e737a3069ff028.png" style="width:12px;margin-top:7px;padding:0 20px" class="CToWUd" data-bit="iit">
+                                    <div style="border-left:1px solid #555;height:50px;margin-left:25px">
+                                        &nbsp;
+                                    </div>
+                                </td>
+                                <td align="left" valign="top" style="padding-bottom:0px">
+                                    <span style="font-size:15px;color:#444444;font-weight:bold">{{Departure}}</span><br>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" style="width:55px;padding-bottom:0px" valign="top"></td>
+                                <td align="left" valign="top" style="width:5px">
+                                    <div style="width:25px"></div>
+                                </td>
+                                <td align="left" valign="top" style="width:30px;border-left:1px solid #555"></td>
+                                <td align="left" valign="top" style="padding-bottom:0px">
+                                    <div style="padding-bottom:20px"></div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left" style="width:55px;padding-bottom:0px" valign="top">
+                                </td>
+                                <td align="left" valign="top" style="width:30px" colspan="2">
+                                    <img src="https://ci3.googleusercontent.com/proxy/eGXwp8Ejw1CTPor4kr1Epx_8ulwCotVP1aRYi-ch0Fufwubx03ZcZkVso7hSVBGv1RDssV3mcEJzHEiYdbqYsi8BWiqA3Qx7NDQ_LjhryVxdbgmWlE77bLZ1yOIrKp_0FittKPbLnFZ9Fl1yf9pCNi7VCnKduUUpil-2mxXux2NVm_Iu=s0-d-e1-ft#https://d1gnmtcb0vp69g.cloudfront.net/imageResource/2021/01/28/1611827927248-80ada129819bd3a0e7e737a3069ff028.png" style="width:12px;padding:0 20px" class="CToWUd" data-bit="iit">
+                                </td>
+                                <td align="left" style="padding-bottom:0px">
+                                    <span style="font-size:15px;color:#444444;font-weight:bold">{{Destination}}</span><br>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!--Hành lý-->
+        <div>
+            <p style="font-size:15px;text-transform:uppercase;color:#259fd9;font-weight:bold">Tên hành khách:</p>
+            <ul style="margin:0px;padding-left:20px;color:#444444;font-size:16px">
+                <li> Quý khách {{CustomerName}}</li>
+            </ul>
+            <div style="display:block;margin-top:4px">
+                <!--<div style="display:inline-block;vertical-align:top;width:80px;text-align:center">
+                <div style="padding:4px 8px;background-color:white;border:1px solid #cdd0d1;border-radius:12px;font-size:11px">
+                    {{Departure}} | {{Destination}}
+                </div>
+            </div>-->
+
+                <div style="display:inline-block;vertical-align:top;margin-bottom:8px">
+                    <div style="display:block;vertical-align:top;padding-left:8px;padding-top:2px;margin-bottom:4px">
+                        <img style="display:inline-block;vertical-align:top;width:16px;height:16px" src="https://ci5.googleusercontent.com/proxy/gP-R3Gn1SE2oaf6iBucSbXJiJELK7JYVZhx9c0yu6EjN8jC-GWbWdFr-IYDMZAl_31roWRllI8zlbeyYCYnGQDd5VeYA5JipOEPLB4_NFC4pud4Pj2xtOdXdrAGPW77oo7WUa_uOTqi-6sxFpRHFNGF6pLqRWbpqA2MdhTjbaOVEE2nx=s0-d-e1-ft#https://d1gnmtcb0vp69g.cloudfront.net/imageResource/2023/01/27/1674794163209-ccca50bc9604976892d94c22ea570fd0.png" alt="" class="CToWUd" data-bit="iit">
+                        <div style="display:inline-block;vertical-align:top">
+                            <div style="font-size:14px;color:#687176">
+                                7 KG Hành lý xách tay
+                            </div>
+                        </div>
+                    </div>
+                    <div style="display:block;vertical-align:top;padding-left:8px;padding-top:2px;margin-bottom:4px">
+                        <img style="display:inline-block;vertical-align:top;width:16px;height:16px" src="https://ci5.googleusercontent.com/proxy/oHmv9dYYy23R7wsQYrEbLnvSd9hSi-7Mgvi6iEXhj3A26sRsAQMzpvC_e1lMxzkQaZwbxguOGcTelbXInVLjwQHQebY6dkBayJ3jo03_h8htO1rKbRJlYpWvkaujD5QdfwkFCH2UUmpY4KOKYRBcTI-GIvY1kncggdFT7oMHqiRiGGxd=s0-d-e1-ft#https://d1gnmtcb0vp69g.cloudfront.net/imageResource/2023/01/27/1674794160442-8993559e8f43e676aea905c5e9c69f35.png" alt="" class="CToWUd" data-bit="iit">
+                        <div style="display:inline-block;vertical-align:top">
+                            <div style="font-size:14px;color:#687176">
+                                {{Bag}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <table align="center" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-bottom-width:1px;border-bottom-style:solid;border-bottom-color:#dadada">
+            <tbody>
+                <tr>
+                    <td><br><br></td>
+                </tr>
+            </tbody>
+        </table>
+        <table align="center" cellpadding="0" cellspacing="0" border="0" width="100%">
+            <tbody>
+                <tr>
+                    <td valign="top" style="border-right-width:1px;border-right-style:solid;border-right-color:#dadada"> <p style="float:left;margin:0px;padding:0px"> <span style="font-size:11px">Quý khách cần hỗ trợ?</span><br> <span style="font-size:15px;font-weight:bold"> 0963450084 </span><br> <span style="font-size:15px;font-weight:bold"><a href="mailto:cs@traveloka.com" target="_blank">airplaneticket@gmail.com</a></span> </p> </td>
+                    <!--<td valign="top" style="padding-left:15px"> <p style="float:left;width:180px;margin:0px;padding:0px"> <span style="font-size:11px">Mã đặt chỗ Traveloka</span><br> <span style="font-size:15px;font-weight:bold">1037436530</span> </p> </td>-->
+                </tr>
+            </tbody>
+        </table>    
+    </div>
 </body>
 </html>

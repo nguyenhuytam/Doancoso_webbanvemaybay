@@ -540,6 +540,7 @@ namespace FlightSearch.Controllers
                 else
                 {
                     // Sắp xếp tăng dần theo thuộc tính Giatien
+                    flights = flights.OrderBy(c => c.Giatien);
                     var flights = ((IEnumerable<Chuyenbay>)Session["flights"]).OrderBy(c => c.Giatien).ToList();
                     return View("SearchFlight", flights);
                 }
@@ -655,6 +656,7 @@ namespace FlightSearch.Controllers
                     Session["KgHanhly"] = Bag;
                     Session["Hangge"] = Baghangghe;
                     Session["TinhTrang"] = ve.Tinhtrang;
+                    Session["TenHang"] = chuyenbay.HangHK.TenHang;
                     if (payment == "payment1")
                     {
                         Ve veMomo = db.Ve.Find(idVeMoi);
@@ -667,6 +669,8 @@ namespace FlightSearch.Controllers
                     content = content.Replace("{{Departure}}", Session["Departure"].ToString());
                     content = content.Replace("{{Destination}}", Session["Destination"].ToString());
                     content = content.Replace("{{Bag}}", Session["KgHanhly"].ToString());
+                    content = content.Replace("{{idchuyenbay}}", Session["idchuyenbay"].ToString());
+                    content = content.Replace("{{TenHang}}", Session["TenHang"].ToString());
                     var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
 
                     new MailHelper().SendMail(Session["emaillh"].ToString(), "Bạn đã đặt vé tại AirplaneTicket", content);
