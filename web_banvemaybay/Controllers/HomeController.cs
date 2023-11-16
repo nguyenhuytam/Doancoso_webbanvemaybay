@@ -55,10 +55,9 @@ namespace web_banvemaybay.Controllers
         }
         public ActionResult Home(string thongbao)
         {
-            List<Chuyenbay> chuyenbays = db.Chuyenbay.ToList();
-
+            List<DiaDiem> diaDiems = db.DiaDiem.ToList();
             ViewBag.thongbao = thongbao;
-            return View(chuyenbays);
+            return View(diaDiems);
         }
         public ActionResult ChonVe()
         {

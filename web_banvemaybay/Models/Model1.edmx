@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
@@ -45,6 +45,13 @@
           <Property Name="NgayDat" Type="datetime" />
           <Property Name="Tinhtrang" Type="nvarchar" MaxLength="50" />
           <Property Name="IDtaikhoan" Type="int" />
+        </EntityType>
+        <EntityType Name="DiaDiem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DiaDiem" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="HangHK">
           <Key>
@@ -255,6 +262,7 @@
           <EntitySet Name="Chucvu" EntityType="Self.Chucvu" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Chuyenbay" EntityType="Self.Chuyenbay" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Dattruoc" EntityType="Self.Dattruoc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DiaDiem" EntityType="Self.DiaDiem" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="HangHK" EntityType="Self.HangHK" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Hangve" EntityType="Self.Hangve" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Hanhkhach" EntityType="Self.Hanhkhach" Schema="dbo" store:Type="Tables" />
@@ -361,6 +369,7 @@
             <End Role="Hanhkhach" EntitySet="Hanhkhach" />
             <End Role="Ve" EntitySet="Ve" />
           </AssociationSet>
+          <EntitySet Name="DiaDiem" EntityType="web_banvemaybayModel.DiaDiem" />
           </EntityContainer>
         <EntityType Name="Chucvu">
           <Key>
@@ -627,6 +636,13 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="DiaDiem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DiaDiem1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -767,6 +783,14 @@
                 <ScalarProperty Name="Gioitinh" ColumnName="Gioitinh" />
                 <ScalarProperty Name="Tenhanhkhach" ColumnName="Tenhanhkhach" />
                 <ScalarProperty Name="IDhanhkhach" ColumnName="IDhanhkhach" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiaDiem">
+            <EntityTypeMapping TypeName="web_banvemaybayModel.DiaDiem">
+              <MappingFragment StoreEntitySet="DiaDiem">
+                <ScalarProperty Name="DiaDiem1" ColumnName="DiaDiem" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

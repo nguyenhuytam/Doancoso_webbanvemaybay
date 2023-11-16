@@ -37,5 +37,6 @@ namespace web_banvemaybay.Models
         public virtual DbSet<Ve> Ve { get; set; }
         public virtual DbSet<Binhluan> Binhluan { get; set; }
         public virtual DbSet<Hanhkhach> Hanhkhach { get; set; }
+        public virtual DbSet<DiaDiem> DiaDiem { get; set; }
     }
 }
