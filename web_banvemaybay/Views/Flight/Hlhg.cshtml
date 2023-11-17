@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Hlhg";
+}
+
+<h2>Hlhg</h2>
+
+@using (Html.BeginForm("Information", "Flight", FormMethod.Post, new { id = "flightForm" }))
+{
+    web_banvemaybay.Models.web_banvemaybayEntities db = new web_banvemaybay.Models.web_banvemaybayEntities();
+    var hanhli = db.Hanhli.ToList();
+
+    <select name="idhanhli" id="searchBySelect">
+        @foreach (var item in hanhli)
+        {
+            <option value="@item.IDhanhli" selected>@item.Kg</option>
+        }
+    </select>
+    <input type="hidden" name="giatien" value="@Session["giatien"]" />
+    <input type="hidden" name="idChuyenBay" value="@Model.IDchuyenbay" />
+    <input type="hidden" name="idcu" value="@Session["idcu"]" />
+    <input type="hidden" name="giatienidcu" value="@Session["giatien" + Model.IDchuyenbay + Session["idhanhli"]]" />
+    @* <input type="hidden" name="idhanhlicu" value="@Session["idhanhli"+Model.IDchuyenbay]" />*@
+}

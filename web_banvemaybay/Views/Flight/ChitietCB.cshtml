@@ -1,0 +1,64 @@
+﻿@using web_banvemaybay.Models;
+@model IEnumerable<Chuyenbay>
+@using System.Data.Entity;
+<div class="information-right">
+    <div class="information-r-heading">
+        <i class="fa-solid fa-cart-shopping"></i>
+        Chuyến bay của bạn
+    </div>
+    <div class="information-r-body">
+        @{
+            web_banvemaybayEntities db = new web_banvemaybayEntities();
+            int id = int.Parse(Session["idcb"].ToString());
+            var item = db.Chuyenbay.Where(c => c.IDchuyenbay == id).FirstOrDefault();
+            DateTime ngay = Convert.ToDateTime(Session["datefrom"]);
+            var diadiemve = Session["from"];
+            var now = DateTime.Now;
+            var idcbve = db.Chuyenbay.Where(c => c.Diadiemdi == diadiemve && DbFunctions.TruncateTime(c.Ngaydi) == ngay.Date && c.Diadiemden == item.Diadiemdi)
+                                     .Select(c => c.IDchuyenbay)
+                                     .OrderBy(idcbv => Guid.NewGuid())
+                                     .FirstOrDefault();
+            Session["idcbv"] = idcbve;
+            var ngayve = db.Chuyenbay.Where(c => c.IDchuyenbay == idcbve).FirstOrDefault();
+            <ul class="information-goto">
+
+                @if (ngay > now)
+                {
+                    <b>Chuyến bay khứ hồi</b>
+                }
+                else
+                {
+                    <b>Chuyến bay một chiều</b>
+                }
+                <li><p>Đi từ <span class="go">@item.Diadiemdi</span></p><p>Đến <span class="to">@item.Diadiemden</span></p></li>
+                <li>
+                    <span class="go">@item.Ngaydi</span>
+                    @if (ngay > now)
+                    {
+                    <li><p>Đi từ <span class="go">@ngayve.Diadiemdi</span></p><p>Đến <span class="to">@ngayve.Diadiemden</span></p></li>
+                    <span class="to">@ngayve.Ngaydi</span>
+                }
+                    </li>
+                </ul>
+            double tong = item.Giatien + ngayve.Giatien;
+            Session["giatien"] = tong;
+            Session["idchuyenbay"] = id;
+                <li>Giá vé<span>@String.Format("{0:0,0}", tong)đ</span></li>
+
+                @* <ul class="information-money">
+                    <b>Giá vé tạm tính</b>
+                    <li>Giá vé<span>@String.Format("{0:0,0}", @Model.Giatien)đ</span></li>
+                    <li>Thuế<span>@String.Format("{0:0,0}", (@Model.Giatien / 100 * 10))đ</span></li>
+                    <li>Phí<span>@String.Format("{0:0,0}", 70000)đ</span></li>
+                    <li>Giá hành lý<span>@String.Format("{0:0,0}", @Session["giahanhly"])đ</span></li>
+                    <li>Giá hạng vé<span>@String.Format("{0:0,0}", @Session["giaHangghe"])đ</span></li>
+                    <li class="li-money-last">Tổng tiền<span>@String.Format("{0:0,0}", @Session["giatien" + Model.IDchuyenbay])đ</span></li>
+                    <input type="hidden" name="idChuyenBay" value="@Model.IDchuyenbay" />
+                    <input type="hidden" name="giatien" value="@Session["giatien"+Model.IDchuyenbay]" />
+                    <input type="hidden" name="idcu" value="@Session["idcu"]" />
+                    <input type="hidden" name="idHangve" value="@Session["idHangve"]" />
+                </ul>*@
+        }
+    </div>
+
+</div>

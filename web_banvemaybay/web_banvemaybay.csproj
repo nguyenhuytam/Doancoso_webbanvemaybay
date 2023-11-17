@@ -364,6 +364,8 @@
     <Content Include="Views\Check\LichSuVe.cshtml" />
     <Content Include="Views\Huyve\Index.cshtml" />
     <Content Include="Views\Binhluan\Index.cshtml" />
+    <Content Include="Views\Flight\ChitietCB.cshtml" />
+    <Content Include="Views\Flight\Hlhg.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

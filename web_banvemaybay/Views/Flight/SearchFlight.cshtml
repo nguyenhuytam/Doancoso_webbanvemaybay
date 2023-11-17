@@ -25,17 +25,11 @@
                         <span>@chuyenbay.Diadiemdi</span>
                         <p>@chuyenbay.Ngaydi.Value.ToString("HH:mm")</p>
                     </div>
-                    @*@if ( chuyenbay.Ngayve != null)
-                    {*@
-                        <div class="choose-time-next">
-                            <span>@chuyenbay.Diadiemden</span>
-                            <p>@chuyenbay.Ngaydi.Value.AddHours(1).AddMinutes(30).ToString("HH:mm")</p>
-                        </div>
-                    @*}*@
+
                     <div class="choose-money">
                         <b>@String.Format("{0:0,0}", @chuyenbay.Giatien)</b><span> VNĐ</span>
                     </div>
-                    <a class="btn-choose" href="@Url.Action("Information","Flight" ,new {id=chuyenbay.IDchuyenbay})">
+                    <a class="btn-choose" href="@Url.Action("ChitietCB","Flight" ,new {id=chuyenbay.IDchuyenbay})">
                         Chọn
                     </a>
                 </div>

@@ -29,40 +29,49 @@ namespace FlightSearch.Controllers
     public class FlightController : Controller
     {
         web_banvemaybayEntities db = new web_banvemaybayEntities();
-/*        public async Task<ActionResult> SearchFlight1(string to, string from, DateTime dateto, DateTime? datefrom)
-        {
-
-            HttpClient client = new HttpClient();
-            string apiKey = "b7878674755fde7fab824400c50ce94d"; // API key của AviationStack
-            string apiUrl = $"http://api.aviationstack.com/v1/flights?access_key={apiKey}&dep_iata={from}&arr_iata={to}&date={dateto.ToString("yyyy-MM-dd")}";
-
-            HttpResponseMessage response = await client.GetAsync(apiUrl);
-            if (response.IsSuccessStatusCode)
-            {
-                string jsonString = await response.Content.ReadAsStringAsync();
-                dynamic result = JsonConvert.DeserializeObject(jsonString);
-
-                // Kiểm tra xem API có trả về kết quả hay không
-                if (result.success && result.data != null)
+        /*        public async Task<ActionResult> SearchFlight1(string to, string from, DateTime dateto, DateTime? datefrom)
                 {
-                    // Lấy dữ liệu từ API và hiển thị lên View
-                    var flights = result.data;
-                    return View(flights);
-                }
-                else
-                {
-                    // Xử lý khi không tìm thấy chuyến bay nào
-                    return RedirectToAction("Home", "Home", new { thongbao = "Không tìm thấy chuyến bay phù hợp" });
-                }
-            }
-            else
-            {
-                // Xử lý khi gọi API không thành công
-                return RedirectToAction("Home", "Home", new { thongbao = "Đã xảy ra lỗi trong quá trình tìm kiếm chuyến bay" });
-            }
-        }*/
 
+                    HttpClient client = new HttpClient();
+                    string apiKey = "b7878674755fde7fab824400c50ce94d"; // API key của AviationStack
+                    string apiUrl = $"http://api.aviationstack.com/v1/flights?access_key={apiKey}&dep_iata={from}&arr_iata={to}&date={dateto.ToString("yyyy-MM-dd")}";
+
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
+                    if (response.IsSuccessStatusCode)
+                    {
+                        string jsonString = await response.Content.ReadAsStringAsync();
+                        dynamic result = JsonConvert.DeserializeObject(jsonString);
+
+                        // Kiểm tra xem API có trả về kết quả hay không
+                        if (result.success && result.data != null)
+                        {
+                            // Lấy dữ liệu từ API và hiển thị lên View
+                            var flights = result.data;
+                            return View(flights);
+                        }
+                        else
+                        {
+                            // Xử lý khi không tìm thấy chuyến bay nào
+                            return RedirectToAction("Home", "Home", new { thongbao = "Không tìm thấy chuyến bay phù hợp" });
+                        }
+                    }
+                    else
+                    {
+                        // Xử lý khi gọi API không thành công
+                        return RedirectToAction("Home", "Home", new { thongbao = "Đã xảy ra lỗi trong quá trình tìm kiếm chuyến bay" });
+                    }
+                }*/
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        public ActionResult ChitietCB(int id)
+        {   
+            Session["idcb"] = id;
+            return View();
+        }
+        public ActionResult Hlhg()
         {
             return View();
         }
@@ -71,9 +80,9 @@ namespace FlightSearch.Controllers
         public ActionResult Sohangve(int idHangve,int idChuyenBay,int? idHangvecu)
         {
             int kthl = Session["idcu"] != null ? int.Parse(Session["idcu"].ToString()) : 0;
-
             int idhanhli = Session["idhanhlimoi"] != null ? int.Parse(Session["idhanhlimoi"].ToString()) : 0;
             Session["idkthlcu"] = kthl;
+            double tien = double.Parse(Session["giatien"].ToString());
             Session["idmoinhat"] = idhanhli;
             int nguoidat = int.Parse(Session["soluong"].ToString());
             int? idGhecu = idHangve;
@@ -86,9 +95,9 @@ namespace FlightSearch.Controllers
 
             if (tt.PhoThong < nguoidat && idHangve == 2)
             {
-                double tongtien = (giatienidcu) - (tt.Giatien / 100 * 10 + 70000)- (idgiave.Gia*nguoidat);
+                double tongtien = (giatienidcu) - (tien / 100 * 10 + 70000)- (idgiave.Gia*nguoidat);
                 TempData["ErrorMessage"] = "Hết chỗ trống vui lòng chọn lại  !";
-                Session["giatien" + tt.IDchuyenbay] = tongtien;
+                Session["giatien"] = tongtien;
                 Session["idHangvecu"] = idGhecu;
                 Session["idHangve"] = idHangve;
                 // Chuyển hướng đến action "Information" trong controller "Flight"
@@ -96,18 +105,18 @@ namespace FlightSearch.Controllers
             }
             if (tt.PhoThong < nguoidat && idHangve == 1)
             {
-                double tongtien = (giatienidcu) - (tt.Giatien / 100 * 10 + 70000) -(idgiave.Gia * nguoidat);
+                double tongtien = (giatienidcu) - (tien / 100 * 10 + 70000) -(idgiave.Gia * nguoidat);
                 Session["idHangve"] = idHangve;
                 Session["idHangvecu"] = idGhecu;
-                Session["giatien" + tt.IDchuyenbay] = tongtien;
+                Session["giatien"] = tongtien;
                 // Chuyển hướng đến action "Information" trong controller "Flight"
                 return RedirectToAction("Information", "Flight", new { id = idChuyenBay });
             }
             if (tt.ThuongGia<nguoidat && idHangve ==1)
             {
-                double tongtien = giatienidcu - (tt.Giatien / 100 * 10 + 70000);
+                double tongtien = giatienidcu - (tien / 100 * 10 + 70000);
                 TempData["ErrorMessage"] = "Hết chỗ trống vui lòng chọn lại  !";
-                Session["giatien" + tt.IDchuyenbay] = tongtien;
+                Session["giatien"] = tongtien;
                 // Chuyển hướng đến action "Information" trong controller "Flight"
                 return RedirectToAction("Information", "Flight", new { id = idChuyenBay });
             }
@@ -129,7 +138,7 @@ namespace FlightSearch.Controllers
                         }
                         // Lưu lại tổng tiền vào session
                         Session["giaHangghe"] = idHv.Gia;
-                        Session["giatien" + tt.IDchuyenbay] = tongtien;
+                        Session["giatien"] = tongtien;
                         Session["idHangvecu"] = idGhecu;
                         Session["idHangve"] = idHangve;
                         Session["giathanhtoan"] = Math.Round(tongtien);
@@ -138,11 +147,9 @@ namespace FlightSearch.Controllers
                     }
                 }
                 if (idHangve != null && idhanhli != 0)
-                {
-                    double gia = double.Parse(Session["giatien" + tt.IDchuyenbay].ToString());
-                    double tong = gia;
-                    Session["giatien" + tt.IDchuyenbay] = tong;
-                    double tongtien = (tong + idHv.Gia * nguoidat);
+                {               
+                    Session["giatien"] = tien;
+                    double tongtien = (tien + idHv.Gia * nguoidat);
                     Session["giatien" + tt.IDchuyenbay] = tongtien;
                     Session["giathanhtoan"] = Math.Round(tongtien);
                     Session["giathanhtoanvnpay"] = Math.Round(tongtien * 100);
@@ -153,11 +160,8 @@ namespace FlightSearch.Controllers
                 }
                 if (idHangve != null)
                 {
-                    double gia = double.Parse(Session["giatien" + tt.IDchuyenbay].ToString());
-                    double tong = gia;
-                    Session["giatien" + tt.IDchuyenbay] = tong;
-                    double tongtien = (tong + idHv.Gia * nguoidat) - (tt.Giatien / 100 * 10 + 70000);
-                    Session["giatien" + tt.IDchuyenbay] = tongtien;
+                    double tongtien = (tien + idHv.Gia * nguoidat) - (tien / 100 * 10 + 70000);
+                    Session["giatien"] = tongtien;
                     Session["giathanhtoan"] = Math.Round(tongtien);
                     Session["giathanhtoanvnpay"] = Math.Round(tongtien * 100);
                     Session["giaHangghe"] = idHv.Gia;
@@ -198,13 +202,13 @@ namespace FlightSearch.Controllers
                     var nowPlusOneHour = now.AddHours(1).AddMinutes(30);
 
                     // Kiểm tra nếu khoảng thời gian giữa ngày đi và giờ đi của mỗi chuyến bay lớn hơn giờ hiện tại và không quá 1 tiếng, hiển thị kết quả
-                    flights = flights.Where(c => c.Ngaydi > now && c.Ngaydi > nowPlusOneHour && c.Ngayve == datefromValue && (c.PhoThong > 0 || c.ThuongGia > 0) && (c.PhoThong >= (nl + te + eb) || c.ThuongGia >= (nl + te + eb)));
+                    flights = flights.Where(c => c.Ngaydi > now && c.Ngaydi > nowPlusOneHour && (c.PhoThong > 0 || c.ThuongGia > 0) && (c.PhoThong >= (nl + te + eb) || c.ThuongGia >= (nl + te + eb)));
                 }
                 else if (datefromValue <= dateto)
                 {
                     return RedirectToAction("Home", "Home", new { thongbao = "Vui lòng chọn Ngày về cách ngày đi ít nhất 1 ngày " });
                 }
-                flights = flights.Where(c => c.Ngaydi != null && SqlFunctions.DateDiff("day", c.Ngaydi, datetoValue) == 0 && SqlFunctions.DateDiff("day", c.Ngayve, datefromValue) == 0 && ( c.PhoThong > 0 || c.ThuongGia > 0) && (c.PhoThong >=( nl + te + eb) || c.ThuongGia >= (nl + te + eb)));
+                flights = flights.Where(c => c.Ngaydi != null && SqlFunctions.DateDiff("day", c.Ngaydi, datetoValue) == 0 && ( c.PhoThong > 0 || c.ThuongGia > 0) && (c.PhoThong >=( nl + te + eb) || c.ThuongGia >= (nl + te + eb)));
             }
             else if (dateto != null && datefrom == null)
             {
@@ -221,10 +225,10 @@ namespace FlightSearch.Controllers
                     var nowPlusOneHour = now.AddHours(1).AddMinutes(30);
 
                     // Kiểm tra nếu khoảng thời gian giữa ngày đi và giờ đi của mỗi chuyến bay lớn hơn giờ hiện tại và không quá 1 tiếng, hiển thị kết quả
-                    flights = flights.Where(c => c.Ngaydi > now && c.Ngaydi > nowPlusOneHour && c.Ngayve == null &&( c.PhoThong > 0 || c.ThuongGia > 0) && (c.PhoThong >= (nl + te + eb) || c.ThuongGia >= (nl + te + eb)));
+                    flights = flights.Where(c => c.Ngaydi > now && c.Ngaydi > nowPlusOneHour &&( c.PhoThong > 0 || c.ThuongGia > 0) && (c.PhoThong >= (nl + te + eb) || c.ThuongGia >= (nl + te + eb)));
                 }
                 // Hiển thị chuyến bay có ngày đi và không có ngày về
-                flights = flights.Where(c => c.Ngaydi != null && SqlFunctions.DateDiff("day", c.Ngaydi, datetoValue) == 0 && c.Ngayve == null && (c.PhoThong > 0 || c.ThuongGia > 0) && (c.PhoThong >=(nl + te + eb) || c.ThuongGia >= (nl + te + eb)));
+                flights = flights.Where(c => c.Ngaydi != null && SqlFunctions.DateDiff("day", c.Ngaydi, datetoValue) == 0 && (c.PhoThong > 0 || c.ThuongGia > 0) && (c.PhoThong >=(nl + te + eb) || c.ThuongGia >= (nl + te + eb)));
             }
             var valueNL = Int32.Parse(form["nl"]);
             var valueTE = Int32.Parse(form["te"]);
@@ -272,8 +276,8 @@ namespace FlightSearch.Controllers
             Session["to"] = to;
             Session["from"] = from;
             Session["soluong"] = valueEB + valueNL + valueTE;
-            Session["dateto"] = form["dateto"];
-            Session["datefrom"] = form["datefrom"];
+            Session["dateto"] = dateto;
+            Session["datefrom"] = datefrom;
             // Lưu danh sách flights vào Session
             Session["flights"] = flights;
             Session["searchBy"] = searchBy;
