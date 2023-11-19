@@ -177,6 +177,9 @@
     <Compile Include="Models\Hanhli.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Khachsan.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Model1.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -193,9 +196,6 @@
       <DependentUpon>Model1.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ResultMomo.cs" />
-    <Compile Include="Models\sysdiagrams.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\TaiKhoan.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -438,6 +438,8 @@
     <Content Include="Views\Check\LichSuVe.cshtml" />
     <Content Include="Views\Huyve\Index.cshtml" />
     <Content Include="Views\Binhluan\Index.cshtml" />
+    <Content Include="Views\Flight\Khuhoi.cshtml" />
+    <Content Include="Views\Flight\hl.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

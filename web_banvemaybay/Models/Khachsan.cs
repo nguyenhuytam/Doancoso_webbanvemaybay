@@ -12,12 +12,10 @@ namespace web_banvemaybay.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagrams
+    public partial class Khachsan
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int IDKháchan { get; set; }
+        public string TenKháchan { get; set; }
+        public Nullable<double> Gía { get; set; }
     }
 }

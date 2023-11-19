@@ -31,8 +31,8 @@ namespace web_banvemaybay.Models
         public virtual Chuyenbay Chuyenbay { get; set; }
         public virtual Dattruoc Dattruoc { get; set; }
         public virtual Hangve Hangve { get; set; }
+        public virtual Hanhkhach Hanhkhach { get; set; }
         public virtual Hanhli Hanhli { get; set; }
         public virtual TTlienhe TTlienhe { get; set; }
-        public virtual Hanhkhach Hanhkhach { get; set; }
     }
 }
