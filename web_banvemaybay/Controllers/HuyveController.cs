@@ -22,7 +22,7 @@ namespace web_banvemaybay.Controllers
             ViewBag.NgayBay = checkma.Chuyenbay.Ngaydi.Value;
             ViewBag.dddi = checkma.Chuyenbay.Diadiemdi;
             ViewBag.ddden = checkma.Chuyenbay.Diadiemden;
-            ViewBag.hang = checkma.Chuyenbay.HangHK;
+            ViewBag.hang = checkma.Chuyenbay.HangHK.TenHang;
             ViewBag.macb = checkma.Chuyenbay.IDchuyenbay;
             if (checkma.Tinhtrang == "Đã thanh toán")
             {

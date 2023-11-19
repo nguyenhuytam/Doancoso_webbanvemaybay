@@ -29,39 +29,6 @@ namespace FlightSearch.Controllers
     public class FlightController : Controller
     {
         web_banvemaybayEntities db = new web_banvemaybayEntities();
-        /*        public async Task<ActionResult> SearchFlight1(string to, string from, DateTime dateto, DateTime? datefrom)
-                {
-
-                    HttpClient client = new HttpClient();
-                    string apiKey = "b7878674755fde7fab824400c50ce94d"; // API key của AviationStack
-                    string apiUrl = $"http://api.aviationstack.com/v1/flights?access_key={apiKey}&dep_iata={from}&arr_iata={to}&date={dateto.ToString("yyyy-MM-dd")}";
-
-                    HttpResponseMessage response = await client.GetAsync(apiUrl);
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string jsonString = await response.Content.ReadAsStringAsync();
-                        dynamic result = JsonConvert.DeserializeObject(jsonString);
-
-                        // Kiểm tra xem API có trả về kết quả hay không
-                        if (result.success && result.data != null)
-                        {
-                            // Lấy dữ liệu từ API và hiển thị lên View
-                            var flights = result.data;
-                            return View(flights);
-                        }
-                        else
-                        {
-                            // Xử lý khi không tìm thấy chuyến bay nào
-                            return RedirectToAction("Home", "Home", new { thongbao = "Không tìm thấy chuyến bay phù hợp" });
-                        }
-                    }
-                    else
-                    {
-                        // Xử lý khi gọi API không thành công
-                        return RedirectToAction("Home", "Home", new { thongbao = "Đã xảy ra lỗi trong quá trình tìm kiếm chuyến bay" });
-                    }
-                }*/
-
         public ActionResult Khuhoi()
         {
             return View();
@@ -136,8 +103,6 @@ namespace FlightSearch.Controllers
                 return Json(new { error = "Có lỗi xảy ra khi cập nhật giá tiền." });
             }
         }
-
-
         public ActionResult hl(int idTo, int idFrom)
         {
             float nl = Session["khnl"] != null ? float.Parse(Session["khnl"].ToString()) : 0;
@@ -779,58 +744,6 @@ namespace FlightSearch.Controllers
             }
             return RedirectToAction("Information", "Flight", new { thongbao = "không lấy được dữ liệu chuyến bay  " });
         }
-     /*   [HttpPost]*/
-     /*   public ActionResult tongtien(int idhanhli, int idChuyenBay, int? idcu, string name, DateTime? birthday, int? sdtlh, string emaillh, string gioitinh, string namelh, string gioitinhlh)
-        {
-            string giaTriNamelh = Request.Form["namelh"];
-
-            int? idhanhlicu = idhanhli;
-
-            var hanhli = db.Hanhli.Where(hl => hl.IDhanhli == idhanhli).FirstOrDefault();
-            double gia = double.Parse(Session["giatien" + idChuyenBay].ToString());
-            double giatienidcu = double.Parse(Session["giatien" + idChuyenBay + Session["idhanhli"]].ToString());
-            double tongtien;
-            if (idcu != null) // Kiểm tra idhanhlicu có tồn tại
-            {
-                var hanhcu = db.Hanhli.Where(hl => hl.IDhanhli == idcu).FirstOrDefault();
-                if (hanhcu != null)
-                {
-                    tongtien = (giatienidcu - hanhcu.Giatien) + hanhli.Giatien;
-                    // Lưu lại tổng tiền vào session
-                    Session["giahanhly"] = hanhli.Giatien;
-                    Session["giatien" + idChuyenBay] = tongtien;
-                    Session["idcu"] = idhanhlicu;
-                    Session["giathanhtoan"] = Math.Round(tongtien);
-                    Session["giathanhtoanvnpay"] = Math.Round(tongtien * 100);
-
-                    // Chuyển hướng đến action "Information" trong controller "Flight"
-                    return RedirectToAction("Information", "Flight", new { id = idChuyenBay });
-                }
-            }
-            // Lấy thông tin từ cơ sở dữ liệu
-            if (hanhli != null)
-            {
-                // Tính tổng tiền mới dựa trên giá trị của hl.Giatien
-
-                tongtien = hanhli.Giatien + gia + (gia / 100 * 10) + 70000;
-
-                // Lưu lại tổng tiền vào session
-                Session["giahanhly"] = hanhli.Giatien;
-                Session["giatien" + idChuyenBay] = tongtien;
-                Session["giathanhtoan"] = Math.Round(tongtien);
-                Session["giathanhtoanvnpay"] = Math.Round(tongtien * 100);
-                Session["idcu"] = idhanhlicu;
-
-                // Chuyển hướng đến action "Information" trong controller "Flight"
-                return RedirectToAction("Information", "Flight", new { id = idChuyenBay });
-            }
-            else
-            {
-                // Xử lý lỗi khi không tìm thấy hl.Giatien dựa trên idhanhli
-                // Nếu cần, bạn có thể thêm mã lỗi hoặc thông báo lỗi tùy vào yêu cầu của dự án
-                return View("Error");
-            }
-        }*/
         public ActionResult PaymentMomo(Ve ve)
         {
             string link = "https://localhost:44378/Home/DatThanhCong/" + Session["idVeMoi"];
@@ -1000,62 +913,5 @@ namespace FlightSearch.Controllers
 
             return View();
         }
-        /*      // Action xử lý yêu cầu tìm kiếm chuyến bay
-              [HttpPost]
-              public async Task<ActionResult> TimKiem(string origin, string destination, DateTime departureDate)
-              {
-                  try
-                  {
-                       Kiểm tra giá trị hợp lệ của các tham số
-                      if (string.IsNullOrEmpty(origin) || string.IsNullOrEmpty(destination) || departureDate == null)
-                      {
-                          ViewBag.ErrorMessage = "Vui lòng nhập đầy đủ thông tin.";
-                          return View("Index");
-                      }
-
-                       Gọi API của Kiwi để lấy dữ liệu chuyến bay
-                      string apiKey = "O7OALE3za9k0VlVkIkEy8EggsjU6wMR8";
-                      string apiUrl = "https://api.skypicker.com/flights";
-                      string searchUrl = $"{apiUrl}?flyFrom={origin}&to={destination}&dateFrom={departureDate.ToString("dd/MM/yyyy")}&dateTo={departureDate.ToString("dd/MM/yyyy")}&apiKey={apiKey}";
-                      using (HttpClient client = new HttpClient())
-                      {
-                          HttpResponseMessage response = await client.GetAsync(searchUrl);
-                          string json = await response.Content.ReadAsStringAsync();
-
-                           Kiểm tra dữ liệu trả về từ API của Kiwi
-                          dynamic flightData = JsonConvert.DeserializeObject(json);
-                          if (flightData == null || flightData.data == null || flightData.data.Length == 0)
-                          {
-                              ViewBag.ErrorMessage = "Không tìm thấy thông tin chuyến bay.";
-                              return View("Index");
-                          }
-
-                           Chuyển đổi dữ liệu json thành đối tượng Chuyenbay
-                          List<Chuyenbay> flights = new List<Chuyenbay>();
-                          foreach (var flight in flightData.data)
-                          {
-                              flights.Add(new Chuyenbay
-                              {
-                                  Diadiemdi = flight.cityFrom,
-                                  Diadiemden = flight.cityTo,
-                                  Batdau = DateTime.Parse(flight.local_departure),
-                                  Ketthuc = DateTime.Parse(flight.local_arrival),
-                              });
-                          }
-
-                           Trả về kết quả cho người dùng
-                          return View("Index", flights);
-                      }
-                  }
-                  catch (Exception ex)
-                  {
-                      ViewBag.ErrorMessage = "Có lỗi xảy ra: " + ex.Message; // Hiển thị thông báo lỗi chi tiết
-                      return View("Index");
-                  }
-              }
-      */
-
-
-
     }
 }
