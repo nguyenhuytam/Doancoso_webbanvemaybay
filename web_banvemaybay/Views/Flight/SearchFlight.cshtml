@@ -26,11 +26,11 @@
                         <p>@chuyenbay.Ngaydi.Value.ToString("HH:mm")</p>
                     </div>
                     @*@if ( chuyenbay.Ngayve != null)
-                    {*@
-                        <div class="choose-time-next">
-                            <span>@chuyenbay.Diadiemden</span>
-                            <p>@chuyenbay.Ngaydi.Value.AddHours(1).AddMinutes(30).ToString("HH:mm")</p>
-                        </div>
+                        {*@
+                    <div class="choose-time-next">
+                        <span>@chuyenbay.Diadiemden</span>
+                        <p>@chuyenbay.Ngaydi.Value.AddHours(1).AddMinutes(30).ToString("HH:mm")</p>
+                    </div>
                     @*}*@
                     <div class="choose-money">
                         <b>@String.Format("{0:0,0}", @chuyenbay.Giatien)</b><span> VNĐ</span>
@@ -55,8 +55,8 @@
                     <label for="priceSort"><input type="radio" name="searchBy" id="priceSort" value="priceSort" checked> Giảm dần</label>
                 </div>
                 <div class="choose-mode-item">
-                   <label for="priceSort1"><input type="radio" name="searchBy" id="priceSort1" value="priceSort1"> Tăng dần</label>
-                </div>   
+                    <label for="priceSort1"><input type="radio" name="searchBy" id="priceSort1" value="priceSort1"> Tăng dần</label>
+                </div>
             </div>
         }
         <script>
@@ -180,74 +180,11 @@
             </div>
         </header>
         <div class="locition-body ">
-            <div class="locition-body-search">
-                <input type="text" name="search" id="search" placeholder="Tìm địa điểm bạn muốn ?">
-                <button class="btn-search"><i class="fa-sharp fa-solid fa-magnifying-glass fa-bounce"></i></button>
-            </div>
             <div class="locition-body-content">
-                <div class="Bac-Nam">
-                    <ul>Miền bắc</ul>
-                    <li>Hà Nội</li>
-                    <li>Hải lihòng</li>
-                    <li>Điện Biên lihủ</li>
-                    <li>Vân đồn</li>
-                    <ul>Miền Nam</ul>
-                    <li>Hồ Chí Minh</li>
-                    <li>lihú Quốc</li>
-                    <li>Cà Mau</li>
-                    <li>Cần Thơ</li>
-                    <li>Côn Đảo</li>
-                    <li>Kiên Giang</li>
-                </div>
-                <div class="Trung">
-                    <ul>Miền Trung</ul>
-                    <li>Đà Nẵng</li>
-                    <li>Nha Trang</li>
-                    <li>Đà Lạt</li>
-                    <li>Huế</li>
-                    <li>Ban Mê Thuột</li>
-                    <li>lileiKu</li>
-                    <li>lihú Yên</li>
-                    <li>Thanh Hóa</li>
-                    <li>Qui Nhơn</li>
-                    <li>Chu Lai</li>
-                    <li>Quảng Bình</li>
-                    <li>Vinh</li>
-                </div>
-                <div class="ChauA">
-                    <ul>Châu Á</ul>
-                    <li>Băng Cốc</li>
-                    <li>Quảng Châu</li>
-                    <li>Hồng Kông</li>
-                    <li>Kuala Lumliur</li>
-                    <li>Seoul, Incheon</li>
-                    <li>Thượng Hải</li>
-                    <li>Singaliore</li>
-                    <li>Đài Bắc</li>
-                    <li>Tokyo</li>
-                    <li>Camliuchia</li>
-                </div>
-                <div class="Au-My">
-                    <ul>Châu Âu</ul>
-                    <li>Amsterdam</li>
-                    <li>Cô-lien-ha-gen</li>
-                    <li>Frankfurt</li>
-                    <li>London</li>
-                    <li>liaris</li>
-                    <li>liraha</li>
-                    <li>Stockholm</li>
-                    <li>Zurich</li>
-                    <ul>Châu úc & Mỹ</ul>
-                    <li>Dallas</li>
-                    <li>Houston</li>
-                    <li>Los Angeles</li>
-                    <li>Men-bơn</li>
-                    <li>New York</li>
-                    <li>San Francisco</li>
-                    <li>Sydney</li>
-                    <li>Toronto</li>
-                    <li>Vancouver</li>
-                </div>
+                @*@foreach (var item in Model)
+                {
+                    <li>@item.DiaDiem1</li>
+                }*@
             </div>
         </div>
     </div>
@@ -262,74 +199,11 @@
             </div>
         </header>
         <div class="locition-body-2 ">
-            <div class="locition-body-search-2">
-                <input type="text" name="search" id="search" placeholder="Tìm địa điểm bạn muốn ?">
-                <button class="btn-search"><i class="fa-sharp fa-solid fa-magnifying-glass fa-bounce"></i></button>
-            </div>
-            <div class="locition-body-content-2">
-                <div class="Bac-Nam">
-                    <ul>Miền bắc</ul>
-                    <li>Hà Nội</li>
-                    <li>Hải lihòng</li>
-                    <li>Điện Biên lihủ</li>
-                    <li>Vân đồn</li>
-                    <ul>Miền Nam</ul>
-                    <li>Hồ Chí Minh</li>
-                    <li>lihú Quốc</li>
-                    <li>Cà Mau</li>
-                    <li>Cần Thơ</li>
-                    <li>Côn Đảo</li>
-                    <li>Kiên Giang</li>
-                </div>
-                <div class="Trung">
-                    <ul>Miền Trung</ul>
-                    <li>Đà Nẵng</li>
-                    <li>Nha Trang</li>
-                    <li>Đà Lạt</li>
-                    <li>Huế</li>
-                    <li>Ban Mê Thuột</li>
-                    <li>lileiKu</li>
-                    <li>lihú Yên</li>
-                    <li>Thanh Hóa</li>
-                    <li>Qui Nhơn</li>
-                    <li>Chu Lai</li>
-                    <li>Quảng Bình</li>
-                    <li>Vinh</li>
-                </div>
-                <div class="ChauA">
-                    <ul>Châu Á</ul>
-                    <li>Băng Cốc</li>
-                    <li>Quảng Châu</li>
-                    <li>Hồng Kông</li>
-                    <li>Kuala Lumliur</li>
-                    <li>Seoul, Incheon</li>
-                    <li>Thượng Hải</li>
-                    <li>Singaliore</li>
-                    <li>Đài Bắc</li>
-                    <li>Tokyo</li>
-                    <li>Camliuchia</li>
-                </div>
-                <div class="Au-My">
-                    <ul>Châu Âu</ul>
-                    <li>Amsterdam</li>
-                    <li>Cô-lien-ha-gen</li>
-                    <li>Frankfurt</li>
-                    <li>London</li>
-                    <li>liaris</li>
-                    <li>liraha</li>
-                    <li>Stockholm</li>
-                    <li>Zurich</li>
-                    <ul>Châu úc & Mỹ</ul>
-                    <li>Dallas</li>
-                    <li>Houston</li>
-                    <li>Los Angeles</li>
-                    <li>Men-bơn</li>
-                    <li>New York</li>
-                    <li>San Francisco</li>
-                    <li>Sydney</li>
-                    <li>Toronto</li>
-                    <li>Vancouver</li>
-                </div>
+            <di@*v class="locition-body-content-2">
+                @foreach (var item in Model)
+                {
+                    <li>@item.DiaDiem1</li>
+                }*@
             </div>
         </div>
     </div>

@@ -109,15 +109,16 @@ else
                         web_banvemaybayEntities db = new web_banvemaybayEntities();
                         int mave = int.Parse(@Session["mavemuontra"].ToString());
                         var kt = db.Ve.Where(c => c.IDve == mave).FirstOrDefault();
-                        if (kt.Tinhtrang == "Chờ thanh toán" && kt.Tinhtrang == "Đã thanh toán")
+                        if (kt.Tinhtrang == "Chờ thanh toán" || kt.Tinhtrang == "Đã thanh toán")
                         {
-                            <a class="btn-choose" href="#" onclick="confirmAction()">
-                                huy
+                            <a class="btn-huy" href="#" onclick="confirmAction()">
+                                Hủy vé
                             </a>
                         }
-        <a class="btn-choose" href="#" onclick="confirmAction()">
-            huy
-        </a>
+<<<<<<< Updated upstream
+          
+=======
+>>>>>>> Stashed changes
                     <input type="hidden" name="idcu" value="@Session["idcu"]" />
                 }
             }

@@ -16,7 +16,14 @@ namespace web_banvemaybay.Controllers
         {
             web_banvemaybayEntities db = new web_banvemaybayEntities();
             int mave = int.Parse(@Session["mavemuontra"].ToString());
+            ViewBag.id = mave;
             var checkma = db.Ve.Where(c => c.IDve.Equals(mave)).FirstOrDefault();
+            ViewBag.Tenkhach = checkma.TTlienhe.FullName;
+            ViewBag.NgayBay = checkma.Chuyenbay.Ngaydi.Value;
+            ViewBag.dddi = checkma.Chuyenbay.Diadiemdi;
+            ViewBag.ddden = checkma.Chuyenbay.Diadiemden;
+            ViewBag.hang = checkma.Chuyenbay.HangHK;
+            ViewBag.macb = checkma.Chuyenbay.IDchuyenbay;
             if (checkma.Tinhtrang == "Đã thanh toán")
             {
                 DateTime ngayhienhtai = DateTime.Today;
