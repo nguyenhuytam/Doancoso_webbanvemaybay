@@ -2,19 +2,36 @@
 @{
     ViewBag.Title = "Index";
 }
+<div class="introduce">
+    <h1>Xác nhận hủy vé</h1>
+    <p>Vé của bạn đã được hủy thành công. Chúng tôi xin thông báo rằng yêu cầu hủy vé của bạn đã được xử lý.</p>
+    <p><b>Thông tin vé</b></p>
+    <ul>
+        <li>Số vé: @ViewBag.id</li>
+        <li>Tên hành khách: @ViewBag.Tenkhach</li>
+        <li>Ngày bay: @ViewBag.NgayBay</li>
+        <li>Thông tin chuyến bay: @ViewBag.dddi - @ViewBag.dddi, @ViewBag.hang, chuyến bay @ViewBag.macb</li>
+    </ul>
+    <p><b>Thông tin hoàn tiền</b></p>
+    <ul>
+        @if (ViewBag.TienHoang != null)
+        {
+            <li>Số tiền hoàn trả cho bạn là: >@String.Format("{0:0,0}", @ViewBag.TienHoang)đ @ViewBag.TienHoang</li>
+        }
+        <li>Quy trình hoàn tiền: Hoàn tiền sẽ được thực hiện qua phương thức thanh toán ban đầu trong vòng 7-14 ngày làm việc.</li>
+        <li>Thời gian xử lý: Yêu cầu hoàn tiền của bạn sẽ được xử lý trong vòng 3-5 ngày làm việc.</li>
+    </ul>
+    <p><b>Liên hệ hổ trợ</b></p>
+    <p>Nếu bạn có bất kỳ câu hỏi hoặc vấn đề nào, vui lòng liên hệ với chúng tôi qua số điện thoại 0963450084 hoặc email airplaneticket@gmail.com. Đội ngũ hỗ trợ khách hàng của chúng tôi sẽ sẵn sàng giúp bạn.</p>
 
-<h2>Hủy Vé </h2>
+</div>
+<div style="padding: 170px 0"></div>
 
-@if (ViewBag.TienHoang != null)
-{
-    <p>Tien Hoang: @ViewBag.TienHoang</p>
-}
-
-@if (!string.IsNullOrEmpty(ViewBag.Message))
+@*@if (!string.IsNullOrEmpty(ViewBag.Message))
 {
     <p>@ViewBag.Message</p>
 }
 @if (!string.IsNullOrEmpty(ViewBag.thongbao))
 {
     <p>@ViewBag.thongbao</p>
-}
+}*@
