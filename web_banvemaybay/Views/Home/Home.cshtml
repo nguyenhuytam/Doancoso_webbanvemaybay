@@ -1,4 +1,4 @@
-﻿@model List<web_banvemaybay.Models.DiaDiem>
+﻿@model List<web_banvemaybay.Models.Chuyenbay>
 @{
     ViewBag.Title = "Home";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -143,14 +143,21 @@
             </div>
         </header>
         <div class="locition-body ">
-            @*<div class="locition-body-search">
-                    <input type="text" name="search" id="search" placeholder="Tìm địa điểm bạn muốn ?">
-                    <button class="btn-search"><i class="fa-sharp fa-solid fa-magnifying-glass fa-bounce"></i></button>
-                </div>*@
             <div class="locition-body-content">
+                @{
+                    // Danh sách tên địa điểm đã xuất hiện
+                    List<string> daXuatHien1 = new List<string>();
+                }
                 @foreach (var item in Model)
-                {                   
-                    <li>@item.DiaDiem1</li>                   
+                {
+                    if (!daXuatHien1.Contains(item.Diadiemdi))
+                    {
+                        // Hiển thị tên địa điểm
+                        <li>@item.Diadiemdi</li>
+
+                        // Thêm tên địa điểm vào danh sách đã xuất hiện
+                        daXuatHien1.Add(item.Diadiemdi);
+                    }
                 }
             </div>
         </div>
@@ -166,17 +173,24 @@
             </div>
         </header>
         <div class="locition-body-2 ">
-            @*<div class="locition-body-search-2">
-                    <input type="text" name="search" id="search" placeholder="Tìm địa điểm bạn muốn ?">
-                    <button class="btn-search"><i class="fa-sharp fa-solid fa-magnifying-glass fa-bounce"></i></button>
-                </div>*@
             <div class="locition-body-content-2">
+                @{
+                    // Danh sách tên địa điểm đã xuất hiện
+                    List<string> daXuatHien2 = new List<string>();
+                }
                 @foreach (var item in Model)
                 {
-                    <li>@item.DiaDiem1</li>
+<<<<<<< Updated upstream
+                    if (!daXuatHien2.Contains(item.Diadiemden))
+                    {
+                        // Hiển thị tên địa điểm
+                        <li>@item.Diadiemden</li>
+
+                        // Thêm tên địa điểm vào danh sách đã xuất hiện
+                        daXuatHien2.Add(item.Diadiemden);
+                    }
                 }
-                @*
-        <div class="Bac-Nam">
+                @* <div class="Bac-Nam">
             <ul>Miền bắc</ul>
             <li>Hà Nội</li>
             <li>Hải Phòng</li>
@@ -239,6 +253,10 @@
             <li>Toronto</li>
             <li>Vancouver</li>
         </div>*@
+=======
+                    <li>@item.DiaDiem1</li>
+                }  
+>>>>>>> Stashed changes
             </div>
         </div>
     </div>
