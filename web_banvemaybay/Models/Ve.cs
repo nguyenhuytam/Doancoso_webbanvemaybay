@@ -27,6 +27,7 @@ namespace web_banvemaybay.Models
         public double Tienphat { get; set; }
         public Nullable<int> Sove { get; set; }
         public double Hoangtra { get; set; }
+        public Nullable<int> IDchuyenbayve { get; set; }
     
         public virtual Chuyenbay Chuyenbay { get; set; }
         public virtual Dattruoc Dattruoc { get; set; }

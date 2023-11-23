@@ -148,39 +148,6 @@ else
                             <input type="email" name="emaillh" placeholder="Email" required class="form-control">
                         </li>
                     </ul>
-                    @*       <div class="invoice">
-                            <div class="invoice-on">
-                                <label for="invoice"><input type="checkbox" name="invoice" id="invoice">Tôi muốn xuất hóa đơn</label>
-                            </div>
-                            <div class="invoice-in">
-                                <ul class="invoice-i">
-                                    <li>
-                                        <p>Tên công ty <sup>*</sup></p>
-                                        <input type="text" placeholder="Tên công ty" required class="form-control">
-                                    </li>
-                                    <li>
-                                        <p>Địa chỉ <sup>*</sup></p>
-                                        <input type="text" placeholder="Địa chỉ" required class="form-control">
-                                    </li>
-                                    <li>
-                                        <p>Thành phố <sup>*</sup></p>
-                                        <input type="text" placeholder="Thành phố" required class="form-control">
-                                    </li>
-                                    <li>
-                                        <p>Mã số thuế VAT <sup>*</sup></p>
-                                        <input type="text" placeholder="Mã số thuế VAT" required class="form-control">
-                                    </li>
-                                    <li>
-                                        <p>Người nhận hóa đơn<sup>*</sup></p>
-                                        <input type="text" placeholder="Người nhận hóa đơn" required class="form-control">
-                                    </li>
-                                    <li>
-                                        <p>Email <sup>*</sup></p>
-                                        <input type="email" placeholder="Email" required class="form-control">
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>*@
                 </div>
             </div>
             <div class="payment">
@@ -286,7 +253,6 @@ else
                             <li>Giá hạng vé<span>@String.Format("{0:0,0}", @Session["giaHangghe"])đ</span></li>
                             <li class="li-money-last">Tổng tiền<span>@String.Format("{0:0,0}", @Session["giatien" + Model.IDchuyenbay])đ</span></li>
                             <input type="hidden" name="idChuyenBay" value="@Model.IDchuyenbay" />
-                            <input type="hidden" name="giatien" value="@Session["giatien"+Model.IDchuyenbay]" />
                             <input type="hidden" name="idcu" value="@Session["idcu"]" />
                             <input type="hidden" name="idHangve" value="@Session["idHangve"]" />
                         </ul>

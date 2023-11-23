@@ -170,6 +170,11 @@
         }
     </div>
 </div>
+<div style="padding: 170px 0"></div>
+@{
+    web_banvemaybayEntities db = new web_banvemaybayEntities();
+    var diaDiemList = db.DiaDiem.ToList();
+}
 @*----------------------------- <location-di> -----------------------------*@
 <div class="location js-location">
     <div class="location-container js-location-container">
@@ -181,10 +186,11 @@
         </header>
         <div class="locition-body ">
             <div class="locition-body-content">
-                @*@foreach (var item in Model)
+                @foreach (var item in diaDiemList)
                 {
+
                     <li>@item.DiaDiem1</li>
-                }*@
+                }
             </div>
         </div>
     </div>
@@ -199,11 +205,11 @@
             </div>
         </header>
         <div class="locition-body-2 ">
-            <di@*v class="locition-body-content-2">
-                @foreach (var item in Model)
+            <div class="locition-body-content-2">
+                @foreach (var item in diaDiemList)
                 {
                     <li>@item.DiaDiem1</li>
-                }*@
+                }
             </div>
         </div>
     </div>

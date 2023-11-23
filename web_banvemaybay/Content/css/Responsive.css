@@ -8,6 +8,14 @@
         .contact-i li:first-child {
             width: 15%;
         }
+    .locition-body-search .otp {
+        width: 82.7%;
+        margin-left: 10px;
+    }
+    .locition-body-search .otp-2 {
+        width: 84.8%;
+        margin-left: 6px;
+    }
 }
 /* Cho máy tính bản */
 @media (min-width: 46.25em) and (max-width: 63.9375em) {

@@ -42,13 +42,31 @@ namespace FlightSearch.Controllers
             var hangvecu = db.Hangve.Where(c => c.IDhangve == hangvekh).FirstOrDefault();
             double tong = double.Parse(Session["giatien"].ToString());
             double giahangve = 0;
-            if (hangvekh >0)
+            //if (hangvekh >0)
+            //{
+            //     giahangve = hangve.Gia + tong - hangvecu.Gia;
+            //}
+            //else
+            //{
+            //     giahangve = hangve.Gia + tong;
+            //}
+            if (idHangve == 1)
             {
-                 giahangve = hangve.Gia + tong - hangvecu.Gia;
+                hangve.Gia *= 2;
+            }
+
+            if (hangvekh == 1)
+            {
+                hangvecu.Gia *= 2;
+            }
+
+            if (hangvekh > 0)
+            {
+                giahangve = hangve.Gia + tong - hangvecu.Gia;
             }
             else
             {
-                 giahangve = hangve.Gia + tong;
+                giahangve = hangve.Gia + tong;
             }
             Session["giatien"]=giahangve;
             return Json(Session["giatien"]);
@@ -340,13 +358,13 @@ namespace FlightSearch.Controllers
             }
             return View(flights);
         }
-
         public ActionResult Information(int? id,int? idTo,int? idFrom, int? idhanhli, int? idcu, int? hangveid,double? totalPrice)
         {
             if (id == null)
             {
                 return View();
             }
+
             int ktidhlcu = Session["idkthlcu"] != null ? int.Parse(Session["idkthlcu"].ToString()) : 0;
             int kthl = Session["idmoinhat"] != null ? int.Parse(Session["idmoinhat"].ToString()) : 0;
             int kthv = Session["idHangve"] != null ? int.Parse(Session["idHangve"].ToString()) : 0;
@@ -613,9 +631,11 @@ namespace FlightSearch.Controllers
             return View("SearchFlight", ((IEnumerable<Chuyenbay>)Session["flights"]).ToList());
         }
         [HttpPost]
-        public ActionResult tt(FormCollection form, TTlienhe lienhe, Hanhkhach hk , string name, DateTime? birthday, int? hangveid, int? sdtlh, string emaillh, string gioitinh, string namelh, string gioitinhlh, int? idcu, int idchuyenbay, double giatien, string payment/*, int? cccd*/)
+        public ActionResult tt(FormCollection form, TTlienhe lienhe, Hanhkhach hk , string name, DateTime? birthday, int? hangveid, int? sdtlh, string emaillh, string gioitinh, string namelh, string gioitinhlh, int? idcu, int? idchuyenbay, string payment/*, int? cccd*/)
         {
             int nguoidat = int.Parse(Session["soluong"].ToString());
+            double giatien = Session["giatien" + idchuyenbay] != null ? double.Parse(@Session["giatien" + idchuyenbay].ToString()) : 0;
+            int idFrom = Session["idFrom"] != null ? int.Parse(Session["idFrom"].ToString()) : 0;
             var now = DateTime.Now;
             if (birthday > now.AddYears(-18))
             {
@@ -638,6 +658,80 @@ namespace FlightSearch.Controllers
                /* kt.CCCD = cccd;*/
                 db.Hanhkhach.Add(kt);
                 db.SaveChanges();
+                if(idFrom != 0)
+                {
+                    int idTo = Session["idTo"] != null ? int.Parse(Session["idTo"].ToString()) : 0;
+                    double gia = Session["giatien"] != null ? double.Parse(Session["giatien"].ToString()) : 0;
+                    double giave = Session["giave"] != null ? double.Parse(Session["giave"].ToString()) : 0;
+                    double tong = gia + (giave / 100 * 10) + 70000;
+                    int sl = Session["tongsl"] != null ? int.Parse(Session["tongsl"].ToString()) : 1;
+                    int idtoHL = Session["toIdcu"] != null ? int.Parse(Session["toIdcu"].ToString()) : 1;
+                    var giato = db.Hanhli.Where(c => c.IDhanhli == idtoHL).FirstOrDefault();
+                    int idfromHL = Session["fromIdcu"] != null ? int.Parse(Session["fromIdcu"].ToString()) : 1;
+                    var giafrom = db.Hanhli.Where(c => c.IDhanhli == idfromHL).FirstOrDefault();
+                    int idhv = Session["hangvekh"] != null ? int.Parse(Session["hangvekh"].ToString()) : 2;
+                    var giahv = db.Hangve.Where(c => c.IDhangve == idhv).FirstOrDefault();
+                    var ve = new Ve();
+                    var giaveto = db.Chuyenbay.Where(c => c.IDchuyenbay == idTo).FirstOrDefault();
+                    if (giaveto != null)
+                    {
+                        double tonggiato = giaveto.Giatien + giato.Giatien + (giaveto.Giatien/100*10)+70000 + giahv.Gia;
+                        ve.Gia = tonggiato;
+                    }
+                    ve.IDchuyenbay = idTo;
+                    Session["idchuyenbay"] = ve.IDchuyenbay;
+                    ve.IDhanhkhach = kt.IDhanhkhach;
+                    ve.IDlienhe = ktlh.IDlienhe;
+                    ve.IDhangve = idhv;
+                    ve.IDhanhli = idtoHL;
+                    ve.Sove = sl;
+                    ve.Ngaydatve = DateTime.Now;
+                    ve.Tinhtrang = "Chờ thanh toán";
+                    Session["TinhTrang"] = ve.Tinhtrang;
+                    Session["emaillh"] = emaillh;
+                    Session["namelh"] = namelh;
+                    Session["sdtlh"] = sdtlh;
+                    Session["payment"] = payment;
+                    Session["KgHanhly"] = giato.Kg;
+                    Session["Hangge"] = giahv.TenHangve;
+                    
+                    ve.IDchuyenbayve = idFrom;
+                    db.Ve.Add(ve);
+                    db.SaveChanges();
+                    int idveTO = ve.IDve;
+                    Session["idVeMoi"] = idveTO;
+                    //Ve khu hoi
+                    var giavefrom = db.Chuyenbay.Where(c => c.IDchuyenbay == idFrom).FirstOrDefault();
+                    if (giaveto != null)
+                    {
+                        double tonggiafrom = giavefrom.Giatien + giafrom.Giatien + (giavefrom.Giatien / 100 * 10) + 70000 + giahv.Gia;
+                        ve.Gia = tonggiafrom;
+                    }
+                    ve.IDchuyenbay = idFrom;
+                    Session["idchuyenbaykh"] = ve.IDchuyenbay;
+                    ve.IDhanhkhach = kt.IDhanhkhach;
+                    ve.IDlienhe = ktlh.IDlienhe;
+                    ve.IDhangve = idhv;
+                    ve.IDhanhli = idfromHL;
+                    ve.Sove = sl;
+                    Session["soluong"] = ve.Sove;
+                    ve.Ngaydatve = DateTime.Now;
+                    ve.Tinhtrang = "Chờ thanh toán";
+                    Session["KgHanhlyHK"] = giafrom.Kg;
+                    Session["TinhTrang"] = ve.Tinhtrang;
+                    ve.IDchuyenbayve = idTo;
+                    db.Ve.Add(ve);
+                    db.SaveChanges();
+                    int idVeFrom = ve.IDve;
+                    //Session["giatien"] = gia;
+                    if (payment == "payment1")
+                    {
+                        Ve veMomo = db.Ve.Find(idTo, idFrom);
+                        return RedirectToAction("PaymentMomo", "Flight", veMomo);
+                    }
+                    return RedirectToAction("DatThanhCong", "Home", new { idTo = idveTO ,idFrom=idVeFrom});
+
+                }
                 string Bag = "Không hành lý!";
                 string DateHour = "";
                 string Departure = "";
@@ -800,7 +894,6 @@ namespace FlightSearch.Controllers
 
             return Redirect(jmessage.GetValue("payUrl").ToString());
         }
-
         //Khi thanh toán xong ở cổng thanh toán Momo, Momo sẽ trả về một số thông tin, trong đó có errorCode để check thông tin thanh toán
         //errorCode = 0 : thanh toán thành công (Request.QueryString["errorCode"])
         //Tham khảo bảng mã lỗi tại: https://developers.momo.vn/#/docs/aio/?id=b%e1%ba%a3ng-m%c3%a3-l%e1%bb%97i
@@ -867,7 +960,6 @@ namespace FlightSearch.Controllers
 
             return Redirect(paymentUrl);
         }
-
         public ActionResult PaymentConfirm()
         {
             if (Request.QueryString.Count > 0)

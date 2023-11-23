@@ -17,12 +17,12 @@
         <EntityTypeShape EntityType="web_banvemaybayModel.Khachsan" Width="1.5" PointX="7.75" PointY="0.75" />
         <EntityTypeShape EntityType="web_banvemaybayModel.TaiKhoan" Width="1.5" PointX="3" PointY="3.75" />
         <EntityTypeShape EntityType="web_banvemaybayModel.TTlienhe" Width="1.5" PointX="5.25" PointY="18.875" />
-        <EntityTypeShape EntityType="web_banvemaybayModel.Ve" Width="1.5" PointX="7.5" PointY="4.375" />
         <AssociationConnector Association="web_banvemaybayModel.FK_Binhluan_TaiKhoan" />
         <AssociationConnector Association="web_banvemaybayModel.FK_TaiKhoan_Chucvu" />
         <AssociationConnector Association="web_banvemaybayModel.FK_Chuyenbay_HangHK" />
-        <AssociationConnector Association="web_banvemaybayModel.FK_Ticket_Filght" />
         <AssociationConnector Association="web_banvemaybayModel.FK_Booking_User" />
+        <EntityTypeShape EntityType="web_banvemaybayModel.Ve" Width="1.5" PointX="7.5" PointY="12.125" />
+        <AssociationConnector Association="web_banvemaybayModel.FK_Ticket_Filght" />
         <AssociationConnector Association="web_banvemaybayModel.FK_Ticket_Booking" />
         <AssociationConnector Association="web_banvemaybayModel.FK_Ve_Hangve" />
         <AssociationConnector Association="web_banvemaybayModel.FK_Ticket_Passenger" />

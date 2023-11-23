@@ -773,7 +773,17 @@ li {
     margin-bottom: 70px;
     display: flex;
 }
-
+.body-choose-KH {
+    margin: 100px 80px 70px;
+    width: 95%;
+    display: flex;
+}
+.body-choose-HL {
+    margin: 100px auto 70px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 .choose {
     width: 60%;
     display: flex;
@@ -781,15 +791,32 @@ li {
     margin-left: auto;
     flex-direction: column;
 }
-
+.choose-KH {
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #fff;
+    box-shadow: 0 0 3px rgb(0 0 0 / 30%);
+}
+.choose-HL {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid #fff;
+    box-shadow: 0 0 3px rgb(0 0 0 / 30%);
+}
+.c-h-c-hl {
+    justify-content: center;
+    padding: 15px 20px
+}
 .choose-heading {
     display: flex;
     flex-direction: row;
     background-color: var(--sea);
     padding: 8px 20px;
     align-items: center;
+    font-size: 21px;
 }
-
     .choose-heading .only-icon {
         font-size: 22px;
         width: 45px;
@@ -803,7 +830,7 @@ li {
     }
 
 .choose-heading-content span {
-    font-size: 14px;
+    font-size: 16px;
 }
 
 .choose-container {
@@ -819,11 +846,74 @@ li {
     box-shadow: 0 0 3px rgb(0 0 0 / 30%);
     opacity: 0.8;
 }
+.choose-item-HL {
+    display: flex;
+    align-items: center;
+    margin: 10px;
+    border-radius: 4px;
+    box-shadow: 0 0 3px rgb(0 0 0 / 30%);
+    opacity: 0.8;
+    flex-wrap: wrap;
+}
+    .choose-item-HL:hover {
+        opacity: 1;
+    } 
 
     .choose-item:hover {
         opacity: 1;
     }
+.choose-hl {
+    display: flex;
+    width: 50%;
+    font-size: 18px;
+    padding: 10px;
+    flex-direction: column;
+}
+    .choose-hl b {
+        padding-bottom: 10px;
+    }
+    .choose-hl select {
+        height: 35px;
+        border: 1px solid;
+        border-radius: 5px;
+        font-size:18px;
+    }
+.choose-hv {
+    display: flex;
+    width: 50%;
+    font-size: 18px;
+    padding:10px;
+    flex-direction: column;
+}
+.choose-hv select {
+    height: 35px;
+    border: 1px solid;
+    border-radius: 5px;
+    font-size: 18px;
+}
+.choose-hv b {
+    padding-bottom: 10px;
+}
+.choose-money-HL {
+    display: flex;
+    width:35%;
+    padding: 5px 10px;
+    font-size: 18px;
+    flex-wrap: wrap;
+}
+.choose-money-HL b {
+    color: rgb(231 73 44);
+}
+    .choose-money-HL p {
+        font-weight: bold;
+        width: 100%;
+        padding-bottom: 10px;
+    }
 
+.choose-money-HL span {
+    font-size: 10px;
+    color: #333333bf;
+}
 .choose-img,
 .choose-time-go,
 .choose-time-next,
@@ -835,13 +925,12 @@ li {
 }
 
     .choose-img img {
-        width: 70px;
-        height: 40px;
+        height: 50px;
     }
 
     .choose-time-go span,
     .choose-time-next span {
-        font-size: 15px;
+        font-size: 16px;
     }
 
     .choose-time-go p,
@@ -889,7 +978,43 @@ li {
     background-color: var(--blue);
     cursor: pointer;
 }
-
+.btn-choose-HL {
+    border: none;
+    border-radius: 4px;
+    padding: 15px 1px;
+    display: flex;
+    width: calc(15% - 10px);
+    margin-right: 10px;
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+    background-color: var(--blue);
+    cursor: pointer;
+}
+.btn-choose-KH {
+    flex: 0.5;
+    border: none;
+    border-radius: 4px;
+    padding: 9px 15px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    font-weight: bold;
+    background-color: var(--blue);
+    cursor: pointer;
+}
+    .btn-choose-KH:hover {
+        border: 1px solid #0e1010;
+        text-decoration: none;
+        padding: 8px 14px;
+        font-size: 16px;
+    }
+    .btn-choose-HL:hover {
+        border: 1px solid #0e1010;
+        text-decoration: none;
+        padding: 14px 0;
+        font-size: 16px;
+    }
     .btn-choose:hover {
         font-size: 15px;
         border: 1px solid #0e1010;
@@ -1056,16 +1181,18 @@ li {
         .customer-i li select {
             width: 100%;
             height: 30px;
+            font-size: 15px;
             margin: 5px 0px;
             cursor: pointer;
         }
 
-        .customer-i li input {
-            width: 100%;
-            height: 30px;
-            padding-left: 5px;
-            margin: 5px 0px;
-        }
+    .customer-i li input {
+        width: 100%;
+        height: 30px;
+        padding-left: 5px;
+        font-size: 15px;
+        margin: 5px 0px;
+    }
 
 .note {
     padding: 10px;
@@ -1074,12 +1201,12 @@ li {
     .note h3 {
         color: red;
         padding-bottom: 5px;
-        font-size: 14px;
+        font-size: 16px;
     }
 
     .note p {
         padding: 5px 10px;
-        font-size: 12px;
+        font-size: 15px;
     }
 
     .note i {
@@ -1135,6 +1262,7 @@ li {
             width: 100%;
             height: 30px;
             margin: 5px 0px;
+            font-size: 15px;
         }
 
         .contact-i li input {
@@ -1142,6 +1270,7 @@ li {
             height: 30px;
             padding-left: 5px;
             margin: 5px 0px;
+            font-size: 15px;
         }
 
 .invoice {
@@ -1324,7 +1453,7 @@ li {
         width: 100%;
         display: flex;
         align-items: center;
-        font-size: 14px;
+        font-size: 16px;
         padding: 6px;
         justify-content: space-between;
     }
@@ -1353,7 +1482,7 @@ li {
         width: 100%;
         display: flex;
         align-items: center;
-        font-size: 13px;
+        font-size: 16px;
         padding: 10px 6px;
         border-bottom: 1px solid #3333;
         justify-content: space-between;
@@ -1362,7 +1491,7 @@ li {
     .information-money .li-money-last {
         color: red;
         border: none;
-        font-size: 15px;
+        font-size: 16px;
         font-weight: 600;
     }
 
@@ -1447,7 +1576,7 @@ li {
     box-shadow: 0 0 3px rgb(0 0 0 / 30%);
     width: calc(50% - 5px);
     background-color: #fff;
-    margin-right: 10px;
+    margin-left: 10px;
 }
 
 .contact-details-heading {
@@ -1699,5 +1828,13 @@ li {
         padding: 3px 0;
         font-weight: 600;
         color: #888;
+        text-align: left;
+    }
+    .thongbao-body .ndtb-2 {
+        font-size: 14px;
+        padding: 3px 0;
+        font-weight: 600;
+        color: #888;
+        display: none;
         text-align: left;
     }
