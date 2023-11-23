@@ -17,7 +17,7 @@ namespace web_banvemaybay.Areas.Admin.Controllers
         // GET: Admin/Ves
         public ActionResult Index()
         {
-            var ve = db.Ve.Include(v => v.Chuyenbay).Include(v => v.Dattruoc).Include(v => v.Hanhkhach).Include(v => v.Hanhli).Include(v => v.TTlienhe);
+            var ve = db.Ve.Include(v => v.Chuyenbay).Include(v => v.Dattruoc).Include(v => v.Hangve).Include(v => v.Hanhli).Include(v => v.TTlienhe).Include(v => v.Hanhkhach);
             return View(ve.ToList());
         }
 
@@ -41,9 +41,10 @@ namespace web_banvemaybay.Areas.Admin.Controllers
         {
             ViewBag.IDchuyenbay = new SelectList(db.Chuyenbay, "IDchuyenbay", "Diadiemdi");
             ViewBag.IDdattruoc = new SelectList(db.Dattruoc, "IDdattruoc", "Tinhtrang");
-            ViewBag.IDhanhkhach = new SelectList(db.Hanhkhach, "IDhanhkhach", "Tenhanhkhach");
+            ViewBag.IDhangve = new SelectList(db.Hangve, "IDhangve", "TenHangve");
             ViewBag.IDhanhli = new SelectList(db.Hanhli, "IDhanhli", "Kg");
             ViewBag.IDlienhe = new SelectList(db.TTlienhe, "IDlienhe", "FullName");
+            ViewBag.IDhanhkhach = new SelectList(db.Hanhkhach, "IDhanhkhach", "Tenhanhkhach");
             return View();
         }
 
@@ -52,7 +53,7 @@ namespace web_banvemaybay.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "IDve,IDdattruoc,IDchuyenbay,IDhanhkhach,Giatien,Tinhtrang,IDlienhe,IDhanhli,Ngaydatve,Gia")] Ve ve)
+        public ActionResult Create([Bind(Include = "IDve,IDdattruoc,IDchuyenbay,IDhanhkhach,Tinhtrang,IDlienhe,IDhanhli,Ngaydatve,Gia,IDhangve,Tienphat,Sove,Hoangtra")] Ve ve)
         {
             if (ModelState.IsValid)
             {
@@ -63,9 +64,10 @@ namespace web_banvemaybay.Areas.Admin.Controllers
 
             ViewBag.IDchuyenbay = new SelectList(db.Chuyenbay, "IDchuyenbay", "Diadiemdi", ve.IDchuyenbay);
             ViewBag.IDdattruoc = new SelectList(db.Dattruoc, "IDdattruoc", "Tinhtrang", ve.IDdattruoc);
-            ViewBag.IDhanhkhach = new SelectList(db.Hanhkhach, "IDhanhkhach", "Tenhanhkhach", ve.IDhanhkhach);
+            ViewBag.IDhangve = new SelectList(db.Hangve, "IDhangve", "TenHangve", ve.IDhangve);
             ViewBag.IDhanhli = new SelectList(db.Hanhli, "IDhanhli", "Kg", ve.IDhanhli);
             ViewBag.IDlienhe = new SelectList(db.TTlienhe, "IDlienhe", "FullName", ve.IDlienhe);
+            ViewBag.IDhanhkhach = new SelectList(db.Hanhkhach, "IDhanhkhach", "Tenhanhkhach", ve.IDhanhkhach);
             return View(ve);
         }
 
@@ -83,9 +85,10 @@ namespace web_banvemaybay.Areas.Admin.Controllers
             }
             ViewBag.IDchuyenbay = new SelectList(db.Chuyenbay, "IDchuyenbay", "Diadiemdi", ve.IDchuyenbay);
             ViewBag.IDdattruoc = new SelectList(db.Dattruoc, "IDdattruoc", "Tinhtrang", ve.IDdattruoc);
-            ViewBag.IDhanhkhach = new SelectList(db.Hanhkhach, "IDhanhkhach", "Tenhanhkhach", ve.IDhanhkhach);
+            ViewBag.IDhangve = new SelectList(db.Hangve, "IDhangve", "TenHangve", ve.IDhangve);
             ViewBag.IDhanhli = new SelectList(db.Hanhli, "IDhanhli", "Kg", ve.IDhanhli);
             ViewBag.IDlienhe = new SelectList(db.TTlienhe, "IDlienhe", "FullName", ve.IDlienhe);
+            ViewBag.IDhanhkhach = new SelectList(db.Hanhkhach, "IDhanhkhach", "Tenhanhkhach", ve.IDhanhkhach);
             return View(ve);
         }
 
@@ -94,7 +97,7 @@ namespace web_banvemaybay.Areas.Admin.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "IDve,IDdattruoc,IDchuyenbay,IDhanhkhach,Giatien,Tinhtrang,IDlienhe,IDhanhli,Ngaydatve,Gia")] Ve ve)
+        public ActionResult Edit([Bind(Include = "IDve,IDdattruoc,IDchuyenbay,IDhanhkhach,Tinhtrang,IDlienhe,IDhanhli,Ngaydatve,Gia,IDhangve,Tienphat,Sove,Hoangtra")] Ve ve)
         {
             if (ModelState.IsValid)
             {
@@ -104,9 +107,10 @@ namespace web_banvemaybay.Areas.Admin.Controllers
             }
             ViewBag.IDchuyenbay = new SelectList(db.Chuyenbay, "IDchuyenbay", "Diadiemdi", ve.IDchuyenbay);
             ViewBag.IDdattruoc = new SelectList(db.Dattruoc, "IDdattruoc", "Tinhtrang", ve.IDdattruoc);
-            ViewBag.IDhanhkhach = new SelectList(db.Hanhkhach, "IDhanhkhach", "Tenhanhkhach", ve.IDhanhkhach);
+            ViewBag.IDhangve = new SelectList(db.Hangve, "IDhangve", "TenHangve", ve.IDhangve);
             ViewBag.IDhanhli = new SelectList(db.Hanhli, "IDhanhli", "Kg", ve.IDhanhli);
             ViewBag.IDlienhe = new SelectList(db.TTlienhe, "IDlienhe", "FullName", ve.IDlienhe);
+            ViewBag.IDhanhkhach = new SelectList(db.Hanhkhach, "IDhanhkhach", "Tenhanhkhach", ve.IDhanhkhach);
             return View(ve);
         }
 

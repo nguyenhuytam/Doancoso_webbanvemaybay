@@ -12,7 +12,7 @@
             <li class="breadcrumb-item active">Hành lí</li>
         </ol>
         <p>
-            @Html.ActionLink("Thêm mới", "Create")
+            @Html.ActionLink("Thêm mới", "Create", null, new { style = "background-color: #0077cc; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;" })
         </p>
 
         <div class="card mb-4">
@@ -44,9 +44,10 @@
                                     @String.Format("{0:0,0}", int.Parse(@Html.DisplayFor(modelItem => item.Giatien).ToString()))đ
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Sửa", "Edit", new { id = item.IDhanhli }) |
-                                    @Html.ActionLink("Chi tiết", "Details", new { id = item.IDhanhli }) |
-                                    @Html.ActionLink("Xóa", "Delete", new { id = item.IDhanhli })
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.IDhanhli }, new { style = "background-color: #0077cc; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" }) |
+                                    @Html.ActionLink("Chi tiết", "Details", new { id = item.IDhanhli }, new { style = "background-color: #ffd700; color: black; padding: 5px 10px; text-decoration: none; border-radius: 5px;" }) |
+                                    @Html.ActionLink("Xóa", "Delete", new { id = item.IDhanhli }, new { style = "background-color: #ff0000; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" })
+
                                 </td>
                             </tr>
                         }

@@ -7,7 +7,7 @@
 
 <main>
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Thống kê chuyến bay</h1>
+        <h1 class="mt-4">Thống kê ghế ngồi</h1>
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
@@ -45,7 +45,7 @@
                                     @Html.DisplayFor(modelItem => item.ThuongGia)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Chi tiết", "DoanhThu", new { id = item.IDchuyenbay })
+                                    @Html.ActionLink("Chi tiết", "DoanhThu", new { id = item.IDchuyenbay }, new { style = "background-color: #ffd700; color: black; padding: 5px 10px; text-decoration: none; border-radius: 5px;" })
                                 </td>
                             </tr>
                         }

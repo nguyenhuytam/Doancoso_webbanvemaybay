@@ -11,39 +11,54 @@
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active">Vé</li>
         </ol>
-        @*<p>
-            @Html.ActionLink("Thêm mới", "Create")
-        </p>*@
-
+        <p>
+            @Html.ActionLink("Thêm mới", "Create", null, new { style = "background-color: #0077cc; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;" })
+        </p>
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
-                Bảng số liệu vé
+                Bảng thông tin vé
             </div>
+
             <div class="card-body">
                 <table id="datatablesSimple">
                     <thead>
                         <tr>
                             <th>
-                                Mã vé
-                            </th>
-                            <th>
-                                Tên hành khách
+                                Tình trạng
                             </th>
                             <th>
                                 Ngày đặt vé
                             </th>
                             <th>
+                                Giá
+                            </th>
+                            <th>
+                                Tiền phạt
+                            </th>
+                            <th>
+                                Số vé
+                            </th>
+                            <th>
+                                Hoàn trả
+                            </th>
+                            <th>
                                 Địa điểm đi
                             </th>
                             <th>
-                                Hành lí
-                            </th>
-                            <th>
-                                Giá tiền
-                            </th>
-                            <th>
                                 Tình trạng
+                            </th>
+                            <th>
+                                Hạng vé
+                            </th>
+                            <th>
+                                Hành lí(Kg)
+                            </th>
+                            <th>
+                                Tên đầy đủ
+                            </th>
+                            <th>
+                                Tên hành khách
                             </th>
                             <th></th>
                         </tr>
@@ -53,31 +68,45 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.IDve)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Hanhkhach.Tenhanhkhach)
+                                    @Html.DisplayFor(modelItem => item.Tinhtrang)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Ngaydatve)
                                 </td>
                                 <td>
+                                    @Html.DisplayFor(modelItem => item.Gia)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Tienphat)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Sove)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Hoangtra)
+                                </td>
+                                <td>
                                     @Html.DisplayFor(modelItem => item.Chuyenbay.Diadiemdi)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Dattruoc.Tinhtrang)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Hangve.TenHangve)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Hanhli.Kg)
                                 </td>
                                 <td>
-                                    @String.Format("{0:0,0}", @Html.DisplayFor(modelItem => item.Gia).ToString())đ
-
+                                    @Html.DisplayFor(modelItem => item.TTlienhe.FullName)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Tinhtrang)
+                                    @Html.DisplayFor(modelItem => item.Hanhkhach.Tenhanhkhach)
                                 </td>
                                 <td>
-                                    @*@Html.ActionLink("Sửa", "Edit", new { id = item.IDve }) |*@
-                                    @Html.ActionLink("Chi tiết", "Details", new { id = item.IDve })
-                                    @*@Html.ActionLink("Xóa", "Delete", new { id = item.IDve })*@
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.IDve }, new { style = "background-color: #0077cc; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" }) |
+                                    @Html.ActionLink("Chi tiết", "Details", new { id = item.IDve }, new { style = "background-color: #ffd700; color: black; padding: 5px 10px; text-decoration: none; border-radius: 5px;" }) |
+                                    @Html.ActionLink("Xóa", "Delete", new { id = item.IDve }, new { style = "background-color: #ff0000; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" })
                                 </td>
                             </tr>
                         }

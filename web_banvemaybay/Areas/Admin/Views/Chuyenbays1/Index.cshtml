@@ -11,7 +11,7 @@
             <li class="breadcrumb-item active">Chuyến bay</li>
         </ol>
         <p>
-            @Html.ActionLink("Thêm mới", "Create")
+            @Html.ActionLink("Thêm mới", "Create", null, new { style = "background-color: #0077cc; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;" })
         </p>
 
         <div class="card mb-4">
@@ -24,19 +24,19 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.Diadiemdi)
+                                Địa điểm đi
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Diadiemden)
+                                Địa điểm đến
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Ngaydi)
+                                Ngày đi
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Ngayve)
+                                Ngày về
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Giatien)
+                                Giá tiền
                             </th>
                             <th>
                                 Số vé phổ thông
@@ -45,7 +45,7 @@
                                 Số vé thương gia
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.HangHK.TenHang)
+                                Tên hãng
                             </th>
                             <th></th>
                         </tr>
@@ -79,8 +79,8 @@
                                     @Html.DisplayFor(modelItem => item.HangHK.TenHang)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Sửa", "Edit", new { id = item.IDchuyenbay }) |
-                                    @Html.ActionLink("Chi tiết", "Details", new { id = item.IDchuyenbay }) |
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.IDchuyenbay }, new { style = "background-color: #0077cc; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" }) |
+                                    @Html.ActionLink("Chi tiết", "Details", new { id = item.IDchuyenbay }, new { style = "background-color: #ffd700; color: black; padding: 5px 10px; text-decoration: none; border-radius: 5px;" })
                                 </td>
                             </tr>
                         }

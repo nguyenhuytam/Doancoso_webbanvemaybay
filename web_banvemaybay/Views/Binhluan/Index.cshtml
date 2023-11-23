@@ -1,4 +1,6 @@
-﻿@model List<web_banvemaybay.Models.Binhluan>
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<web_banvemaybay.Models.Binhluan>
 <link href="~/Content/css/Binhluan.css" rel="stylesheet" />
 <title>Beautiful Comments</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-dTq9t5pUc4L/Il2iXXx2AhNN07P5QPl3NmEs3TJ5ymCprYi/QT4P8ceGcv5Cd0zVK3C8E1GXvqzjo5A3uW9dkwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -22,16 +24,26 @@
                         <i class="fas fa-star" style="color:gold"></i>
                     }
                 </div>
+                <a href="#" class="reply-link" data-comment-id="@item.id">Trả lời</a>
+                <div class="reply-form" style="display: none;" data-comment-id="@item.id">
+                    <input type="hidden" class="comment-id" value="@item.id" />
+                    <input type="hidden" class="parent-comment-id" value="@item.idTraloi" />
+                    <textarea class="reply-text" placeholder="Viết phản hồi tại đây"></textarea>
+                    <button class="reply-submit">Gửi</button>
+                </div>
             </div>
+
         }
+        <!-- Hiển thị phân trang -->
+        @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+
         <!-- More comments go here -->
 
         <div class="comment-form">
             @if (Session["IDtaikhoan"] != null)
             {
                 <span>@Session["Hovaten"]</span>
-                <textarea placeholder="Add a comment..." name="binhluanmoi"></textarea>
-                <button>Bình luận</button>
+                <textarea placeholder="Viết phản hồi tại đây" name="binhluanmoi"></textarea>
                 <div class="rating" name="sosao">
                     <i class="fas fa-star" data-rating="1"></i>
                     <i class="fas fa-star" data-rating="2"></i>
@@ -39,6 +51,7 @@
                     <i class="fas fa-star" data-rating="4"></i>
                     <i class="fas fa-star" data-rating="5"></i>
                 </div>
+                <button>Bình luận</button>
                 <input type="hidden" id="selectedRating" name="selectedRating" value="0" />
             }
             else
@@ -50,6 +63,47 @@
 </form>
 
 <script>
+    // JavaScript để hiển thị form trả lời khi click vào button "Trả lời"
+    document.querySelectorAll('.reply-link').forEach(replyLink => {
+        replyLink.addEventListener('click', function () {
+            const commentId = this.getAttribute('data-comment-id');
+            const parentCommentId = this.getAttribute('data-parent-comment-id');
+            const replyForm = document.querySelector('.reply-form[data-comment-id="' + commentId + '"]');
+            replyForm.querySelector('.parent-comment-id').value = parentCommentId;
+            replyForm.style.display = 'block';
+        });
+    });
+    // Xử lý Gửi Form Trả lời
+    document.querySelectorAll('.reply-submit').forEach(replySubmit => {
+        replySubmit.addEventListener('click', function () {
+            const commentId = this.parentElement.querySelector('.comment-id').value;
+            const parentCommentId = this.parentElement.querySelector('.parent-comment-id').value;
+            const replyText = this.parentElement.querySelector('.reply-text').value;
+
+            // Gửi dữ liệu form qua Ajax đến server
+            fetch('/reply', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ commentId: commentId, parentCommentId: parentCommentId, replyText: replyText }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    // Hiển thị câu trả lời dưới comment tương ứng
+                    const newReply = document.createElement('div');
+                    newReply.classList.add('reply');
+                    newReply.innerText = data.replyText;
+                    this.parentElement.parentElement.querySelector('.reply-container').appendChild(newReply);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    });
+
+
+
     const stars = document.querySelectorAll('.rating i');
     const selectedRatingInput = document.getElementById('selectedRating');
 

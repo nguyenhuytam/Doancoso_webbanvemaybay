@@ -5,44 +5,112 @@
     Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
 }
 
+<h2>Chi tiết</h2>
 
-
-<div class="p15">
-    <h2>Chi tiết</h2><br />
+<div>
     <h4>Vé</h4>
     <hr />
-    <dl class="dl-horizontal p15">
+    <dl class="dl-horizontal">
         <dt>
-            Id vé : @Html.DisplayFor(model => model.IDve)
+            @Html.DisplayNameFor(model => model.Tinhtrang)
         </dt>
-        <dt>
-            Tên hành khách : @Html.DisplayFor(model => model.Hanhkhach.Tenhanhkhach)
-        </dt>
-        <dt>
-            Ngày đặt vé : @Html.DisplayFor(model => model.Ngaydatve)
-        </dt>
-        <dt>
-            Địa điểm đi : @Html.DisplayFor(model => model.Chuyenbay.Diadiemdi)
-        </dt>
-        <dt>
-            Địa điểm đến : @Html.DisplayFor(model => model.Chuyenbay.Diadiemden)
-        </dt>
-        <dt>
-            Hành lí : @Html.DisplayFor(model => model.Hanhli.Kg)
-        </dt>
-        <dt>
-            Giá tiền : @String.Format("{0:0,0}", int.Parse(@Html.DisplayFor(model => model.Gia).ToString()))đ
-        </dt>
-        <dt>
-            Thông tin liên hệ : @Html.DisplayFor(model => model.TTlienhe.Phone)
-        </dt>
-        <dt>
-            Tình trạng : @Html.DisplayFor(model => model.Tinhtrang)
-        </dt>
-    </dl>
-    <p class="p15">
-        @*@Html.ActionLink("Sửa", "Edit", new { id = Model.IDve }) |*@
-        @Html.ActionLink("Quay lại", "Index")
-    </p>
-</div>
 
+        <dd>
+            @Html.DisplayFor(model => model.Tinhtrang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Ngaydatve)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Ngaydatve)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Gia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Gia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tienphat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tienphat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sove)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sove)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hoangtra)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hoangtra)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Chuyenbay.Diadiemdi)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Chuyenbay.Diadiemdi)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Dattruoc.Tinhtrang)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Dattruoc.Tinhtrang)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hangve.TenHangve)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hangve.TenHangve)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hanhli.Kg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hanhli.Kg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TTlienhe.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TTlienhe.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Hanhkhach.Tenhanhkhach)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Hanhkhach.Tenhanhkhach)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Sửa", "Edit", new { id = Model.IDve }, new { style = "background-color: #0077cc; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" }) |
+    @Html.ActionLink("Quay lại", "Index", null, new { style = "background-color: #0077cc; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" })
+
+</p>

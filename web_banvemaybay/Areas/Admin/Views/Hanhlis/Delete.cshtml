@@ -11,22 +11,23 @@
     <h2>Xóa</h2><br />
     <h4>Hành lí</h4>
     <hr />
-        <dl class="dl-horizontal p15">
-            <dt>
-                Kg : @Html.DisplayFor(model => model.Kg)
-            </dt>
-            <dt>
-                Giá tiền : @Html.DisplayFor(model => model.Giatien)
-            </dt>
-        </dl>
+    <dl class="dl-horizontal p15">
+        <dt>
+            Kg : @Html.DisplayFor(model => model.Kg)
+        </dt>
+        <dt>
+            Giá tiền : @Html.DisplayFor(model => model.Giatien)
+        </dt>
+    </dl>
 
-        @using (Html.BeginForm())
-        {
-            @Html.AntiForgeryToken()
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
 
-            <div class="form-actions no-color p15">
-                <input type="submit" value="Xóa" class="btn btn-danger" /> |
-                @Html.ActionLink("Quay lại", "Index")
-            </div>
-        }
+        <div class="form-actions no-color p15">
+            <input type="submit" value="Xóa" class="btn btn-danger" style="background-color: red; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px; border: none;" onclick="return confirm('Bạn có chắc chắn muốn xóa không?');" /> |
+            @Html.ActionLink("Quay lại", "Index", null, new { style = "background-color: #0077cc; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" })
+        </div>
+
+    }
 </div>

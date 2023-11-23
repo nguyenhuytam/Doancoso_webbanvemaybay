@@ -12,7 +12,7 @@
             <li class="breadcrumb-item active">Đặt trước</li>
         </ol>
         <p>
-            @Html.ActionLink("Thêm mới", "Create")
+            @Html.ActionLink("Thêm mới", "Create", null, new { style = "background-color: #0077cc; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;" })
         </p>
 
         <div class="card mb-4">
@@ -50,9 +50,9 @@
                                     @Html.DisplayFor(modelItem => item.TaiKhoan.IDtaikhoan)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Sửa", "Edit", new { id = item.IDdattruoc }) |
-                                    @Html.ActionLink("Chi tiết", "Details", new { id = item.IDdattruoc }) |
-                                    @Html.ActionLink("Xóa", "Delete", new { id = item.IDdattruoc })
+                                    @Html.ActionLink("Sửa", "Edit", new { id = item.IDdattruoc }, new { style = "background-color: #0077cc; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" }) |
+                                    @Html.ActionLink("Chi tiết", "Details", new { id = item.IDdattruoc }, new { style = "background-color: #ffd700; color: black; padding: 5px 10px; text-decoration: none; border-radius: 5px;" }) |
+                                    @Html.ActionLink("Xóa", "Delete", new { id = item.IDdattruoc }, new { style = "background-color: #ff0000; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" })
                                 </td>
                             </tr>
                         }
