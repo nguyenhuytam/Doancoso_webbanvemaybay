@@ -1,4 +1,4 @@
-﻿@model List<web_banvemaybay.Models.Chuyenbay>
+﻿@model List<web_banvemaybay.Models.DiaDiem>
 @{
     ViewBag.Title = "Home";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -143,25 +143,10 @@
             </div>
         </header>
         <div class="locition-body ">
-            @*<div class="locition-body-search">
-                    <input type="text" name="search" id="search" placeholder="Tìm địa điểm bạn muốn ?">
-                    <button class="btn-search"><i class="fa-sharp fa-solid fa-magnifying-glass fa-bounce"></i></button>
-                </div>*@
             <div class="locition-body-content">
-                @{
-                    // Danh sách tên địa điểm đã xuất hiện
-                    List<string> daXuatHien1 = new List<string>();
-                }
                 @foreach (var item in Model)
                 {
-                    if (!daXuatHien1.Contains(item.Diadiemdi))
-                    {
-                        // Hiển thị tên địa điểm
-                        <li>@item.Diadiemdi</li>
-
-                        // Thêm tên địa điểm vào danh sách đã xuất hiện
-                        daXuatHien1.Add(item.Diadiemdi);
-                    }
+                    <li>@item.DiaDiem1</li>
                 }
             </div>
         </div>
@@ -177,89 +162,11 @@
             </div>
         </header>
         <div class="locition-body-2 ">
-            @*<div class="locition-body-search-2">
-                    <input type="text" name="search" id="search" placeholder="Tìm địa điểm bạn muốn ?">
-                    <button class="btn-search"><i class="fa-sharp fa-solid fa-magnifying-glass fa-bounce"></i></button>
-                </div>*@
-            <div class="locition-body-content-2">
-                @{
-                    // Danh sách tên địa điểm đã xuất hiện
-                    List<string> daXuatHien2 = new List<string>();
-                }
+            <div class="locition-body-content-2">             
                 @foreach (var item in Model)
                 {
-                    if (!daXuatHien2.Contains(item.Diadiemden))
-                    {
-                        // Hiển thị tên địa điểm
-                        <li>@item.Diadiemden</li>
-
-                        // Thêm tên địa điểm vào danh sách đã xuất hiện
-                        daXuatHien2.Add(item.Diadiemden);
-                    }
-                }
-                @* <div class="Bac-Nam">
-            <ul>Miền bắc</ul>
-            <li>Hà Nội</li>
-            <li>Hải Phòng</li>
-            <li>Điện Biên Phủ</li>
-            <li>Vân đồn</li>
-            <ul>Miền Nam</ul>
-            <li>Hồ Chí Minh</li>
-            <li>Phú Quốc</li>
-            <li>Cà Mau</li>
-            <li>Cần Thơ</li>
-            <li>Côn Đảo</li>
-            <li>Kiên Giang</li>
-        </div>
-        <div class="Trung">
-            <ul>Miền Trung</ul>
-            <li>Đà Nẵng</li>
-            <li>Nha Trang</li>
-            <li>Đà Lạt</li>
-            <li>Huế</li>
-            <li>Ban Mê Thuột</li>
-            <li>PleiKu</li>
-            <li>Phú Yên</li>
-            <li>Thanh Hóa</li>
-            <li>Qui Nhơn</li>
-            <li>Chu Lai</li>
-            <li>Quảng Bình</li>
-            <li>Vinh</li>
-        </div>
-        <div class="ChauA">
-            <ul>Châu Á</ul>
-            <li>Băng Cốc</li>
-            <li>Quảng Châu</li>
-            <li>Hồng Kông</li>
-            <li>Kuala Lumpur</li>
-            <li>Seoul, Incheon</li>
-            <li>Thượng Hải</li>
-            <li>Singapore</li>
-            <li>Đài Bắc</li>
-            <li>Tokyo</li>
-            <li>Campuchia</li>
-        </div>
-        <div class="Au-My">
-            <ul>Châu Âu</ul>
-            <li>Amsterdam</li>
-            <li>Cô-pen-ha-gen</li>
-            <li>Frankfurt</li>
-            <li>London</li>
-            <li>Paris</li>
-            <li>Praha</li>
-            <li>Stockholm</li>
-            <li>Zurich</li>
-            <ul>Châu úc & Mỹ</ul>
-            <li>Dallas</li>
-            <li>Houston</li>
-            <li>Los Angeles</li>
-            <li>Men-bơn</li>
-            <li>New York</li>
-            <li>San Francisco</li>
-            <li>Sydney</li>
-            <li>Toronto</li>
-            <li>Vancouver</li>
-        </div>*@
+                    <li>@item.DiaDiem1</li>
+                }  
             </div>
         </div>
     </div>

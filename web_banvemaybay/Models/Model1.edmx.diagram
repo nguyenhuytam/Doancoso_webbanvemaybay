@@ -5,28 +5,29 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="719edde81a52431b99b7406dc25f59dc" Name="Diagram1" ZoomLevel="96">
-        <EntityTypeShape EntityType="web_banvemaybayModel.Chucvu" Width="1.5" PointX="0.75" PointY="2.375" />
-        <EntityTypeShape EntityType="web_banvemaybayModel.Chuyenbay" Width="1.5" PointX="5.25" PointY="7.125" />
-        <EntityTypeShape EntityType="web_banvemaybayModel.Dattruoc" Width="1.5" PointX="5.25" PointY="2.125" />
-        <EntityTypeShape EntityType="web_banvemaybayModel.HangHK" Width="1.5" PointX="3" PointY="7.75" />
-        <EntityTypeShape EntityType="web_banvemaybayModel.Hangve" Width="1.5" PointX="5.25" PointY="11" />
-        <EntityTypeShape EntityType="web_banvemaybayModel.Hanhli" Width="1.5" PointX="5.25" PointY="13.5" />
-        <EntityTypeShape EntityType="web_banvemaybayModel.sysdiagrams" Width="1.5" PointX="7.75" PointY="6.75" />
-        <EntityTypeShape EntityType="web_banvemaybayModel.TaiKhoan" Width="1.5" PointX="3" PointY="1.875" />
-        <EntityTypeShape EntityType="web_banvemaybayModel.TTlienhe" Width="1.5" PointX="5.25" PointY="16" />
+        <EntityTypeShape EntityType="web_banvemaybayModel.Binhluan" Width="1.5" PointX="5.25" PointY="2.5" />
+        <EntityTypeShape EntityType="web_banvemaybayModel.Chucvu" Width="1.5" PointX="0.75" PointY="4.25" />
+        <EntityTypeShape EntityType="web_banvemaybayModel.Chuyenbay" Width="1.5" PointX="5.25" PointY="11.75" />
+        <EntityTypeShape EntityType="web_banvemaybayModel.Dattruoc" Width="1.5" PointX="5.25" PointY="5.625" />
+        <EntityTypeShape EntityType="web_banvemaybayModel.DiaDiem" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="web_banvemaybayModel.HangHK" Width="1.5" PointX="3" PointY="12.375" />
+        <EntityTypeShape EntityType="web_banvemaybayModel.Hangve" Width="1.5" PointX="5.25" PointY="21.625" />
+        <EntityTypeShape EntityType="web_banvemaybayModel.Hanhkhach" Width="1.5" PointX="5.25" PointY="15.625" />
+        <EntityTypeShape EntityType="web_banvemaybayModel.Hanhli" Width="1.5" PointX="5.25" PointY="9.25" />
+        <EntityTypeShape EntityType="web_banvemaybayModel.Khachsan" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="web_banvemaybayModel.TaiKhoan" Width="1.5" PointX="3" PointY="3.75" />
+        <EntityTypeShape EntityType="web_banvemaybayModel.TTlienhe" Width="1.5" PointX="5.25" PointY="18.875" />
+        <EntityTypeShape EntityType="web_banvemaybayModel.Ve" Width="1.5" PointX="7.5" PointY="4.375" />
+        <AssociationConnector Association="web_banvemaybayModel.FK_Binhluan_TaiKhoan" />
         <AssociationConnector Association="web_banvemaybayModel.FK_TaiKhoan_Chucvu" />
         <AssociationConnector Association="web_banvemaybayModel.FK_Chuyenbay_HangHK" />
-        <AssociationConnector Association="web_banvemaybayModel.FK_Booking_User" />
-        <EntityTypeShape EntityType="web_banvemaybayModel.Ve" Width="1.5" PointX="7.5" PointY="9.5" />
         <AssociationConnector Association="web_banvemaybayModel.FK_Ticket_Filght" />
+        <AssociationConnector Association="web_banvemaybayModel.FK_Booking_User" />
         <AssociationConnector Association="web_banvemaybayModel.FK_Ticket_Booking" />
         <AssociationConnector Association="web_banvemaybayModel.FK_Ve_Hangve" />
+        <AssociationConnector Association="web_banvemaybayModel.FK_Ticket_Passenger" />
         <AssociationConnector Association="web_banvemaybayModel.FK_Ve_Hanhli" />
         <AssociationConnector Association="web_banvemaybayModel.FK_Ve_TTlienhe" />
-        <EntityTypeShape EntityType="web_banvemaybayModel.Binhluan" Width="1.5" PointX="5.25" PointY="19.125" />
-        <EntityTypeShape EntityType="web_banvemaybayModel.Hanhkhach" Width="1.5" PointX="7.375" PointY="1" />
-        <AssociationConnector Association="web_banvemaybayModel.FK_Binhluan_TaiKhoan" />
-        <AssociationConnector Association="web_banvemaybayModel.FK_Ticket_Passenger" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

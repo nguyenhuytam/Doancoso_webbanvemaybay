@@ -17,22 +17,22 @@ namespace web_banvemaybay.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TaiKhoan()
         {
-            this.Dattruoc = new HashSet<Dattruoc>();
             this.Binhluan = new HashSet<Binhluan>();
+            this.Dattruoc = new HashSet<Dattruoc>();
         }
     
         public int IDtaikhoan { get; set; }
-        public string Password { get; set; }
         public string ConfirmPassword { get; set; }
+        public string Password { get; set; }
         public string HovaTen { get; set; }
         public string Email { get; set; }
         public Nullable<int> SDT { get; set; }
         public Nullable<int> IDchucvu { get; set; }
     
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Binhluan> Binhluan { get; set; }
         public virtual Chucvu Chucvu { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Dattruoc> Dattruoc { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Binhluan> Binhluan { get; set; }
     }
 }
