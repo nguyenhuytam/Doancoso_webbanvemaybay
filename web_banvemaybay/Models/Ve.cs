@@ -24,9 +24,9 @@ namespace web_banvemaybay.Models
         public DateTime Ngaydatve { get; set; }
         public double Gia { get; set; }
         public Nullable<int> IDhangve { get; set; }
-        public double Tienphat { get; set; }
+        public double? Tienphat { get; set; }
         public Nullable<int> Sove { get; set; }
-        public double Hoangtra { get; set; }
+        public double? Hoangtra { get; set; }
         public Nullable<int> IDchuyenbayve { get; set; }
     
         public virtual Chuyenbay Chuyenbay { get; set; }
