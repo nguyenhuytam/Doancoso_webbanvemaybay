@@ -308,6 +308,7 @@
     <Content Include="Areas\Admin\ContentAdmin\image\iconweb.jpg" />
     <Content Include="Areas\Admin\ContentAdmin\image\iconweb2.jpg" />
     <Content Include="Content\javascript\js.js" />
+    <Content Include="Content\template\ChoThanhToanKH.html" />
     <Content Include="Content\template\ChoThanhToan.html" />
     <Content Include="Content\template\EmailVe.html" />
     <Content Include="favicon.ico" />

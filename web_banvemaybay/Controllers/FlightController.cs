@@ -658,7 +658,12 @@ namespace FlightSearch.Controllers
                /* kt.CCCD = cccd;*/
                 db.Hanhkhach.Add(kt);
                 db.SaveChanges();
-                if(idFrom != 0)
+                string Bag = "Không hành lý!";
+                string DateHour = "";
+                string DateHourKH = "";
+                string Departure = "";
+                string Destination = "";
+                if (idFrom != 0)
                 {
                     int idTo = Session["idTo"] != null ? int.Parse(Session["idTo"].ToString()) : 0;
                     double gia = Session["giatien"] != null ? double.Parse(Session["giatien"].ToString()) : 0;
@@ -723,19 +728,46 @@ namespace FlightSearch.Controllers
                     db.Ve.Add(ve);
                     db.SaveChanges();
                     int idVeFrom = ve.IDve;
+                    Session["idVeKH"] = idVeFrom;
                     //Session["giatien"] = gia;
                     if (payment == "payment1")
                     {
                         Ve veMomo = db.Ve.Find(idTo, idFrom);
                         return RedirectToAction("PaymentMomo", "Flight", veMomo);
                     }
+                    var chuyenbay = db.Chuyenbay.Where(hl => hl.IDchuyenbay == idTo).FirstOrDefault();
+                    Departure = chuyenbay.Diadiemdi.ToString();
+                    Session["Departure"] = Departure;
+                    Destination = chuyenbay.Diadiemden.ToString();
+                    Session["Destination"] = Destination;
+                    Session["TenHang"] = chuyenbay.HangHK.TenHang;
+                    DateHour = chuyenbay.Ngaydi.ToString();
+                    var chuyenbaykh = db.Chuyenbay.Where(hl => hl.IDchuyenbay == idFrom).FirstOrDefault();
+                    DateHourKH = chuyenbaykh.Ngaydi.ToString();
+                    Session["TenHangKH"] = chuyenbaykh.HangHK.TenHang;
+                    string DateHour1 = (DateTime.Parse(DateHour).AddDays(-1)).ToString();
+                    string DateHour2 = (DateTime.Parse(DateHourKH).AddDays(-1)).ToString();
+                    string content = System.IO.File.ReadAllText(Server.MapPath("~/Content/template/ChoThanhToanKH.html"));
+                    content = content.Replace("{{CustomerName}}", namelh);
+                    content = content.Replace("{{MaVe}}", Session["idVeMoi"].ToString());
+                    content = content.Replace("{{MaVeKH}}", Session["idVeKH"].ToString());
+                    content = content.Replace("{{DateHour}}", DateHour1);
+                    content = content.Replace("{{DateHour2}}", DateHour2);
+                    content = content.Replace("{{Departure}}", Session["Departure"].ToString());
+                    content = content.Replace("{{Destination}}", Session["Destination"].ToString());
+                    content = content.Replace("{{Bag}}", Session["KgHanhly"].ToString());
+                    content = content.Replace("{{BagKH}}", Session["KgHanhlyHK"].ToString());
+                    content = content.Replace("{{idchuyenbay}}", Session["idchuyenbay"].ToString());
+                    content = content.Replace("{{TenHang}}", Session["TenHang"].ToString());
+                    content = content.Replace("{{TenHangKH}}", Session["TenHangKH"].ToString());
+                    var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+
+                    new MailHelper().SendMail(Session["emaillh"].ToString(), "Bạn đã đặt vé tại AirplaneTicket", content);
+                   // new MailHelper().SendMail(toEmail, "Đơn hàng mới từ AirplaneTicket", content);
                     return RedirectToAction("DatThanhCong", "Home", new { idTo = idveTO ,idFrom=idVeFrom});
 
                 }
-                string Bag = "Không hành lý!";
-                string DateHour = "";
-                string Departure = "";
-                string Destination = "";
+                
                 if (idchuyenbay != null)
                 {
                     var ve = new Ve();
@@ -832,7 +864,7 @@ namespace FlightSearch.Controllers
                     var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
 
                     new MailHelper().SendMail(Session["emaillh"].ToString(), "Bạn đã đặt vé tại AirplaneTicket", content);
-                    new MailHelper().SendMail(toEmail, "Đơn hàng mới từ AirplaneTicket", content);
+                    new MailHelper().SendMail(toEmail, "Đơn hàng mới từ AirplaneTicket", content);  
                     return RedirectToAction("DatThanhCong", "Home", new { id = idVeMoi });
                 }
             }
