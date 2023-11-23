@@ -133,6 +133,7 @@
     <Compile Include="Areas\Admin\Controllers\Chuyenbays1Controller.cs" />
     <Compile Include="Areas\Admin\Controllers\ChuyenbaysController.cs" />
     <Compile Include="Areas\Admin\Controllers\DattruocsController.cs" />
+    <Compile Include="Areas\Admin\Controllers\DiaDiemsController.cs" />
     <Compile Include="Areas\Admin\Controllers\HangHKsController.cs" />
     <Compile Include="Areas\Admin\Controllers\HanhlisController.cs" />
     <Compile Include="Areas\Admin\Controllers\LoginAdminController.cs" />
@@ -421,6 +422,11 @@
     <Content Include="Areas\Admin\Views\Ves\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Ves\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Ves\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\DiaDiems\Create.cshtml" />
+    <Content Include="Areas\Admin\Views\DiaDiems\Delete.cshtml" />
+    <Content Include="Areas\Admin\Views\DiaDiems\Details.cshtml" />
+    <Content Include="Areas\Admin\Views\DiaDiems\Edit.cshtml" />
+    <Content Include="Areas\Admin\Views\DiaDiems\Index.cshtml" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />

@@ -5,112 +5,68 @@
     Layout = "~/Areas/Admin/Views/Shared/Layout_Admin.cshtml";
 }
 
-<h2>Chi tiết</h2>
+
 
 <div>
+    <h2>Chi tiết</h2>
     <h4>Vé</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Tinhtrang)
+            Tình trạng @Html.DisplayFor(model => model.Tinhtrang)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Tinhtrang)
-        </dd>
+        <dt>
+            Ngày đặt vé: @Html.DisplayFor(model => model.Ngaydatve)
+        </dt>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Ngaydatve)
+            Giá tiền: @Html.DisplayFor(model => model.Gia)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Ngaydatve)
-        </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Gia)
+            Tiền phạt: @Html.DisplayFor(model => model.Tienphat)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Gia)
-        </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Tienphat)
+            Số vé: @Html.DisplayFor(model => model.Sove)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Tienphat)
-        </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Sove)
+            Hoàn trả: @Html.DisplayFor(model => model.Hoangtra)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Sove)
-        </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Hoangtra)
+            Địa điển đi: @Html.DisplayFor(model => model.Chuyenbay.Diadiemdi)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hoangtra)
-        </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Chuyenbay.Diadiemdi)
+            Đặt trước: @Html.DisplayNameFor(model => model.Dattruoc.Tinhtrang)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Chuyenbay.Diadiemdi)
-        </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Dattruoc.Tinhtrang)
+            Hạng vé: @Html.DisplayNameFor(model => model.Hangve.TenHangve)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Dattruoc.Tinhtrang)
-        </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Hangve.TenHangve)
+            Hành lý(Kg): @Html.DisplayNameFor(model => model.Hanhli.Kg)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Hangve.TenHangve)
-        </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Hanhli.Kg)
+            Họ và tên: @Html.DisplayNameFor(model => model.TTlienhe.FullName)
         </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Hanhli.Kg)
-        </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.TTlienhe.FullName)
+            Tên Hành khách: @Html.DisplayNameFor(model => model.Hanhkhach.Tenhanhkhach)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.TTlienhe.FullName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hanhkhach.Tenhanhkhach)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hanhkhach.Tenhanhkhach)
-        </dd>
 
     </dl>
-</div>
-<p>
-    @Html.ActionLink("Sửa", "Edit", new { id = Model.IDve }, new { style = "background-color: #0077cc; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" }) |
-    @Html.ActionLink("Quay lại", "Index", null, new { style = "background-color: #0077cc; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" })
+    <p>
+        @Html.ActionLink("Sửa", "Edit", new { id = Model.IDve }, new { style = "background-color: #0077cc; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" }) |
+        @Html.ActionLink("Quay lại", "Index", null, new { style = "background-color: #0077cc; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" })
 
-</p>
+    </p>
+</div>
+
