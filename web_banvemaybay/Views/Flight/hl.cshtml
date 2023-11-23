@@ -1,122 +1,149 @@
 ﻿@model web_banvemaybay.Models.Hanhli
+@using System.Globalization;
 @{
     ViewBag.Title = "hl";
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>hl</h2>
 
 @{
     web_banvemaybay.Models.web_banvemaybayEntities db = new web_banvemaybay.Models.web_banvemaybayEntities();
-    var hanhlidi = db.Hanhli.ToList();
-    <select name="to" id="tohl">
-        @foreach (var item in hanhlidi)
-        {
-            <option value="@item.IDhanhli">@item.Kg</option>
-        }
-    </select>
-    var hanhlive = db.Hanhli.ToList();
-    <select name="from" id="fromhl">
-        @foreach (var item in hanhlive)
-        {
-            <option value="@item.IDhanhli">@item.Kg</option>
-        }
-    </select>
-    <p id="giatien">@Session["giatien"]</p>
-    <a class="btn-choose" href="@Url.Action("Information","Flight")">
-        Chọn
-    </a>
-}
-
-@{
     int idHvto = int.Parse(Session["idTo"].ToString());
     int idHvFrom = int.Parse(Session["idFrom"].ToString());
     int sl = int.Parse(Session["tongsl"].ToString());
     var itemTo = db.Chuyenbay.Where(c => c.IDchuyenbay == idHvto).FirstOrDefault();
+    Session["to"] = itemTo.Diadiemdi;
     var itemFrom = db.Chuyenbay.Where(c => c.IDchuyenbay == idHvFrom).FirstOrDefault();
+    Session["from"] = itemTo.Diadiemden;
     var hangve = db.Hangve.ToList();
     double tong = double.Parse(Session["giatien"].ToString());
     double tonggiatien = 0;
 }
-<div id="form2">
-    <!-- Nội dung form tại đây -->
-    <select name="idHangve" id="idHangve">
-        @{ 
-            if (itemTo.PhoThong < sl && itemTo.ThuongGia >= sl)
-            {
-                var selectedHangve = hangve.FirstOrDefault(h => h.IDhangve == 1);
-                tonggiatien = tong * sl;
-                Session["giatien"] = tonggiatien;
-                <option value="@selectedHangve.IDhangve">@selectedHangve.TenHangve</option>
-            }
-            else if (itemTo.PhoThong >= sl && itemTo.ThuongGia < sl)
-            {
-                var selectedHangve = hangve.FirstOrDefault(h => h.IDhangve == 2);
-                <option value="@selectedHangve.IDhangve">@selectedHangve.TenHangve</option>
-            }
-            else if (itemTo.PhoThong >= sl && itemTo.ThuongGia >= sl)
-            {
-                foreach (var item in hangve)
-                {
-                <option value="@item.IDhangve" @(item.IDhangve == 2 ? "selected" : "")>@item.TenHangve</option>
-                    }
-             }
-            }
-    </select>
-</div>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-<script>
-    $(document).ready(function () {
-        // Sự kiện thay đổi giá trị select
-        $("#idHangve").change(function () {
-            updateTotalPrice();
-        });
+<div class="body-choose-HL">
+    <div class="choose-HL">
+        <div class="choose-heading c-h-c-hl">
+            <div class="choose-heading-content ">
+                <p>Chuyến bay khứ hồi của bạn @Session["to"] <i class="fa-solid fa-arrows-left-right"></i> @Session["from"]</p>
+            </div>
+        </div>
+        <div class="choose-container">
+            <div class="choose-item-HL">
+                @{
+                    var hanhlidi = db.Hanhli.ToList();
+                    <div class="choose-hl">
+                        <b>Chọn hạn mức hành lý chuyến đi:</b>
+                        <select name="to" id="tohl" data-idhl="item.IDhanhli">
+                            @foreach (var item in hanhlidi)
+                            {
+                                <option value="@item.IDhanhli">@item.Kg</option>
+                            }
+                        </select>
+                    </div>
+                    <input type="hidden" value="item.IDhanhli" id="idhlTo" />
+                    var hanhlive = db.Hanhli.ToList();
+                    <div class="choose-hl">
+                        <b>Chọn hạn mức hành lý chuyến khứ hồi:</b>
+                        <select name="from" id="fromhl" data-idhl="item.IDhanhli">
+                            @foreach (var item in hanhlive)
+                            {
+                                <option value="@item.IDhanhli">@item.Kg</option>
+                            }
+                        </select>
+                    </div>
+                    <input type="hidden" value="item.IDhanhli" id="idhlFrom" />
+                    <div class="choose-hv">
+                        <b>Chọn hạng vé:</b>
+                        <select name="idHangve" id="idHangve" data-idhanhly="item.IDhangve">
+                            @{
+                                if (itemTo.PhoThong < sl && itemTo.ThuongGia >= sl)
+                                {
+                                    var selectedHangve = hangve.FirstOrDefault(h => h.IDhangve == 1);
+                                    tonggiatien = tong * sl;
+                                    Session["giatien"] = tonggiatien;
+                                    <option value="@selectedHangve.IDhangve">@selectedHangve.TenHangve</option>
+                                }
+                                else if (itemTo.PhoThong >= sl && itemTo.ThuongGia < sl)
+                                {
+                                    var selectedHangve = hangve.FirstOrDefault(h => h.IDhangve == 2);
+                                    <option value="@selectedHangve.IDhangve">@selectedHangve.TenHangve</option>
+                                }
+                                else if (itemTo.PhoThong >= sl && itemTo.ThuongGia >= sl)
+                                {
+                                    foreach (var item in hangve)
+                                    {
+                                        <option value="@item.IDhangve" @(item.IDhangve == 2 ? "selected" : "")>@item.TenHangve</option>
+                                    }
+                                }
+                            }
+                        </select>
+                        <input type="hidden" value="item.IDhangve" id="idhangve" />
+                    </div>
+                    <div class="choose-money-HL">
+                        <p>Tổng tiền tạm tính:</p>
+                        <b id="giatien">@String.Format("{0:0,0}", @Session["giatien"])</b><span> VNĐ</span>
+                    </div>
 
-        function updateTotalPrice() {
-            // Lấy giá trị idHangve từ dropdown
-            var idHangve = $('#idHangve').val();
+                    <a class="btn-choose-HL" href="@Url.Action("Information","Flight" ,new {idTo = idHvto, idFrom = idHvFrom})">
+                        Chọn
+                    </a>
+                }
+            </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding: 170px 0"></div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Sự kiện thay đổi giá trị select
+            $("#idHangve").change(function () {
+                updateTotalPrice();
+            });
 
-            // Kiểm tra nếu có chuyến đi được chọn  // Gọi API hoặc thực hiện các xử lý cần thiết để lấy giá tiền từ server
+            function updateTotalPrice() {
+                // Lấy giá trị idHangve từ dropdown
+                var idHangve = $('#idHangve').val();
+
+                // Kiểm tra nếu có chuyến đi được chọn  // Gọi API hoặc thực hiện các xử lý cần thiết để lấy giá tiền từ server
                 // Ở đây, giả sử có một API có thể được gọi với idHangve để lấy giá tiền
                 $.ajax({
                     url: '/Flight/Hv', // Điều chỉnh đường dẫn tương ứng với ứng dụng của bạn
                     method: 'POST', // Phương thức POST
                     data: { idHangve: idHangve },
                     success: function (result) {
-                        console.log(result);
-                        $("#giatien").text(result);
+                        var formattedPrice = parseFloat(result).toLocaleString("en-US");
+                        $("#giatien").text(formattedPrice);
                     },
                     error: function () {
                         alert("Lỗi");
                     }
                 });
-        }
-    });
-</script>
-
-<script>
-    $(document).ready(function () {
-        // Đoạn mã jQuery của bạn ở đây
-        $("#tohl, #fromhl").change(function () {
-            updateSessionPrice();
+            }
         });
+    </script>
 
-        function updateSessionPrice() {
-            var toId = $("#tohl").val(); // Sửa đây để lấy giá trị từ select "tohl"
-            var fromId = $("#fromhl").val();
-
-            $.ajax({
-                type: "POST",
-                url: "/Flight/UpdateSessionPrice",
-                data: { toId: toId, fromId: fromId },
-                success: function (result) {
-                    console.log(result);
-                    $("#giatien").text(result);
-                },
-                error: function () {
-                    alert("Lỗi");
-                }
+    <script>
+        $(document).ready(function () {
+            // Đoạn mã jQuery của bạn ở đây
+            $("#tohl, #fromhl").change(function () {
+                updateSessionPrice();
             });
-        }
-    });
-</script>
+
+            function updateSessionPrice() {
+                var toId = $("#tohl").val(); // Sửa đây để lấy giá trị từ select "tohl"
+                var fromId = $("#fromhl").val();
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Flight/UpdateSessionPrice",
+                    data: { toId: toId, fromId: fromId },
+                    success: function (result) {
+                        var formattedPrice = parseFloat(result).toLocaleString("en-US");
+                        $("#giatien").text(formattedPrice);
+                    },
+                    error: function () {
+                        alert("Lỗi");
+                    }
+                });
+            }
+        });
+    </script>
