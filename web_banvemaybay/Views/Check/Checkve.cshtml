@@ -46,6 +46,7 @@ else
                 Chi tiết vé máy bay của bạn
             </div>
             @{
+                web_banvemaybayEntities db = new web_banvemaybayEntities();
                 foreach (var item in Model.OrderByDescending(c => c.IDve))
                 {
                     <div class="checkve-body">
@@ -62,7 +63,7 @@ else
                             {
                                 <p>Chuyến bay: <b>Một chiều </b></p>
                             }
-                            <p>Hạng vé: <b>@Session["Hangge"]</b> </p>
+                            <p>Hạng vé: <b>@item.Hangve.TenHangve</b> </p>
                             <p>Thời gian: <b>02h 30p</b></p>
                         </div>
                         <div class="checkve-go">
@@ -71,56 +72,92 @@ else
                             <p>Ngày: <b>@item.Chuyenbay.Ngaydi.Value.ToString("dd/MM/yyyy")</b></p>
                         </div>
                         <div class="checkve-to">
-                            <p>Đi từ: <b>@item.Chuyenbay.Diadiemdi</b></p>
+                            <p>:Đến<b>@item.Chuyenbay.Diadiemdi</b></p>
                             <p>
                                 Hạ cánh: <b>
-                                    @if (@item.Chuyenbay.Ngayve != null)
-                                    {
-                                        @item.Chuyenbay.Ngayve.Value.ToString("HH:mm")
-                                    }
-                                    else
-                                    {
-                                        @item.Chuyenbay.Ngaydi.Value.AddHours(1).AddMinutes(30).ToString("HH:mm")
-                                    }
+                                    @item.Chuyenbay.Ngaydi.Value.AddHours(2).AddMinutes(30).ToString("HH:mm")
                                 </b>
                             </p>
                             <p>
                                 Ngày: <b>
-                                    @if (@item.Chuyenbay.Ngayve != null)
-                                    {
-                                        @item.Chuyenbay.Ngayve.Value.ToString("dd/MM/yyyy")
-                                    }
-                                    else
-                                    {
-                                        @item.Chuyenbay.Ngaydi.Value.AddHours(1).AddMinutes(30).ToString("dd/MM/yyyy")
-                                    }
+                                    @item.Chuyenbay.Ngaydi.Value.AddHours(2).AddMinutes(30).ToString("dd/MM/yyyy")
                                 </b>
                             </p>
                         </div>
-                        <div class="checkve-info">
-                            <p>Mã vé: <b>@item.IDve</b></p>
-                            <p>Hành khách: <b>@item.Hanhkhach.Tenhanhkhach</b></p>
-                            <p>Hành lý xách tay: <b>@item.Hanhli.Kg</b></p>
-                            <p>Tổng tiền: <b>@String.Format("{0:0,0}", @item.Gia)đ</b></p>
-                        </div>
                     </div>
-                
-                    
-                        web_banvemaybayEntities db = new web_banvemaybayEntities();
-                        int mave = int.Parse(@Session["mavemuontra"].ToString());
-                        var kt = db.Ve.Where(c => c.IDve == mave).FirstOrDefault();
-                        if (kt.Tinhtrang == "Chờ thanh toán" || kt.Tinhtrang == "Đã thanh toán")
+                    if (item.IDchuyenbayve == null)
+                    {
+                        int check = int.Parse(@Session["mavemuontra"].ToString());
+                        var checkma = db.Ve.Where(c => c.IDve == check).FirstOrDefault();
+                        if (checkma.Tinhtrang == "Chờ thanh toán" || checkma.Tinhtrang == "Đã thanh toán")
                         {
                             <a class="btn-huy" href="#" onclick="confirmAction()">
                                 Hủy vé
                             </a>
                         }
+                    }
                     <input type="hidden" name="idcu" value="@Session["idcu"]" />
                 }
             }
         </div>
     </div>
+    @{
+        foreach (var item in Model.OrderByDescending(c => c.IDve))
+        {
+            if (item.IDchuyenbayve != null)
+            {
+                var check = db.Ve.Where(c => c.IDve == item.IDchuyenbayve).FirstOrDefault();
+                <div class="check-main">
+                    <div class="flight-details">
+                        <div class="checkve-heading">
+                            Chi tiết vé máy bay của bạn
+                        </div>
+                        <div class="checkve-body">
+                            <div class="checkve-img">
+                                <img src="@check.Chuyenbay.HangHK.Hinhanh" alt="">
+                            </div>
+                            <div class="checkve-chuyenbay">
+                                <p>Mã chuyến bay: <b>@check.Chuyenbay.IDchuyenbay</b></p>
+                                <p>Chuyến bay: <b>Khứ hồi </b></p>
+                                <p>Hạng vé: <b>@item.Hangve.TenHangve</b> </p>
+                                <p>Thời gian: <b>02h 30p</b></p>
+                            </div>
+                            <div class="checkve-go">
+                                <p>Đi từ: <b>@check.Chuyenbay.Diadiemden</b></p>
+                                <p>Cất cánh: <b>@check.Chuyenbay.Ngaydi.Value.ToString("HH:mm")</b></p>
+                                <p>Ngày: <b>@check.Chuyenbay.Ngaydi.Value.ToString("dd/MM/yyyy")</b></p>
+                            </div>
+                            <div class="checkve-to">
+                                <p>:Đến<b>@check.Chuyenbay.Diadiemdi</b></p>
+                                <p>
+                                    Hạ cánh: <b>
+                                        @check.Chuyenbay.Ngaydi.Value.AddHours(2).AddMinutes(30).ToString("HH:mm")
+                                    </b>
+                                </p>
+                                <p>
+                                    Ngày: <b>
+                                        @check.Chuyenbay.Ngaydi.Value.AddHours(2).AddMinutes(30).ToString("dd/MM/yyyy")
+                                    </b>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                int mave = int.Parse(@Session["mavemuontra"].ToString());
+                var kt = db.Ve.Where(c => c.IDve == mave).FirstOrDefault();
+                if (kt.Tinhtrang == "Chờ thanh toán" || kt.Tinhtrang == "Đã thanh toán")
+                {
+                    <a class="btn-huy" href="#" onclick="confirmAction()">
+                        Hủy vé
+                    </a>
+                }
+            }
+
+        }
+    }
 </div>
+
+
 
 <script>
 function confirmAction() {
