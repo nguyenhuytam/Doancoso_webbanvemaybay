@@ -699,8 +699,7 @@ namespace FlightSearch.Controllers
                     Session["payment"] = payment;
                     Session["KgHanhly"] = giato.Kg;
                     Session["Hangge"] = giahv.TenHangve;
-                    
-                    ve.IDchuyenbayve = idFrom;
+                    Session["VeDi"] = ve.IDve;
                     db.Ve.Add(ve);
                     db.SaveChanges();
                     int idveTO = ve.IDve;
@@ -724,12 +723,15 @@ namespace FlightSearch.Controllers
                     ve.Tinhtrang = "Chờ thanh toán";
                     Session["KgHanhlyHK"] = giafrom.Kg;
                     Session["TinhTrang"] = ve.Tinhtrang;
-                    ve.IDchuyenbayve = idTo;
+                    ve.IDchuyenbayve = idveTO;
                     db.Ve.Add(ve);
                     db.SaveChanges();
                     int idVeFrom = ve.IDve;
                     Session["idVeKH"] = idVeFrom;
                     //Session["giatien"] = gia;
+                    var vedi = db.Ve.Where(c => c.IDve == idveTO).FirstOrDefault();
+                    vedi.IDchuyenbayve = idVeFrom;
+                    db.SaveChanges();
                     if (payment == "payment1")
                     {
                         Ve veMomo = db.Ve.Find(idTo, idFrom);

@@ -18,7 +18,7 @@ namespace web_banvemaybay.Controllers
             int mave = int.Parse(@Session["mavemuontra"].ToString());
             ViewBag.id = mave;
             var checkma = db.Ve.Where(c => c.IDve.Equals(mave)).FirstOrDefault();
-            var checkmafrom = db.Ve.Where(c => c.IDve.Equals(mave+1)).FirstOrDefault();
+            var checkmafrom = db.Ve.Where(c => c.IDve == checkma.IDchuyenbayve).FirstOrDefault();
             ViewBag.Tenkhach = checkma.TTlienhe.FullName;
             ViewBag.NgayBay = checkma.Chuyenbay.Ngaydi.Value;
             ViewBag.dddi = checkma.Chuyenbay.Diadiemdi;
@@ -82,8 +82,8 @@ namespace web_banvemaybay.Controllers
 
             if(checkma.IDchuyenbayve != null)
             {
-                Session["mavefrom"] = mave + 1;
-                ViewBag.idfrom = mave + 1;
+                Session["mavefrom"] = checkma.IDchuyenbayve;
+                ViewBag.idfrom = checkma.IDchuyenbayve;
                 ViewBag.Tenkhachfrom = checkmafrom.TTlienhe.FullName;
                 ViewBag.NgayBayfrom = checkmafrom.Chuyenbay.Ngaydi.Value;
                 ViewBag.dddifrom = checkmafrom.Chuyenbay.Diadiemdi;
