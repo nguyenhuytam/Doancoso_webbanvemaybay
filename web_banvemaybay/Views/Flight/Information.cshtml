@@ -40,7 +40,6 @@ else
 }
 <form action="@Url.Action("tt", "Flight", new { id = "myForm" })" method="post">
     <!-- Nội dung form tại đây -->
-
     <div class="information">
         <div class="information-left">
             <div class="customer-info">
@@ -165,9 +164,9 @@ else
                             Địa chỉ: 10/80C XL Hà Nội, Phường Tân Phú, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam
                         </div>
                         @*<li>
-                            <input type="radio" name="payment" id="payment1" value="payment1">
-                            <label for="payment1">Thanh toán momo</label>
-                        </li>*@
+                                <input type="radio" name="payment" id="payment1" value="payment1">
+                                <label for="payment1">Thanh toán momo</label>
+                            </li>*@
                         <li>
                             <input type="radio" name="payment" id="payment3" value="payment3">
                             <label for="payment3">Thanh toán vnpay</label>
@@ -175,53 +174,56 @@ else
                     </ul>
                     <input type="submit" value="Thanh toán" class="btn btn-reservations ttmacdinh" />
                     @*<a class="btn btn-reservations ttmomo" href="@Url.Action("PaymentMomo","Flight")">Thanh toán</a>
-                    <a class="btn btn-reservations ttvnpay" href="@Url.Action("PaymentVnpay","Flight")">Thanh toán</a>*@
+                        <a class="btn btn-reservations ttvnpay" href="@Url.Action("PaymentVnpay","Flight")">Thanh toán</a>*@
                 </div>
             </div>
         </div>
         @{
-                        double giatien = Session["giatien"] != null ? double.Parse(Session["giatien"].ToString()) : 0;
-                        double giave = Session["giave"] != null ? double.Parse(Session["giave"].ToString()) : 0;
-                        int idto = Session["toIdcu"] != null ? int.Parse(Session["toIdcu"].ToString()) : 1;
-                        var giato = db.Hanhli.Where(c => c.IDhanhli == idto).FirstOrDefault();
-                        int idfrom = Session["fromIdcu"] != null ? int.Parse(Session["fromIdcu"].ToString()) : 1;
-                        var giafrom = db.Hanhli.Where(c => c.IDhanhli == idfrom).FirstOrDefault();
-                        double idhv = Session["hangvekh"] != null ? double.Parse(Session["hangvekh"].ToString()) : 2;
-                        var giahv = db.Hangve.Where(c => c.IDhangve == idhv).FirstOrDefault();
-                        int cd = int.Parse(Session["idTo"].ToString());
-                        var chuyendi = db.Chuyenbay.Where(c => c.IDchuyenbay == cd).FirstOrDefault();
-                        int cv = int.Parse(Session["idFrom"].ToString());
-                        var chuyenve = db.Chuyenbay.Where(c => c.IDchuyenbay == cv).FirstOrDefault();
-                        double tong = giatien + (chuyendi.Giatien / 100 * 10) + (chuyenve.Giatien / 100 * 10) + 140000;
-                        Session["giatien"] = tong;
-                        if (toFrom > 0)
-                        {
-                <div class="information-right">
-                    <div class="information-r-heading">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        Chuyến bay của bạn
-                    </div>
-                    <div class="information-r-body">
-                        <ul class="information-goto">
-                            <b>Chuyến bay khứ hồi</b>
-                            <li><p>Đi từ <span class="go">@Session["to"]</span></p><p>Đến <span class="to">@Session["from"]</span></p></li>
-                            <li>
-                                <span class="go">@Session["dateto"]</span>
-                                <span class="go">@Session["datefrom"]</span>
-                            </li>
-                        </ul>
-                        <ul class="information-money">
-                            <b>Giá vé tạm tính</b>
-                            <li>Giá vé<span>@String.Format("{0:0,0}", giave)đ</span></li>
-                            <li>Thuế<span>@String.Format("{0:0,0}", (chuyendi.Giatien / 100 * 10) + (chuyenve.Giatien / 100 * 10))đ</span></li>
-                            <li>Phí<span>@String.Format("{0:0,0}", 140000)đ</span></li>
-                            <li>Giá hành lý<span>@String.Format("{0:0,0}", giato.Giatien + giafrom.Giatien)đ</span></li>
-                            <li>Giá hạng vé<span>@String.Format("{0:0,0}", giahv.Gia)đ</span></li>
-                            <li class="li-money-last">Tổng tiền<span>@String.Format("{0:0,0}",tong)đ</span></li>
-                        </ul>
-                    </div>
+            if (Session["idTo"] != null && Session["idFrom"] != null)
+            {
+                double giatien = Session["giatien"] != null ? double.Parse(Session["giatien"].ToString()) : 0;
+                double giave = Session["giave"] != null ? double.Parse(Session["giave"].ToString()) : 0;
+                int idto = Session["toIdcu"] != null ? int.Parse(Session["toIdcu"].ToString()) : 1;
+                var giato = db.Hanhli.Where(c => c.IDhanhli == idto).FirstOrDefault();
+                int idfrom = Session["fromIdcu"] != null ? int.Parse(Session["fromIdcu"].ToString()) : 1;
+                var giafrom = db.Hanhli.Where(c => c.IDhanhli == idfrom).FirstOrDefault();
+                double idhv = Session["hangvekh"] != null ? double.Parse(Session["hangvekh"].ToString()) : 2;
+                var giahv = db.Hangve.Where(c => c.IDhangve == idhv).FirstOrDefault();
+                int cd = int.Parse(Session["idTo"].ToString());
+                var chuyendi = db.Chuyenbay.Where(c => c.IDchuyenbay == cd).FirstOrDefault();
+                int cv = int.Parse(Session["idFrom"].ToString());
+                var chuyenve = db.Chuyenbay.Where(c => c.IDchuyenbay == cv).FirstOrDefault();
+                double tong = giatien + (chuyendi.Giatien / 100 * 10) + (chuyenve.Giatien / 100 * 10) + 140000;
+                Session["giatien"] = tong;
+                if (toFrom > 0)
+                {
+                    <div class="information-right">
+                        <div class="information-r-heading">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                            Chuyến bay của bạn
+                        </div>
+                        <div class="information-r-body">
+                            <ul class="information-goto">
+                                <b>Chuyến bay khứ hồi</b>
+                                <li><p>Đi từ <span class="go">@Session["to"]</span></p><p>Đến <span class="to">@Session["from"]</span></p></li>
+                                <li>
+                                    <span class="go">@Session["dateto"]</span>
+                                    <span class="go">@Session["datefrom"]</span>
+                                </li>
+                            </ul>
+                            <ul class="information-money">
+                                <b>Giá vé tạm tính</b>
+                                <li>Giá vé<span>@String.Format("{0:0,0}", giave)đ</span></li>
+                                <li>Thuế<span>@String.Format("{0:0,0}", (chuyendi.Giatien / 100 * 10) + (chuyenve.Giatien / 100 * 10))đ</span></li>
+                                <li>Phí<span>@String.Format("{0:0,0}", 140000)đ</span></li>
+                                <li>Giá hành lý<span>@String.Format("{0:0,0}", giato.Giatien + giafrom.Giatien)đ</span></li>
+                                <li>Giá hạng vé<span>@String.Format("{0:0,0}", (giahv.Gia * 2))đ</span></li>
+                                <li class="li-money-last">Tổng tiền<span>@String.Format("{0:0,0}", tong)đ</span></li>
+                            </ul>
+                        </div>
 
-                </div>
+                    </div>
+                }
             }
             else
             {
@@ -233,7 +235,7 @@ else
                     <div class="information-r-body">
                         <ul class="information-goto">
                             @if (Model.Ngayve != null)
-                {
+                            {
                                 <b>Chuyến bay khứ hồi</b>
                             }
                             else
@@ -271,12 +273,12 @@ else
     </div>
 </form>
 @{
-                if (toFrom == 0)
-                {
+    if (toFrom == 0)
+    {
         <li style="display:none">
             @using (Html.BeginForm("Information", "Flight", FormMethod.Post, new { id = "flightForm" }))
-                        {
-                        var hanhli = db.Hanhli.ToList();
+            {
+                var hanhli = db.Hanhli.ToList();
 
                 <select name="idhanhli" id="searchBySelect">
                     @foreach (var item in hanhli)
