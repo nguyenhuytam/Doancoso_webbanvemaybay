@@ -682,6 +682,7 @@ namespace FlightSearch.Controllers
                     {
                         double tonggiato = giaveto.Giatien + giato.Giatien + (giaveto.Giatien/100*10)+70000 + giahv.Gia;
                         ve.Gia = tonggiato;
+                        Session["giaveto"] = tonggiato;
                     }
                     ve.IDchuyenbay = idTo;
                     Session["idchuyenbay"] = ve.IDchuyenbay;
@@ -710,6 +711,8 @@ namespace FlightSearch.Controllers
                     {
                         double tonggiafrom = giavefrom.Giatien + giafrom.Giatien + (giavefrom.Giatien / 100 * 10) + 70000 + giahv.Gia;
                         ve.Gia = tonggiafrom;
+                        double tongvekh = tonggiafrom + double.Parse(Session["giaveto"].ToString());
+                        Session["giathanhtoanvnpay"] = Math.Round(tongvekh * 100);
                     }
                     ve.IDchuyenbay = idFrom;
                     Session["idchuyenbaykh"] = ve.IDchuyenbay;
@@ -732,11 +735,6 @@ namespace FlightSearch.Controllers
                     var vedi = db.Ve.Where(c => c.IDve == idveTO).FirstOrDefault();
                     vedi.IDchuyenbayve = idVeFrom;
                     db.SaveChanges();
-                    if (payment == "payment1")
-                    {
-                        Ve veMomo = db.Ve.Find(idTo, idFrom);
-                        return RedirectToAction("PaymentMomo", "Flight", veMomo);
-                    }
                     var chuyenbay = db.Chuyenbay.Where(hl => hl.IDchuyenbay == idTo).FirstOrDefault();
                     Departure = chuyenbay.Diadiemdi.ToString();
                     Session["Departure"] = Departure;
@@ -748,7 +746,19 @@ namespace FlightSearch.Controllers
                     DateHourKH = chuyenbaykh.Ngaydi.ToString();
                     Session["TenHangKH"] = chuyenbaykh.HangHK.TenHang;
                     string DateHour1 = (DateTime.Parse(DateHour).AddDays(-1)).ToString();
+                    Session["DateHour1"] = DateHour1;
                     string DateHour2 = (DateTime.Parse(DateHourKH).AddDays(-1)).ToString();
+                    Session["DateHour2"] = DateHour2;
+                    if (payment == "payment3")
+                    {
+                        Ve veVn = db.Ve.Find(idTo);
+                        return RedirectToAction("PaymentVnpay", "Flight", veVn);
+                    }
+                    if (payment == "payment1")
+                    {
+                        Ve veMomo = db.Ve.Find(idTo);
+                        return RedirectToAction("PaymentMomo", "Flight", veMomo);
+                    }
                     string content = System.IO.File.ReadAllText(Server.MapPath("~/Content/template/ChoThanhToanKH.html"));
                     content = content.Replace("{{CustomerName}}", namelh);
                     content = content.Replace("{{MaVe}}", Session["idVeMoi"].ToString());
@@ -854,6 +864,11 @@ namespace FlightSearch.Controllers
                         Ve veMomo = db.Ve.Find(idVeMoi);
                         return RedirectToAction("PaymentMomo", "Flight", veMomo);
                     }
+                    if (payment == "payment3")
+                    {
+                        Ve veVn = db.Ve.Find(idVeMoi);
+                        return RedirectToAction("PaymentVnpay", "Flight", veVn);
+                    }
                     string content = System.IO.File.ReadAllText(Server.MapPath("~/Content/template/ChoThanhToan.html"));
                     content = content.Replace("{{CustomerName}}", namelh);
                     content = content.Replace("{{MaVe}}", Session["idVeMoi"].ToString());
@@ -866,7 +881,7 @@ namespace FlightSearch.Controllers
                     var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
 
                     new MailHelper().SendMail(Session["emaillh"].ToString(), "Bạn đã đặt vé tại AirplaneTicket", content);
-                    new MailHelper().SendMail(toEmail, "Đơn hàng mới từ AirplaneTicket", content);  
+                    //new MailHelper().SendMail(toEmail, "Đơn hàng mới từ AirplaneTicket", content);  
                     return RedirectToAction("DatThanhCong", "Home", new { id = idVeMoi });
                 }
             }
@@ -957,7 +972,7 @@ namespace FlightSearch.Controllers
                 var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
 
                 new MailHelper().SendMail(Session["emaillh"].ToString(), "Bạn đã đặt vé thành công tại AirplaneTicket", content);
-                new MailHelper().SendMail(toEmail, "Đơn hàng mới từ AirplaneTicket", content);
+                //new MailHelper().SendMail(toEmail, "Đơn hàng mới từ AirplaneTicket", content);
                 return RedirectToAction("DatThanhCong", "Home", new { id = ve.IDve });
             }
 
@@ -967,7 +982,7 @@ namespace FlightSearch.Controllers
             }
             return View();
         }
-        public ActionResult PaymentVnpay()
+       public ActionResult PaymentVnpay(Ve ve)
         {
             string url = ConfigurationManager.AppSettings["Url"];
             string returnUrl = ConfigurationManager.AppSettings["ReturnUrl"];
@@ -988,7 +1003,7 @@ namespace FlightSearch.Controllers
             pay.AddRequestData("vnp_OrderInfo", "Thanh toan don hang"); //Thông tin mô tả nội dung thanh toán
             pay.AddRequestData("vnp_OrderType", "other"); //topup: Nạp tiền điện thoại - billpayment: Thanh toán hóa đơn - fashion: Thời trang - other: Thanh toán trực tuyến
             pay.AddRequestData("vnp_ReturnUrl", returnUrl); //URL thông báo kết quả giao dịch khi Khách hàng kết thúc thanh toán
-            pay.AddRequestData("vnp_TxnRef", DateTime.Now.Ticks.ToString()); //mã hóa đơn
+            pay.AddRequestData("vnp_TxnRef", Session["idVeMoi"].ToString()); //mã hóa đơn
 
             string paymentUrl = pay.CreateRequestUrl(url, hashSecret);
 
@@ -1022,13 +1037,59 @@ namespace FlightSearch.Controllers
                 {
                     if (vnp_ResponseCode == "00")
                     {
-                        //Thanh toán thành công
-                        ViewBag.Message = "Thanh toán thành công hóa đơn " + orderId + " | Mã giao dịch: " + vnpayTranId;
+                        if(Session["idVeKH"] != null)
+                        {
+                            int idveve = int.Parse(Session["idVeKH"].ToString());
+                            var veve = db.Ve.FirstOrDefault(p => p.IDve == idveve);
+                            veve.Tinhtrang = "Đã thanh toán";
+                            Session["TinhTrang"] = veve.Tinhtrang;
+                            Session["payment"] = "Thanh toán vnpay";
+                            db.Ve.AddOrUpdate(veve);
+                            db.SaveChanges();
+                        }
+                        var ve = db.Ve.FirstOrDefault(p => p.IDve == orderId);
+                        ve.Tinhtrang = "Đã thanh toán";
+                        Session["TinhTrang"] = ve.Tinhtrang;
+                        Session["payment"] = "Thanh toán vnpay";
+                        db.Ve.AddOrUpdate(ve);
+                        db.SaveChanges();
+                        if (Session["idVeKH"] != null)
+                        {
+                            string content = System.IO.File.ReadAllText(Server.MapPath("~/Content/template/ChoThanhToanKH.html"));
+                            content = content.Replace("{{CustomerName}}", Session["namelh"].ToString());
+                            content = content.Replace("{{MaVe}}", Session["idVeMoi"].ToString());
+                            content = content.Replace("{{MaVeKH}}", Session["idVeKH"].ToString());
+                            content = content.Replace("{{DateHour}}", Session["DateHour1"].ToString());
+                            content = content.Replace("{{DateHour2}}", Session["DateHour2"].ToString());
+                            content = content.Replace("{{Departure}}", Session["Departure"].ToString());
+                            content = content.Replace("{{Destination}}", Session["Destination"].ToString());
+                            content = content.Replace("{{Bag}}", Session["KgHanhly"].ToString());
+                            content = content.Replace("{{BagKH}}", Session["KgHanhlyHK"].ToString());
+                            content = content.Replace("{{idchuyenbay}}", Session["idchuyenbay"].ToString());
+                            content = content.Replace("{{TenHang}}", Session["TenHang"].ToString());
+                            content = content.Replace("{{TenHangKH}}", Session["TenHangKH"].ToString());
+                            var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+                            new MailHelper().SendMail(Session["emaillh"].ToString(), "Bạn đã đặt vé tại AirplaneTicket", content);
+                        }
+                        else
+                        {
+                            string content = System.IO.File.ReadAllText(Server.MapPath("~/Content/template/ChoThanhToan.html"));
+                            content = content.Replace("{{CustomerName}}", Session["namelh"].ToString());
+                            content = content.Replace("{{MaVe}}", Session["idVeMoi"].ToString());
+                            content = content.Replace("{{DateHour}}", Session["DateHour1"].ToString());
+                            content = content.Replace("{{Departure}}", Session["Departure"].ToString());
+                            content = content.Replace("{{Destination}}", Session["Destination"].ToString());
+                            content = content.Replace("{{Bag}}", Session["KgHanhly"].ToString());
+                            content = content.Replace("{{idchuyenbay}}", Session["idchuyenbay"].ToString());
+                            content = content.Replace("{{TenHang}}", Session["TenHang"].ToString());
+                            var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
+                            new MailHelper().SendMail(Session["emaillh"].ToString(), "Bạn đã đặt vé tại AirplaneTicket", content);
+                        }
+                        return RedirectToAction("DatThanhCong", "Home", new { id = ve.IDve });
                     }
                     else
                     {
-                        //Thanh toán không thành công. Mã lỗi: vnp_ResponseCode
-                        ViewBag.Message = "Có lỗi xảy ra trong quá trình xử lý hóa đơn " + orderId + " | Mã giao dịch: " + vnpayTranId + " | Mã lỗi: " + vnp_ResponseCode;
+                        return RedirectToAction("DatThanhCong", "Home", new { id = orderId });
                     }
                 }
                 else
@@ -1040,4 +1101,4 @@ namespace FlightSearch.Controllers
             return View();
         }
     }
-}
+} 

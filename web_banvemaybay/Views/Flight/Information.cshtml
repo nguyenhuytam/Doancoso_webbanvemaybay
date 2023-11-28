@@ -164,33 +164,38 @@ else
                         <div class="payment2" style="display:block">
                             Địa chỉ: 10/80C XL Hà Nội, Phường Tân Phú, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam
                         </div>
-                        <li>
-                            <input type="radio" name="payment" id="payment1" value="payment1" @*value="Thanh toán momo"*@>
-                            <label for="payment1">Thanh toán momo</label>
-                        </li>
                         @*<li>
-                                <input type="radio" name="payment" id="payment3" value="Thanh toán vnpay">
-                                <label for="payment3">Thanh toán vnpay</label>
-                            </li>*@
+                            <input type="radio" name="payment" id="payment1" value="payment1">
+                            <label for="payment1">Thanh toán momo</label>
+                        </li>*@
+                        <li>
+                            <input type="radio" name="payment" id="payment3" value="payment3">
+                            <label for="payment3">Thanh toán vnpay</label>
+                        </li>
                     </ul>
                     <input type="submit" value="Thanh toán" class="btn btn-reservations ttmacdinh" />
-                    <a class="btn btn-reservations ttmomo" href="@Url.Action("PaymentMomo","Flight")">Thanh toán</a>
-                    <a class="btn btn-reservations ttvnpay" href="@Url.Action("PaymentVnpay","Flight")">Thanh toán</a>
+                    @*<a class="btn btn-reservations ttmomo" href="@Url.Action("PaymentMomo","Flight")">Thanh toán</a>
+                    <a class="btn btn-reservations ttvnpay" href="@Url.Action("PaymentVnpay","Flight")">Thanh toán</a>*@
                 </div>
             </div>
         </div>
         @{
-            double giatien = Session["giatien"] != null ? double.Parse(Session["giatien"].ToString()) : 0;
-            double giave = Session["giave"] != null ? double.Parse(Session["giave"].ToString()) : 0;
-            double tong = giatien + (giave / 100 * 10) + 70000;
-            int idto = Session["toIdcu"] != null ? int.Parse(Session["toIdcu"].ToString()) : 1;
-            var giato = db.Hanhli.Where(c => c.IDhanhli == idto).FirstOrDefault();
-            int idfrom = Session["fromIdcu"] != null ? int.Parse(Session["fromIdcu"].ToString()) : 1;
-            var giafrom = db.Hanhli.Where(c => c.IDhanhli == idfrom).FirstOrDefault();
-            double idhv = Session["hangvekh"] != null ? double.Parse(Session["hangvekh"].ToString()) : 2;
-            var giahv = db.Hangve.Where(c => c.IDhangve == idhv).FirstOrDefault();
-            if (toFrom > 0)
-            {
+                        double giatien = Session["giatien"] != null ? double.Parse(Session["giatien"].ToString()) : 0;
+                        double giave = Session["giave"] != null ? double.Parse(Session["giave"].ToString()) : 0;
+                        int idto = Session["toIdcu"] != null ? int.Parse(Session["toIdcu"].ToString()) : 1;
+                        var giato = db.Hanhli.Where(c => c.IDhanhli == idto).FirstOrDefault();
+                        int idfrom = Session["fromIdcu"] != null ? int.Parse(Session["fromIdcu"].ToString()) : 1;
+                        var giafrom = db.Hanhli.Where(c => c.IDhanhli == idfrom).FirstOrDefault();
+                        double idhv = Session["hangvekh"] != null ? double.Parse(Session["hangvekh"].ToString()) : 2;
+                        var giahv = db.Hangve.Where(c => c.IDhangve == idhv).FirstOrDefault();
+                        int cd = int.Parse(Session["idTo"].ToString());
+                        var chuyendi = db.Chuyenbay.Where(c => c.IDchuyenbay == cd).FirstOrDefault();
+                        int cv = int.Parse(Session["idFrom"].ToString());
+                        var chuyenve = db.Chuyenbay.Where(c => c.IDchuyenbay == cv).FirstOrDefault();
+                        double tong = giatien + (chuyendi.Giatien / 100 * 10) + (chuyenve.Giatien / 100 * 10) + 140000;
+                        Session["giatien"] = tong;
+                        if (toFrom > 0)
+                        {
                 <div class="information-right">
                     <div class="information-r-heading">
                         <i class="fa-solid fa-cart-shopping"></i>
@@ -208,8 +213,8 @@ else
                         <ul class="information-money">
                             <b>Giá vé tạm tính</b>
                             <li>Giá vé<span>@String.Format("{0:0,0}", giave)đ</span></li>
-                            <li>Thuế<span>@String.Format("{0:0,0}", (giave / 100 * 10))đ</span></li>
-                            <li>Phí<span>@String.Format("{0:0,0}", 70000)đ</span></li>
+                            <li>Thuế<span>@String.Format("{0:0,0}", (chuyendi.Giatien / 100 * 10) + (chuyenve.Giatien / 100 * 10))đ</span></li>
+                            <li>Phí<span>@String.Format("{0:0,0}", 140000)đ</span></li>
                             <li>Giá hành lý<span>@String.Format("{0:0,0}", giato.Giatien + giafrom.Giatien)đ</span></li>
                             <li>Giá hạng vé<span>@String.Format("{0:0,0}", giahv.Gia)đ</span></li>
                             <li class="li-money-last">Tổng tiền<span>@String.Format("{0:0,0}",tong)đ</span></li>
@@ -228,7 +233,7 @@ else
                     <div class="information-r-body">
                         <ul class="information-goto">
                             @if (Model.Ngayve != null)
-                            {
+                {
                                 <b>Chuyến bay khứ hồi</b>
                             }
                             else
@@ -266,12 +271,12 @@ else
     </div>
 </form>
 @{
-    if (toFrom == 0)
-    {
+                if (toFrom == 0)
+                {
         <li style="display:none">
             @using (Html.BeginForm("Information", "Flight", FormMethod.Post, new { id = "flightForm" }))
-            {
-                var hanhli = db.Hanhli.ToList();
+                        {
+                        var hanhli = db.Hanhli.ToList();
 
                 <select name="idhanhli" id="searchBySelect">
                     @foreach (var item in hanhli)
@@ -436,7 +441,6 @@ else
     //document.getElementById('payment1').onclick = function (e) {
     //    if (this.checked) {
     //        document.querySelector(".payment2").style.display = "none"
-    //        document.querySelector(".ttmacdinh").style.display = "none"
     //        document.querySelector(".ttmomo").style.display = "block"
     //        document.querySelector(".ttvnpay").style.display = "none"
     //    }
@@ -444,17 +448,15 @@ else
     document.getElementById('payment2').onclick = function (e) {
         if (this.checked) {
             document.querySelector(".payment2").style.display = "block"
-            document.querySelector(".ttmacdinh").style.display = "block"
             document.querySelector(".ttmomo").style.display = "none"
             document.querySelector(".ttvnpay").style.display = "none"
         }
     }
-    //document.getElementById('payment3').onclick = function (e) {
-    //    if (this.checked) {
-    //        document.querySelector(".payment2").style.display = "none"
-    //        document.querySelector(".ttmacdinh").style.display = "none"
-    //        document.querySelector(".ttmomo").style.display = "none"
-    //        document.querySelector(".ttvnpay").style.display = "block"
-    //    }
-    //}
+    document.getElementById('payment3').onclick = function (e) {
+        if (this.checked) {
+            document.querySelector(".payment2").style.display = "none"
+            document.querySelector(".ttmomo").style.display = "none"
+            document.querySelector(".ttvnpay").style.display = "block"
+        }
+    }
 </script>
