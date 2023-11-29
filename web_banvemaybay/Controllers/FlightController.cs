@@ -751,11 +751,13 @@ namespace FlightSearch.Controllers
                     Session["DateHour2"] = DateHour2;
                     if (payment == "payment3")
                     {
+                        Session["payment"] = "Thanh toán Vnpay";
                         Ve veVn = db.Ve.Find(idTo);
                         return RedirectToAction("PaymentVnpay", "Flight", veVn);
                     }
                     if (payment == "payment1")
                     {
+                        Session["payment"] = "Thanh toán momo";
                         Ve veMomo = db.Ve.Find(idTo);
                         return RedirectToAction("PaymentMomo", "Flight", veMomo);
                     }
@@ -861,11 +863,13 @@ namespace FlightSearch.Controllers
                     Session["TenHang"] = chuyenbay.HangHK.TenHang;
                     if (payment == "payment1")
                     {
+                        Session["payment"] = "Thanh toán momo";
                         Ve veMomo = db.Ve.Find(idVeMoi);
                         return RedirectToAction("PaymentMomo", "Flight", veMomo);
                     }
                     if (payment == "payment3")
                     {
+                        Session["payment"] = "Thanh toán Vnpay";
                         Ve veVn = db.Ve.Find(idVeMoi);
                         return RedirectToAction("PaymentVnpay", "Flight", veVn);
                     }
@@ -959,7 +963,6 @@ namespace FlightSearch.Controllers
                 var ve = db.Ve.FirstOrDefault(p => p.IDve == rOrderId);
                 ve.Tinhtrang = "Đã thanh toán";
                 Session["TinhTrang"] = ve.Tinhtrang;
-                Session["payment"] = "Thanh toán momo";
                 db.Ve.AddOrUpdate(ve);
                 db.SaveChanges();
                 string content = System.IO.File.ReadAllText(Server.MapPath("~/Content/template/EmailVe.html"));
@@ -978,7 +981,7 @@ namespace FlightSearch.Controllers
 
             else
             {
-                ViewBag.Message = "Có lỗi xảy ra trong quá trình xử lý";
+                return RedirectToAction("DatThanhCong", "Home", new { id = idmoi });
             }
             return View();
         }
