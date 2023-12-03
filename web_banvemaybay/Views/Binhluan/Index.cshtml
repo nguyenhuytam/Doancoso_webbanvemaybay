@@ -1,13 +1,13 @@
 ﻿@model PagedList.IPagedList<web_banvemaybay.Models.Binhluan>
 @using PagedList.Mvc;
 <link href="~/Content/css/Binhluan.css" rel="stylesheet" />
-<title>Beautiful Comments</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-dTq9t5pUc4L/Il2iXXx2AhNN07P5QPl3NmEs3TJ5ymCprYi/QT4P8ceGcv5Cd0zVK3C8E1GXvqzjo5A3uW9dkwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 @if (!string.IsNullOrEmpty(ViewBag.thongbao))
 {
     <p>@ViewBag.thongbao</p>
 }
+<div style="margin: 90px auto 80px "></div>
 <form action="@Url.Action("binhluan","Binhluan")" method="post">
     <div class="comment-container">
         @foreach (var item in Model)
@@ -20,7 +20,7 @@
                 <div class="comment-rating">
                     @for (int i = 0; i < item.sosao; i++)
                     {
-                        <i class="fas fa-star" style="color:gold"></i>
+                        <i class="fas fa-star" style="color: #f5f545"></i>
                     }
                 </div>
 
