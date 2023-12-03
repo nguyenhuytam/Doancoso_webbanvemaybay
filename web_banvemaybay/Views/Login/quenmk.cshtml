@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "quenmk";
+}
+
+<h2>quenmk</h2>
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <p>@ViewBag.Message</p>
+}
+<img src="~/Areas/Admin/ContentAdmin/image/209501.jpg" alt="" id="backgroud">
+<form action="@Url.Action("SendOTPMk")" method="post">
+    <div id="main">
+        <div class="TraVe">
+            <div class="TraVe-heading">
+                <p>quên mk</p>
+            </div>
+            <div class="TraVe-content">
+                <div class="locition-body-search">
+                    <label for="email" class="lable-otp-2">Email: </label><input type="email" name="email" required class="otp">
+                    <button type="submit">Gửi mã OTP</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

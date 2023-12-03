@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Checkmk";
+}
+
+<h2>Thây đổi mk </h2>
+@if (!string.IsNullOrEmpty(ViewBag.Message))
+{
+    <p>@ViewBag.Message</p>
+}
+<img src="~/Areas/Admin/ContentAdmin/image/209501.jpg" alt="" id="backgroud">
+<form action="@Url.Action("doimoi")" method="post">
+    <div id="main">
+        <div class="TraVe">
+            <div class="TraVe-heading">
+                <p>quên mk</p>
+            </div>
+            <div class="TraVe-content">
+                <div class="locition-body-search">
+                    <label for="password" class="lable-otp-2">Password: </label><input type="password" name="password" required class="otp">
+                    <label for="password" class="lable-otp-2">Password mới: </label><input type="password" name="passwordmoi" required class="otp">
+                    <label for="password" class="lable-otp-2">Password: </label><input type="password" name="passwordxn" required class="otp">
+                    <button type="submit"> Đổi mk mới </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -1,10 +1,12 @@
 ﻿using Facebook;
 using System;
-using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
+using System.Net;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
-using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using web_banvemaybay.Models;
 
@@ -247,6 +249,128 @@ namespace web_banvemaybay.Controllers
                 ModelState.AddModelError("", "Lỗi");
                 return View(user);
             }
+        }
+        public ActionResult quenmk(string email)
+        {
+            return View();
+        }
+        Random random = new Random();
+        int otp;
+        [HttpPost]
+        public ActionResult SendOTPMk(FormCollection form)
+        {
+            string email = form["email"];
+            otp = random.Next(100000, 10000000);
+
+            var fromAddress = ConfigurationManager.AppSettings["FromEmailAddress"].ToString();
+            var toAddress = new MailAddress(email).ToString();
+            string frompass = ConfigurationManager.AppSettings["FromEmailPassword"].ToString();
+            const string subject = "OTP code";
+            string body = "Mã OTP: " + otp.ToString();
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = false,
+                Credentials = new NetworkCredential(fromAddress, frompass),
+                Timeout = 200000
+            };
+            using (var message = new MailMessage(fromAddress, toAddress)
+            {
+                Subject = subject,
+                Body = body,
+            })
+            {
+                smtp.Send(message);
+            }
+            Session["otp"] = otp.ToString();
+            Session["email"] = email;
+            ViewBag.Message = "OTP đã được gửi";
+            return RedirectToAction("xacnhan", "Login");
+        }
+        public ActionResult xacnhan(string thongbao)
+        {
+            ViewBag.thongbao = thongbao;
+            return View();
+        }
+        public ActionResult doimoi(string password, string passwordmoi, string passwordxn)
+        {
+            web_banvemaybayEntities db = new web_banvemaybayEntities();
+            password = MD5Hash(password);
+            string email = Session["email"].ToString();
+            var checkma = db.TaiKhoan.Where(c => c.Email == email).FirstOrDefault();
+            if (checkma.Password == password)
+            {
+                if (passwordmoi == passwordxn)
+                {
+                    checkma.Password = MD5Hash(passwordmoi);
+                    db.SaveChanges();
+                }
+            }
+
+            return RedirectToAction("Login", "Login");
+        }
+
+        public ActionResult Checkmk(string OTP)
+        {
+            string email = Session["email"].ToString();
+            web_banvemaybayEntities db = new web_banvemaybayEntities();
+            if (Session["otp"].ToString() == OTP)
+            {
+                var checkma = db.TaiKhoan.Where(c => c.Email ==email).FirstOrDefault();
+                if (checkma != null)
+                {
+                    int number;
+                    string numberStr;
+                    Random random = new Random();
+                    numberStr = random.Next(100000, 10000000).ToString();
+                    checkma.Password = numberStr;
+                    checkma.Password = MD5Hash(checkma.Password);
+                    db.SaveChanges();
+
+                    var fromAddress = ConfigurationManager.AppSettings["FromEmailAddress"].ToString();
+                    var toAddress = new MailAddress(email).ToString();
+                    string frompass = ConfigurationManager.AppSettings["FromEmailPassword"].ToString();
+                    const string subject = "Password mới";
+                    string body = "Password: " + numberStr.ToString();
+
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = false,
+                        Credentials = new NetworkCredential(fromAddress, frompass),
+                        Timeout = 200000
+                    };
+                    using (var message = new MailMessage(fromAddress, toAddress)
+                    {
+                        Subject = subject,
+                        Body = body,
+                    })
+                    {
+                        smtp.Send(message);
+                    }
+                    Session["password"] = numberStr.ToString();
+                    Session["email"] = email;
+                    ViewBag.Message = "OTP đã được gửi";
+                }
+                else
+                {
+                    ViewBag.Message = "Bạn nhập sai mã vui lòng kiểm tra lại ";
+                    return RedirectToAction("xacnhan", "Check", new { thongbao = "Vui lòng kiểm kĩ Email hoặc Mã vé : " });
+                }
+            }
+            else
+            {
+                ViewBag.Message = "Bạn nhập sai mã vui lòng kiểm tra lại ";
+                return RedirectToAction("xacnhan", "Check", new { thongbao = "Bạn nhập sai mã otp vui lòng kiểm tra lại " });
+            }
+            return View();
         }
 
     }

@@ -472,6 +472,9 @@
     <Content Include="Views\Binhluan\Index.cshtml" />
     <Content Include="Views\Flight\Khuhoi.cshtml" />
     <Content Include="Views\Flight\hl.cshtml" />
+    <Content Include="Views\Login\quenmk.cshtml" />
+    <Content Include="Views\Login\xacnhan.cshtml" />
+    <Content Include="Views\Login\Checkmk.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
