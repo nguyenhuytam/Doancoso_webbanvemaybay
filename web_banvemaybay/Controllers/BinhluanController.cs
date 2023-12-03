@@ -1,41 +1,46 @@
-﻿using System;
+﻿using PagedList;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using web_banvemaybay.Models;
-using PagedList;
 
 namespace web_banvemaybay.Controllers
 {
     public class BinhluanController : Controller
     {
         web_banvemaybayEntities db = new web_banvemaybayEntities();
-
         // GET: Binhluan
         public ActionResult Index(int? page)
         {
-            int pageSize = 5;
+            int pageSize = 5    ;
             int pageNumber = (page ?? 1);
-            var binhluan = db.Binhluan.ToList().ToPagedList(pageNumber, pageSize);
-            return View(binhluan);
+            var binhluanList = db.Binhluan.ToList().ToPagedList(pageNumber, pageSize);
+            return View(binhluanList);
         }
-
-        [HttpPost]
-        public ActionResult Binhluan(string binhluanmoi, int selectedRating, int? idTraloi)
+        public ActionResult binhluan(string binhluanmoi, int selectedRating)
         {
             if (Session["IDtaikhoan"] != null)
             {
-                int IDTK = int.Parse(Session["IDtaikhoan"].ToString());
-                var newBinhLuan = new Binhluan
+                int IDTK;
+                if (int.TryParse(Session["IDtaikhoan"].ToString(), out IDTK))
                 {
-                    binhluan1 = binhluanmoi,
-                    sosao = selectedRating,
-                    idtaikhoan = IDTK,
-                    idTraloi = idTraloi // Lưu giá trị idTraloi từ form vào đối tượng Binhluan
-                };
-                db.Binhluan.Add(newBinhLuan);
-                db.SaveChanges();
+                    Binhluan newBinhLuan = new Binhluan
+                    {
+                        binhluan1 = binhluanmoi,
+                        sosao = selectedRating,
+                        idtaikhoan = IDTK,
+                        ngaybl =  DateTime.Now // Thêm thời gian bình luận ở đây
+                    };
+                    db.Binhluan.Add(newBinhLuan);
+                    db.SaveChanges();
+                }
+                else
+                {
+                    ViewBag.thongbao = "Lỗi xảy ra khi lấy ID tài khoản";
+                    return RedirectToAction("Index", "Binhluan");
+                }
             }
             else
             {
@@ -44,5 +49,6 @@ namespace web_banvemaybay.Controllers
             }
             return RedirectToAction("Index", "Binhluan");
         }
+
     }
 }

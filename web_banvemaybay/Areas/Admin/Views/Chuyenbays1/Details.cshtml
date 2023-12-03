@@ -8,7 +8,7 @@
     <h2>Chi tiết</h2><br />
     <h4>Chuyến bay</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal p15">
         <dt>
             Điểm đi: @Html.DisplayFor(model => model.Diadiemdi)
         </dt>
@@ -39,7 +39,7 @@
             Hãng hàng không: @Html.DisplayFor(model => model.HangHK.TenHang)
         </dt>
     </dl>
-    <p>
+    <p class="p15">
         @Html.ActionLink("Sửa", "Edit", new { id = Model.IDchuyenbay }, new { style = "background-color: #0077cc; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" }) |
         @Html.ActionLink("Quay lại", "Index", null, new { style = "background-color: #0077cc; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" })
 

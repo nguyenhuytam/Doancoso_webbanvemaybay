@@ -1,4 +1,4 @@
-﻿body {
+﻿﻿body {
 	font-family: Arial, sans-serif;
 	background-color: #f4f4f4;
 	margin: 0;
@@ -77,10 +77,12 @@
 		border-radius: 50%;
 		margin-right: 5px;
 	}
+
 .comment-date {
 	color: #777;
 	font-size: 12px;
 }
+
 .rating {
 	font-size: 24px;
 	cursor: pointer;
