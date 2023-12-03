@@ -10,8 +10,20 @@
         <li>Số vé: @ViewBag.id</li>
         <li>Tên hành khách: @ViewBag.Tenkhach</li>
         <li>Ngày bay: @ViewBag.NgayBay</li>
-        <li>Thông tin chuyến bay: @ViewBag.dddi - @ViewBag.dddi, @ViewBag.hang, chuyến bay @ViewBag.macb</li>
+        <li>Thông tin chuyến bay: @ViewBag.dddi - @ViewBag.ddden, @ViewBag.hang, chuyến bay @ViewBag.macb</li>
     </ul>
+    @{
+        int idfrom = Session["mavefrom"] != null ? int.Parse(Session["mavefrom"].ToString()) : 0;
+        if (idfrom > 0)
+        {
+            <ul>
+                <li>Số vé: @ViewBag.idfrom</li>
+                <li>Tên hành khách: @ViewBag.Tenkhach</li>
+                <li>Ngày bay: @ViewBag.NgayBayfrom</li>
+                <li>Thông tin chuyến bay: @ViewBag.dddifrom - @ViewBag.dddenfrom, @ViewBag.hangfrom, chuyến bay @ViewBag.macbfrom</li>
+            </ul>
+        }
+    }
     <p><b>Thông tin hoàn tiền</b></p>
     <ul>
         @if (ViewBag.TienHoang != null)
