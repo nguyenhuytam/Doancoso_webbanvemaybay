@@ -6,18 +6,18 @@
 }
 
 
-<div>
-    <h2>Chi tiết</h2>
+<div class="p15">
+    <h2>Chi tiết</h2><br />
 
     <h4>Địa điểm</h4>
     <hr />
-    <dl class="dl-horizontal">
+    <dl class="dl-horizontal p15">
         <dt>
             Địa điểm: @Html.DisplayFor(model => model.DiaDiem1)
         </dt>
     </dl>
 
-    <p>
+    <p class="p15">
         @Html.ActionLink("Sửa", "Edit", new { id = Model.Id }, new { style = "background-color: #0077cc; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" }) |
         @Html.ActionLink("Quay lại", "Index", null, new { style = "background-color: #0077cc; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" })
 

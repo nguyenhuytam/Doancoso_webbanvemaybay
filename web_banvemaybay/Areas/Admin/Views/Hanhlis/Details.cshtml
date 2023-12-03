@@ -19,12 +19,11 @@
             Giá tiền: @String.Format("{0:0,0}", int.Parse(@Html.DisplayFor(model => model.Giatien).ToString()))đ
         </dt>
     </dl>
+
     <p class="p15">
-    <p>
         @Html.ActionLink("Sửa", "Edit", new { id = Model.IDhanhli }, new { style = "background-color: #0077cc; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" }) |
         @Html.ActionLink("Quay lại", "Index", null, new { style = "background-color: #0077cc; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" })
 
-    </p>
     </p>
 </div>
 

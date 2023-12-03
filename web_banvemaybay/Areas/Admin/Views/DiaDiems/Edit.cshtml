@@ -10,8 +10,8 @@
 {
     @Html.AntiForgeryToken()
     
-<div class="form-horizontal">
-    <h2>Sửa</h2>
+<div class="form-horizontal p15">
+    <h2>Sửa</h2><br />
 
     <h4>Địa điểm</h4>
     <hr />
@@ -31,7 +31,7 @@
             <input type="submit" value="Thêm mới" class="btn btn-default" style="background-color: #0077cc; color: white; padding: 5px 10px; border: none; border-radius: 5px;" />
         </div>
     </div>
-    <div>
+    <div class="p15">
         @Html.ActionLink("Quay lại", "Index", null, new { style = "background-color: #0077cc; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" })
     </div>
 </div>
