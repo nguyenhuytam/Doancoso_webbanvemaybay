@@ -1,9 +1,8 @@
 ﻿
 @{
     ViewBag.Title = "xacnhan";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>xacnhan</h2>
 
 @if (!string.IsNullOrEmpty(ViewBag.Message) || ViewBag.thongbao != null)
 {
@@ -32,7 +31,6 @@ else
             <div class="thongbao-body">
                 <p>Thông báo</p>
                 <p class="ndtb"></p>
-
             </div>
             <div class="thongbao-close">
                 <i class="fa-solid fa-xmark"></i>
@@ -45,7 +43,7 @@ else
     <div id="main">
         <div class="TraVe">
             <div class="TraVe-heading">
-                <p>Tra thông tin vé</p>
+                <p>Nhập mã OTP</p>
             </div>
             <div class="TraVe-content">
                 <div class="locition-body-search">
@@ -56,3 +54,38 @@ else
         </div>
     </div>
 </form>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lấy thẻ thông báo
+        var thongBao = document.getElementById("thongbao");
+
+        // Lấy thẻ nút đóng thông báo
+        var closeBtn = document.querySelector(".thongbao-close");
+
+        // Lấy thẻ hình nền
+        var backgroundImg = document.getElementById("backgroud");
+
+
+        // Sự kiện khi nhấn vào nút đóng
+        closeBtn.addEventListener("click", function () {
+            hideThongBao();
+        });
+
+        // Sự kiện khi nhấn vào hình nền
+        backgroundImg.addEventListener("click", function () {
+            hideThongBao();
+        });
+
+        // Tự động ẩn thông báo sau 2 giây
+        setTimeout(function () {
+            hideThongBao();
+        }, 2000);
+
+        // Hàm ẩn thông báo
+        function hideThongBao() {
+            thongBao.style.display = "none";
+        }
+    });
+</script>
+
+

@@ -454,17 +454,30 @@ li {
         font-size: 18px;
         width: 85%;
     }
-
-    .locition-body-search .otp-2 {
-        background-color: #fff;
-        border: 1px solid #000000;
-        border-radius: 10px 0 0 10px;
-        padding: 7px 10px;
-        margin-top: 5px;
-        margin-left: 7px;
-        font-size: 18px;
-        width: 86.5%;
+    .locition-body-search .mkm {
+        border-radius: 10px;
+        margin-left: 44px !important;
     }
+    .locition-body-search .nlmk {
+        border-radius: 10px;
+    }
+.btn-dmk {
+    border-radius: 10px !important;
+    margin-left: 162px;
+    margin-right: auto;
+    width: 25%;
+    border: 1px solid #000000 !important;
+}
+.locition-body-search .otp-2 {
+    background-color: #fff;
+    border: 1px solid #000000;
+    border-radius: 10px 0 0 10px;
+    padding: 7px 10px;
+    margin-top: 5px;
+    margin-left: 7px;
+    font-size: 18px;
+    width: 86.5%;
+}
 
     .locition-body-search button, .locition-body-search-2 button {
         background-color: var(--blue);

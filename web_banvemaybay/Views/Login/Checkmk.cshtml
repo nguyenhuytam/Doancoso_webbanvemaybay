@@ -3,26 +3,87 @@
     ViewBag.Title = "Checkmk";
 }
 
-<h2>Thây đổi mk </h2>
-@if (!string.IsNullOrEmpty(ViewBag.Message))
+@if (!string.IsNullOrEmpty(ViewBag.Message) || ViewBag.thongbao != null)
 {
-    <p>@ViewBag.Message</p>
+    <div id="thongbao">
+        <div class="thongbao">
+            <div class="thongbao-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="thongbao-body">
+                <p>Thông báo</p>
+                <p class="ndtb">@ViewBag.Message @ViewBag.thongbao</p>
+            </div>
+            <div class="thongbao-close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div id="thongbao" style="display:none !important">
+        <div class="thongbao">
+            <div class="thongbao-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="thongbao-body">
+                <p>Thông báo</p>
+                <p class="ndtb"></p>
+            </div>
+            <div class="thongbao-close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+    </div>
 }
 <img src="~/Areas/Admin/ContentAdmin/image/209501.jpg" alt="" id="backgroud">
 <form action="@Url.Action("doimoi")" method="post">
     <div id="main">
         <div class="TraVe">
             <div class="TraVe-heading">
-                <p>quên mk</p>
+                <p>Nhập mật khẩu mới</p>
             </div>
             <div class="TraVe-content">
                 <div class="locition-body-search">
-                    <label for="password" class="lable-otp-2">Password: </label><input type="password" name="password" required class="otp">
-                    <label for="password" class="lable-otp-2">Password mới: </label><input type="password" name="passwordmoi" required class="otp">
-                    <label for="password" class="lable-otp-2">Password: </label><input type="password" name="passwordxn" required class="otp">
-                    <button type="submit"> Đổi mk mới </button>
+                    <label for="password" class="lable-otp-2">Mật khẩu mới: </label><input type="password" name="passwordmoi" required class="otp mkm">
+                    <label for="password" class="lable-otp-2">Nhập lại mật khẩu: </label><input type="password" name="passwordxn" required class="otp nlmk">
+                    <button type="submit" class="btn-dmk"> Đổi mk mới </button>
                 </div>
             </div>
         </div>
     </div>
 </form>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lấy thẻ thông báo
+        var thongBao = document.getElementById("thongbao");
+
+        // Lấy thẻ nút đóng thông báo
+        var closeBtn = document.querySelector(".thongbao-close");
+
+        // Lấy thẻ hình nền
+        var backgroundImg = document.getElementById("backgroud");
+
+
+        // Sự kiện khi nhấn vào nút đóng
+        closeBtn.addEventListener("click", function () {
+            hideThongBao();
+        });
+
+        // Sự kiện khi nhấn vào hình nền
+        backgroundImg.addEventListener("click", function () {
+            hideThongBao();
+        });
+
+        // Tự động ẩn thông báo sau 2 giây
+        setTimeout(function () {
+            hideThongBao();
+        }, 2000);
+
+        // Hàm ẩn thông báo
+        function hideThongBao() {
+            thongBao.style.display = "none";
+        }
+    });
+</script>

@@ -3,17 +3,46 @@
     ViewBag.Title = "quenmk";
 }
 
-<h2>quenmk</h2>
-@if (!string.IsNullOrEmpty(ViewBag.Message))
+@if (!string.IsNullOrEmpty(ViewBag.Message) || ViewBag.thongbao != null)
 {
-    <p>@ViewBag.Message</p>
+    <div id="thongbao">
+        <div class="thongbao">
+            <div class="thongbao-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="thongbao-body">
+                <p>Thông báo</p>
+                <p class="ndtb">@ViewBag.Message @ViewBag.thongbao</p>
+            </div>
+            <div class="thongbao-close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div id="thongbao" style="display:none !important">
+        <div class="thongbao">
+            <div class="thongbao-icon">
+                <i class="fa-solid fa-triangle-exclamation"></i>
+            </div>
+            <div class="thongbao-body">
+                <p>Thông báo</p>
+                <p class="ndtb"></p>
+            </div>
+            <div class="thongbao-close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+        </div>
+    </div>
 }
 <img src="~/Areas/Admin/ContentAdmin/image/209501.jpg" alt="" id="backgroud">
 <form action="@Url.Action("SendOTPMk")" method="post">
     <div id="main">
         <div class="TraVe">
             <div class="TraVe-heading">
-                <p>quên mk</p>
+                <p>Bạn quên mật khẩu? Hãy nhập email bạn đã đăng ký</p>
             </div>
             <div class="TraVe-content">
                 <div class="locition-body-search">
@@ -24,3 +53,34 @@
         </div>
     </div>
 </form>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Lấy thẻ thông báo
+        var thongBao = document.getElementById("thongbao");
+
+        // Lấy thẻ nút đóng thông báo
+        var closeBtn = document.querySelector(".thongbao-close");
+
+        // Lấy thẻ hình nền
+        var backgroundImg = document.getElementById("backgroud");
+        // Sự kiện khi nhấn vào nút đóng
+        closeBtn.addEventListener("click", function () {
+            hideThongBao();
+        });
+
+        // Sự kiện khi nhấn vào hình nền
+        backgroundImg.addEventListener("click", function () {
+            hideThongBao();
+        });
+
+        // Tự động ẩn thông báo sau 2 giây
+        setTimeout(function () {
+            hideThongBao();
+        }, 2000);
+
+        // Hàm ẩn thông báo
+        function hideThongBao() {
+            thongBao.style.display = "none";
+        }
+    });
+</script>

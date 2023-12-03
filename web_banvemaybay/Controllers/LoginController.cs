@@ -250,9 +250,11 @@ namespace web_banvemaybay.Controllers
                 return View(user);
             }
         }
-        public ActionResult quenmk(string email)
+        public ActionResult quenmk(string email, string message)
         {
+            ViewBag.Message = message;
             return View();
+
         }
         Random random = new Random();
         int otp;
@@ -260,6 +262,16 @@ namespace web_banvemaybay.Controllers
         public ActionResult SendOTPMk(FormCollection form)
         {
             string email = form["email"];
+            if (email != null)
+            {
+                web_banvemaybayEntities db = new web_banvemaybayEntities();
+                var checkma = db.TaiKhoan.Where(c => c.Email == email).FirstOrDefault();
+                if (checkma == null)
+                {
+                    return RedirectToAction("quenmk", "Login", new { message = "Email này chưa được đăng ký" });
+                }
+
+            }
             otp = random.Next(100000, 10000000);
 
             var fromAddress = ConfigurationManager.AppSettings["FromEmailAddress"].ToString();
@@ -296,80 +308,27 @@ namespace web_banvemaybay.Controllers
             ViewBag.thongbao = thongbao;
             return View();
         }
-        public ActionResult doimoi(string password, string passwordmoi, string passwordxn)
+        public ActionResult doimoi(string passwordmoi, string passwordxn)
         {
-            web_banvemaybayEntities db = new web_banvemaybayEntities();
-            password = MD5Hash(password);
-            string email = Session["email"].ToString();
-            var checkma = db.TaiKhoan.Where(c => c.Email == email).FirstOrDefault();
-            if (checkma.Password == password)
-            {
+                web_banvemaybayEntities db = new web_banvemaybayEntities();
+                string email = Session["email"].ToString();
+                var checkma = db.TaiKhoan.Where(c => c.Email == email).FirstOrDefault();
                 if (passwordmoi == passwordxn)
                 {
                     checkma.Password = MD5Hash(passwordmoi);
                     db.SaveChanges();
-                }
+                return RedirectToAction("Login", "Login");
             }
-
-            return RedirectToAction("Login", "Login");
-        }
-
-        public ActionResult Checkmk(string OTP)
-        {
-            string email = Session["email"].ToString();
-            web_banvemaybayEntities db = new web_banvemaybayEntities();
-            if (Session["otp"].ToString() == OTP)
-            {
-                var checkma = db.TaiKhoan.Where(c => c.Email ==email).FirstOrDefault();
-                if (checkma != null)
-                {
-                    int number;
-                    string numberStr;
-                    Random random = new Random();
-                    numberStr = random.Next(100000, 10000000).ToString();
-                    checkma.Password = numberStr;
-                    checkma.Password = MD5Hash(checkma.Password);
-                    db.SaveChanges();
-
-                    var fromAddress = ConfigurationManager.AppSettings["FromEmailAddress"].ToString();
-                    var toAddress = new MailAddress(email).ToString();
-                    string frompass = ConfigurationManager.AppSettings["FromEmailPassword"].ToString();
-                    const string subject = "Password mới";
-                    string body = "Password: " + numberStr.ToString();
-
-                    var smtp = new SmtpClient
-                    {
-                        Host = "smtp.gmail.com",
-                        Port = 587,
-                        EnableSsl = true,
-                        DeliveryMethod = SmtpDeliveryMethod.Network,
-                        UseDefaultCredentials = false,
-                        Credentials = new NetworkCredential(fromAddress, frompass),
-                        Timeout = 200000
-                    };
-                    using (var message = new MailMessage(fromAddress, toAddress)
-                    {
-                        Subject = subject,
-                        Body = body,
-                    })
-                    {
-                        smtp.Send(message);
-                    }
-                    Session["password"] = numberStr.ToString();
-                    Session["email"] = email;
-                    ViewBag.Message = "OTP đã được gửi";
-                }
                 else
                 {
-                    ViewBag.Message = "Bạn nhập sai mã vui lòng kiểm tra lại ";
-                    return RedirectToAction("xacnhan", "Check", new { thongbao = "Vui lòng kiểm kĩ Email hoặc Mã vé : " });
+                    return RedirectToAction("Checkmk", "Login", new { message = "Vui lòng nhập đúng mật khẩu đã nhập", passwordmoi = passwordmoi });
                 }
-            }
-            else
-            {
-                ViewBag.Message = "Bạn nhập sai mã vui lòng kiểm tra lại ";
-                return RedirectToAction("xacnhan", "Check", new { thongbao = "Bạn nhập sai mã otp vui lòng kiểm tra lại " });
-            }
+            
+        }
+
+        public ActionResult Checkmk(string message)
+        {
+            ViewBag.Message = message;
             return View();
         }
 
