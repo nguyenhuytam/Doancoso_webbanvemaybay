@@ -861,6 +861,7 @@ namespace FlightSearch.Controllers
                     Session["Hangge"] = Baghangghe;
                     Session["TinhTrang"] = ve.Tinhtrang;
                     Session["TenHang"] = chuyenbay.HangHK.TenHang;
+                    Session["giathanhtoanvnpay"] = Math.Round(giatien * 100);
                     if (payment == "payment1")
                     {
                         Session["payment"] = "Thanh toán momo";
