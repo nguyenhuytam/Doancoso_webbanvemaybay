@@ -685,6 +685,28 @@ namespace FlightSearch.Controllers
                         Session["giaveto"] = tonggiato;
                     }
                     ve.IDchuyenbay = idTo;
+                    ve.IDhangve = idhv;
+                    var slhangdi = db.Chuyenbay.FirstOrDefault(cb => cb.IDchuyenbay == idTo);                   
+                    if (slhangdi != null)
+                    {
+                        if (idhv == null)
+                        {
+                            slhangdi.PhoThong -= 1 * nguoidat;
+                            ve.IDhangve = 2;
+                        }
+                        if (idhv == 1)
+                        {
+                            slhangdi.ThuongGia -= 1 * nguoidat;
+                            ve.IDhangve = 1;
+                        }
+                        if (idhv == 2)
+                        {
+                            slhangdi.PhoThong -= 1 * nguoidat;
+                            ve.IDhangve = 2;
+                        }
+
+                        db.SaveChanges();
+                    }
                     Session["idchuyenbay"] = ve.IDchuyenbay;
                     ve.IDhanhkhach = kt.IDhanhkhach;
                     ve.IDlienhe = ktlh.IDlienhe;
@@ -715,6 +737,39 @@ namespace FlightSearch.Controllers
                         Session["giathanhtoanvnpay"] = Math.Round(tongvekh * 100);
                     }
                     ve.IDchuyenbay = idFrom;
+                    ve.IDhangve = idhv;
+                    var slhangve = db.Chuyenbay.FirstOrDefault(cb => cb.IDchuyenbay == ve.IDchuyenbay);
+                    if (ve.IDhangve == null)
+                    {
+                        if (slhangve.PhoThong > 0)
+                        {
+                            ve.IDhangve = 2;
+                        }
+                        else
+                        {
+                            ve.IDhangve = 1;
+                        }
+                    }
+                    if (slhangve != null)
+                    {
+                        if (slhangve == null)
+                        {
+                            slhangve.PhoThong -= 1 * nguoidat;
+                            ve.IDhangve = 2;
+                        }
+                        if (idhv == 1)
+                        {
+                            slhangve.ThuongGia -= 1 * nguoidat;
+                            ve.IDhangve = 1;
+                        }
+                        if (idhv == 2)
+                        {
+                            slhangve.PhoThong -= 1 * nguoidat;
+                            ve.IDhangve = 2;
+                        }
+
+                        db.SaveChanges();
+                    }
                     Session["idchuyenbaykh"] = ve.IDchuyenbay;
                     ve.IDhanhkhach = kt.IDhanhkhach;
                     ve.IDlienhe = ktlh.IDlienhe;
