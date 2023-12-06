@@ -32,9 +32,9 @@ namespace web_banvemaybay.Models
         public virtual DbSet<DiaDiem> DiaDiem { get; set; }
         public virtual DbSet<HangHK> HangHK { get; set; }
         public virtual DbSet<Hangve> Hangve { get; set; }
-        public virtual DbSet<Hanhkhach> Hanhkhach { get; set; }
+        public virtual DbSet<HanhKhach> HanhKhach { get; set; }
         public virtual DbSet<Hanhli> Hanhli { get; set; }
-        public virtual DbSet<Khachsan> Khachsan { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TaiKhoan> TaiKhoan { get; set; }
         public virtual DbSet<TTlienhe> TTlienhe { get; set; }
         public virtual DbSet<Ve> Ve { get; set; }

@@ -17,7 +17,7 @@ namespace web_banvemaybay.Areas.Admin.Controllers
         // GET: Admin/Ves
         public ActionResult Index()
         {
-            var ve = db.Ve.Include(v => v.Chuyenbay).Include(v => v.Dattruoc).Include(v => v.Hangve).Include(v => v.Hanhli).Include(v => v.TTlienhe).Include(v => v.Hanhkhach);
+            var ve = db.Ve.Include(v => v.Chuyenbay).Include(v => v.Dattruoc).Include(v => v.Hangve).Include(v => v.Hanhli).Include(v => v.TTlienhe).Include(v => v.HanhKhach);
             return View(ve.ToList());
         }
 
@@ -44,7 +44,7 @@ namespace web_banvemaybay.Areas.Admin.Controllers
             ViewBag.IDhangve = new SelectList(db.Hangve, "IDhangve", "TenHangve");
             ViewBag.IDhanhli = new SelectList(db.Hanhli, "IDhanhli", "Kg");
             ViewBag.IDlienhe = new SelectList(db.TTlienhe, "IDlienhe", "FullName");
-            ViewBag.IDhanhkhach = new SelectList(db.Hanhkhach, "IDhanhkhach", "Tenhanhkhach");
+            ViewBag.IDhanhkhach = new SelectList(db.HanhKhach, "IDhanhkhach", "Tenhanhkhach");
             return View();
         }
 
@@ -67,7 +67,7 @@ namespace web_banvemaybay.Areas.Admin.Controllers
             ViewBag.IDhangve = new SelectList(db.Hangve, "IDhangve", "TenHangve", ve.IDhangve);
             ViewBag.IDhanhli = new SelectList(db.Hanhli, "IDhanhli", "Kg", ve.IDhanhli);
             ViewBag.IDlienhe = new SelectList(db.TTlienhe, "IDlienhe", "FullName", ve.IDlienhe);
-            ViewBag.IDhanhkhach = new SelectList(db.Hanhkhach, "IDhanhkhach", "Tenhanhkhach", ve.IDhanhkhach);
+            ViewBag.IDhanhkhach = new SelectList(db.HanhKhach, "IDhanhkhach", "Tenhanhkhach", ve.HanhKhach);
             return View(ve);
         }
 
@@ -88,7 +88,7 @@ namespace web_banvemaybay.Areas.Admin.Controllers
             ViewBag.IDhangve = new SelectList(db.Hangve, "IDhangve", "TenHangve", ve.IDhangve);
             ViewBag.IDhanhli = new SelectList(db.Hanhli, "IDhanhli", "Kg", ve.IDhanhli);
             ViewBag.IDlienhe = new SelectList(db.TTlienhe, "IDlienhe", "FullName", ve.IDlienhe);
-            ViewBag.IDhanhkhach = new SelectList(db.Hanhkhach, "IDhanhkhach", "Tenhanhkhach", ve.IDhanhkhach);
+            ViewBag.IDhanhkhach = new SelectList(db.HanhKhach, "IDhanhkhach", "Tenhanhkhach", ve.IDhanhKhach);
             return View(ve);
         }
 
@@ -110,7 +110,7 @@ namespace web_banvemaybay.Areas.Admin.Controllers
             ViewBag.IDhangve = new SelectList(db.Hangve, "IDhangve", "TenHangve", ve.IDhangve);
             ViewBag.IDhanhli = new SelectList(db.Hanhli, "IDhanhli", "Kg", ve.IDhanhli);
             ViewBag.IDlienhe = new SelectList(db.TTlienhe, "IDlienhe", "FullName", ve.IDlienhe);
-            ViewBag.IDhanhkhach = new SelectList(db.Hanhkhach, "IDhanhkhach", "Tenhanhkhach", ve.IDhanhkhach);
+            ViewBag.IDhanhkhach = new SelectList(db.HanhKhach, "IDhanhkhach", "Tenhanhkhach", ve.HanhKhach);
             return View(ve);
         }
 

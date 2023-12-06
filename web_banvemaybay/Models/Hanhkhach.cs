@@ -12,10 +12,10 @@ namespace web_banvemaybay.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Hanhkhach
+    public partial class HanhKhach
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Hanhkhach()
+        public HanhKhach()
         {
             this.Ve = new HashSet<Ve>();
         }
@@ -24,7 +24,6 @@ namespace web_banvemaybay.Models
         public string Tenhanhkhach { get; set; }
         public string Gioitinh { get; set; }
         public Nullable<System.DateTime> NgaySinh { get; set; }
-        public Nullable<int> CCCD { get; set; }
         public Nullable<int> SDT { get; set; }
         public string Email { get; set; }
     

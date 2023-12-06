@@ -17,7 +17,6 @@ namespace web_banvemaybay.Models
         public int IDve { get; set; }
         public Nullable<int> IDdattruoc { get; set; }
         public Nullable<int> IDchuyenbay { get; set; }
-        public Nullable<int> IDhanhkhach { get; set; }
         public string Tinhtrang { get; set; }
         public Nullable<int> IDlienhe { get; set; }
         public Nullable<int> IDhanhli { get; set; }
@@ -28,11 +27,12 @@ namespace web_banvemaybay.Models
         public Nullable<int> Sove { get; set; }
         public Nullable<double> Hoangtra { get; set; }
         public Nullable<int> IDchuyenbayve { get; set; }
+        public Nullable<int> IDhanhKhach { get; set; }
     
         public virtual Chuyenbay Chuyenbay { get; set; }
         public virtual Dattruoc Dattruoc { get; set; }
         public virtual Hangve Hangve { get; set; }
-        public virtual Hanhkhach Hanhkhach { get; set; }
+        public virtual HanhKhach HanhKhach { get; set; }
         public virtual Hanhli Hanhli { get; set; }
         public virtual TTlienhe TTlienhe { get; set; }
     }

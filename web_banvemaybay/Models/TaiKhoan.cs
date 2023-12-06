@@ -22,8 +22,9 @@ namespace web_banvemaybay.Models
         }
     
         public int IDtaikhoan { get; set; }
-        public string ConfirmPassword { get; set; }
         public string Password { get; set; }
+        public string ConfirmPassword { get; set; }
+        
         public string HovaTen { get; set; }
         public string Email { get; set; }
         public Nullable<int> SDT { get; set; }

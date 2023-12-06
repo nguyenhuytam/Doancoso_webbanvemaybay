@@ -631,7 +631,7 @@ namespace FlightSearch.Controllers
             return View("SearchFlight", ((IEnumerable<Chuyenbay>)Session["flights"]).ToList());
         }
         [HttpPost]
-        public ActionResult tt(FormCollection form, TTlienhe lienhe, Hanhkhach hk , string name, DateTime? birthday, int? hangveid, int? sdtlh, string emaillh, string gioitinh, string namelh, string gioitinhlh, int? idcu, int? idchuyenbay, string payment/*, int? cccd*/)
+        public ActionResult tt(FormCollection form, TTlienhe lienhe, HanhKhach hk , string name, DateTime? birthday, int? hangveid, int? sdtlh, string emaillh, string gioitinh, string namelh, string gioitinhlh, int? idcu, int? idchuyenbay, string payment, string cmnd)
         {
             int nguoidat = int.Parse(Session["soluong"].ToString());
             double giatien = Session["giatien" + idchuyenbay] != null ? double.Parse(@Session["giatien" + idchuyenbay].ToString()) : 0;
@@ -642,22 +642,26 @@ namespace FlightSearch.Controllers
                 TempData["ErrorMessage"] = "Chưa đủ 18 tuổi vui lòng chọn  lại  !";
                 return RedirectToAction("Information", "Flight", new {id = idchuyenbay});
             }
-            if (name != null && birthday != null && sdtlh != null && emaillh != null && gioitinh != null && gioitinhlh != null && namelh != null  /*cccd!=null*/)
+            if (name != null && birthday != null && sdtlh != null && emaillh != null && gioitinh != null && gioitinhlh != null && namelh != null  && cmnd != null)
             {
-                     var ktlh = new TTlienhe();
+                    var ktlh = new TTlienhe();
                     ktlh.FullName = namelh;
                     ktlh.Phone = sdtlh;
                     ktlh.Email = emaillh;
                     db.TTlienhe.Add(ktlh);
                     db.SaveChanges();
-
-                var kt = new Hanhkhach();
-                kt.Tenhanhkhach = name;
-                kt.NgaySinh = birthday;
-                kt.Gioitinh = gioitinh;
-               /* kt.CCCD = cccd;*/
-                db.Hanhkhach.Add(kt);
-                db.SaveChanges();
+                int cccd = int.Parse(cmnd.ToString());
+                var khachhang = db.HanhKhach.Where(c=>c.IDhanhkhach == cccd).FirstOrDefault();
+                var kt = new HanhKhach();
+                kt.IDhanhkhach = cccd;
+                if (khachhang == null)
+                {
+                    kt.Tenhanhkhach = name;
+                    kt.NgaySinh = birthday;
+                    kt.Gioitinh = gioitinh;
+                    db.HanhKhach.Add(kt);
+                    db.SaveChanges();
+                }
                 string Bag = "Không hành lý!";
                 string DateHour = "";
                 string DateHourKH = "";
@@ -708,7 +712,7 @@ namespace FlightSearch.Controllers
                         db.SaveChanges();
                     }
                     Session["idchuyenbay"] = ve.IDchuyenbay;
-                    ve.IDhanhkhach = kt.IDhanhkhach;
+                    ve.IDhanhKhach = kt.IDhanhkhach;
                     ve.IDlienhe = ktlh.IDlienhe;
                     ve.IDhangve = idhv;
                     ve.IDhanhli = idtoHL;
@@ -771,7 +775,7 @@ namespace FlightSearch.Controllers
                         db.SaveChanges();
                     }
                     Session["idchuyenbaykh"] = ve.IDchuyenbay;
-                    ve.IDhanhkhach = kt.IDhanhkhach;
+                    ve.IDhanhKhach = kt.IDhanhkhach;
                     ve.IDlienhe = ktlh.IDlienhe;
                     ve.IDhangve = idhv;
                     ve.IDhanhli = idfromHL;
@@ -836,12 +840,15 @@ namespace FlightSearch.Controllers
                     return RedirectToAction("DatThanhCong", "Home", new { idTo = idveTO ,idFrom=idVeFrom});
 
                 }
+
+
+
                 
                 if (idchuyenbay != null)
                 {
                     var ve = new Ve();
                     ve.IDchuyenbay = idchuyenbay;
-                    ve.IDhanhkhach = kt.IDhanhkhach;
+                    ve.IDhanhKhach = kt.IDhanhkhach;
                     ve.IDlienhe = ktlh.IDlienhe;
                     ve.IDhangve = hangveid;
                     var slhang = db.Chuyenbay.FirstOrDefault(cb => cb.IDchuyenbay == idchuyenbay);
