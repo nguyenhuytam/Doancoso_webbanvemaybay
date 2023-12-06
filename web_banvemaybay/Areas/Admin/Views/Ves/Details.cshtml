@@ -13,14 +13,14 @@
     <hr />
     <dl class="dl-horizontal p15">
         <dt>
-            Tình trạng @Html.DisplayFor(model => model.Tinhtrang)
+            Tình trạng: @Html.DisplayFor(model => model.Tinhtrang)
         </dt>
         <dt>
             Ngày đặt vé: @Html.DisplayFor(model => model.Ngaydatve)
         </dt>
 
         <dt>
-            Giá tiền: @Html.DisplayFor(model => model.Gia)
+            Giá tiền: @Html.DisplayFor(model => model.Gia)đ
         </dt>
 
         <dt>
@@ -40,31 +40,29 @@
         </dt>
 
         <dt>
-            Đặt trước: @Html.DisplayNameFor(model => model.Dattruoc.Tinhtrang)
+            Địa điển đến: @Html.DisplayFor(model => model.Chuyenbay.Diadiemden)
         </dt>
 
         <dt>
-            Hạng vé: @Html.DisplayNameFor(model => model.Hangve.TenHangve)
+            Hạng vé: @Html.DisplayFor(model => model.Hangve.TenHangve)
         </dt>
-
 
         <dt>
-            Hành lý(Kg): @Html.DisplayNameFor(model => model.Hanhli.Kg)
+            Hành lý(Kg): @Html.DisplayFor(model => model.Hanhli.Kg)
         </dt>
-
 
         <dt>
-            Họ và tên: @Html.DisplayNameFor(model => model.TTlienhe.FullName)
+            Tên đầy đủ: @Html.DisplayFor(model => model.TTlienhe.FullName)
         </dt>
-
 
         <dt>
-            Tên Hành khách: @Html.DisplayNameFor(model => model.Hanhkhach.Tenhanhkhach)
+            Tên Hành khách: @Html.DisplayFor(model => model.Hanhkhach.Tenhanhkhach)
         </dt>
+
 
     </dl>
     <p class="p15">
-        @Html.ActionLink("Sửa", "Edit", new { id = Model.IDve }, new { style = "background-color: #0077cc; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" }) |
+        @*@Html.ActionLink("Sửa", "Edit", new { id = Model.IDve }, new { style = "background-color: #0077cc; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" }) |*@
         @Html.ActionLink("Quay lại", "Index", null, new { style = "background-color: #0077cc; color: white; padding: 5px 10px; text-decoration: none; border-radius: 5px;" })
 
     </p>

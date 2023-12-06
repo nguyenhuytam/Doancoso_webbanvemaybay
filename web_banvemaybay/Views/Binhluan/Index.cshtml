@@ -51,7 +51,8 @@
         }
         else
         {
-            <a href="@Url.Action("Login", "Login")">Đăng nhập để Bình luận</a>
+            Session["ReturnUrl"] = Request.Url.ToString();
+            <a href="@Url.Action("Login", "Login")">Đăng nhập để bình luận</a>
         }
     </div>
     </div>

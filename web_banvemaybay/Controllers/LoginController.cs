@@ -80,7 +80,17 @@ namespace web_banvemaybay.Controllers
                 {
                     Session["isAdmin"] = false;
                 }
-                return RedirectToAction("Home", "Home", new { id = Session["Hovaten"] });
+                if (Session["ReturnUrl"] != null)
+                {
+                    string returnUrl = Session["ReturnUrl"].ToString();
+                    Session["ReturnUrl"] = null;
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    return RedirectToAction("Home", "Home", new { id = Session["Hovaten"] });
+                }
+
             }
             else
             {
