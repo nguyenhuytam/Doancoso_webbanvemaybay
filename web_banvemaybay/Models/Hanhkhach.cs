@@ -20,7 +20,7 @@ namespace web_banvemaybay.Models
             this.Ve = new HashSet<Ve>();
         }
     
-        public int IDhanhkhach { get; set; }
+        public string IDhanhkhach { get; set; }
         public string Tenhanhkhach { get; set; }
         public string Gioitinh { get; set; }
         public Nullable<System.DateTime> NgaySinh { get; set; }

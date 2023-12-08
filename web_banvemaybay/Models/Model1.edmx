@@ -73,7 +73,7 @@
           <Key>
             <PropertyRef Name="IDhanhkhach" />
           </Key>
-          <Property Name="IDhanhkhach" Type="int" Nullable="false" />
+          <Property Name="IDhanhkhach" Type="nchar" MaxLength="20" Nullable="false" />
           <Property Name="Tenhanhkhach" Type="nvarchar" MaxLength="100" />
           <Property Name="Gioitinh" Type="nvarchar" MaxLength="50" />
           <Property Name="NgaySinh" Type="datetime" />
@@ -135,7 +135,7 @@
           <Property Name="Sove" Type="int" />
           <Property Name="Hoangtra" Type="float" />
           <Property Name="IDchuyenbayve" Type="int" />
-          <Property Name="IDhanhKhach" Type="int" />
+          <Property Name="IDhanhKhach" Type="nchar" MaxLength="20" />
         </EntityType>
         <Association Name="FK_Binhluan_TaiKhoan">
           <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="0..1" />
@@ -447,7 +447,7 @@
           <Key>
             <PropertyRef Name="IDhanhkhach" />
           </Key>
-          <Property Name="IDhanhkhach" Type="Int32" Nullable="false" />
+          <Property Name="IDhanhkhach" Type="String" Nullable="false" MaxLength="20" FixedLength="true" Unicode="true" />
           <Property Name="Tenhanhkhach" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="Gioitinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="NgaySinh" Type="DateTime" Precision="3" />
@@ -515,7 +515,7 @@
           <Property Name="Sove" Type="Int32" />
           <Property Name="Hoangtra" Type="Double" />
           <Property Name="IDchuyenbayve" Type="Int32" />
-          <Property Name="IDhanhKhach" Type="Int32" />
+          <Property Name="IDhanhKhach" Type="String" MaxLength="20" FixedLength="true" Unicode="true" />
           <NavigationProperty Name="Chuyenbay" Relationship="web_banvemaybayModel.FK_Ticket_Filght" FromRole="Ve" ToRole="Chuyenbay" />
           <NavigationProperty Name="Dattruoc" Relationship="web_banvemaybayModel.FK_Ticket_Booking" FromRole="Ve" ToRole="Dattruoc" />
           <NavigationProperty Name="Hangve" Relationship="web_banvemaybayModel.FK_Ve_Hangve" FromRole="Ve" ToRole="Hangve" />

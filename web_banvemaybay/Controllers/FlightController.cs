@@ -650,10 +650,9 @@ namespace FlightSearch.Controllers
                     ktlh.Email = emaillh;
                     db.TTlienhe.Add(ktlh);
                     db.SaveChanges();
-                int cccd = int.Parse(cmnd.ToString());
-                var khachhang = db.HanhKhach.Where(c=>c.IDhanhkhach == cccd).FirstOrDefault();
+                var khachhang = db.HanhKhach.Where(c=>c.IDhanhkhach == cmnd).FirstOrDefault();
                 var kt = new HanhKhach();
-                kt.IDhanhkhach = cccd;
+                kt.IDhanhkhach = cmnd;
                 if (khachhang == null)
                 {
                     kt.Tenhanhkhach = name;

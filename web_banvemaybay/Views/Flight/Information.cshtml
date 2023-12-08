@@ -97,10 +97,16 @@ else
                             <p>Họ tên <sup>*</sup></p>
                             <input type="text" name="name" placeholder="Nhập họ tên" required class="form-control">
                         </li>
-                          <li>
-                                <p>CCCD <sup>*</sup></p>
-                                <input type="text" name="cmnd" placeholder="CCCD" required class="form-control">
-                            </li>
+                        <li>
+                            <p>CCCD <sup>*</sup></p>
+                            <input type="text" name="cmnd" placeholder="CCCD" required class="form-control" oninput="validateCCCD(this)">
+                            <div id="error-message" class="error-message"></div>
+                            <style>
+                                .error-message {
+                                    color: red;
+                                }
+                            </style>
+                        </li>
                         <li>
                             <p>Ngày sinh <sup>*</sup></p>
                             <input type="date" name="birthday" id="birthday" required>
@@ -318,7 +324,7 @@ else
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         // Lấy giá trị đã lưu trong localStorage (nếu có) và gán cho các trường dữ liệu
-        var inputElements = document.querySelectorAll('input[name="name"], input[name="namelh"], input[name="sdtlh"], input[name="emaillh"]');
+        var inputElements = document.querySelectorAll('input[name="name"], input[name="namelh"], input[name="sdtlh"], input[name="emaillh"],input[name="cmnd"]');
         var selectElements = document.querySelectorAll('select[name="gioitinh"], select[name="gioitinhlh"]');
 
         for (var i = 0; i < inputElements.length; i++) {
@@ -459,6 +465,29 @@ else
             document.querySelector(".payment2").style.display = "none"
             document.querySelector(".ttmomo").style.display = "none"
             document.querySelector(".ttvnpay").style.display = "block"
+        }
+    }
+</script>
+<script>
+    function validateCCCD(input) {
+        // Loại bỏ các ký tự không phải là số
+        let value = input.value.replace(/\D/g, '');
+
+        // Giới hạn chiều dài của chuỗi nhập là 12 ký tự
+        value = value.slice(0, 12);
+
+        // Kiểm tra nếu có chứa các giá trị 'a', 'b', 'c', 'd' thì loại bỏ
+        value = value.replace(/[abcd]/gi, '');
+
+        // Cập nhật giá trị trong trường nhập liệu
+        input.value = value;
+
+        // Hiển thị thông báo lỗi nếu không đủ 12 số
+        const errorMessage = document.getElementById('error-message');
+        if (value.length !== 12) {
+            errorMessage.textContent = 'CCCD phải có đủ 12 số.';
+        } else {
+            errorMessage.textContent = ''; // Xóa thông báo lỗi nếu hợp lệ
         }
     }
 </script>
