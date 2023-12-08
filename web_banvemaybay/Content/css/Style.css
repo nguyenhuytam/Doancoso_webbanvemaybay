@@ -100,7 +100,7 @@ li {
         left: 0;
         list-style-type: none;
         background-color: #85b8ff9e;
-        min-width: 151px;
+        min-width: 135px;
         box-shadow: 0 0 10px rgb(0, 0, 0, 0.3);
     }
 
@@ -301,7 +301,8 @@ li {
     border: none;
     font-size: 16px;
     line-height: 10px;
-    font-weight:bold;
+    white-space: nowrap;
+    font-weight: bold;
     padding: 15px;
     background-color: var(--blue);
     opacity: 0.8;
@@ -1177,12 +1178,16 @@ li {
 
     .customer-i li {
         margin: 0 13px;
-        width: 30%;
+        white-space: nowrap;
+        width: 27.49%;
     }
 
     .customer-i .li-50 {
         width: 47%;
         margin-bottom: 10px;
+    }
+    .customer-i .li-gt {
+        width: 7%;
     }
 
         .customer-i li p sup {

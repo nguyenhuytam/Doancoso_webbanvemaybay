@@ -24,6 +24,7 @@
         width: 48%;
     }
     .customer-i li {
+
         width: 31.4%;
     }
     .contact-i li, .contact-i li:first-child {
@@ -473,15 +474,37 @@
     }
 }
 /* Cho ipab và điện thoại */
-@media (max-width: 63.9375em) {
+@media (max-width: 1290px) {
     #nav > li {
         text-align: center;
     }
 
+    .customer-i li, .customer-i .li-gt {
+        width: 48%;
+    }
+    .locition-body-search .trave {
+        margin: 0 0 10px;
+        width: 100%;
+    }
     .footer-distributed {
         font: bold 14px sans-serif;
     }
-
+    .locition-body-search .otp, .locition-body-search .otp-2 {
+        background-color: #fff;
+        border: 1px solid #000000;
+        border-radius: 10px;
+        padding: 7px 10px;
+        font-size: 18px;
+        width: 100%;
+        margin: 0 0 10px;
+    }
+    .locition-body-search button {
+        margin: 0;
+        border-radius: 10px;
+        width: 100%;
+        margin-bottom: 18px;
+        padding: 10px;
+    }
         .footer-distributed .footer-left,
         .footer-distributed .footer-center,
         .footer-distributed .footer-right {
