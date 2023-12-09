@@ -47,6 +47,9 @@ else
             </div>
             @{
                 web_banvemaybayEntities db = new web_banvemaybayEntities();
+                int mave = int.Parse(@Session["mavemuontra"].ToString());
+                var checkdc = db.Ve.Where(c => c.IDve == mave).FirstOrDefault();
+                Session["diadiemden"] = checkdc.Chuyenbay.Diadiemden;
                 foreach (var item in Model.OrderByDescending(c => c.IDve))
                 {
                     <div class="checkve-body">
@@ -87,8 +90,7 @@ else
                     </div>
                     if (item.IDchuyenbayve == null)
                     {
-                        int check = int.Parse(@Session["mavemuontra"].ToString());
-                        var checkma = db.Ve.Where(c => c.IDve == check).FirstOrDefault();
+                        var checkma = db.Ve.Where(c => c.IDve == mave).FirstOrDefault();
                         if (checkma.Tinhtrang == "Chờ thanh toán" || checkma.Tinhtrang == "Đã thanh toán")
                         {
                             <a class="btn-huy" href="#" onclick="confirmAction()">
@@ -106,39 +108,38 @@ else
                 if (item.IDchuyenbayve != null)
                 {
                     var check = db.Ve.Where(c => c.IDve == item.IDchuyenbayve).FirstOrDefault();
-                        <div class="flight-details">
+                    <div class="flight-details">
 
-                            <div class="checkve-body">
-                                <div class="checkve-img">
-                                    <img src="@check.Chuyenbay.HangHK.Hinhanh" alt="">
-                                </div>
-                                <div class="checkve-chuyenbay">
-                                    <p>Mã chuyến bay: <b>@check.Chuyenbay.IDchuyenbay</b></p>
-                                    <p>Chuyến bay: <b>Khứ hồi </b></p>
-                                    <p>Hạng vé: <b>@item.Hangve.TenHangve</b> </p>
-                                    <p>Thời gian: <b>02h 30p</b></p>
-                                </div>
-                                <div class="checkve-go">
-                                    <p>Đi từ: <b>@check.Chuyenbay.Diadiemden</b></p>
-                                    <p>Cất cánh: <b>@check.Chuyenbay.Ngaydi.Value.ToString("HH:mm")</b></p>
-                                    <p>Ngày: <b>@check.Chuyenbay.Ngaydi.Value.ToString("dd/MM/yyyy")</b></p>
-                                </div>
-                                <div class="checkve-to">
-                                    <p>Đến: <b>@check.Chuyenbay.Diadiemdi</b></p>
-                                    <p>
-                                        Hạ cánh: <b>
-                                            @check.Chuyenbay.Ngaydi.Value.AddHours(2).AddMinutes(30).ToString("HH:mm")
-                                        </b>
-                                    </p>
-                                    <p>
-                                        Ngày: <b>
-                                            @check.Chuyenbay.Ngaydi.Value.AddHours(2).AddMinutes(30).ToString("dd/MM/yyyy")
-                                        </b>
-                                    </p>
-                                </div>
+                        <div class="checkve-body">
+                            <div class="checkve-img">
+                                <img src="@check.Chuyenbay.HangHK.Hinhanh" alt="">
+                            </div>
+                            <div class="checkve-chuyenbay">
+                                <p>Mã chuyến bay: <b>@check.Chuyenbay.IDchuyenbay</b></p>
+                                <p>Chuyến bay: <b>Khứ hồi </b></p>
+                                <p>Hạng vé: <b>@item.Hangve.TenHangve</b> </p>
+                                <p>Thời gian: <b>02h 30p</b></p>
+                            </div>
+                            <div class="checkve-go">
+                                <p>Đi từ: <b>@check.Chuyenbay.Diadiemden</b></p>
+                                <p>Cất cánh: <b>@check.Chuyenbay.Ngaydi.Value.ToString("HH:mm")</b></p>
+                                <p>Ngày: <b>@check.Chuyenbay.Ngaydi.Value.ToString("dd/MM/yyyy")</b></p>
+                            </div>
+                            <div class="checkve-to">
+                                <p>Đến: <b>@check.Chuyenbay.Diadiemdi</b></p>
+                                <p>
+                                    Hạ cánh: <b>
+                                        @check.Chuyenbay.Ngaydi.Value.AddHours(2).AddMinutes(30).ToString("HH:mm")
+                                    </b>
+                                </p>
+                                <p>
+                                    Ngày: <b>
+                                        @check.Chuyenbay.Ngaydi.Value.AddHours(2).AddMinutes(30).ToString("dd/MM/yyyy")
+                                    </b>
+                                </p>
                             </div>
                         </div>
-                    int mave = int.Parse(@Session["mavemuontra"].ToString());
+                    </div>
                     var kt = db.Ve.Where(c => c.IDve == mave).FirstOrDefault();
                     if (kt.Tinhtrang == "Chờ thanh toán" || kt.Tinhtrang == "Đã thanh toán")
                     {
@@ -151,10 +152,132 @@ else
             }
         }
     </div>
-    
-</div>
-<div style="padding: 170px 0"></div>
 
+</div>
+<div id="map" style=" width: 92%; height: 600px; margin-left: auto; margin-right: auto;"></div>
+<div style="padding: 170px 0"></div>
+<script>
+    var map;
+    var service;
+    var infowindow;
+
+    function initMap() {
+        infowindow = new google.maps.InfoWindow();
+        // Lấy vị trí hiện tại của người dùng
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+
+            var uluru = { lat: lat, lng: lng };
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 16,
+                center: uluru
+            });
+        });
+    }
+    function geocodeAfterDelay() {
+        setTimeout(function () {
+            // Lấy địa chỉ được chọn
+            var selectedAddress = "Sân bay" + " " + '@Html.Raw(Session["diadiemden"])';
+
+            // Gọi hàm geocodeAddress với địa chỉ đã chọn
+            geocodeAddress(selectedAddress);
+        }, 1000);
+    }
+    function geocodeAddress(address) {
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({ address: address }, function (results, status) {
+            if (status === 'OK') {
+                var location = results[0].geometry.location;
+                map.setCenter(location);
+
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: location,
+                    title: address
+                });
+                searchMap();
+            } else {
+                alert('Không tìm thấy địa chỉ: ' + status);
+            }
+        });
+    }
+
+    function searchMap() {
+        var request = {
+            location: map.getCenter(),
+            radius: '2000',
+            type: 'lodging'
+        };
+        service = new google.maps.places.PlacesService(map);
+        service.nearbySearch(request, showPlaces);
+    }
+    var arrMarkers = [];
+
+    function showPlaces(result, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK && result && result.length > 0) {
+            for (i in arrMarkers)
+                arrMarkers[i].setMap(null);
+            arrMarkers = [];
+            for (i in result) {
+                var place = result[i];
+                var image = {
+                    url: place.icon,
+                    size: new google.maps.Size(71, 71),
+                    origin: new google.maps.Point(0, 0),
+                    anchor: new google.maps.Point(17, 34),
+                    scaledSize: new google.maps.Size(25, 25),
+                };
+                var content = "<strong>" + place.name + "</strong><br />" +
+                    "Địa chỉ: " + place.vicinity + "<br />" +
+                    "Số điện thoại: " + place.phoneNumber + "<br />" +
+                    "Đánh giá: " + place.rating + "/5";
+
+                var marker = new google.maps.Marker({
+                    map: map,
+                    icon: image,
+                    title: place.name,
+                    content: content,
+                    position: place.geometry.location,
+                    data: place
+                });
+
+                google.maps.event.addListener(marker, 'click', function () {
+                    infowindow.setContent(this.content);
+                    infowindow.open(map, this);
+                    TimDuong(this.data);
+                });
+                arrMarkers.push(marker);
+            }
+        }
+    }
+    var ddisplay;
+    function TimDuong(place) {
+        var dservice = new google.maps.DirectionsService();
+        if (ddisplay)
+            ddisplay.setMap(null);
+        ddisplay = new google.maps.DirectionsRenderer();
+        ddisplay.setMap(map);
+
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var userLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+            var request = {
+                origin: userLocation,
+                destination: place.geometry.location,
+                travelMode: 'WALKING',
+                provideRouteAlternatives: true
+            };
+
+            dservice.route(request, function (result, status) {
+                if (status == "OK") ddisplay.setDirections(result);
+            });
+        });
+    }
+    window.onload = geocodeAfterDelay;
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvBgDEOkzu_K1BtFpg1FDt8ETzVRKhKis&libraries=places&callback=initMap">
+</script>
 
 <script>
 function confirmAction() {
