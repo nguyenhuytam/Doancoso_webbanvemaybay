@@ -830,6 +830,7 @@ namespace FlightSearch.Controllers
                     content = content.Replace("{{Bag}}", Session["KgHanhly"].ToString());
                     content = content.Replace("{{BagKH}}", Session["KgHanhlyHK"].ToString());
                     content = content.Replace("{{idchuyenbay}}", Session["idchuyenbay"].ToString());
+                    content = content.Replace("{{idchuyenbaykh}}", Session["idchuyenbaykh"].ToString());
                     content = content.Replace("{{TenHang}}", Session["TenHang"].ToString());
                     content = content.Replace("{{TenHangKH}}", Session["TenHangKH"].ToString());
                     var toEmail = ConfigurationManager.AppSettings["ToEmailAddress"].ToString();
