@@ -731,26 +731,27 @@ namespace FlightSearch.Controllers
                     int idveTO = ve.IDve;
                     Session["idVeMoi"] = idveTO;
                     //Ve khu hoi
+                    var vekh = new Ve();
                     var giavefrom = db.Chuyenbay.Where(c => c.IDchuyenbay == idFrom).FirstOrDefault();
                     if (giaveto != null)
                     {
                         double tonggiafrom = giavefrom.Giatien + giafrom.Giatien + (giavefrom.Giatien / 100 * 10) + 70000 + giahv.Gia;
-                        ve.Gia = tonggiafrom;
+                        vekh.Gia = tonggiafrom;
                         double tongvekh = tonggiafrom + double.Parse(Session["giaveto"].ToString());
                         Session["giathanhtoanvnpay"] = Math.Round(tongvekh * 100);
                     }
-                    ve.IDchuyenbay = idFrom;
-                    ve.IDhangve = idhv;
-                    var slhangve = db.Chuyenbay.FirstOrDefault(cb => cb.IDchuyenbay == ve.IDchuyenbay);
-                    if (ve.IDhangve == null)
+                    vekh.IDchuyenbay = idFrom;
+                    vekh.IDhangve = idhv;
+                    var slhangve = db.Chuyenbay.FirstOrDefault(cb => cb.IDchuyenbay == vekh.IDchuyenbay);
+                    if (vekh.IDhangve == null)
                     {
                         if (slhangve.PhoThong > 0)
                         {
-                            ve.IDhangve = 2;
+                            vekh.IDhangve = 2;
                         }
                         else
                         {
-                            ve.IDhangve = 1;
+                            vekh.IDhangve = 1;
                         }
                     }
                     if (slhangve != null)
@@ -758,36 +759,36 @@ namespace FlightSearch.Controllers
                         if (slhangve == null)
                         {
                             slhangve.PhoThong -= 1 * nguoidat;
-                            ve.IDhangve = 2;
+                            vekh.IDhangve = 2;
                         }
                         if (idhv == 1)
                         {
                             slhangve.ThuongGia -= 1 * nguoidat;
-                            ve.IDhangve = 1;
+                            vekh.IDhangve = 1;
                         }
                         if (idhv == 2)
                         {
                             slhangve.PhoThong -= 1 * nguoidat;
-                            ve.IDhangve = 2;
+                            vekh.IDhangve = 2;
                         }
 
                         db.SaveChanges();
                     }
-                    Session["idchuyenbaykh"] = ve.IDchuyenbay;
-                    ve.IDhanhKhach = kt.IDhanhkhach;
-                    ve.IDlienhe = ktlh.IDlienhe;
-                    ve.IDhangve = idhv;
-                    ve.IDhanhli = idfromHL;
-                    ve.Sove = sl;
-                    Session["soluong"] = ve.Sove;
-                    ve.Ngaydatve = DateTime.Now;
-                    ve.Tinhtrang = "Chờ thanh toán";
+                    Session["idchuyenbaykh"] = vekh.IDchuyenbay;
+                    vekh.IDhanhKhach = kt.IDhanhkhach;
+                    vekh.IDlienhe = ktlh.IDlienhe;
+                    vekh.IDhangve = idhv;
+                    vekh.IDhanhli = idfromHL;
+                    vekh.Sove = sl;
+                    Session["soluong"] = vekh.Sove;
+                    vekh.Ngaydatve = DateTime.Now;
+                    vekh.Tinhtrang = "Chờ thanh toán";
                     Session["KgHanhlyHK"] = giafrom.Kg;
-                    Session["TinhTrang"] = ve.Tinhtrang;
-                    ve.IDchuyenbayve = idveTO;
-                    db.Ve.Add(ve);
+                    Session["TinhTrang"] = vekh.Tinhtrang;
+                    vekh.IDchuyenbayve = idveTO;
+                    db.Ve.Add(vekh);
                     db.SaveChanges();
-                    int idVeFrom = ve.IDve;
+                    int idVeFrom = vekh.IDve;
                     Session["idVeKH"] = idVeFrom;
                     //Session["giatien"] = gia;
                     var vedi = db.Ve.Where(c => c.IDve == idveTO).FirstOrDefault();
