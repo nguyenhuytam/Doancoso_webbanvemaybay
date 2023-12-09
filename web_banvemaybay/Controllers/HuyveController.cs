@@ -30,7 +30,7 @@ namespace web_banvemaybay.Controllers
                 DateTime ngayhienhtai = DateTime.Today;
                 DateTime ngayxuatphat = checkma.Chuyenbay.Ngaydi.Value;
                 int sosanh = (ngayxuatphat - ngayhienhtai).Days;
-                if (sosanh >= 3)
+                if (sosanh >= 2)
                 {
                     double tienhoang;
                     tienhoang = checkma.Gia - ((30 * checkma.Gia) / 100);
