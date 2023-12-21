@@ -804,9 +804,9 @@ namespace FlightSearch.Controllers
                     var chuyenbaykh = db.Chuyenbay.Where(hl => hl.IDchuyenbay == idFrom).FirstOrDefault();
                     DateHourKH = chuyenbaykh.Ngaydi.ToString();
                     Session["TenHangKH"] = chuyenbaykh.HangHK.TenHang;
-                    string DateHour1 = (DateTime.Parse(DateHour).AddDays(-1)).ToString();
+                    string DateHour1 = (DateTime.Parse(DateHour)).ToString();
                     Session["DateHour1"] = DateHour1;
-                    string DateHour2 = (DateTime.Parse(DateHourKH).AddDays(-1)).ToString();
+                    string DateHour2 = (DateTime.Parse(DateHourKH)).ToString();
                     Session["DateHour2"] = DateHour2;
                     if (payment == "payment3")
                     {
@@ -901,7 +901,7 @@ namespace FlightSearch.Controllers
                     ve.Gia = giatien;
                     var chuyenbay = db.Chuyenbay.Where(hl => hl.IDchuyenbay == idchuyenbay).FirstOrDefault();
                     DateHour = chuyenbay.Ngaydi.ToString();
-                    string DateHour1= (DateTime.Parse(DateHour).AddDays(-1)).ToString();
+                    string DateHour1= (DateTime.Parse(DateHour)).ToString();
                     Departure = chuyenbay.Diadiemdi.ToString();
                     Destination = chuyenbay.Diadiemden.ToString();
                     ve.Tinhtrang = "Chờ thanh toán";
